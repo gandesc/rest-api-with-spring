@@ -36,7 +36,6 @@ public class StartupLoggingComponent implements InitializingBean {
             logEnvTarget(env);
             logPersistenceTarget(env);
 
-            logActiveSpringProfile(env);
             logPersistenceData(env);
         } catch (final Exception ex) {
             logger.warn("There was a problem logging data on startup", ex);
@@ -57,10 +56,6 @@ public class StartupLoggingComponent implements InitializingBean {
         logger.info("{} = {}", PERSISTENCE_TARGET_KEY, envTarget);
     }
 
-    private void logActiveSpringProfile(final Environment environment) {
-        final String activeSpringProfile = getValueOfProperty(environment, ACTIVE_SPRING_PROFILE_KEY, "none", null);
-        logger.info("{} = {}", ACTIVE_SPRING_PROFILE_KEY, activeSpringProfile);
-    }
 
     private void logPersistenceData(final Environment environment) {
         final String persistenceHost = getValueOfProperty(environment, PERSISTENCE_HOST_KEY, "not-found", null);
