@@ -24,16 +24,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    public RestResponseEntityExceptionHandler() {
-        super();
-    }
-
-    // API
-
     // 400
-
-    // ============== generic
-
+    
     // 403
 
     @ExceptionHandler({ MyForbiddenException.class })
@@ -51,7 +43,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     }
 
     @ExceptionHandler(value = { EntityNotFoundException.class })
-    protected ResponseEntity<Object> handleBadRequest(final EntityNotFoundException ex, final WebRequest request) {
+    protected ResponseEntity<Object> handleLibraryNotFound(final EntityNotFoundException ex, final WebRequest request) {
         final String bodyOfResponse = "This should be application specific";
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
@@ -64,16 +56,18 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.CONFLICT, request);
     }
 
-    // 4xx
+    // 412
 
     @ExceptionHandler({ MyPreconditionFailedException.class })
-    /*412*/protected ResponseEntity<Object> handlePreconditionFailed(final RuntimeException ex, final WebRequest request) {
+    protected ResponseEntity<Object> handlePreconditionFailed(final RuntimeException ex, final WebRequest request) {
         final String bodyOfResponse = "This should be application specific";
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.PRECONDITION_FAILED, request);
     }
 
+    // 500
+
     @ExceptionHandler({ NullPointerException.class, IllegalArgumentException.class, IllegalStateException.class })
-    /*500*/public ResponseEntity<Object> handleInternal(final RuntimeException ex, final WebRequest request) {
+    public ResponseEntity<Object> handleInternal(final RuntimeException ex, final WebRequest request) {
         logger.error("500 Status Code", ex);
         final String bodyOfResponse = "This should be application specific";
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
