@@ -1,0 +1,16 @@
+package com.baeldung.um.test.suite;
+
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
+
+import com.baeldung.um.common.search.ConstructQueryStringUnitTest;
+import com.baeldung.um.service.impl.UserServiceUnitTest;
+import com.baeldung.um.service.impl.PrivilegeServiceUnitTest;
+import com.baeldung.um.service.impl.RoleServiceUnitTest;
+
+@RunWith(Suite.class)
+@SuiteClasses({ UserServiceUnitTest.class, RoleServiceUnitTest.class, PrivilegeServiceUnitTest.class, ConstructQueryStringUnitTest.class })
+public final class UnitSuite {
+    //
+}
