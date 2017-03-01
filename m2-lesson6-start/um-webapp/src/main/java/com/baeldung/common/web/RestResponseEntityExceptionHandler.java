@@ -3,8 +3,6 @@ package com.baeldung.common.web;
 import javax.persistence.EntityNotFoundException;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
@@ -28,15 +26,8 @@ import com.baeldung.common.web.exception.MyPreconditionFailedException;
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
-    private final Logger log = LoggerFactory.getLogger(getClass());
-
-    public RestResponseEntityExceptionHandler() {
-        super();
-    }
-
-    // API
-
     // 400
+    
     @Override
     protected final ResponseEntity<Object> handleHttpMessageNotReadable(final HttpMessageNotReadableException ex, final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
         return handleExceptionInternal(ex, message(HttpStatus.BAD_REQUEST, ex), headers, HttpStatus.BAD_REQUEST, request);
@@ -48,23 +39,21 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     }
 
     @ExceptionHandler(value = { DataIntegrityViolationException.class, MyBadRequestException.class })
-    public final ResponseEntity<Object> handleBadRequest(final RuntimeException ex, final WebRequest request) {
+    protected final ResponseEntity<Object> handleBadRequest(final RuntimeException ex, final WebRequest request) {
         return handleExceptionInternal(ex, message(HttpStatus.BAD_REQUEST, ex), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
-    private ApiError message(final HttpStatus httpStatus, final Exception ex) {
+    private final ApiError message(final HttpStatus httpStatus, final Exception ex) {
         final String message = ex.getMessage() == null ? ex.getClass().getSimpleName() : ex.getMessage();
         final String devMessage = ExceptionUtils.getRootCauseMessage(ex);
 
         return new ApiError(httpStatus.value(), message, devMessage);
     }
 
-    // ======================== generic
-
     // 403
 
     @ExceptionHandler({ MyForbiddenException.class })
-    public ResponseEntity<Object> handleForbidden(final MyForbiddenException ex, final WebRequest request) {
+    protected ResponseEntity<Object> handleForbidden(final MyForbiddenException ex, final WebRequest request) {
         final String bodyOfResponse = "This should be application specific";
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.FORBIDDEN, request);
     }
@@ -78,7 +67,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     }
 
     @ExceptionHandler(value = { EntityNotFoundException.class })
-    protected ResponseEntity<Object> handleBadRequest(final EntityNotFoundException ex, final WebRequest request) {
+    protected ResponseEntity<Object> handleLibraryNotFound(final EntityNotFoundException ex, final WebRequest request) {
         final String bodyOfResponse = "This should be application specific";
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
@@ -91,16 +80,18 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.CONFLICT, request);
     }
 
-    // 4xx
+    // 412
 
     @ExceptionHandler({ MyPreconditionFailedException.class })
-    /*412*/protected ResponseEntity<Object> handlePreconditionFailed(final RuntimeException ex, final WebRequest request) {
+    protected ResponseEntity<Object> handlePreconditionFailed(final RuntimeException ex, final WebRequest request) {
         final String bodyOfResponse = "This should be application specific";
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.PRECONDITION_FAILED, request);
     }
 
+    //500
+    
     @ExceptionHandler({ NullPointerException.class, IllegalArgumentException.class, IllegalStateException.class })
-    /*500*/public ResponseEntity<Object> handleInternal(final RuntimeException ex, final WebRequest request) {
+    protected ResponseEntity<Object> handleInternal(final RuntimeException ex, final WebRequest request) {
         logger.error("500 Status Code", ex);
         final String bodyOfResponse = "This should be application specific";
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
