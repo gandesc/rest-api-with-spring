@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<name>um-client</name>
-	<artifactId>um-client</artifactId>
+	<artifactId>um-client-m9</artifactId>
 
 	<parent>
-		<groupId>org.baeldung</groupId>
-		<artifactId>user-management-parent</artifactId>
+		<groupId>com.baeldung</groupId>
+		<artifactId>user-management-parent-m9</artifactId>
 		<version>1.0.1-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
@@ -15,14 +15,14 @@
 		<!-- internal -->
 
 		<dependency>
-			<groupId>org.baeldung</groupId>
-			<artifactId>common-client</artifactId>
+			<groupId>com.baeldung</groupId>
+			<artifactId>common-client-m9</artifactId>
 			<version>1.0.1-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
-			<groupId>org.baeldung</groupId>
-			<artifactId>common-test</artifactId>
+			<groupId>com.baeldung</groupId>
+			<artifactId>common-test-m9</artifactId>
 			<version>1.0.1-SNAPSHOT</version>
 			<scope>test</scope>
 		</dependency>

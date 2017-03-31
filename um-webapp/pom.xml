@@ -1,14 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>um-webapp</artifactId>
+    <artifactId>um-webapp-m9</artifactId>
     <packaging>war</packaging>
 
     <name>um-webapp</name>
 
     <parent>
-        <groupId>org.baeldung</groupId>
-        <artifactId>user-management-parent</artifactId>
+        <groupId>com.baeldung</groupId>
+        <artifactId>user-management-parent-m9</artifactId>
         <version>1.0.1-SNAPSHOT</version>
     </parent>
 
@@ -17,35 +17,35 @@
         <!-- internal -->
 
         <dependency>
-            <groupId>org.baeldung</groupId>
-            <artifactId>common</artifactId>
+            <groupId>com.baeldung</groupId>
+            <artifactId>common-m9</artifactId>
             <version>1.0.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>org.baeldung</groupId>
-            <artifactId>common-client</artifactId>
+            <groupId>com.baeldung</groupId>
+            <artifactId>common-client-m9</artifactId>
             <version>1.0.1-SNAPSHOT</version>
             <scope>test</scope>
             <classifier>tests</classifier>
         </dependency>
 
         <dependency>
-            <groupId>org.baeldung</groupId>
-            <artifactId>common-test</artifactId>
+            <groupId>com.baeldung</groupId>
+            <artifactId>common-test-m9</artifactId>
             <version>1.0.1-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>org.baeldung</groupId>
-            <artifactId>um-client</artifactId>
+            <groupId>com.baeldung</groupId>
+            <artifactId>um-client-m9</artifactId>
             <version>1.0.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>org.baeldung</groupId>
-            <artifactId>um-client</artifactId>
+            <groupId>com.baeldung</groupId>
+            <artifactId>um-client-m9</artifactId>
             <version>1.0.1-SNAPSHOT</version>
             <scope>test</scope>
             <classifier>tests</classifier>

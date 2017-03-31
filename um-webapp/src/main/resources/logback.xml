@@ -15,8 +15,8 @@
 	<logger name="org.springframework.web.servlet.mvc" level="WARN" /> <!-- some serialization issues are at trace level here: org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod -->
 
 	<!-- our service -->
-	<logger name="org.baeldung.um" level="INFO" />
-	<logger name="org.baeldung.um.persistence.setup" level="DEBUG" /> <!-- to follow if setup is being executed -->
+	<logger name="com.baeldung.um" level="INFO" />
+	<logger name="com.baeldung.um.persistence.setup" level="DEBUG" /> <!-- to follow if setup is being executed -->
 
 	<root level="INFO">
 		<appender-ref ref="STDOUT" />
