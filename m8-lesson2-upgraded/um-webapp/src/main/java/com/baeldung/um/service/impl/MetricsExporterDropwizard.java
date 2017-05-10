@@ -14,21 +14,21 @@ import com.codahale.metrics.MetricRegistry;
 
 @Component
 final class MetricsExporterDropwizard {
-    
+
     private Logger logger = LoggerFactory.getLogger(getClass());
-    
+
     @Autowired
     private MetricRegistry metricRegistry;
 
-    @Scheduled(fixedRate = 1000 * 30) //every 30 second
+    @Scheduled(fixedRate = 1000 * 30) // every 30 second
     public void exportMetrics() {
         final SortedMap<String, Counter> counters = metricRegistry.getCounters();
-        final SortedMap<String, Gauge> gauges = metricRegistry.getGauges(); 
+        final SortedMap<String, Gauge> gauges = metricRegistry.getGauges();
         counters.forEach(this::log);
-       
+
     }
-    
+
     private void log(String counterName, final Counter m) {
-        logger.info("Reporting metric {}={}", counterName, m.getCount());                      
+        logger.info("Reporting metric {}={}", counterName, m.getCount());
     }
 }

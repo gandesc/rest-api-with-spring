@@ -112,7 +112,7 @@ public abstract class AbstractLogicLiveTest<T extends INameableDto> {
      code public void whenResourceWithUnsupportedMediaTypeIsCreated_then415IsReceived() {
         // When
         final Response response = givenReadAuthenticated().contentType("unknown").post(getUri());
-
+    
         // Then
         assertThat(response.getStatusCode(), is(415));
     }*/

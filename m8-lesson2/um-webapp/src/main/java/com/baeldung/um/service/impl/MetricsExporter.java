@@ -10,11 +10,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 final class MetricsExporter {
-    
+
     private Logger logger = LoggerFactory.getLogger(getClass());
-    
+
     @Autowired
-    private MetricRepository metricRepo;         
+    private MetricRepository metricRepo;
 
     @Scheduled(fixedRate = 1000 * 30) // every 30 seconds
     public void exportMetrics() {
@@ -22,7 +22,7 @@ final class MetricsExporter {
     }
 
     private void log(final Metric<?> m) {
-        logger.info("Reporting metric {}={}", m.getName(), m.getValue());       
-        metricRepo.reset(m.getName());         
+        logger.info("Reporting metric {}={}", m.getName(), m.getValue());
+        metricRepo.reset(m.getName());
     }
 }

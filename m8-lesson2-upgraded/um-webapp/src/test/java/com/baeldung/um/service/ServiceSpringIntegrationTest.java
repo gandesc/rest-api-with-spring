@@ -2,6 +2,9 @@ package com.baeldung.um.service;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.boot.actuate.autoconfigure.MetricRepositoryAutoConfiguration;
+import org.springframework.boot.actuate.autoconfigure.MetricsDropwizardAutoConfiguration;
+import org.springframework.boot.actuate.autoconfigure.PublicMetricsAutoConfiguration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
@@ -16,7 +19,10 @@ import com.baeldung.um.spring.UmServiceConfig;
         UmContextConfig.class, 
         UmPersistenceJpaConfig.class, 
         UmServiceConfig.class, 
-        UmMetricConfig.class
+        UmMetricConfig.class,
+        MetricRepositoryAutoConfiguration.class, 
+        PublicMetricsAutoConfiguration.class,
+        MetricsDropwizardAutoConfiguration.class
     }, loader = AnnotationConfigContextLoader.class)// @formatter:off
 public class ServiceSpringIntegrationTest {
 

@@ -10,12 +10,12 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 //@Component
 final class MetricsExporter {
-    
-    private Logger logger = LoggerFactory.getLogger(getClass());        
-    
+
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
     @Autowired
-    private BufferMetricReader metricReader;    
-    
+    private BufferMetricReader metricReader;
+
     @Autowired
     private CounterService counterService;
 
@@ -25,7 +25,7 @@ final class MetricsExporter {
     }
 
     private void log(final Metric<?> m) {
-        logger.info("Reporting metric {}={}", m.getName(), m.getValue());              
+        logger.info("Reporting metric {}={}", m.getName(), m.getValue());
         counterService.reset(m.getName());
     }
 }
