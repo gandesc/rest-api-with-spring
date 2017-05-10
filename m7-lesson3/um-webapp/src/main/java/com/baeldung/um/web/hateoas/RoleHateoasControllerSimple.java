@@ -11,18 +11,18 @@ import com.baeldung.um.persistence.model.Role;
 import com.baeldung.um.service.IRoleService;
 
 @Controller
-//@RequestMapping(value = UmMappings.Hateoas.ROLES)
+// @RequestMapping(value = UmMappings.Hateoas.ROLES)
 public class RoleHateoasControllerSimple {
 
     @Autowired
     private IRoleService service;
-    
-    //API -  find - one
+
+    // API - find - one
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public RoleResource findOne(@PathVariable("id") final Long id) {
-        final Role entity =  service.findOne(id);
+        final Role entity = service.findOne(id);
         return new RoleResource(entity);
     }
 }

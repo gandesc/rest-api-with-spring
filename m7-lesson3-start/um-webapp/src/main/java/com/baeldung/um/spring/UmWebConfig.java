@@ -25,8 +25,8 @@ public class UmWebConfig extends WebMvcConfigurerAdapter {
     public UmWebConfig() {
         super();
     }
-    
- // beans
+
+    // beans
 
     @Bean
     public Docket mainConfig() { // @formatter:off

@@ -38,12 +38,10 @@ public class UmApp extends SpringBootServletInitializer {
         return application.sources(CONFIGS).initializers(new MyApplicationContextInitializer());
     }
 
-
     public static void main(final String... args) {
         final SpringApplication springApplication = new SpringApplication(CONFIGS);
         springApplication.addInitializers(new MyApplicationContextInitializer());
         springApplication.run(args);
     }
-
 
 }

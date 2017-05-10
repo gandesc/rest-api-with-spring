@@ -57,7 +57,7 @@ public class User implements INameableEntity, INameableDto {
         name = nameToSet;
         password = passwordToSet;
         roles = rolesToSet;
-    }    
+    }
 
     // API
 

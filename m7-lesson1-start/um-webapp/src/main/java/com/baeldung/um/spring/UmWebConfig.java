@@ -13,5 +13,5 @@ public class UmWebConfig extends WebMvcConfigurerAdapter {
     public UmWebConfig() {
         super();
     }
-    
+
 }

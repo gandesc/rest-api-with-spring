@@ -60,15 +60,14 @@ public class PrivilegeController extends AbstractController<Privilege, Privilege
     @ResponseBody
     public List<Privilege> findAllSorted(@RequestParam(value = QueryConstants.SORT_BY) final String sortBy, @RequestParam(value = QueryConstants.SORT_ORDER) final String sortOrder) {
         return findAllSortedInternal(sortBy, sortOrder);
-    }    
-    
+    }
+
     @RequestMapping(method = RequestMethod.GET)
-    @ResponseBody    
+    @ResponseBody
     public List<Privilege> findAll(final HttpServletRequest request, final UriComponentsBuilder uriBuilder, final HttpServletResponse response) {
         return findAllInternal(request, uriBuilder, response);
     }
-       
-    
+
     // find - one
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)

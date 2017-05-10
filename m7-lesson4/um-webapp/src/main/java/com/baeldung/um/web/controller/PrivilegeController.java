@@ -61,21 +61,21 @@ public class PrivilegeController extends AbstractController<Privilege, Privilege
     @ResponseBody
     public List<Privilege> findAllSorted(@RequestParam(value = QueryConstants.SORT_BY) final String sortBy, @RequestParam(value = QueryConstants.SORT_ORDER) final String sortOrder) {
         return findAllSortedInternal(sortBy, sortOrder);
-    }    
-    
-    @RequestMapping(value= {UmMappings.Plural.PRIVILEGES,"roles/{roleId}/privileges"}, method = RequestMethod.GET)
-    @ResponseBody    
-    public List<Privilege> findAll(@PathVariable final Map<String,String> pathVariables, final HttpServletRequest request, final UriComponentsBuilder uriBuilder, final HttpServletResponse response) {
+    }
+
+    @RequestMapping(value = { UmMappings.Plural.PRIVILEGES, "roles/{roleId}/privileges" }, method = RequestMethod.GET)
+    @ResponseBody
+    public List<Privilege> findAll(@PathVariable final Map<String, String> pathVariables, final HttpServletRequest request, final UriComponentsBuilder uriBuilder, final HttpServletResponse response) {
         return findAllInternal(request, uriBuilder, response);
     }
-       
+
     @Override
-    @RequestMapping( method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public List<Privilege> findAll(HttpServletRequest request, UriComponentsBuilder uriBuilder, HttpServletResponse response) {
         return findAllInternal(request, uriBuilder, response);
     }
-    
+
     // find - one
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)

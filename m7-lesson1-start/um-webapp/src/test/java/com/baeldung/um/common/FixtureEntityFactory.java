@@ -11,7 +11,7 @@ public class FixtureEntityFactory {
 
     private FixtureEntityFactory() {
         throw new AssertionError();
-    }    
+    }
 
     // User
 

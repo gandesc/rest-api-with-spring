@@ -27,7 +27,7 @@ import com.baeldung.um.util.UmMappings;
 
 @Controller
 @RequestMapping(value = UmMappings.PRIVILEGES)
-public class PrivilegeController extends AbstractController<Privilege>implements ISortingController<Privilege> {
+public class PrivilegeController extends AbstractController<Privilege> implements ISortingController<Privilege> {
 
     @Autowired
     private IPrivilegeService service;

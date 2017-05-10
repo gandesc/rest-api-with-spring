@@ -13,7 +13,6 @@ public class FixtureResourceFactory {
         throw new AssertionError();
     }
 
-
     // User
 
     public static User createNewUser() {
