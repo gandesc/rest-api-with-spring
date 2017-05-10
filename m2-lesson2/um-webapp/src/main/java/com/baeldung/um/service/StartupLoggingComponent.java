@@ -56,7 +56,6 @@ public class StartupLoggingComponent implements InitializingBean {
         logger.info("{} = {}", PERSISTENCE_TARGET_KEY, envTarget);
     }
 
-
     private void logPersistenceData(final Environment environment) {
         final String persistenceHost = getValueOfProperty(environment, PERSISTENCE_HOST_KEY, "not-found", null);
         logger.info("{} = {}", PERSISTENCE_HOST_KEY, persistenceHost);

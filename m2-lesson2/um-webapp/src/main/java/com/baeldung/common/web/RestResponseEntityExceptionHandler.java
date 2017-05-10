@@ -27,7 +27,7 @@ import com.baeldung.common.web.exception.MyPreconditionFailedException;
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
     // 400
-    
+
     @Override
     protected final ResponseEntity<Object> handleHttpMessageNotReadable(final HttpMessageNotReadableException ex, final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
         logger.info("Bad Request: " + ex.getMessage());
@@ -58,7 +58,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
         return new ApiError(httpStatus.value(), message, devMessage);
     }
-    
+
     // 403
 
     @ExceptionHandler({ MyForbiddenException.class })
@@ -97,8 +97,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.PRECONDITION_FAILED, request);
     }
 
-    //500
-    
+    // 500
+
     @ExceptionHandler({ NullPointerException.class, IllegalArgumentException.class, IllegalStateException.class })
     protected ResponseEntity<Object> handleInternal(final RuntimeException ex, final WebRequest request) {
         logger.error("500 Status Code", ex);

@@ -22,12 +22,11 @@ public class MyApplicationContextInitializer implements ApplicationContextInitia
     public void initialize(final ConfigurableApplicationContext applicationContext) {
         final ConfigurableEnvironment environment = applicationContext.getEnvironment();
         final String activeProfiles = environment.getProperty("spring.profiles.active");
-        
+
         if (activeProfiles != null) {
             environment.setActiveProfiles(activeProfiles.split(","));
         }
 
-       
     }
 
 }

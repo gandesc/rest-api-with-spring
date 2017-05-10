@@ -80,7 +80,7 @@ public class SecuritySetup implements ApplicationListener<ContextRefreshedEvent>
         createPrivilegeIfNotExisting(Privileges.CAN_USER_READ);
         createPrivilegeIfNotExisting(Privileges.CAN_USER_WRITE);
     }
-    
+
     final void createPrivilegeIfNotExisting(final String name) {
         createPrivilegeIfNotExisting(name, name);
     }

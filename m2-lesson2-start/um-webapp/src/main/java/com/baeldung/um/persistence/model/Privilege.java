@@ -22,7 +22,7 @@ public class Privilege implements INameableEntity, INameableDto {
     @Column(name = "PRIV_ID")
     private Long id;
 
-    @Column(unique = true, nullable = false)    
+    @Column(unique = true, nullable = false)
     private String name;
 
     @Column(unique = false, nullable = false)

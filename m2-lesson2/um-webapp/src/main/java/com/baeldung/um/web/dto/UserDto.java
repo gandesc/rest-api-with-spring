@@ -29,7 +29,7 @@ public class UserDto implements INameableEntity, INameableDto {
     @NotNull
     @Email
     private String email;
-    
+
     @Min(0)
     @Max(99)
     private int age;

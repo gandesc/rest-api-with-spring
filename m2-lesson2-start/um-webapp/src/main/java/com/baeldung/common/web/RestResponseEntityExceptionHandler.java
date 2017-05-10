@@ -24,10 +24,10 @@ import com.baeldung.common.web.exception.MyForbiddenException;
 import com.baeldung.common.web.exception.MyPreconditionFailedException;
 
 @ControllerAdvice
-public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {    
+public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
     // 400
-    
+
     @Override
     protected final ResponseEntity<Object> handleHttpMessageNotReadable(final HttpMessageNotReadableException ex, final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
         logger.info("Bad Request: " + ex.getMessage());
@@ -57,7 +57,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         final String devMessage = ExceptionUtils.getRootCauseMessage(ex);
 
         return new ApiError(httpStatus.value(), message, devMessage);
-    } 
+    }
 
     // 403
 
@@ -96,8 +96,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         final String bodyOfResponse = "This should be application specific";
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.PRECONDITION_FAILED, request);
     }
-    
-    //500
+
+    // 500
 
     @ExceptionHandler({ NullPointerException.class, IllegalArgumentException.class, IllegalStateException.class })
     protected ResponseEntity<Object> handleInternal(final RuntimeException ex, final WebRequest request) {

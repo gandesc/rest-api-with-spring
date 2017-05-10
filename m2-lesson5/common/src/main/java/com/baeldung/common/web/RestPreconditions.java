@@ -118,7 +118,7 @@ public final class RestPreconditions {
             throw new MyConflictException(message);
         }
     }
-    
+
     /**
      * Ensures the truth of an expression related to the validity of the request
      *
@@ -148,6 +148,5 @@ public final class RestPreconditions {
             throw new MyBadRequestException(message);
         }
     }
-
 
 }

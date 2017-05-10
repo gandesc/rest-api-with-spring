@@ -16,15 +16,15 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 @Configuration
-@ComponentScan({ "com.baeldung.um.web","com.baeldung.common.web" })
+@ComponentScan({ "com.baeldung.um.web", "com.baeldung.common.web" })
 @EnableWebMvc
 public class UmWebConfig extends WebMvcConfigurerAdapter {
 
     public UmWebConfig() {
         super();
     }
-    
- // configuration
+
+    // configuration
 
     @Override
     public void extendMessageConverters(final List<HttpMessageConverter<?>> converters) {
@@ -35,7 +35,7 @@ public class UmWebConfig extends WebMvcConfigurerAdapter {
             converter.getObjectMapper().enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         }
     }
-    
+
     @Bean
     public javax.validation.Validator localValidatorFactoryBean() {
         return new LocalValidatorFactoryBean();

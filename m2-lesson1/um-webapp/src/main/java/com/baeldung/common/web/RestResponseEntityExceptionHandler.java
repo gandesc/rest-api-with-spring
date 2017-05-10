@@ -20,7 +20,7 @@ import com.baeldung.common.web.exception.ApiError;
 import com.baeldung.common.web.exception.MyBadRequestException;
 
 @ControllerAdvice
-public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {    
+public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
     private Logger log = LoggerFactory.getLogger(getClass());
 
