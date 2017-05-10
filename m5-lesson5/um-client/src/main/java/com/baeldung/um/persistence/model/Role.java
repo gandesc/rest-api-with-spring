@@ -32,7 +32,7 @@ public class Role implements INameableEntity, INameableDto {
 
     @Column(unique = true, nullable = false)
     private String name;
-    
+
     @NotNull
     private String description;
 
@@ -51,11 +51,11 @@ public class Role implements INameableEntity, INameableDto {
         name = nameToSet;
         this.description = description;
     }
-    
+
     public Role(final String nameToSet) {
         this(nameToSet, randomAlphabetic(6));
     }
-    
+
     public Role(final String nameToSet, final Set<Privilege> privilegesToSet) {
         this(nameToSet, randomAlphabetic(6), privilegesToSet);
     }
@@ -87,7 +87,7 @@ public class Role implements INameableEntity, INameableDto {
     @Override
     public void setName(final String nameToSet) {
         name = nameToSet;
-    }        
+    }
 
     public String getDescription() {
         return description;

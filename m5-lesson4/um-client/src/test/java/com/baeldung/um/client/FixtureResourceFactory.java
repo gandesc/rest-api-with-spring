@@ -13,22 +13,22 @@ public class FixtureResourceFactory {
         throw new AssertionError();
     }
 
-    // user 
+    // user
 
     /*public static User createNewUser() {
         return createNewUser(randomAlphabetic(8), randomAlphabetic(8));
     }
-
+    
     public static User createNewUser(final String name) {
         return createNewUser(name, randomAlphabetic(8));
     }
-
+    
     public static User createNewUser(final String name, final String pass) {
         final User user = new User(name, pass, Sets.<Role> newHashSet());
         user.setEmail(randomAlphabetic(6) + "@gmail.com");
         return user;
     }
-*/
+    */
     // User
 
     public static User createNewUser() {

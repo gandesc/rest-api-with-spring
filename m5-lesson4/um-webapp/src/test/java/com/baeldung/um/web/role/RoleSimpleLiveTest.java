@@ -28,7 +28,7 @@ public class RoleSimpleLiveTest extends GenericSimpleLiveTest<Role> {
 
     @Autowired
     private RoleSimpleApiClient api;
-    
+
     /*@Override
     @Test
     @Ignore("operation not supported")

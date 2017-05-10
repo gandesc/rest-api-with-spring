@@ -21,5 +21,4 @@ public class RoleBasicLiveTest {
 
     private final static String JSON = MediaType.APPLICATION_JSON.toString();
 
-    
 }

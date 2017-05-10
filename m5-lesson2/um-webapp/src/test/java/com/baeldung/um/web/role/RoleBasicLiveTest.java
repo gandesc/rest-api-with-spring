@@ -30,16 +30,15 @@ import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
 
-
 @ActiveProfiles({ CLIENT, TEST })
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { UmLiveTestConfig.class, UmClientConfig.class, CommonTestConfig.class }, loader = AnnotationConfigContextLoader.class)
 public class RoleBasicLiveTest {
 
     private final static String JSON = MediaType.APPLICATION_JSON.toString();
-    
-    private final static String URI= "http://localhost:8082/um-webapp/api/roles";
-    
+
+    private final static String URI = "http://localhost:8082/um-webapp/api/roles";
+
     @Test
     public void whenAllRolesAreRetrieved_then200OK() {
 
@@ -57,19 +56,19 @@ public class RoleBasicLiveTest {
 
         assertThat(allRoles, not(Matchers.<Role> empty()));
     }
-    
+
     @Test
     public void whenCreatingANewRole_thenRoleCanBeRetrieved() {
 
         final Role newRole = new Role(randomAlphabetic(6), Sets.newHashSet());
         final RequestSpecification writeAuth = RestAssured.given().auth().preemptive().basic(Um.ADMIN_EMAIL, Um.ADMIN_PASS);
         final Response createResponse = writeAuth.contentType(ContentType.JSON).body(newRole).post(URI);
-        
+
         final String locationHeader = createResponse.getHeader("Location");
         final RequestSpecification readAuth = RestAssured.given().auth().preemptive().basic(Um.ADMIN_EMAIL, Um.ADMIN_PASS);
         final Role retrievedRole = readAuth.accept(ContentType.JSON).get(locationHeader).as(Role.class);
         assertThat(newRole, equalTo(retrievedRole));
-        
+
     }
 
 }

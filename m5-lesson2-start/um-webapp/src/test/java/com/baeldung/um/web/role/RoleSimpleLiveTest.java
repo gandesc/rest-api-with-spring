@@ -33,22 +33,22 @@ public class RoleSimpleLiveTest {
 
     // find - one
 
-   /* @Test
+    /* @Test
     public final void whenNonExistingResourceIsRetrieved_then404IsReceived() {
         final Response response = getApi().findOneAsResponse(IDUtil.randomPositiveLong());
-
+    
         assertThat(response.getStatusCode(), is(404));
     }
-
+    
     @Test
     public final void whenResourceIsRetrievedByNonNumericId_then400IsReceived() {
         // When
         final Response res = getApi().read(getUri() + WebConstants.PATH_SEP + randomAlphabetic(6));
-
+    
         // Then
         assertThat(res.getStatusCode(), is(400));
     }
-
+    
     @Test
     public final void givenResourceForIdExists_whenResourceOfThatIdIsRetrieved_then200IsRetrieved() {
         // Given
@@ -56,17 +56,17 @@ public class RoleSimpleLiveTest {
         
         //when
         final Response response = getApi().read(uriForResourseCreation);
-
+    
         // Then
         assertThat(response.getStatusCode(), is(200));
     }
-
+    
     @Test
     public final void whenResourceIsCreated_thenResourceIsCorrectlyRetrieved() {
         // Given, When
         final Role newResource = createNewResource();
         final Role createdResource = getApi().create(newResource);
-
+    
         // Then
         assertEquals(createdResource, newResource);
     }*/

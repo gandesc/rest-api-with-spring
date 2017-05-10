@@ -38,13 +38,12 @@ import com.jayway.restassured.response.Response;
 @ActiveProfiles({ CLIENT, TEST })
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { UmLiveTestConfig.class, UmClientConfig.class, CommonTestConfig.class }, loader = AnnotationConfigContextLoader.class)
-public abstract class GenericSimpleLiveTest <T extends INameableDto> {
+public abstract class GenericSimpleLiveTest<T extends INameableDto> {
 
     private final static String JSON = MediaType.APPLICATION_JSON.toString();
 
     @Autowired
     private GenericSimpleApiClient<T> api;
-    
 
     // find - one
 
@@ -58,7 +57,7 @@ public abstract class GenericSimpleLiveTest <T extends INameableDto> {
         // Then
         assertThat(response.getStatusCode(), is(200));
     }
-    
+
     // find - all - pagination
 
     @Test
@@ -123,9 +122,9 @@ public abstract class GenericSimpleLiveTest <T extends INameableDto> {
         // Then
         assertThat(response.getStatusCode(), is(400));
     }
-        
-    //count
-    
+
+    // count
+
     @Test
     public final void whenCountIsPerformed_then200IsReceived() {
         // When
@@ -137,7 +136,7 @@ public abstract class GenericSimpleLiveTest <T extends INameableDto> {
     // create
 
     @Test
-    public  void whenResourceIsCreated_then201IsReceived() {
+    public void whenResourceIsCreated_then201IsReceived() {
         // When
         final Response response = getApi().createAsResponse(createNewResource());
 
@@ -182,7 +181,7 @@ public abstract class GenericSimpleLiveTest <T extends INameableDto> {
         // Then
         assertThat(response.getStatusCode(), is(409));
     }
-    
+
     @Test
     public final void whenResourceWithUnsupportedMediaTypeIsCreated_then415IsReceived() {
         // When
@@ -214,19 +213,19 @@ public abstract class GenericSimpleLiveTest <T extends INameableDto> {
     }
 
     @Test
-    public final void givenResourceExsits_whenResourceWithSameAttributeIsCreated_then409IsReceived(){
-        //Given
+    public final void givenResourceExsits_whenResourceWithSameAttributeIsCreated_then409IsReceived() {
+        // Given
         final T newEntity = createNewResource();
         getApi().createAsResponse(newEntity);
-        
-        //when
-        final Response response =  getApi().createAsResponse(newEntity);
-        
+
+        // when
+        final Response response = getApi().createAsResponse(newEntity);
+
         // Then
         assertThat(response.getStatusCode(), is(409));
     }
-    
- // update
+
+    // update
 
     @Test
     public final void givenResourceExists_whenResourceIsUpdated_then200IsReceived() {
@@ -343,17 +342,16 @@ public abstract class GenericSimpleLiveTest <T extends INameableDto> {
         assertThat(res.getContentType(), StringContains.containsString(MediaType.APPLICATION_JSON.toString()));
     }
 
-    
     // UTIL
-    
+
     private final String getUri() {
         return getApi().getUri() + WebConstants.PATH_SEP;
     }
 
-    protected abstract GenericSimpleApiClient<T> getApi();    
-    
+    protected abstract GenericSimpleApiClient<T> getApi();
+
     protected abstract T createNewResource();
-    
+
     protected abstract <A extends IDto> Collection<A> getAssociations(T resource);
 
     protected abstract <A extends IDto> A createNewAssociationResource();

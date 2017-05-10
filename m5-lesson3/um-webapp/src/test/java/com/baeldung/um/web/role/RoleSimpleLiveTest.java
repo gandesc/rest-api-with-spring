@@ -61,8 +61,8 @@ public class RoleSimpleLiveTest {
     public final void givenResourceForIdExists_whenResourceOfThatIdIsRetrieved_then200IsRetrieved() {
         // Given
         final String uriForResourseCreation = getApi().createAsResponse(createNewResource()).getHeader(HttpHeaders.LOCATION);
-        
-        //when
+
+        // when
         final Response response = getApi().read(uriForResourseCreation);
 
         // Then
@@ -78,7 +78,7 @@ public class RoleSimpleLiveTest {
         // Then
         assertEquals(createdResource, newResource);
     }
-    
+
     // find - all
 
     @Test
@@ -89,7 +89,7 @@ public class RoleSimpleLiveTest {
         // Then
         assertThat(response.getStatusCode(), is(200));
     }
-    
+
     // create
 
     @Test
@@ -144,14 +144,14 @@ public class RoleSimpleLiveTest {
     }
 
     @Test
-    public final void givenResourceExsits_whenResourceWithSameAttributeIsCreated_then409IsReceived(){
-        //Given
+    public final void givenResourceExsits_whenResourceWithSameAttributeIsCreated_then409IsReceived() {
+        // Given
         final Role newEntity = createNewResource();
         getApi().createAsResponse(newEntity);
-        
-        //when
-        final Response response =  getApi().createAsResponse(newEntity);
-        
+
+        // when
+        final Response response = getApi().createAsResponse(newEntity);
+
         // Then
         assertThat(response.getStatusCode(), is(409));
     }

@@ -26,7 +26,7 @@ import com.jayway.restassured.specification.RequestSpecification;
 @Component
 @Profile(Profiles.CLIENT)
 public final class RoleSimpleApiClient {
-    
+
     private final static String JSON = MediaType.APPLICATION_JSON.toString();
 
     @Autowired
@@ -52,25 +52,25 @@ public final class RoleSimpleApiClient {
     }
 
     private final Role findOneByUri(final String uriOfResource) {
-        String resourceAsMime = findOneByUriAsString(uriOfResource);       
+        String resourceAsMime = findOneByUriAsString(uriOfResource);
         return marshaller.decode(resourceAsMime, clazz);
     }
-    
+
     private final String findOneByUriAsString(final String uriOfResource) {
         final Response response = read(uriOfResource);
         Preconditions.checkState(response.getStatusCode() == 200);
 
         return response.asString();
     }
-    
-    public final Response findByUriAsResponse(final String uriOfResource){
+
+    public final Response findByUriAsResponse(final String uriOfResource) {
         return read(uriOfResource);
-        
+
     }
 
     // find - all
-    
-    public final List<Role> findAll(){
+
+    public final List<Role> findAll() {
         return findAll(getUri());
     }
 
@@ -82,29 +82,28 @@ public final class RoleSimpleApiClient {
         }
         return listOfResources;
     }
-    
-    public final Response finaAllAsResponse(){
+
+    public final Response finaAllAsResponse() {
         return findByUriAsResponse(getUri());
     }
 
     // find - all (sorted, paginated)
-    
-    public final List<Role> findAllSorted(final String sortBy, final String sortOrder){
+
+    public final List<Role> findAllSorted(final String sortBy, final String sortOrder) {
         final Response findAllResponse = findByUriAsResponse(getUri() + QueryConstants.Q_SORT_BY + sortBy + QueryConstants.S_ORDER + sortOrder);
-        return marshaller.<Role>decodeList(findAllResponse.getBody().asString(),clazz);
+        return marshaller.<Role> decodeList(findAllResponse.getBody().asString(), clazz);
     }
 
-    public final List<Role> findAllPaginated(final int page, final int size){
+    public final List<Role> findAllPaginated(final int page, final int size) {
         final Response allPaginatedAsResponse = findAllPaginatedAsResponse(page, size);
-        return marshaller.<Role>decodeList(allPaginatedAsResponse.getBody().asString(),clazz);
+        return marshaller.<Role> decodeList(allPaginatedAsResponse.getBody().asString(), clazz);
     }
-    
-    public final List<Role> findAllPaginatedAndSorted(final int page, final int size, final String sortBy, final String sortOrder){
-        final Response allPaginatedAndSortedAsResponse = findAllPaginatedAndSortedAsResponse(page, size, sortBy, sortOrder );
-        return marshaller.<Role>decodeList(allPaginatedAndSortedAsResponse.getBody().asString(),clazz);
+
+    public final List<Role> findAllPaginatedAndSorted(final int page, final int size, final String sortBy, final String sortOrder) {
+        final Response allPaginatedAndSortedAsResponse = findAllPaginatedAndSortedAsResponse(page, size, sortBy, sortOrder);
+        return marshaller.<Role> decodeList(allPaginatedAndSortedAsResponse.getBody().asString(), clazz);
     }
-    
-    
+
     public final Response findAllPaginatedAndSortedAsResponse(final int page, final int size, final String sortBy, final String sortOrder) {
         final StringBuilder uri = new StringBuilder(getUri());
         uri.append(QueryConstants.QUESTIONMARK);
@@ -156,16 +155,16 @@ public final class RoleSimpleApiClient {
         return read(uri.toString());
     }
 
-    //count
-    
+    // count
+
     public final Response countAsResponse() {
         return read(getUri() + "/count");
     }
-    
+
     // create
 
     public final Role create(final Role resource) {
-               
+
         final String uriForResourceCreation = createAsUri(resource);
         final String resourceAsMime = findOneByUriAsString(uriForResourceCreation);
         return marshaller.decode(resourceAsMime, clazz);
@@ -180,7 +179,6 @@ public final class RoleSimpleApiClient {
         return locationOfCreatedResource;
     }
 
-    
     public final Response createAsResponse(final Role resource) {
         Preconditions.checkNotNull(resource);
         final RequestSpecification givenAuthenticated = givenAuthenticated();
@@ -188,10 +186,10 @@ public final class RoleSimpleApiClient {
         return givenAuthenticated.contentType(JSON).body(resource).post(getUri());
     }
 
-   /* public final Response createAsResponse(final String resourceAsString) {
+    /* public final Response createAsResponse(final String resourceAsString) {
         Preconditions.checkNotNull(resourceAsString);
         final RequestSpecification givenAuthenticated = givenAuthenticated();
-
+    
         return givenAuthenticated.contentType(JSON).body(resourceAsString).post(getUri());
     }*/
 

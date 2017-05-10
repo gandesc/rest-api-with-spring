@@ -16,22 +16,22 @@ import com.jayway.restassured.specification.RequestSpecification;
 @Component
 @Profile(Profiles.CLIENT)
 public final class RoleSimpleApiClient {
-    
+
     private final static String JSON = MediaType.APPLICATION_JSON.toString();
-    
+
     @Autowired
     protected UmPaths paths;
-    
+
     // API
 
     // find - one
-    
+
     // UTIL
-    
+
     public final String getUri() {
         return paths.getRoleUri();
     }
-    
+
     public final RequestSpecification givenAuthenticated() {
         final Pair<String, String> credentials = getDefaultCredentials();
         return RestAssured.given().auth().preemptive().basic(credentials.getLeft(), credentials.getRight());

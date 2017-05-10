@@ -71,7 +71,7 @@ public class Role implements INameableEntity, INameableDto {
     @Override
     public void setName(final String nameToSet) {
         name = nameToSet;
-    }            
+    }
 
     public Set<Privilege> getPrivileges() {
         return privileges;
@@ -107,7 +107,7 @@ public class Role implements INameableEntity, INameableDto {
             return false;
         return true;
     }
-    
+
     @Override
     public String toString() {
         return new ToStringBuilder(this).append("id", id).append("name", name).toString();

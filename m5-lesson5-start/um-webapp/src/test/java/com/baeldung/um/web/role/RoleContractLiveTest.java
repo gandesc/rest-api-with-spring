@@ -54,7 +54,7 @@ public class RoleContractLiveTest {
     }
 
     private final Role createNewResource() {
-        return new Role(randomAlphabetic(8), Sets.<Privilege> newHashSet());        
+        return new Role(randomAlphabetic(8), Sets.<Privilege> newHashSet());
     }
 
 }

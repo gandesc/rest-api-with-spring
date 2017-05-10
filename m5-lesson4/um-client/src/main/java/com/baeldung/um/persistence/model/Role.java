@@ -71,7 +71,7 @@ public class Role implements INameableEntity, INameableDto {
     @Override
     public void setName(final String nameToSet) {
         name = nameToSet;
-    }            
+    }
 
     public Set<Privilege> getPrivileges() {
         return privileges;

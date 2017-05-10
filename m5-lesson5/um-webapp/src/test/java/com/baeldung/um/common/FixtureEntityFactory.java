@@ -14,11 +14,11 @@ public class FixtureEntityFactory {
     }
 
     /*// user DTO
-
+    
     public static UserDto createNewUser() {
         return createNewUser(randomAlphabetic(8), randomAlphabetic(8));
     }
-
+    
     public static UserDto createNewUser(final String name, final String pass) {
         return new UserDto(name, pass, Sets.<Role> newHashSet());
     }*/

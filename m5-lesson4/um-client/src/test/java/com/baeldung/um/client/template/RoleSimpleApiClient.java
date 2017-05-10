@@ -9,7 +9,7 @@ import com.baeldung.um.persistence.model.Role;
 @Component
 @Profile(Profiles.CLIENT)
 public final class RoleSimpleApiClient extends GenericSimpleApiClient<Role> {
-    
+
     public RoleSimpleApiClient() {
         super(Role.class);
     }

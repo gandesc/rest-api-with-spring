@@ -131,7 +131,7 @@ public final class RoleSimpleApiClientNoBase {
         final String locationOfCreatedResource = response.getHeader(HttpHeaders.LOCATION);
         Preconditions.checkNotNull(locationOfCreatedResource);
         return findOneByUri(locationOfCreatedResource);
-    }    
+    }
 
     public final Response createAsResponse(final Role resource) {
         Preconditions.checkNotNull(resource);
@@ -139,7 +139,6 @@ public final class RoleSimpleApiClientNoBase {
 
         return givenAuthenticated.contentType(JSON).body(resource).post(getUri());
     }
-
 
     // update
 

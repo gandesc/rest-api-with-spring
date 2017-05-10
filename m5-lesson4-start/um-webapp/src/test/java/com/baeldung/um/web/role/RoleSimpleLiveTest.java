@@ -12,7 +12,6 @@ import java.util.Collection;
 import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphanumeric;
 
-
 import org.apache.http.HttpHeaders;
 import org.hamcrest.core.StringContains;
 import org.junit.Test;
@@ -46,7 +45,6 @@ public class RoleSimpleLiveTest {
 
     @Autowired
     private RoleSimpleApiClient api;
-    
 
     // find - one
 
@@ -60,7 +58,7 @@ public class RoleSimpleLiveTest {
         // Then
         assertThat(response.getStatusCode(), is(200));
     }
-    
+
     // find - all - pagination
 
     @Test
@@ -125,9 +123,9 @@ public class RoleSimpleLiveTest {
         // Then
         assertThat(response.getStatusCode(), is(400));
     }
-        
-    //count
-    
+
+    // count
+
     @Test
     public final void whenCountIsPerformed_then200IsReceived() {
         // When
@@ -184,7 +182,7 @@ public class RoleSimpleLiveTest {
         // Then
         assertThat(response.getStatusCode(), is(409));
     }
-    
+
     @Test
     public final void whenResourceWithUnsupportedMediaTypeIsCreated_then415IsReceived() {
         // When
@@ -216,19 +214,19 @@ public class RoleSimpleLiveTest {
     }
 
     @Test
-    public final void givenResourceExsits_whenResourceWithSameAttributeIsCreated_then409IsReceived(){
-        //Given
+    public final void givenResourceExsits_whenResourceWithSameAttributeIsCreated_then409IsReceived() {
+        // Given
         final Role newEntity = createNewResource();
         getApi().createAsResponse(newEntity);
-        
-        //when
-        final Response response =  getApi().createAsResponse(newEntity);
-        
+
+        // when
+        final Response response = getApi().createAsResponse(newEntity);
+
         // Then
         assertThat(response.getStatusCode(), is(409));
     }
-    
- // update
+
+    // update
 
     @Test
     public final void givenResourceExists_whenResourceIsUpdated_then200IsReceived() {
@@ -345,7 +343,6 @@ public class RoleSimpleLiveTest {
         assertThat(res.getContentType(), StringContains.containsString(MediaType.APPLICATION_JSON.toString()));
     }
 
-    
     // UTIL
 
     private final String getUri() {
@@ -359,11 +356,11 @@ public class RoleSimpleLiveTest {
     private final Privilege createNewAssociationResource() {
         return new Privilege(randomAlphabetic(8));
     }
-    
+
     private Collection<Privilege> getAssociations(Role resource) {
         return resource.getPrivileges();
     }
-    
+
     private final Role createNewResource() {
         return new Role(randomAlphabetic(8), Sets.<Privilege> newHashSet());
     }

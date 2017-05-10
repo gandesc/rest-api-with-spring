@@ -188,7 +188,7 @@ public abstract class AbstractSimpleRestClient<T extends IDto> {
     }
 
     // delete
-    
+
     public final void deleteAll() {
         throw new UnsupportedOperationException();
     }
