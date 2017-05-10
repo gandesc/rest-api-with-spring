@@ -26,7 +26,7 @@ import com.baeldung.um.test.live.UmLogicRestLiveTest;
 import com.google.common.collect.Sets;
 import com.jayway.restassured.response.Response;
 
-public class RoleLogicRestLiveTest extends UmLogicRestLiveTest<Role>implements IResourceWithAssociationsIntegrationTest {
+public class RoleLogicRestLiveTest extends UmLogicRestLiveTest<Role> implements IResourceWithAssociationsIntegrationTest {
 
     @Autowired
     private RoleRestClient api;

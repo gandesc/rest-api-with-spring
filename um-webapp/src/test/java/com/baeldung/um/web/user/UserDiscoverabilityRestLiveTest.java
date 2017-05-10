@@ -8,7 +8,6 @@ import com.baeldung.um.model.UserDtoOpsImpl;
 import com.baeldung.um.persistence.model.User;
 import com.baeldung.um.test.live.UmDiscoverabilityRestLiveTest;
 
-
 public class UserDiscoverabilityRestLiveTest extends UmDiscoverabilityRestLiveTest<User> {
 
     @Autowired

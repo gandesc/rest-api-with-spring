@@ -13,8 +13,6 @@ public class FixtureEntityFactory {
         throw new AssertionError();
     }
 
-
-
     // user
 
     public static User createNewUser() {

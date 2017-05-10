@@ -12,7 +12,6 @@ public class FixtureResourceFactory {
     private FixtureResourceFactory() {
         throw new AssertionError();
     }
-    
 
     // User
 

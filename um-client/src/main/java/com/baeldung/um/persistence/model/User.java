@@ -58,7 +58,7 @@ public class User implements INameableEntity, INameableDto {
         password = passwordToSet;
         roles = rolesToSet;
     }
-    
+
     public User(final String nameToSet, final String emailToSet, final String passwordToSet, final Set<Role> rolesToSet) {
         super();
         email = emailToSet;
