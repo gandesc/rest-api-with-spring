@@ -29,14 +29,14 @@ import com.baeldung.common.web.exception.MyResourceNotFoundException;
 import com.baeldung.common.web.exception.ValidationErrorDTO;
 
 @ControllerAdvice
-public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {    
+public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
     // 400
 
     @Override
     protected final ResponseEntity<Object> handleHttpMessageNotReadable(final HttpMessageNotReadableException ex, final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
         logger.info("Bad Request: ", ex);
-        logger.debug("Bad Request: ", ex);          
+        logger.debug("Bad Request: ", ex);
 
         final ApiError apiError = message(HttpStatus.BAD_REQUEST, ex);
         return handleExceptionInternal(ex, apiError, headers, HttpStatus.BAD_REQUEST, request);

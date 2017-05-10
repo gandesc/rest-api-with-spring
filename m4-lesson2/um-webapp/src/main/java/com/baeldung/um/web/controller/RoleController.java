@@ -27,7 +27,7 @@ import com.baeldung.um.util.UmMappings;
 
 @Controller
 @RequestMapping(value = UmMappings.ROLES)
-public class RoleController extends AbstractController<Role>implements ISortingController<Role> {
+public class RoleController extends AbstractController<Role> implements ISortingController<Role> {
 
     @Autowired
     private IRoleService service;
@@ -73,7 +73,7 @@ public class RoleController extends AbstractController<Role>implements ISortingC
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
-    //@CrossOrigin(origins = "*")
+    // @CrossOrigin(origins = "*")
     public Role findOne(@PathVariable("id") final Long id, final UriComponentsBuilder uriBuilder, final HttpServletResponse response) {
         return findOneInternal(id, uriBuilder, response);
     }

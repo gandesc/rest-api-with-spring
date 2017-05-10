@@ -27,7 +27,7 @@ import com.baeldung.um.util.UmMappings;
 
 @Controller
 @RequestMapping(value = UmMappings.USERS)
-public class UserController extends AbstractController<User>implements ISortingController<User> {
+public class UserController extends AbstractController<User> implements ISortingController<User> {
 
     @Autowired
     private IUserService service;
