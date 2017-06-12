@@ -20,5 +20,7 @@ public interface IRawService<T extends IEntity> extends IOperations<T> {
     Page<T> searchPaginated(final int page, final int size, final Triple<String, ClientOperation, String>... constraints);
 
     Page<T> findAllPaginatedAndSortedRaw(final int page, final int size, final String sortBy, final String sortOrder);
+    
+    Page<T> findAllPaginatedRaw(final int page, final int size);
 
 }
