@@ -54,8 +54,8 @@ public abstract class AbstractHateoasController<D extends ResourceSupport, E ext
         return convertList(resultPage.getContent());
     }
 
-    protected final List<D> findPaginatedInternal(final int page, final int size, final String sortBy, final String sortOrder) {
-        final Page<E> resultPage = getService().findAllPaginatedAndSortedRaw(page, size, sortBy, sortOrder);
+    protected final List<D> findPaginatedInternal(final int page, final int size) {
+        final Page<E> resultPage = getService().findAllPaginatedRaw(page, size);
         if (page > resultPage.getTotalPages()) {
             throw new MyResourceNotFoundException();
         }

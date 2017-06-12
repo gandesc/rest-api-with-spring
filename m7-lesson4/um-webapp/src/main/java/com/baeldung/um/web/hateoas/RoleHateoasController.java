@@ -47,7 +47,7 @@ public class RoleHateoasController extends AbstractHateoasController<RoleResourc
     @RequestMapping(params = { QueryConstants.PAGE, QueryConstants.SIZE }, method = RequestMethod.GET)
     @ResponseBody
     public List<RoleResource> findAllPaginated(@RequestParam(value = QueryConstants.PAGE) final int page, @RequestParam(value = QueryConstants.SIZE) final int size) {
-        return findPaginatedAndSortedInternal(page, size, null, null);
+        return findPaginatedInternal(page, size);
     }
 
     @RequestMapping(params = { QueryConstants.SORT_BY }, method = RequestMethod.GET)
