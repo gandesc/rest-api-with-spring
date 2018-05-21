@@ -22,5 +22,5 @@ cache:
   - .autoconf
   - $HOME/.m2
 before_cache:
- - rm /home/travis/.m2/repository/org/springframework/spring-webmvc/4.3.7.RELEASE/spring-webmvc-4.3.7.RELEASE.jar
+ - rm $HOME/.m2
   
