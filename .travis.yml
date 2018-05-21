@@ -22,5 +22,5 @@ cache:
   - .autoconf
   - $HOME/.m2
 before_cache:
- - rm $HOME/.m2
+ - rm -f $HOME/.m2/repository/org/springframework
   
