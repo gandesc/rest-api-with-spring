@@ -5,6 +5,8 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.util.Optional;
+
 import org.junit.Before;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -43,7 +45,7 @@ public class UserServiceUnitTest extends AbstractServiceUnitTest<User> {
     protected final User configureGet(final long id) {
         final User entity = new User();
         entity.setId(id);
-        when(daoMock.findOne(id)).thenReturn(entity);
+		when(daoMock.findById(id)).thenReturn(Optional.of(entity));
         return entity;
     }
 

@@ -1,6 +1,7 @@
 package com.baeldung.common.persistence.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.commons.lang3.tuple.Triple;
 import org.slf4j.Logger;
@@ -51,7 +52,8 @@ public abstract class AbstractRawService<T extends IEntity> implements IRawServi
     @Override
     @Transactional(readOnly = true)
     public T findOne(final long id) {
-        return getDao().findOne(id);
+    	Optional<T> entity = getDao().findById(id);
+    	return entity.orElse(null);
     }
 
     // find - all
@@ -66,7 +68,7 @@ public abstract class AbstractRawService<T extends IEntity> implements IRawServi
     @Transactional(readOnly = true)
     public Page<T> findAllPaginatedAndSortedRaw(final int page, final int size, final String sortBy, final String sortOrder) {
         final Sort sortInfo = constructSort(sortBy, sortOrder);
-        return getDao().findAll(new PageRequest(page, size, sortInfo));
+        return getDao().findAll(new PageRequest(page, size));
     }
 
     @Override
@@ -137,12 +139,14 @@ public abstract class AbstractRawService<T extends IEntity> implements IRawServi
 
     @Override
     public void delete(final long id) {
-        final T entity = getDao().findOne(id);
+    	final Optional<T> entity = getDao().findById(id);
         ServicePreconditions.checkEntityExists(entity);
-
-        eventPublisher.publishEvent(new BeforeEntityDeleteEvent<T>(this, clazz, entity));
-        getDao().delete(entity);
-        eventPublisher.publishEvent(new AfterEntityDeleteEvent<T>(this, clazz, entity));
+        
+        if(entity.isPresent()) {
+	        eventPublisher.publishEvent(new BeforeEntityDeleteEvent<T>(this, clazz, entity.get()));
+	        getDao().delete(entity.get());
+	        eventPublisher.publishEvent(new AfterEntityDeleteEvent<T>(this, clazz, entity.get()));
+        }
     }
 
     // count

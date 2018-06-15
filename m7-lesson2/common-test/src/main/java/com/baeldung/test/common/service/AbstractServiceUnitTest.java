@@ -10,6 +10,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.Optional;
+
 import org.junit.Test;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
@@ -196,7 +198,7 @@ public abstract class AbstractServiceUnitTest<T extends IEntity> {
         getApi().findOne(1l);
 
         // Then
-        verify(getDAO()).findOne(1l);
+        verify(getDAO()).findById(1l);
     }
 
     @Test
@@ -270,12 +272,12 @@ public abstract class AbstractServiceUnitTest<T extends IEntity> {
     protected final T givenEntityExists(final long id) {
         final T entity = createNewEntity();
         entity.setId(id);
-        when(getDAO().findOne(id)).thenReturn(entity);
+        when(getDAO().findById(id)).thenReturn(Optional.of(entity));
         return entity;
     }
 
     protected final T givenEntityExists(final T entity) {
-        when(getDAO().findOne(entity.getId())).thenReturn(entity);
+        when(getDAO().findById(entity.getId())).thenReturn(Optional.of(entity));
         return entity;
     }
 
@@ -293,7 +295,7 @@ public abstract class AbstractServiceUnitTest<T extends IEntity> {
         final T entity = createNewEntity();
         entity.setId(IDUtil.randomPositiveLong());
 
-        when(getDAO().findOne(entity.getId())).thenReturn(entity);
+        when(getDAO().findById(entity.getId())).thenReturn(Optional.of(entity));
         return entity;
     }
 
