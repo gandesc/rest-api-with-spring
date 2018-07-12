@@ -5,7 +5,7 @@
 	<artifactId>um-ui-m4-l2</artifactId>
 	<packaging>jar</packaging>
 
-	<name>um-ui</name>
+	<name>um-ui-l2</name>
 	<description>User Management UI</description>
 
 	<parent>
