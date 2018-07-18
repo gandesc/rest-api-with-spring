@@ -4,7 +4,7 @@
     <artifactId>um-webapp-m12-l2-start</artifactId>
     <packaging>war</packaging>
 
-    <name>um-webapp</name>
+    <name>um-webapp-l2-start</name>
 
     <parent>
         <groupId>com.baeldung</groupId>
@@ -65,12 +65,6 @@
                     <groupId>commons-logging</groupId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
         </dependency>
 
     </dependencies>
