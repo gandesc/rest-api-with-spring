@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<description>REST with Spring Classes Module7-Lesson1-start</description>
-	<name>user-management-parent</name>
+	<name>user-management-parent-l1-start</name>
 	<url>https://github.com/eugenp/restwithspring</url>
 
 	<groupId>com.baeldung</groupId>
