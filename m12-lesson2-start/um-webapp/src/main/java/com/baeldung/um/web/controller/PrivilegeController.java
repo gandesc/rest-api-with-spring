@@ -1,27 +1,34 @@
 package com.baeldung.um.web.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.baeldung.common.util.QueryConstants;
 import com.baeldung.common.web.controller.AbstractController;
 import com.baeldung.common.web.controller.ISortingController;
 import com.baeldung.um.persistence.model.Privilege;
 import com.baeldung.um.service.IPrivilegeService;
 import com.baeldung.um.util.UmMappings;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @RestController
 @RequestMapping(UmMappings.PRIVILEGES)
 public class PrivilegeController extends AbstractController<Privilege> implements ISortingController<Privilege> {
 
     @Autowired private IPrivilegeService service;
-
-    public PrivilegeController() {
-        super(Privilege.class);
-    }
 
     // API
 

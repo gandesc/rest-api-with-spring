@@ -2,14 +2,8 @@ package com.baeldung.common.web.controller;
 
 import com.baeldung.common.persistence.model.IEntity;
 import com.baeldung.common.web.RestPreconditions;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class AbstractController<T extends IEntity> extends AbstractReadOnlyController<T> {
-
-    @Autowired
-    public AbstractController(final Class<T> clazzToSet) {
-        super(clazzToSet);
-    }
 
     // save/create/persist
 

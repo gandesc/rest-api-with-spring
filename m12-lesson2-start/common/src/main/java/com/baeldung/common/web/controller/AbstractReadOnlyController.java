@@ -1,9 +1,9 @@
 package com.baeldung.common.web.controller;
 
-import com.baeldung.common.persistence.model.IEntity;
-import com.baeldung.common.persistence.service.IRawService;
-import com.baeldung.common.web.RestPreconditions;
-import com.baeldung.common.web.exception.MyResourceNotFoundException;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -13,21 +13,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-import java.util.Objects;
+import com.baeldung.common.persistence.model.IEntity;
+import com.baeldung.common.persistence.service.IRawService;
+import com.baeldung.common.web.RestPreconditions;
+import com.baeldung.common.web.exception.MyResourceNotFoundException;
 
 public abstract class AbstractReadOnlyController<T extends IEntity> {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
-
-    protected Class<T> clazz;
-
-    public AbstractReadOnlyController(final Class<T> clazzToSet) {
-        super();
-
-        Objects.requireNonNull(clazzToSet);
-        clazz = clazzToSet;
-    }
 
     // find - one
 

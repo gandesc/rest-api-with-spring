@@ -12,6 +12,7 @@ import com.baeldung.um.service.IPrivilegeService
 import com.baeldung.um.util.UmMappings
 import com.baeldung.um.web.dto.PrivilegeDto
 import com.baeldung.um.web.dto.toDto
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -28,8 +29,8 @@ import javax.servlet.http.HttpServletRequest
 
 @RestController
 @RequestMapping(UmMappings.PRIVILEGES)
-class PrivilegeController(private val service: IPrivilegeService)
-    : AbstractController<Privilege>(Privilege::class.java), ISortingController<Privilege> {
+class PrivilegeController (private val service: IPrivilegeService)
+    : AbstractController<Privilege>(), ISortingController<Privilege> {
 
     // API
 
