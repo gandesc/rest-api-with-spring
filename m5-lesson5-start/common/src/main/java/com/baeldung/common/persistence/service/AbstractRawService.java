@@ -15,7 +15,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.baeldung.common.persistence.ServicePreconditions;
+import com.baeldung.common.persistence.exception.MyEntityNotFoundException;
 import com.baeldung.common.persistence.model.IEntity;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
@@ -77,7 +77,7 @@ public abstract class AbstractRawService<T extends IEntity> implements IRawServi
     @Override
     @Transactional(readOnly = true)
     public List<T> findAllPaginated(final int page, final int size) {
-        final List<T> content = getDao().findAll(new PageRequest(page, size, null)).getContent();
+        final List<T> content = getDao().findAll(PageRequest.of(page, size)).getContent();
         if (content == null) {
             return Lists.newArrayList();
         }
@@ -120,11 +120,12 @@ public abstract class AbstractRawService<T extends IEntity> implements IRawServi
 
     @Override
     public void delete(final long id) {
-    	final Optional<T> entity = getDao().findById(id);
-    	if(entity.isPresent()) {
-    		ServicePreconditions.checkEntityExists(entity);
-    		getDao().delete(entity.get());	
-    	}
+        final Optional<T> entity = getDao().findById(id);
+        if(entity.isPresent()) {
+            getDao().delete(entity.get());  
+        } else {
+            throw new MyEntityNotFoundException();
+        }
     }
 
     // count
