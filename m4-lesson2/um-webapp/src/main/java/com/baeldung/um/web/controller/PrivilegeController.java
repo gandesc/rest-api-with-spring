@@ -31,11 +31,10 @@ public class PrivilegeController extends AbstractController<Privilege> implement
 
     @Autowired
     private IPrivilegeService service;
-
+    
     public PrivilegeController() {
         super(Privilege.class);
     }
-
     // API
 
     // find - all/paginated
