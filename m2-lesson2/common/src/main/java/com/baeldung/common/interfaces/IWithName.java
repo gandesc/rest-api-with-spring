@@ -1,7 +1,9 @@
 package com.baeldung.common.interfaces;
 
-public interface IWithName {
+import java.io.Serializable;
 
-    String getName();
+public interface IWithName extends Serializable {
+
+	String getName();
 
 }

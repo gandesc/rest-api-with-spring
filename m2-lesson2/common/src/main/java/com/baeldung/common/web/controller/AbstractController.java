@@ -1,20 +1,13 @@
 package com.baeldung.common.web.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.baeldung.common.persistence.model.IEntity;
+import com.baeldung.common.persistence.model.INameableEntity;
 import com.baeldung.common.web.RestPreconditions;
 
-public abstract class AbstractController<T extends IEntity> extends AbstractReadOnlyController<T> {
-
-    @Autowired
-    public AbstractController(final Class<T> clazzToSet) {
-        super(clazzToSet);
-    }
+public abstract class AbstractController<E extends INameableEntity> extends AbstractReadOnlyController<E> {
 
     // save/create/persist
 
-    protected final void createInternal(final T resource) {
+    protected final void createInternal(final E resource) {
         RestPreconditions.checkRequestElementNotNull(resource);
         RestPreconditions.checkRequestState(resource.getId() == null);
         getService().create(resource);
@@ -25,7 +18,7 @@ public abstract class AbstractController<T extends IEntity> extends AbstractRead
     /**
      * - note: the operation is IDEMPOTENT <br/>
      */
-    protected final void updateInternal(final long id, final T resource) {
+    protected final void updateInternal(final long id, final E resource) {
         RestPreconditions.checkRequestElementNotNull(resource);
         RestPreconditions.checkRequestElementNotNull(resource.getId());
         RestPreconditions.checkIfBadRequest(resource.getId() == id, resource.getClass().getSimpleName() + " id and URI id don't match");
