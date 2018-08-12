@@ -17,7 +17,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.baeldung.common.persistence.ServicePreconditions;
 import com.baeldung.common.persistence.event.AfterEntitiesDeletedEvent;
 import com.baeldung.common.persistence.event.AfterEntityCreateEvent;
 import com.baeldung.common.persistence.event.AfterEntityDeleteEvent;
@@ -25,6 +24,7 @@ import com.baeldung.common.persistence.event.AfterEntityUpdateEvent;
 import com.baeldung.common.persistence.event.BeforeEntityCreateEvent;
 import com.baeldung.common.persistence.event.BeforeEntityDeleteEvent;
 import com.baeldung.common.persistence.event.BeforeEntityUpdateEvent;
+import com.baeldung.common.persistence.exception.MyEntityNotFoundException;
 import com.baeldung.common.persistence.model.IEntity;
 import com.baeldung.common.search.ClientOperation;
 import com.google.common.base.Preconditions;
@@ -91,7 +91,7 @@ public abstract class AbstractRawService<T extends IEntity> implements IRawServi
     @Override
     @Transactional(readOnly = true)
     public List<T> findAllPaginated(final int page, final int size) {
-        final List<T> content = getDao().findAll(new PageRequest(page, size, null)).getContent();
+        final List<T> content = getDao().findAll(PageRequest.of(page, size)).getContent();
         if (content == null) {
             return Lists.newArrayList();
         }
@@ -140,12 +140,13 @@ public abstract class AbstractRawService<T extends IEntity> implements IRawServi
     @Override
     public void delete(final long id) {
     	final Optional<T> entity = getDao().findById(id);
-        ServicePreconditions.checkEntityExists(entity);
         
         if(entity.isPresent()) {
 	        eventPublisher.publishEvent(new BeforeEntityDeleteEvent<T>(this, clazz, entity.get()));
 	        getDao().delete(entity.get());
 	        eventPublisher.publishEvent(new AfterEntityDeleteEvent<T>(this, clazz, entity.get()));
+        } else {
+            throw new MyEntityNotFoundException();
         }
     }
 
