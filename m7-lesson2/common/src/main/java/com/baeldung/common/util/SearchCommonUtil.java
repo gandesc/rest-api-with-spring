@@ -75,7 +75,7 @@ public final class SearchCommonUtil {
         final ClientOperation op = determineOperation(negated, value);
         final String theKey = determineKey(negated, key);
         final String theValue = determineValue(value);
-        return new ImmutableTriple<String, ClientOperation, String>(theKey, op, theValue);
+        return new ImmutableTriple<>(theKey, op, theValue);
     }
 
     static String determineValue(final String value) {

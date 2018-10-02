@@ -4,8 +4,8 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Matchers.isA;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -23,7 +23,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import com.baeldung.common.persistence.event.AfterEntityCreateEvent;
 import com.baeldung.common.persistence.event.AfterEntityUpdateEvent;
 import com.baeldung.common.persistence.event.BeforeEntityCreateEvent;
-import com.baeldung.common.persistence.model.IEntity;
+import com.baeldung.common.persistence.model.INameableEntity;
 import com.baeldung.common.persistence.service.IRawService;
 import com.baeldung.test.common.util.IDUtil;
 import com.google.common.collect.Lists;
@@ -31,7 +31,7 @@ import com.google.common.collect.Lists;
 /**
  * A base class for service layer unit tests.
  */
-public abstract class AbstractServiceUnitTest<T extends IEntity> {
+public abstract class AbstractServiceUnitTest<T extends INameableEntity> {
 
     protected ApplicationEventPublisher eventPublisher;
 

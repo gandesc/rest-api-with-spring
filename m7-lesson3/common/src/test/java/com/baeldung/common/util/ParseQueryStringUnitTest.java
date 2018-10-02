@@ -276,7 +276,7 @@ public final class ParseQueryStringUnitTest {
     //
 
     Triple<String, ClientOperation, String> createNewImmutableTriple(final String key, final ClientOperation op, final String value) {
-        return new ImmutableTriple<String, ClientOperation, String>(key, op, value);
+        return new ImmutableTriple<>(key, op, value);
     }
 
 }

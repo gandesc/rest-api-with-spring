@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.baeldung.common.persistence.model.IEntity;
+import com.baeldung.common.persistence.model.INameableEntity;
 import com.baeldung.common.persistence.service.IRawService;
 import com.baeldung.common.web.RestPreconditions;
 import com.baeldung.common.web.exception.MyResourceNotFoundException;
 
-public abstract class AbstractHateoasController<D extends ResourceSupport, E extends IEntity> {
+public abstract class AbstractHateoasController<D extends ResourceSupport, E extends INameableEntity> {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired

@@ -17,7 +17,7 @@ public class VersionRequestCondition implements RequestCondition<VersionRequestC
 
     @Override
     public VersionRequestCondition combine(VersionRequestCondition other) {
-        final Set<Double> result = new HashSet<Double>(this.versions);
+        final Set<Double> result = new HashSet<>(this.versions);
         result.addAll(other.versions);
         return new VersionRequestCondition(result);
     }

@@ -33,7 +33,7 @@ public class CustomRequestMappingHandlerMapping extends RequestMappingHandlerMap
     protected RequestMappingInfo createRequestMappingInfo(RequestMapping requestMapping, RequestCondition<?> customCondition) {
         String[] resultPath = requestMapping.path();
         if ((customCondition != null) && (customCondition instanceof VersionRequestCondition)) {
-            final ArrayList<String> newPath = new ArrayList<String>();
+            final ArrayList<String> newPath = new ArrayList<>();
             final Set<Double> versions = ((VersionRequestCondition) customCondition).getVersions();
             for (final String old : resultPath) {
                 newPath.add(old);

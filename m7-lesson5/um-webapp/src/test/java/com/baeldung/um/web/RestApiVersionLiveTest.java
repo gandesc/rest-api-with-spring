@@ -49,7 +49,7 @@ public class RestApiVersionLiveTest {
         final HttpHeaders headers = new HttpHeaders();
         headers.set("Accept", "application/vnd.resource.v1.0+json");
 
-        final HttpEntity<String> entity = new HttpEntity<String>(headers);
+        final HttpEntity<String> entity = new HttpEntity<>(headers);
 
         final ResponseEntity<String> response = restTemplate.exchange(APP_ROOT + RESOURCE_URI, HttpMethod.GET, entity, String.class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
