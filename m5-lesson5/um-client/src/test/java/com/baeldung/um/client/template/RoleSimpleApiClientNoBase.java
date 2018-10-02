@@ -206,7 +206,7 @@ public final class RoleSimpleApiClientNoBase {
     }
 
     private final Pair<String, String> getDefaultCredentials() {
-        return new ImmutablePair<String, String>(Um.ADMIN_EMAIL, Um.ADMIN_PASS);
+        return new ImmutablePair<>(Um.ADMIN_EMAIL, Um.ADMIN_PASS);
     }
 
     public final IMarshaller getMarshaller() {
