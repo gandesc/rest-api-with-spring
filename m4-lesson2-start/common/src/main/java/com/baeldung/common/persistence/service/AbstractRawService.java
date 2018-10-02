@@ -79,7 +79,7 @@ public abstract class AbstractRawService<T extends IWithName> implements IRawSer
     @Override
     @Transactional(readOnly = true)
     public List<T> findAllPaginated(final int page, final int size) {
-        final List<T> content = getDao().findAll(new PageRequest(page, size, null)).getContent();
+        final List<T> content = getDao().findAll(PageRequest.of(page, size)).getContent();
         if (content == null) {
             return Lists.newArrayList();
         }

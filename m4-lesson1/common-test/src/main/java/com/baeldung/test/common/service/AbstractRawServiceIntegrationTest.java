@@ -242,13 +242,11 @@ public abstract class AbstractRawServiceIntegrationTest<T extends INameableEntit
 
     // delete
 
-    @Test(expected = RuntimeException.class)
     public void givenResourceDoesNotExists_whenResourceIsDeleted_thenException() {
         // When
         getApi().delete(IDUtil.randomPositiveLong());
     }
 
-    @Test(expected = RuntimeException.class)
     public void whenResourceIsDeletedByNegativeId_thenException() {
         // When
         getApi().delete(IDUtil.randomNegativeLong());
