@@ -25,8 +25,8 @@ class ActuatorMetricService implements IActuatorMetricService {
     public ActuatorMetricService() {
         super();
 
-        statusMetricsByMinute = new ArrayList<List<Integer>>();
-        statusList = new ArrayList<String>();
+        statusMetricsByMinute = new ArrayList<>();
+        statusList = new ArrayList<>();
     }
 
     // API
@@ -46,7 +46,7 @@ class ActuatorMetricService implements IActuatorMetricService {
         }
 
         List<Integer> minuteOfStatuses;
-        List<Integer> last = new ArrayList<Integer>();
+        List<Integer> last = new ArrayList<>();
         for (int i = 1; i < rowCount; i++) {
             minuteOfStatuses = statusMetricsByMinute.get(i - 1);
             result[i][0] = dateFormat.format(new Date(current.getTime() - (60000 * (rowCount - i))));
@@ -66,7 +66,7 @@ class ActuatorMetricService implements IActuatorMetricService {
 
     @Scheduled(fixedDelay = 60000)
     private void exportMetrics() {
-        final List<Integer> lastMinuteStatuses = new ArrayList<Integer>();
+        final List<Integer> lastMinuteStatuses = new ArrayList<>();
 
         initializeStatuses(lastMinuteStatuses);
         updateMetrics(lastMinuteStatuses);
