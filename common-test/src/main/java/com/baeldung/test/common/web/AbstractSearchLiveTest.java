@@ -48,7 +48,7 @@ public abstract class AbstractSearchLiveTest<T extends INameableDto> extends Abs
         final T existingResource = getApi().create(createNewResource());
 
         // When
-        final Triple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.name.toString(), EQ, existingResource.getName());
+        final Triple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<>(SearchField.name.toString(), EQ, existingResource.getName());
         getApi().searchAll(nameConstraint);
     }
 
@@ -95,7 +95,7 @@ public abstract class AbstractSearchLiveTest<T extends INameableDto> extends Abs
         final T existingResource = getApi().create(createNewResource());
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.name.name(), EQ, existingResource.getName());
+        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<>(SearchField.name.name(), EQ, existingResource.getName());
         getApi().searchOne(nameConstraint);
     }
 
@@ -105,7 +105,7 @@ public abstract class AbstractSearchLiveTest<T extends INameableDto> extends Abs
         final T existingResource = getApi().create(createNewResource());
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.name.name(), EQ, existingResource.getName());
+        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<>(SearchField.name.name(), EQ, existingResource.getName());
         final T resourceByName = getApi().searchOne(nameConstraint);
 
         // Then
@@ -118,7 +118,7 @@ public abstract class AbstractSearchLiveTest<T extends INameableDto> extends Abs
         final T existingResource = getApi().create(createNewResource());
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.name.name(), EQ, existingResource.getName());
+        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<>(SearchField.name.name(), EQ, existingResource.getName());
         final T resourceByName = getApi().searchOne(nameConstraint);
 
         // Then
@@ -131,7 +131,7 @@ public abstract class AbstractSearchLiveTest<T extends INameableDto> extends Abs
         final T existingResource = getApi().create(createNewResource());
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.name.name(), NEG_EQ, existingResource.getName());
+        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<>(SearchField.name.name(), NEG_EQ, existingResource.getName());
         getApi().searchAll(nameConstraint);
 
         // Then
@@ -177,7 +177,7 @@ public abstract class AbstractSearchLiveTest<T extends INameableDto> extends Abs
         final T existingResource2 = getApi().create(createNewResource());
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.name.toString(), EQ, existingResource1.getName());
+        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<>(SearchField.name.toString(), EQ, existingResource1.getName());
         final List<T> searchResults = getApi().searchAll(nameConstraint);
 
         // Then
@@ -212,7 +212,7 @@ public abstract class AbstractSearchLiveTest<T extends INameableDto> extends Abs
         final T existingEntity = getApi().create(createNewResource());
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.name.toString(), CONTAINS, existingEntity.getName());
+        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<>(SearchField.name.toString(), CONTAINS, existingEntity.getName());
         final List<T> searchResults = getApi().searchAll(nameConstraint);
 
         // Then
@@ -227,7 +227,7 @@ public abstract class AbstractSearchLiveTest<T extends INameableDto> extends Abs
         final String partOfName = name.substring(2);
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> nameContainsConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.name.toString(), CONTAINS, partOfName);
+        final ImmutableTriple<String, ClientOperation, String> nameContainsConstraint = new ImmutableTriple<>(SearchField.name.toString(), CONTAINS, partOfName);
         final List<T> searchResults = getApi().searchAll(nameContainsConstraint);
 
         // Then
@@ -339,7 +339,7 @@ public abstract class AbstractSearchLiveTest<T extends INameableDto> extends Abs
     public final void givenResourceExists_whenResourceIsSearchedByNegatedName_thenOperationIsSuccessful() {
         final T existingResource = getApi().create(createNewResource());
 
-        final Triple<String, ClientOperation, String> negatedNameConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.name.toString(), NEG_EQ, existingResource.getName());
+        final Triple<String, ClientOperation, String> negatedNameConstraint = new ImmutableTriple<>(SearchField.name.toString(), NEG_EQ, existingResource.getName());
 
         // When
         final Response searchResponse = getApi().searchAsResponse(null, negatedNameConstraint);
@@ -353,7 +353,7 @@ public abstract class AbstractSearchLiveTest<T extends INameableDto> extends Abs
     public final void givenResourceExists_whenResourceIsSearchedByNegatedId_thenOperationIsSuccessful() {
         final T existingResource = getApi().create(createNewResource());
 
-        final Triple<String, ClientOperation, String> negatedIdConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.id.toString(), NEG_EQ, existingResource.getId().toString());
+        final Triple<String, ClientOperation, String> negatedIdConstraint = new ImmutableTriple<>(SearchField.id.toString(), NEG_EQ, existingResource.getId().toString());
 
         // When
         final Response searchResponse = getApi().searchAsResponse(negatedIdConstraint, null);
@@ -394,7 +394,7 @@ public abstract class AbstractSearchLiveTest<T extends INameableDto> extends Abs
         final T existingResource2 = getApi().create(createNewResource());
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.name.toString(), NEG_EQ, existingResource1.getName());
+        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<>(SearchField.name.toString(), NEG_EQ, existingResource1.getName());
         final List<T> searchResults = getApi().searchAll(nameConstraint);
 
         // Then
@@ -409,7 +409,7 @@ public abstract class AbstractSearchLiveTest<T extends INameableDto> extends Abs
         final T existingResource2 = getApi().create(createNewResource());
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> idConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.id.toString(), NEG_EQ, existingResource1.getId().toString());
+        final ImmutableTriple<String, ClientOperation, String> idConstraint = new ImmutableTriple<>(SearchField.id.toString(), NEG_EQ, existingResource1.getId().toString());
         final List<T> searchResults = getApi().searchAll(idConstraint);
 
         // Then
@@ -424,7 +424,7 @@ public abstract class AbstractSearchLiveTest<T extends INameableDto> extends Abs
         final T existingResource = getApi().create(createNewResource());
 
         // When
-        final Triple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.name.toString(), EQ, existingResource.getName());
+        final Triple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<>(SearchField.name.toString(), EQ, existingResource.getName());
         final Response searchResponse = getApi().searchAsResponse(null, nameConstraint, 0, 2);
 
         // Then
@@ -439,7 +439,7 @@ public abstract class AbstractSearchLiveTest<T extends INameableDto> extends Abs
         getApi().create(createNewResource());
 
         // When
-        final Triple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.name.toString(), NEG_EQ, existingResource1.getName());
+        final Triple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<>(SearchField.name.toString(), NEG_EQ, existingResource1.getName());
         final List<T> searchResults = getApi().searchPaginated(null, nameConstraint, 0, 2);
 
         // Then

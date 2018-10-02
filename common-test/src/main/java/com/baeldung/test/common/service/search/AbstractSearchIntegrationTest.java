@@ -35,7 +35,7 @@ public abstract class AbstractSearchIntegrationTest<T extends INameableEntity> i
         final T existingEntity = persistNewEntity();
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<String, ClientOperation, String>(QueryConstants.NAME, EQ, existingEntity.getName());
+        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<>(QueryConstants.NAME, EQ, existingEntity.getName());
         getApi().searchAll(nameConstraint);
     }
 
@@ -54,7 +54,7 @@ public abstract class AbstractSearchIntegrationTest<T extends INameableEntity> i
         final T existingResource = persistNewEntity();
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> idConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.id.toString(), EQ, existingResource.getId().toString());
+        final ImmutableTriple<String, ClientOperation, String> idConstraint = new ImmutableTriple<>(SearchField.id.toString(), EQ, existingResource.getId().toString());
         final List<T> searchResults = getApi().searchAll(idConstraint);
 
         // Then
@@ -79,7 +79,7 @@ public abstract class AbstractSearchIntegrationTest<T extends INameableEntity> i
         final T existingResource = persistNewEntity();
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> idConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.id.toString(), EQ, IDUtil.randomPositiveLongAsString());
+        final ImmutableTriple<String, ClientOperation, String> idConstraint = new ImmutableTriple<>(SearchField.id.toString(), EQ, IDUtil.randomPositiveLongAsString());
         final List<T> searchResults = getApi().searchAll(idConstraint);
 
         // Then
@@ -94,7 +94,7 @@ public abstract class AbstractSearchIntegrationTest<T extends INameableEntity> i
         final T existingResource = persistNewEntity();
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.name.toString(), EQ, existingResource.getName());
+        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<>(SearchField.name.toString(), EQ, existingResource.getName());
         getApi().searchAll(nameConstraint);
     }
 
@@ -104,7 +104,7 @@ public abstract class AbstractSearchIntegrationTest<T extends INameableEntity> i
         final T existingResource = persistNewEntity();
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.name.toString(), EQ, existingResource.getName());
+        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<>(SearchField.name.toString(), EQ, existingResource.getName());
         final List<T> searchResults = getApi().searchAll(nameConstraint);
 
         // Then
@@ -117,7 +117,7 @@ public abstract class AbstractSearchIntegrationTest<T extends INameableEntity> i
         final T existingResource = persistNewEntity();
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.name.toString(), EQ, existingResource.getName());
+        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<>(SearchField.name.toString(), EQ, existingResource.getName());
         final List<T> searchResults = getApi().searchAll(nameConstraint);
 
         // Then
@@ -130,7 +130,7 @@ public abstract class AbstractSearchIntegrationTest<T extends INameableEntity> i
         final T existingResource = persistNewEntity();
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.name.toString(), EQ, randomAlphabetic(8));
+        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<>(SearchField.name.toString(), EQ, randomAlphabetic(8));
         final List<T> searchResults = getApi().searchAll(nameConstraint);
 
         // Then
@@ -144,7 +144,7 @@ public abstract class AbstractSearchIntegrationTest<T extends INameableEntity> i
         final T existingResource2 = persistNewEntity();
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.name.toString(), EQ, existingResource1.getName());
+        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<>(SearchField.name.toString(), EQ, existingResource1.getName());
         final List<T> searchResults = getApi().searchAll(nameConstraint);
 
         // Then
@@ -172,8 +172,8 @@ public abstract class AbstractSearchIntegrationTest<T extends INameableEntity> i
         final T existingResource = persistNewEntity();
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.name.toString(), EQ, existingResource.getName());
-        final ImmutableTriple<String, ClientOperation, String> idConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.id.toString(), EQ, existingResource.getId().toString());
+        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<>(SearchField.name.toString(), EQ, existingResource.getName());
+        final ImmutableTriple<String, ClientOperation, String> idConstraint = new ImmutableTriple<>(SearchField.id.toString(), EQ, existingResource.getId().toString());
         final List<T> searchResults = getApi().searchAll(nameConstraint, idConstraint);
 
         // Then
@@ -186,8 +186,8 @@ public abstract class AbstractSearchIntegrationTest<T extends INameableEntity> i
         final T existingResource = persistNewEntity();
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.name.toString(), EQ, existingResource.getName());
-        final ImmutableTriple<String, ClientOperation, String> idConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.id.toString(), EQ, existingResource.getId().toString());
+        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<>(SearchField.name.toString(), EQ, existingResource.getName());
+        final ImmutableTriple<String, ClientOperation, String> idConstraint = new ImmutableTriple<>(SearchField.id.toString(), EQ, existingResource.getId().toString());
         final List<T> searchResults = getApi().searchAll(nameConstraint, idConstraint);
 
         // Then
@@ -200,8 +200,8 @@ public abstract class AbstractSearchIntegrationTest<T extends INameableEntity> i
         final T existingResource = persistNewEntity();
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.name.toString(), EQ, existingResource.getName());
-        final ImmutableTriple<String, ClientOperation, String> idConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.id.toString(), EQ, IDUtil.randomPositiveLongAsString());
+        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<>(SearchField.name.toString(), EQ, existingResource.getName());
+        final ImmutableTriple<String, ClientOperation, String> idConstraint = new ImmutableTriple<>(SearchField.id.toString(), EQ, IDUtil.randomPositiveLongAsString());
         final List<T> searchResults = getApi().searchAll(nameConstraint, idConstraint);
 
         // Then
@@ -214,8 +214,8 @@ public abstract class AbstractSearchIntegrationTest<T extends INameableEntity> i
         final T existingResource = persistNewEntity();
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.name.toString(), EQ, randomAlphabetic(8));
-        final ImmutableTriple<String, ClientOperation, String> idConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.id.toString(), EQ, existingResource.getId().toString());
+        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<>(SearchField.name.toString(), EQ, randomAlphabetic(8));
+        final ImmutableTriple<String, ClientOperation, String> idConstraint = new ImmutableTriple<>(SearchField.id.toString(), EQ, existingResource.getId().toString());
         final List<T> searchResults = getApi().searchAll(nameConstraint, idConstraint);
 
         // Then
@@ -243,7 +243,7 @@ public abstract class AbstractSearchIntegrationTest<T extends INameableEntity> i
         final T existingResource = persistNewEntity();
 
         // When
-        final Triple<String, ClientOperation, String> negatedIdConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.id.toString(), NEG_EQ, existingResource.getId().toString());
+        final Triple<String, ClientOperation, String> negatedIdConstraint = new ImmutableTriple<>(SearchField.id.toString(), NEG_EQ, existingResource.getId().toString());
         final List<T> searchResults = getApi().searchAll(negatedIdConstraint);
 
         // Then
@@ -257,7 +257,7 @@ public abstract class AbstractSearchIntegrationTest<T extends INameableEntity> i
         final T existingResource = persistNewEntity();
 
         // When
-        final Triple<String, ClientOperation, String> negatedIdConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.name.toString(), NEG_EQ, existingResource.getName());
+        final Triple<String, ClientOperation, String> negatedIdConstraint = new ImmutableTriple<>(SearchField.name.toString(), NEG_EQ, existingResource.getName());
         final List<T> searchResults = getApi().searchAll(negatedIdConstraint);
 
         // Then
@@ -271,7 +271,7 @@ public abstract class AbstractSearchIntegrationTest<T extends INameableEntity> i
         final T existingResource2 = persistNewEntity();
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.name.toString(), NEG_EQ, existingResource1.getName());
+        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<>(SearchField.name.toString(), NEG_EQ, existingResource1.getName());
         final List<T> searchResults = getApi().searchAll(nameConstraint);
 
         // Then
@@ -286,7 +286,7 @@ public abstract class AbstractSearchIntegrationTest<T extends INameableEntity> i
         final T existingResource2 = persistNewEntity();
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> idConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.id.toString(), NEG_EQ, existingResource1.getId().toString());
+        final ImmutableTriple<String, ClientOperation, String> idConstraint = new ImmutableTriple<>(SearchField.id.toString(), NEG_EQ, existingResource1.getId().toString());
         final List<T> searchResults = getApi().searchAll(idConstraint);
 
         // Then
@@ -300,7 +300,7 @@ public abstract class AbstractSearchIntegrationTest<T extends INameableEntity> i
         final T existingResource = persistNewEntity();
 
         // When
-        final Triple<String, ClientOperation, String> negatedIdConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.id.toString(), NEG_EQ, existingResource.getId().toString());
+        final Triple<String, ClientOperation, String> negatedIdConstraint = new ImmutableTriple<>(SearchField.id.toString(), NEG_EQ, existingResource.getId().toString());
         final List<T> searchResults = getApi().searchAll(negatedIdConstraint, null);
 
         // Then
@@ -339,7 +339,7 @@ public abstract class AbstractSearchIntegrationTest<T extends INameableEntity> i
         final T existingResource = persistNewEntity();
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.name.toString(), ClientOperation.CONTAINS, existingResource.getName());
+        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<>(SearchField.name.toString(), ClientOperation.CONTAINS, existingResource.getName());
         final List<T> searchResults = getApi().searchAll(nameConstraint);
 
         // Then
@@ -354,7 +354,7 @@ public abstract class AbstractSearchIntegrationTest<T extends INameableEntity> i
         final String partOfName = name.substring(2);
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> nameContainsConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.name.toString(), ClientOperation.CONTAINS, partOfName);
+        final ImmutableTriple<String, ClientOperation, String> nameContainsConstraint = new ImmutableTriple<>(SearchField.name.toString(), ClientOperation.CONTAINS, partOfName);
         final List<T> searchResults = getApi().searchAll(nameContainsConstraint);
 
         // Then
@@ -367,7 +367,7 @@ public abstract class AbstractSearchIntegrationTest<T extends INameableEntity> i
     @Test
     public final void whenSearchByStartsWithIsPerformed_thenNoExceptions() {
         // When
-        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.name.toString(), ClientOperation.STARTS_WITH, randomAlphabetic(8));
+        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<>(SearchField.name.toString(), ClientOperation.STARTS_WITH, randomAlphabetic(8));
         getApi().searchAll(nameConstraint);
     }
 
@@ -389,7 +389,7 @@ public abstract class AbstractSearchIntegrationTest<T extends INameableEntity> i
     @Test
     public final void whenSearchByEndsWithIsPerformed_thenNoExceptions() {
         // When
-        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.name.toString(), ClientOperation.ENDS_WITH, randomAlphabetic(8));
+        final ImmutableTriple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<>(SearchField.name.toString(), ClientOperation.ENDS_WITH, randomAlphabetic(8));
         getApi().searchAll(nameConstraint);
     }
 
@@ -420,7 +420,7 @@ public abstract class AbstractSearchIntegrationTest<T extends INameableEntity> i
         final String partOfValue = newEntity.getName().substring(2);
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> containsConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.name.toString(), ClientOperation.ENDS_WITH, partOfValue);
+        final ImmutableTriple<String, ClientOperation, String> containsConstraint = new ImmutableTriple<>(SearchField.name.toString(), ClientOperation.ENDS_WITH, partOfValue);
         final List<T> searchResults = getApi().searchAll(containsConstraint);
 
         // Then
@@ -440,11 +440,11 @@ public abstract class AbstractSearchIntegrationTest<T extends INameableEntity> i
     // util
 
     protected final Triple<String, ClientOperation, String> createNameConstraint(final ClientOperation operation, final String nameValue) {
-        return new ImmutableTriple<String, ClientOperation, String>(QueryConstants.NAME, operation, nameValue);
+        return new ImmutableTriple<>(QueryConstants.NAME, operation, nameValue);
     }
 
     protected final Triple<String, ClientOperation, String> createIdConstraint(final ClientOperation operation, final Long idValue) {
-        return new ImmutableTriple<String, ClientOperation, String>(QueryConstants.ID, operation, idValue.toString());
+        return new ImmutableTriple<>(QueryConstants.ID, operation, idValue.toString());
     }
 
 }

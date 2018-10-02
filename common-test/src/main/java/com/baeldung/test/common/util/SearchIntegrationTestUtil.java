@@ -26,7 +26,7 @@ public final class SearchIntegrationTestUtil {
         final T existingResource = api.create(newEntity);
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> constraint = new ImmutableTriple<String, ClientOperation, String>(key.toString(), op, value);
+        final ImmutableTriple<String, ClientOperation, String> constraint = new ImmutableTriple<>(key.toString(), op, value);
         final List<T> searchResults = api.searchAll(constraint);
 
         // Then
@@ -38,7 +38,7 @@ public final class SearchIntegrationTestUtil {
         final String partOfValue = value.substring(0, 2);
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> containsConstraint = new ImmutableTriple<String, ClientOperation, String>(key.toString(), op, partOfValue);
+        final ImmutableTriple<String, ClientOperation, String> containsConstraint = new ImmutableTriple<>(key.toString(), op, partOfValue);
         final List<T> searchResults = api.searchAll(containsConstraint);
 
         // Then
@@ -50,7 +50,7 @@ public final class SearchIntegrationTestUtil {
         final String partOfValue = value.substring(2);
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> containsConstraint = new ImmutableTriple<String, ClientOperation, String>(key.toString(), op, partOfValue);
+        final ImmutableTriple<String, ClientOperation, String> containsConstraint = new ImmutableTriple<>(key.toString(), op, partOfValue);
         final List<T> searchResults = api.searchAll(containsConstraint);
 
         // Then
@@ -61,7 +61,7 @@ public final class SearchIntegrationTestUtil {
         final T existingEntity = api.create(newEntity);
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> constraint = new ImmutableTriple<String, ClientOperation, String>(key.toString(), op, value);
+        final ImmutableTriple<String, ClientOperation, String> constraint = new ImmutableTriple<>(key.toString(), op, value);
         final List<T> searchResults = api.searchAll(constraint);
 
         // Then
@@ -73,7 +73,7 @@ public final class SearchIntegrationTestUtil {
         final String partOfValue = value.substring(2, 5);
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> containsConstraint = new ImmutableTriple<String, ClientOperation, String>(key.toString(), op, partOfValue);
+        final ImmutableTriple<String, ClientOperation, String> containsConstraint = new ImmutableTriple<>(key.toString(), op, partOfValue);
         final List<T> searchResults = api.searchAll(containsConstraint);
 
         // Then
@@ -85,7 +85,7 @@ public final class SearchIntegrationTestUtil {
         final String partOfValue = value.substring(2);
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> containsConstraint = new ImmutableTriple<String, ClientOperation, String>(key.toString(), op, partOfValue);
+        final ImmutableTriple<String, ClientOperation, String> containsConstraint = new ImmutableTriple<>(key.toString(), op, partOfValue);
         final List<T> searchResults = api.searchAll(containsConstraint);
 
         // Then

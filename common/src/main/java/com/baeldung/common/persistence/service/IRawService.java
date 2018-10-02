@@ -6,10 +6,10 @@ import org.apache.commons.lang3.tuple.Triple;
 import org.springframework.data.domain.Page;
 
 import com.baeldung.common.interfaces.IOperations;
-import com.baeldung.common.persistence.model.IEntity;
+import com.baeldung.common.interfaces.IWithName;
 import com.baeldung.common.search.ClientOperation;
 
-public interface IRawService<T extends IEntity> extends IOperations<T> {
+public interface IRawService<T extends IWithName> extends IOperations<T> {
 
     // search
 
