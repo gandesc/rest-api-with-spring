@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -23,6 +24,9 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     @Value("${signing-key:oui214hmui23o4hm1pui3o2hp4m1o3h2m1o43}")
     private String signingKey;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public AuthorizationServerConfiguration() {
         super();
@@ -49,7 +53,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         // @formatter:off
         clients.inMemory()
         .withClient("live-test")
-        .secret("bGl2ZS10ZXN0")
+        .secret(passwordEncoder.encode("bGl2ZS10ZXN0"))
         .authorizedGrantTypes("password")
         .scopes("um-webapp", "read", "write", "trust")
         .scopes("um-webapp")
@@ -58,7 +62,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         .and()
         //
         .withClient("um")
-        .secret("VXB0YWtlLUlyb24h")
+        .secret(passwordEncoder.encode("VXB0YWtlLUlyb24h"))
         .authorizedGrantTypes("password")        
         .scopes("um-webapp", "read", "write", "trust")        
         .autoApprove("um-webapp")

@@ -15,7 +15,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.1.RELEASE</version>
+		<version>2.1.0.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
@@ -115,10 +115,7 @@
 		<guava.version>19.0</guava.version>
 		 
 		<rest-assured.version>2.9.0</rest-assured.version>
-		
-		<!-- maven plugins -->
-		<cargo-maven2-plugin.version>1.5.0</cargo-maven2-plugin.version>
-						
+
 	</properties>
 
 	<modules>

@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -18,6 +20,9 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     @Autowired
     private AuthenticationManager authenticationManager;
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public AuthorizationServerConfiguration() {
         super();
@@ -27,7 +32,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     public TokenStore tokenStore() {
         return new InMemoryTokenStore();
     }
-
+    
     // config
 
     @Override
@@ -40,7 +45,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         // @formatter:off
         clients.inMemory()
         .withClient("live-test")
-        .secret("bGl2ZS10ZXN0")
+        .secret(passwordEncoder.encode("bGl2ZS10ZXN0"))
         .authorizedGrantTypes("password")
         .scopes("um-webapp")
         .autoApprove("um-webapp")
