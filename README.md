@@ -1,9 +1,4 @@
-# Resources
-- [REST With Spring] (http://bit.ly/restwithspring)
-
-
-# Get Started
-
-You can get started with the first module of the course, [here](https://github.com/eugenp/REST-With-Spring/tree/module1). 
+# Module 14 - Spring Boot 2
+This is the codebase for Module 14 of [REST with Spring](http://bit.ly/restwithspring)
 
 For more details, here's [the main Readme](https://github.com/eugenp/REST-With-Spring/wiki) of the project. 
