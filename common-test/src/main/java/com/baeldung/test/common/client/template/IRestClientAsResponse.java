@@ -5,8 +5,8 @@ import org.apache.commons.lang3.tuple.Triple;
 
 import com.baeldung.common.interfaces.IDto;
 import com.baeldung.common.search.ClientOperation;
-import com.jayway.restassured.response.Response;
-import com.jayway.restassured.specification.RequestSpecification;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 
 public interface IRestClientAsResponse<T extends IDto> {
 

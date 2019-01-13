@@ -29,8 +29,8 @@ import com.baeldung.test.common.test.contract.ISearchTest;
 import com.baeldung.test.common.util.IDUtil;
 import com.baeldung.test.common.util.SearchIntegrationTestUtil;
 import com.baeldung.test.common.web.util.ClientConstraintsUtil;
-import com.jayway.restassured.response.Response;
-import com.jayway.restassured.specification.RequestSpecification;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 
 @SuppressWarnings("unchecked")
 @ActiveProfiles({ CLIENT, TEST })

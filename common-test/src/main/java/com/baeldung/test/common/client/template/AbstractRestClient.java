@@ -19,8 +19,8 @@ import com.baeldung.test.common.client.security.ITestAuthenticator;
 import com.baeldung.test.common.search.SearchTestUtil;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
-import com.jayway.restassured.response.Response;
-import com.jayway.restassured.specification.RequestSpecification;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public abstract class AbstractRestClient<T extends IDto> implements IRestClient<T> {

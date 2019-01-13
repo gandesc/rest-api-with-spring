@@ -14,7 +14,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
@@ -92,7 +91,7 @@ public abstract class AbstractRawService<T extends IWithName> implements IRawSer
         Preconditions.checkState(constraints != null);
         Preconditions.checkState(constraints.length > 0);
         final Specification<T> firstSpec = resolveConstraint(constraints[0]);
-        Specifications<T> specifications = Specifications.where(firstSpec);
+        Specification<T> specifications = Specification.where(firstSpec);
         for (int i = 1; i < constraints.length; i++) {
             specifications = specifications.and(resolveConstraint(constraints[i]));
         }
@@ -108,7 +107,7 @@ public abstract class AbstractRawService<T extends IWithName> implements IRawSer
         Preconditions.checkState(constraints != null);
         Preconditions.checkState(constraints.length > 0);
         final Specification<T> firstSpec = resolveConstraint(constraints[0]);
-        Specifications<T> specifications = Specifications.where(firstSpec);
+        Specification<T> specifications = Specification.where(firstSpec);
         for (int i = 1; i < constraints.length; i++) {
             specifications = specifications.and(resolveConstraint(constraints[i]));
         }
@@ -124,12 +123,12 @@ public abstract class AbstractRawService<T extends IWithName> implements IRawSer
     public Page<T> searchPaginated(final int page, final int size, final Triple<String, ClientOperation, String>... constraints) {
         final Specification<T> firstSpec = resolveConstraint(constraints[0]);
         Preconditions.checkState(firstSpec != null);
-        Specifications<T> specifications = Specifications.where(firstSpec);
+        Specification<T> specifications = Specification.where(firstSpec);
         for (int i = 1; i < constraints.length; i++) {
             specifications = specifications.and(resolveConstraint(constraints[i]));
         }
 
-        return getSpecificationExecutor().findAll(specifications, new PageRequest(page, size, null));
+        return getSpecificationExecutor().findAll(specifications, PageRequest.of(page, size, null));
     }
 
     // find - one
@@ -153,14 +152,14 @@ public abstract class AbstractRawService<T extends IWithName> implements IRawSer
     @Transactional(readOnly = true)
     public Page<T> findAllPaginatedAndSortedRaw(final int page, final int size, final String sortBy, final String sortOrder) {
         final Sort sortInfo = constructSort(sortBy, sortOrder);
-        return getDao().findAll(new PageRequest(page, size));
+        return getDao().findAll(PageRequest.of(page, size));
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<T> findAllPaginatedAndSorted(final int page, final int size, final String sortBy, final String sortOrder) {
         final Sort sortInfo = constructSort(sortBy, sortOrder);
-        final List<T> content = getDao().findAll(new PageRequest(page, size, sortInfo)).getContent();
+        final List<T> content = getDao().findAll(PageRequest.of(page, size, sortInfo)).getContent();
         if (content == null) {
             return Lists.newArrayList();
         }
@@ -170,7 +169,7 @@ public abstract class AbstractRawService<T extends IWithName> implements IRawSer
     @Override
     @Transactional(readOnly = true)
     public Page<T> findAllPaginatedRaw(final int page, final int size) {
-        return getDao().findAll(new PageRequest(page, size));
+        return getDao().findAll(PageRequest.of(page, size));
     }
 
     @Override
