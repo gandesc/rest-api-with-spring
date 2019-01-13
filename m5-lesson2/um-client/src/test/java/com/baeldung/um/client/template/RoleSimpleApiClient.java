@@ -15,9 +15,9 @@ import com.baeldung.um.persistence.model.Role;
 import com.baeldung.um.util.Um;
 import com.google.common.base.Preconditions;
 import com.google.common.net.HttpHeaders;
-import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.response.Response;
-import com.jayway.restassured.specification.RequestSpecification;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 
 @Component
 @Profile(Profiles.CLIENT)

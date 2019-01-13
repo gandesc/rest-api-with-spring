@@ -26,7 +26,7 @@ import com.baeldung.um.spring.CommonTestConfig;
 import com.baeldung.um.spring.UmClientConfig;
 import com.baeldung.um.spring.UmLiveTestConfig;
 import com.google.common.collect.Sets;
-import com.jayway.restassured.response.Response;
+import io.restassured.response.Response;
 
 @ActiveProfiles({ CLIENT, TEST })
 @RunWith(SpringJUnit4ClassRunner.class)

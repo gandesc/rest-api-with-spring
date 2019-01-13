@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 import com.baeldung.common.spring.util.Profiles;
 import com.baeldung.um.client.UmPaths;
 import com.baeldung.um.util.Um;
-import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.specification.RequestSpecification;
+import io.restassured.RestAssured;
+import io.restassured.specification.RequestSpecification;
 
 @Component
 @Profile(Profiles.CLIENT)

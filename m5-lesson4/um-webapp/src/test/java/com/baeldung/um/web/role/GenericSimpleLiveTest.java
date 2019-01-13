@@ -33,7 +33,7 @@ import com.baeldung.um.persistence.model.Privilege;
 import com.baeldung.um.spring.CommonTestConfig;
 import com.baeldung.um.spring.UmClientConfig;
 import com.baeldung.um.spring.UmLiveTestConfig;
-import com.jayway.restassured.response.Response;
+import io.restassured.response.Response;
 
 @ActiveProfiles({ CLIENT, TEST })
 @RunWith(SpringJUnit4ClassRunner.class)

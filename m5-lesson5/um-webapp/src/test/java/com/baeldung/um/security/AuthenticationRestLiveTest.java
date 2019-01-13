@@ -22,9 +22,9 @@ import com.baeldung.um.spring.CommonTestConfig;
 import com.baeldung.um.spring.UmClientConfig;
 import com.baeldung.um.spring.UmLiveTestConfig;
 import com.baeldung.um.util.Um;
-import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.response.Response;
-import com.jayway.restassured.specification.RequestSpecification;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { UmLiveTestConfig.class, UmClientConfig.class, CommonTestConfig.class }, loader = AnnotationConfigContextLoader.class)

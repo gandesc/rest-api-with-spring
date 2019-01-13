@@ -15,9 +15,9 @@ import com.baeldung.common.util.QueryConstants;
 import com.baeldung.common.web.WebConstants;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
-import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.response.Response;
-import com.jayway.restassured.specification.RequestSpecification;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 
 public abstract class AbstractSimpleRestClient<T extends IDto> {
     protected final Logger logger = LoggerFactory.getLogger(getClass());

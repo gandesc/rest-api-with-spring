@@ -14,9 +14,9 @@ import com.baeldung.common.spring.util.Profiles;
 import com.baeldung.um.client.UmPaths;
 import com.baeldung.um.persistence.model.Role;
 import com.baeldung.um.util.Um;
-import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.response.Response;
-import com.jayway.restassured.specification.RequestSpecification;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 
 import com.google.common.base.Preconditions;
 
