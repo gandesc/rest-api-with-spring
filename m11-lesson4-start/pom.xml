@@ -1,17 +1,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <description>REST with Spring Classes Module11-Lesson4</description>
-    <name>user-management-parent</name>
+    <description>REST with Spring Classes Module11-Lesson3-Start</description>
+    <name>user-management-parent-l4-start</name>
 
     <groupId>com.baeldung</groupId>
-    <artifactId>rest-with-spring-m11-l4-start</artifactId>
+    <artifactId>user-management-parent-m11-l4-start</artifactId>
     <version>0.1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.5.RELEASE</version>
+        <version>2.1.1.RELEASE</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
@@ -32,91 +32,60 @@
         </developer>
     </developers>
 
-    <dependencies>        
-
-        <!-- web -->            
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-        </dependency>               
-
-        <!-- test scoped -->
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.jayway.restassured</groupId>
-            <artifactId>rest-assured</artifactId>
-            <version>${rest-assured.version}</version>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <artifactId>commons-logging</artifactId>
-                    <groupId>commons-logging</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>        
-
-    </dependencies>
+    <ciManagement>
+        <system>Jenkins</system>
+        <url>https://rest-security.ci.cloudbees.com/</url>
+    </ciManagement>
 
     <build>
-
-        <finalName>um-webapp</finalName>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
 
         <plugins>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-plugin.version}</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
+                <artifactId>maven-surefire-plugin</artifactId>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>${maven-resources-plugin.version}</version>
+                <artifactId>maven-compiler-plugin</artifactId>
             </plugin>
 
         </plugins>
 
+        <pluginManagement>
+            <plugins>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <configuration>
+                        <excludes>
+                            <exclude>**/*IntegrationTest.java</exclude>
+                            <exclude>**/*LiveTest.java</exclude>
+                        </excludes>
+                        <systemPropertyVariables>
+                            <!-- <provPersistenceTarget>h2</provPersistenceTarget> -->
+                        </systemPropertyVariables>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
 
     </build>
 
@@ -125,19 +94,25 @@
         <!-- non-dependencies -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
-       
+
+
+        <!-- persistence -->
+
+        <!-- validator -->
+        <hibernate-validator.version>6.0.13.Final</hibernate-validator.version>
+
         <!-- commons and utils -->
-        <guava.version>23.0</guava.version>
+        <guava.version>27.0-jre</guava.version>
 
-        <commons-text.version>1.1</commons-text.version>
-
-        <rest-assured.version>2.9.0</rest-assured.version>
         
-         <reactor-spring.version>1.0.1.RELEASE</reactor-spring.version>
 
-        <!-- maven plugins -->
-        <maven-surefire-plugin.version>2.20</maven-surefire-plugin.version>
+        <rest-assured.version>3.2.0</rest-assured.version>
 
     </properties>
+
+    <modules>
+        <module>common</module>
+        <module>um-webapp</module>
+    </modules>
 
 </project>
