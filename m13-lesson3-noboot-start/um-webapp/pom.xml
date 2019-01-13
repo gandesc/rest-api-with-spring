@@ -48,7 +48,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.jayway.restassured</groupId>
+            
+
+<groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
             <version>${rest-assured.version}</version>
             <scope>test</scope>
@@ -64,7 +66,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
-            <version>1.16.20</version>
+            <version>1.18.4</version>
         </dependency>
 
     </dependencies>
@@ -79,28 +81,6 @@
         </resources>
 
         <plugins>
-
-            <plugin>
-                <groupId>org.codehaus.cargo</groupId>
-                <artifactId>cargo-maven2-plugin</artifactId>
-                <version>${cargo-maven2-plugin.version}</version>
-                <configuration>
-                    <container>
-                        <containerId>tomcat8x</containerId>
-                        <type>embedded</type>
-                        <systemProperties>
-                            <envTarget>local</envTarget>
-                            <persistenceTarget>cargo</persistenceTarget>
-                        </systemProperties>
-                    </container>
-                    <configuration>
-                        <properties>
-                            <cargo.servlet.port>8082</cargo.servlet.port>
-                        </properties>
-                    </configuration>
-                </configuration>
-            </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>

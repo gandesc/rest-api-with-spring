@@ -5,6 +5,6 @@ import com.baeldung.um.persistence.model.User;
 
 public interface IUserService extends IService<User> {
 
-    User getCurrentUser();
+    //
 
 }

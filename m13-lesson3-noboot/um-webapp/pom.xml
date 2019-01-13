@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>um-webapp-m13-l3-noboot</artifactId>
@@ -36,7 +37,6 @@
             <version>${yasson.version}</version>
         </dependency>
 
-
         <!-- test scoped -->
 
         <dependency>
@@ -61,7 +61,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.jayway.restassured</groupId>
+            <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
             <version>${rest-assured.version}</version>
             <scope>test</scope>
@@ -72,12 +72,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
-            <version>1.16.20</version>
+            <version>1.18.4</version>
         </dependency>
 
     </dependencies>
@@ -92,28 +92,6 @@
         </resources>
 
         <plugins>
-
-            <plugin>
-                <groupId>org.codehaus.cargo</groupId>
-                <artifactId>cargo-maven2-plugin</artifactId>
-                <version>${cargo-maven2-plugin.version}</version>
-                <configuration>
-                    <container>
-                        <containerId>tomcat8x</containerId>
-                        <type>embedded</type>
-                        <systemProperties>
-                            <envTarget>local</envTarget>
-                            <persistenceTarget>cargo</persistenceTarget>
-                        </systemProperties>
-                    </container>
-                    <configuration>
-                        <properties>
-                            <cargo.servlet.port>8082</cargo.servlet.port>
-                        </properties>
-                    </configuration>
-                </configuration>
-            </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
@@ -130,9 +108,8 @@
     <properties>
 
         <!-- marshalling -->
-        <javax.json.version>1.1.2</javax.json.version>
-        <yasson.version>1.0.1</yasson.version>
-
+        <javax.json.version>1.1.4</javax.json.version>
+        <yasson.version>1.0.2</yasson.version>
     </properties>
 
 </project>

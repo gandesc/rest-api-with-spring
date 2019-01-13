@@ -1,6 +1,7 @@
 package com.baeldung.common.persistence.service;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,30 +16,18 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.baeldung.common.persistence.ServicePreconditions;
-import com.baeldung.common.persistence.event.AfterEntitiesDeletedEvent;
-import com.baeldung.common.persistence.event.AfterEntityCreateEvent;
-import com.baeldung.common.persistence.event.AfterEntityDeleteEvent;
-import com.baeldung.common.persistence.event.AfterEntityUpdateEvent;
-import com.baeldung.common.persistence.event.BeforeEntityCreateEvent;
-import com.baeldung.common.persistence.event.BeforeEntityDeleteEvent;
-import com.baeldung.common.persistence.event.BeforeEntityUpdateEvent;
 import com.baeldung.common.persistence.model.IEntity;
-import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 
 @Transactional
 public abstract class AbstractRawService<T extends IEntity> implements IRawService<T> {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-    private Class<T> clazz;
-
     @Autowired
     protected ApplicationEventPublisher eventPublisher;
 
-    public AbstractRawService(final Class<T> clazzToSet) {
+    public AbstractRawService() {
         super();
-
-        clazz = clazzToSet;
     }
 
     // API
@@ -76,7 +65,7 @@ public abstract class AbstractRawService<T extends IEntity> implements IRawServi
         }
         return content;
     }
-    
+
     @Override
     @Transactional(readOnly = true)
     public Page<T> findAllPaginatedRaw(final int page, final int size) {
@@ -104,11 +93,9 @@ public abstract class AbstractRawService<T extends IEntity> implements IRawServi
 
     @Override
     public T create(final T entity) {
-        Preconditions.checkNotNull(entity);
+        Objects.requireNonNull(entity);
 
-        eventPublisher.publishEvent(new BeforeEntityCreateEvent<T>(this, clazz, entity));
         final T persistedEntity = getDao().save(entity);
-        eventPublisher.publishEvent(new AfterEntityCreateEvent<T>(this, clazz, persistedEntity));
 
         return persistedEntity;
     }
@@ -117,11 +104,9 @@ public abstract class AbstractRawService<T extends IEntity> implements IRawServi
 
     @Override
     public void update(final T entity) {
-        Preconditions.checkNotNull(entity);
+        Objects.requireNonNull(entity);
 
-        eventPublisher.publishEvent(new BeforeEntityUpdateEvent<T>(this, clazz, entity));
         getDao().save(entity);
-        eventPublisher.publishEvent(new AfterEntityUpdateEvent<T>(this, clazz, entity));
     }
 
     // delete
@@ -129,7 +114,6 @@ public abstract class AbstractRawService<T extends IEntity> implements IRawServi
     @Override
     public void deleteAll() {
         getDao().deleteAll();
-        eventPublisher.publishEvent(new AfterEntitiesDeletedEvent<T>(this, clazz));
     }
 
     @Override
@@ -137,9 +121,7 @@ public abstract class AbstractRawService<T extends IEntity> implements IRawServi
         final T entity = getDao().findById(id).orElse(null);
         ServicePreconditions.checkEntityExists(entity);
 
-        eventPublisher.publishEvent(new BeforeEntityDeleteEvent<T>(this, clazz, entity));
         getDao().delete(entity);
-        eventPublisher.publishEvent(new AfterEntityDeleteEvent<T>(this, clazz, entity));
     }
 
     // count

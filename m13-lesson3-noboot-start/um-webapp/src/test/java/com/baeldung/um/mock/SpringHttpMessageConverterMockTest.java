@@ -36,7 +36,7 @@ public class SpringHttpMessageConverterMockTest {
     }
 
     @Test
-    public void shouldReturnDefaultMessage() throws Exception {
+    public void whenAllPrivilegesAreRetrived_then200K() throws Exception {
         // @formatter:off
         mockMvc.perform(get("/api/privileges")
                 .contentType(MediaType.APPLICATION_JSON))

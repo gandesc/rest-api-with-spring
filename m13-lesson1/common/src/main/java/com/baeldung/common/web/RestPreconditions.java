@@ -4,13 +4,10 @@ import org.springframework.http.HttpStatus;
 
 import com.baeldung.common.web.exception.MyBadRequestException;
 import com.baeldung.common.web.exception.MyConflictException;
-import com.baeldung.common.web.exception.MyForbiddenException;
 import com.baeldung.common.web.exception.MyResourceNotFoundException;
 
 /**
- * Simple static methods to be called at the start of your own methods to verify
- * correct arguments and state. If the Precondition fails, an {@link HttpStatus}
- * code is thrown
+ * Simple static methods to be called at the start of your own methods to verify correct arguments and state. If the Precondition fails, an {@link HttpStatus} code is thrown
  */
 public final class RestPreconditions {
 
@@ -56,8 +53,7 @@ public final class RestPreconditions {
     }
 
     /**
-     * Ensures that an object reference passed as a parameter to the calling
-     * method is not null.
+     * Ensures that an object reference passed as a parameter to the calling method is not null.
      *
      * @param reference
      *            an object reference
@@ -117,128 +113,6 @@ public final class RestPreconditions {
     public static void checkRequestState(final boolean expression, final String message) {
         if (!expression) {
             throw new MyConflictException(message);
-        }
-    }
-
-    /**
-     * Ensures the truth of an expression related to the validity of the request
-     *
-     * @param expression
-     *            a boolean expression
-     *
-     * @throws MyBadRequestException
-     *             if {@code expression} is false
-     */
-    public static void checkIfBadRequest(final boolean expression) {
-        checkIfBadRequest(expression, null);
-    }
-
-    /**
-     * Ensures the truth of an expression related to the validity of the request
-     *
-     * @param expression
-     *            a boolean expression
-     * @param message
-     *            the message of the exception if the check fails
-     *
-     * @throws MyBadRequestException
-     *             if {@code expression} is false
-     */
-    public static void checkIfBadRequest(final boolean expression, final String message) {
-        if (!expression) {
-            throw new MyBadRequestException(message);
-        }
-    }
-
-    /**
-     * Check if some value was found, otherwise throw exception.
-     *
-     * @param expression
-     *            has value true if found, otherwise false
-     *
-     * @throws MyResourceNotFoundException
-     *             if expression is false, means value not found.
-     */
-    public static void checkFound(final boolean expression) {
-        checkFound(expression, null);
-    }
-
-    /**
-     * Check if some value was found, otherwise throw exception.
-     *
-     * @param expression
-     *            has value true if found, otherwise false
-     * @param message
-     *            the message of the exception if the check fails
-     *
-     * @throws MyResourceNotFoundException
-     *             if expression is false, means value not found.
-     */
-    public static void checkFound(final boolean expression, final String message) {
-        if (!expression) {
-            throw new MyResourceNotFoundException(message);
-        }
-    }
-
-    /**
-     * Check if some value was found, otherwise throw exception.
-     *
-     * @param expression
-     *            has value true if found, otherwise false
-     *
-     * @throws MyResourceNotFoundException
-     *             if expression is false, means value not found.
-     */
-    public static <T> T checkFound(final T resource) {
-        return checkFound(resource, null);
-    }
-
-    /**
-     * Check if some value was found, otherwise throw exception.
-     *
-     * @param expression
-     *            has value true if found, otherwise false
-     * @param message
-     *            the message of the exception if the check fails
-     *
-     * @throws MyResourceNotFoundException
-     *             if expression is false, means value not found.
-     */
-    public static <T> T checkFound(final T resource, final String message) {
-        if (resource == null) {
-            throw new MyResourceNotFoundException(message);
-        }
-
-        return resource;
-    }
-
-    /**
-     * Check if some value was found, otherwise throw exception.
-     *
-     * @param expression
-     *            has value true if found, otherwise false
-     *
-     * @throws MyForbiddenException
-     *             if expression is false, means operation not allowed.
-     */
-    public static void checkAllowed(final boolean expression) {
-        checkAllowed(expression, null);
-    }
-
-    /**
-     * Check if some value was found, otherwise throw exception.
-     *
-     * @param expression
-     *            has value true if found, otherwise false
-     * @param message
-     *            the message of the exception if the check fails
-     *
-     * @throws MyForbiddenException
-     *             if expression is false, means operation not allowed.
-     */
-    public static void checkAllowed(final boolean expression, final String message) {
-        if (!expression) {
-            throw new MyForbiddenException(message);
         }
     }
 

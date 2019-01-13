@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.baeldung.common.persistence.service.AbstractService;
-import com.baeldung.common.security.SpringSecurityUtil;
 import com.baeldung.um.persistence.dao.IUserJpaDao;
 import com.baeldung.um.persistence.model.User;
 import com.baeldung.um.service.IUserService;
@@ -16,10 +15,10 @@ import com.baeldung.um.service.IUserService;
 public class UserServiceImpl extends AbstractService<User> implements IUserService {
 
     @Autowired
-    IUserJpaDao dao;
+    private IUserJpaDao dao;
 
     public UserServiceImpl() {
-        super(User.class);
+        super();
     }
 
     // API
@@ -34,13 +33,6 @@ public class UserServiceImpl extends AbstractService<User> implements IUserServi
 
     // other
 
-    @Override
-    @Transactional(readOnly = true)
-    public User getCurrentUser() {
-        final String userName = SpringSecurityUtil.getNameOfCurrentPrincipal();
-        return getDao().findByName(userName);
-    }
-
     // Spring
 
     @Override
@@ -52,5 +44,4 @@ public class UserServiceImpl extends AbstractService<User> implements IUserServi
     protected JpaSpecificationExecutor<User> getSpecificationExecutor() {
         return dao;
     }
-
 }

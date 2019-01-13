@@ -12,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
 import com.baeldung.common.interfaces.INameableDto;
 import com.baeldung.common.persistence.model.INameableEntity;
 
@@ -54,4 +52,5 @@ public class Role implements INameableEntity, INameableDto {
         name = nameToSet;
         privileges = privilegesToSet;
     }
+
 }

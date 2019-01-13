@@ -52,4 +52,5 @@ public class Role implements INameableEntity, INameableDto {
         name = nameToSet;
         privileges = privilegesToSet;
     }
+
 }

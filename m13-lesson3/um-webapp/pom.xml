@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>um-webapp-m13-l3</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <name>um-webapp-l3</name>
 
@@ -65,7 +65,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.jayway.restassured</groupId>
+            
+
+<groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
             <version>${rest-assured.version}</version>
             <scope>test</scope>
@@ -93,39 +95,13 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
-
-        <plugins>
-
-            <plugin>
-                <groupId>org.codehaus.cargo</groupId>
-                <artifactId>cargo-maven2-plugin</artifactId>
-                <version>${cargo-maven2-plugin.version}</version>
-                <configuration>
-                    <container>
-                        <containerId>tomcat8x</containerId>
-                        <type>embedded</type>
-                        <systemProperties>
-                            <envTarget>local</envTarget>
-                            <persistenceTarget>cargo</persistenceTarget>
-                        </systemProperties>
-                    </container>
-                    <configuration>
-                        <properties>
-                            <cargo.servlet.port>8082</cargo.servlet.port>
-                        </properties>
-                    </configuration>
-                </configuration>
-            </plugin>
-
-        </plugins>
-
     </build>
     
     <properties>
     
         <!-- marshalling -->
-        <javax.json.version>1.1.2</javax.json.version>
-        <yasson.version>1.0.1</yasson.version>
+        <javax.json.version>1.1.4</javax.json.version>
+        <yasson.version>1.0.2</yasson.version>
         
     </properties>
 

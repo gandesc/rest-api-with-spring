@@ -1,25 +1,19 @@
 package com.baeldung.common.web.controller;
 
-import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.util.UriComponentsBuilder;
+import com.baeldung.common.interfaces.IDto;
 
-import com.baeldung.common.persistence.model.IEntity;
+public interface ISortingController<D extends IDto> {
 
-public interface ISortingController<T extends IEntity> {
+    public List<D> findAllPaginatedAndSorted(final int page, final int size, final String sortBy, final String sortOrder);
 
-    public List<T> findAllPaginatedAndSorted(final int page, final int size, final String sortBy, final String sortOrder, final UriComponentsBuilder uriBuilder, final HttpServletResponse response);
+    public List<D> findAllPaginated(final int page, final int size);
 
-    public List<T> findAllPaginated(final int page, final int size, final UriComponentsBuilder uriBuilder, final HttpServletResponse response);
+    public List<D> findAllSorted(final String sortBy, final String sortOrder);
 
-    public List<T> findAllSorted(final String sortBy, final String sortOrder);
-
-    default public List<T> findAll(final HttpServletRequest request, final UriComponentsBuilder uriBuilder, final HttpServletResponse response){        
-        return Collections.emptyList();
-    };
+    public List<D> findAll(final HttpServletRequest request);
 
 }

@@ -11,7 +11,10 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.0.RELEASE</version>
+        <!-- this is the highest version with which there are no failing tests.
+        It has to do with serialisation, and it might work well if one replaces yasson 
+        with johnzon, but the lesson uses yasson explicitly -->
+        <version>2.0.0.RELEASE</version>   
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
@@ -136,13 +139,10 @@
         <java.version>1.8</java.version>          
 
         <!-- commons and utils -->
-        <guava.version>23.6.1-jre</guava.version>
-        <commons-text.version>1.1</commons-text.version>
+        <guava.version>27.0-jre</guava.version>
+        <commons-text.version>1.6</commons-text.version>
 
-        <rest-assured.version>2.9.0</rest-assured.version>        
-
-        <!-- maven plugins -->
-        <cargo-maven2-plugin.version>1.6.4</cargo-maven2-plugin.version>
+        <rest-assured.version>3.2.0</rest-assured.version>        
 
     </properties>
 
