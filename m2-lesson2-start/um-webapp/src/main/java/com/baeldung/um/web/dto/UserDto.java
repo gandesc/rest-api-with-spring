@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.hibernate.validator.constraints.Email;
+import javax.validation.constraints.Email;
 
 import com.baeldung.common.interfaces.INameableDto;
 import com.baeldung.common.persistence.model.INameableEntity;

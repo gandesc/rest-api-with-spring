@@ -10,7 +10,7 @@ import org.springframework.http.converter.json.AbstractJackson2HttpMessageConver
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -18,11 +18,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 @Configuration
 @ComponentScan({ "com.baeldung.um.web", "com.baeldung.common.web" })
 @EnableWebMvc
-public class UmWebConfig extends WebMvcConfigurerAdapter {
-
-    public UmWebConfig() {
-        super();
-    }
+public class UmWebConfig implements WebMvcConfigurer {
 
     // configuration
 
