@@ -15,7 +15,7 @@ public final class UmMappings {
     }
 
     public static final class Hateoas {
-        private static final String HATEOAS = "hateoas/";
+        private static final String HATEOAS = "/hateoas/";
 
         public static final String USER = HATEOAS + Plural.USERS;
         public static final String PRIVILEGE = HATEOAS + Plural.PRIVILEGES;

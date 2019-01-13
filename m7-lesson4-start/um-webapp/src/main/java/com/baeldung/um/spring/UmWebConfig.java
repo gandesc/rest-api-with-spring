@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -25,7 +25,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @ComponentScan({ "com.baeldung.common.web", "com.baeldung.um.web" })
 @EnableWebMvc
 @EnableSwagger2
-public class UmWebConfig extends WebMvcConfigurerAdapter {
+public class UmWebConfig implements WebMvcConfigurer {
 
     public UmWebConfig() {
         super();
