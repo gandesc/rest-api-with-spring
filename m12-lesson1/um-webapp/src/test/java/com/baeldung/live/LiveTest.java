@@ -9,9 +9,9 @@ import org.junit.Test;
 
 import com.baeldung.common.util.RandomStringUtils;
 import com.baeldung.um.persistence.model.User;
-import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.http.ContentType;
-import com.jayway.restassured.response.Response;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 
 public class LiveTest {
 

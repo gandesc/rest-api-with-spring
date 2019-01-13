@@ -13,7 +13,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.2.RELEASE</version>
+        <version>2.1.1.RELEASE</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
@@ -109,16 +109,13 @@
         <!-- persistence -->
 
         <!-- validator -->
-        <hibernate-validator.version>6.0.2.Final</hibernate-validator.version>
+        
 
         <!-- commons and utils -->
-        <guava.version>23.0</guava.version>
-        <commons-text.version>1.1</commons-text.version>
+        <guava.version>27.0-jre</guava.version>
+        <commons-text.version>1.6</commons-text.version>
 
-        <rest-assured.version>2.9.0</rest-assured.version>
-
-        <!-- maven plugins -->
-        <cargo-maven2-plugin.version>1.6.4</cargo-maven2-plugin.version>
+        <rest-assured.version>3.2.0</rest-assured.version>
 
     </properties>
 
