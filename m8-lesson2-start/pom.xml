@@ -155,7 +155,6 @@
 		<rest-assured.version>2.5.0</rest-assured.version>
 
 		<!-- maven plugins -->
-		<cargo-maven2-plugin.version>1.5.0</cargo-maven2-plugin.version>
 		<maven-war-plugin.version>2.6</maven-war-plugin.version>
 
 	</properties>

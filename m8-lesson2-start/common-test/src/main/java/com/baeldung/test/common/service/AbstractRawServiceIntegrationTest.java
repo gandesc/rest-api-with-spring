@@ -17,7 +17,6 @@ import org.junit.Test;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Sort;
 
-import com.baeldung.common.persistence.model.IEntity;
 import com.baeldung.common.persistence.model.INameableEntity;
 import com.baeldung.common.persistence.service.IRawService;
 import com.baeldung.common.util.SearchField;
