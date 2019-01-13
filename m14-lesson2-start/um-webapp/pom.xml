@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>um-webapp-m14-l2-start</artifactId>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<name>um-webapp-l2-start</name>
 
