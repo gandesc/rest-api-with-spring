@@ -128,9 +128,9 @@ public final class RestPreconditions {
      * @throws MyBadRequestException
      *             if {@code expression} is false
      */
-    public static void checkIfBadRequest(final boolean expression) {
+    public static void checkIfBadRequest(final boolean expression, final String message) {
         if (!expression) {
-            throw new MyBadRequestException();
+            throw new MyBadRequestException(message);
         }
     }
 
