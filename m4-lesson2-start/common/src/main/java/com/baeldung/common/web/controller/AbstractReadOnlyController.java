@@ -36,7 +36,7 @@ public abstract class AbstractReadOnlyController<T extends IWithName> {
 
     @Autowired
     protected ApplicationEventPublisher eventPublisher;
-    
+
     public AbstractReadOnlyController(final Class<T> clazzToSet) {
         super();
 
@@ -59,7 +59,8 @@ public abstract class AbstractReadOnlyController<T extends IWithName> {
     // find - all
 
     protected final List<T> findAllInternal(final HttpServletRequest request, final UriComponentsBuilder uriBuilder, final HttpServletResponse response) {
-        if (request.getParameterNames().hasMoreElements()) {
+        if (request.getParameterNames()
+            .hasMoreElements()) {
             throw new MyResourceNotFoundException();
         }
 
@@ -68,8 +69,13 @@ public abstract class AbstractReadOnlyController<T extends IWithName> {
     }
 
     protected final void findAllRedirectToPagination(final UriComponentsBuilder uriBuilder, final HttpServletResponse response) {
-        final String resourceName = clazz.getSimpleName().toString().toLowerCase();
-        final String locationValue = uriBuilder.path(WebConstants.PATH_SEP + resourceName).build().encode().toUriString() + "?" + "page=0&size=10";
+        final String resourceName = clazz.getSimpleName()
+            .toString()
+            .toLowerCase();
+        final String locationValue = uriBuilder.path(WebConstants.PATH_SEP + resourceName)
+            .build()
+            .encode()
+            .toUriString() + "?" + "page=0&size=10";
 
         response.setHeader(HttpHeaders.LOCATION, locationValue);
     }
@@ -84,7 +90,7 @@ public abstract class AbstractReadOnlyController<T extends IWithName> {
         return Lists.newArrayList(resultPage.getContent());
     }
 
-    protected final List<T> findPaginatedInternal(final int page, final int size,  final UriComponentsBuilder uriBuilder, final HttpServletResponse response) {
+    protected final List<T> findPaginatedInternal(final int page, final int size, final UriComponentsBuilder uriBuilder, final HttpServletResponse response) {
         final Page<T> resultPage = getService().findAllPaginatedRaw(page, size);
         if (page > resultPage.getTotalPages()) {
             throw new MyResourceNotFoundException();

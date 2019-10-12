@@ -7,7 +7,7 @@ public class UmServletConfig {
 
     public UmServletConfig() {
         super();
-    }    
+    }
 
     /*@Bean
     public SimpleCorsFilter simpleCorsFilter() {
