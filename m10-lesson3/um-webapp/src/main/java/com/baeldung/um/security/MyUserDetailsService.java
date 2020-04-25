@@ -45,11 +45,16 @@ public final class MyUserDetailsService implements UserDetailsService {
         }
 
         final List<GrantedAuthority> authorities = new ArrayList<>();
-        principal.getRoles().forEach(role -> {
-            if (role != null) {
-                authorities.addAll(role.getPrivileges().stream().map(priv -> new SimpleGrantedAuthority(priv.getName())).distinct().collect(Collectors.toList()));
-            }
-        });
+        principal.getRoles()
+            .forEach(role -> {
+                if (role != null) {
+                    authorities.addAll(role.getPrivileges()
+                        .stream()
+                        .map(priv -> new SimpleGrantedAuthority(priv.getName()))
+                        .distinct()
+                        .collect(Collectors.toList()));
+                }
+            });
 
         return new User(principal.getName(), principal.getPassword(), authorities);
     }

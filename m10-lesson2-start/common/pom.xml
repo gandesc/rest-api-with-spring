@@ -26,17 +26,6 @@
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpcore</artifactId>
-			<exclusions>
-				<exclusion>
-					<artifactId>commons-logging</artifactId>
-					<groupId>commons-logging</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
@@ -149,14 +138,7 @@
 		<dependency>
 			<groupId>io.rest-assured</groupId>
 			<artifactId>rest-assured</artifactId>
-			<version>${rest-assured.version}</version>
 			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<artifactId>commons-logging</artifactId>
-					<groupId>commons-logging</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 
 	</dependencies>

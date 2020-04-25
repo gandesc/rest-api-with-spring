@@ -25,8 +25,8 @@ public class RateLimiterAspect {
         this.limiters = new ConcurrentHashMap<>();
     }
 
-    // 
-    
+    //
+
     @Before("@annotation(limit)")
     public void rateLimit(JoinPoint jp, RateLimit limit) {
         String key = getOrCreateKey(jp, limit);
@@ -36,7 +36,8 @@ public class RateLimiterAspect {
     }
 
     private String getOrCreateKey(JoinPoint jp, RateLimit limit) {
-        return Optional.ofNullable(Strings.emptyToNull(limit.key())).orElseGet(() -> JoinPointToStringHelper.toString(jp));
+        return Optional.ofNullable(Strings.emptyToNull(limit.key()))
+            .orElseGet(() -> JoinPointToStringHelper.toString(jp));
     }
 
     private Function<String, RateLimiter> createLimiter(RateLimit limit) {

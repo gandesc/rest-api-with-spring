@@ -118,7 +118,7 @@ public abstract class AbstractLogicLiveTest<T extends INameableDto> {
     }
 
     @Test
-    /* code */public void whenResourceIsCreatedWithNonNullId_then409IsReceived() {
+    /* code */public void whenResourceIsCreatedWithNonNullId_then400IsReceived() {
         final T resourceWithId = createNewResource();
         resourceWithId.setId(5l);
 

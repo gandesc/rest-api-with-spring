@@ -51,14 +51,16 @@ public class AsyncService {
     }
 
     public void scheduleCreateUser(UserDto resource, DeferredResult<UserDto> deferredResult) {
-        CompletableFuture.supplyAsync(() -> userService.createSlow(resource)).whenCompleteAsync((result, throwable) -> deferredResult.setResult(result));
+        CompletableFuture.supplyAsync(() -> userService.createSlow(resource))
+            .whenCompleteAsync((result, throwable) -> deferredResult.setResult(result));
     }
 
     @Scheduled(fixedRate = DELAY)
     public void processUserDtoQueue() {
         deferredResultMap.forEach((k, pair) -> {
             final UserDto created = userService.create(pair.getLeft());
-            pair.getRight().setResult(created);
+            pair.getRight()
+                .setResult(created);
         });
     }
 }

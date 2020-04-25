@@ -50,7 +50,7 @@ public class User implements INameableEntity, INameableDto {
 
         locked = false;
     }
-    
+
     public User(final String name, final String email, final String password, final Set<Role> roles) {
         super();
 
@@ -159,7 +159,9 @@ public class User implements INameableEntity, INameableDto {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("id", id).append("name", name).toString();
+        return new ToStringBuilder(this).append("id", id)
+            .append("name", name)
+            .toString();
     }
 
 }

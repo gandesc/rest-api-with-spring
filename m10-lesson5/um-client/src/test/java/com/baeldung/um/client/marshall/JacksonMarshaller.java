@@ -83,23 +83,23 @@ public final class JacksonMarshaller implements IMarshaller {
         List<T> entities = null;
         try {
             if (clazz.equals(Role.class)) {
-                entities = objectMapper.readValue(resourcesAsString, new TypeReference<List<Role>>() {
+                entities = (List<T>) objectMapper.readValue(resourcesAsString, new TypeReference<List<Role>>() {
                     // ...
                 });
             } else if (clazz.equals(Privilege.class)) {
-                entities = objectMapper.readValue(resourcesAsString, new TypeReference<List<Privilege>>() {
+                entities = (List<T>) objectMapper.readValue(resourcesAsString, new TypeReference<List<Privilege>>() {
                     // ...
                 });
             } else if (clazz.equals(UserDto.class)) {
-                entities = objectMapper.readValue(resourcesAsString, new TypeReference<List<UserDto>>() {
+                entities = (List<T>) objectMapper.readValue(resourcesAsString, new TypeReference<List<UserDto>>() {
                     // ...
                 });
             } else if (clazz.equals(Principal.class)) {
-                entities = objectMapper.readValue(resourcesAsString, new TypeReference<List<Principal>>() {
+                entities = (List<T>) objectMapper.readValue(resourcesAsString, new TypeReference<List<Principal>>() {
                     // ...
                 });
             } else {
-                entities = objectMapper.readValue(resourcesAsString, List.class);
+                entities = (List<T>) objectMapper.readValue(resourcesAsString, List.class);
             }
         } catch (final JsonParseException parseEx) {
             logger.error("", parseEx);

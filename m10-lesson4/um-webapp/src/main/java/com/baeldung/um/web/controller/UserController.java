@@ -36,7 +36,7 @@ public class UserController extends AbstractController<UserDto, UserDto> impleme
 
     @Autowired
     private IUserService service;
-    
+
     @Autowired
     private AsyncService asyncService;
 
@@ -53,7 +53,7 @@ public class UserController extends AbstractController<UserDto, UserDto> impleme
     @ResponseBody
     @Secured(Privileges.CAN_USER_READ)
     public List<UserDto> findAllPaginatedAndSorted(@RequestParam(value = QueryConstants.PAGE) final int page, @RequestParam(value = QueryConstants.SIZE) final int size, @RequestParam(value = QueryConstants.SORT_BY) final String sortBy,
-            @RequestParam(value = QueryConstants.SORT_ORDER) final String sortOrder, final UriComponentsBuilder uriBuilder, final HttpServletResponse response) {
+        @RequestParam(value = QueryConstants.SORT_ORDER) final String sortOrder, final UriComponentsBuilder uriBuilder, final HttpServletResponse response) {
         return findPaginatedAndSortedInternal(page, size, sortBy, sortOrder, uriBuilder, response);
     }
 
@@ -94,7 +94,7 @@ public class UserController extends AbstractController<UserDto, UserDto> impleme
     @ResponseBody
     @Secured(Privileges.CAN_USER_READ)
     public UserDto findOneByName(@RequestParam(value = "name") final String name) {
-        return getService().findByName(name);               
+        return getService().findByName(name);
     }
 
     // create
@@ -104,7 +104,7 @@ public class UserController extends AbstractController<UserDto, UserDto> impleme
     public void create(@RequestBody @Valid final UserDto resource, final UriComponentsBuilder uriBuilder, final HttpServletResponse response) {
         createInternal(resource, uriBuilder, response);
     }
-        
+
     @RequestMapping(value = "/callable", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
@@ -116,7 +116,7 @@ public class UserController extends AbstractController<UserDto, UserDto> impleme
             }
         };
     }
-    
+
     @RequestMapping(value = "/deferred", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
@@ -125,15 +125,18 @@ public class UserController extends AbstractController<UserDto, UserDto> impleme
         asyncService.scheduleCreateUser(resource, result);
         return result;
     }
-    
+
     @RequestMapping(value = "/async", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void createUserWithAsync(@RequestBody final UserDto resource, HttpServletResponse response, UriComponentsBuilder uriBuilder) throws InterruptedException {
         asyncService.createUserAsync(resource);
-        final String location = uriBuilder.path("/users").queryParam("name", resource.getName()).build().encode().toString();        
-        response.setHeader("Location", location);        
+        final String location = uriBuilder.path("/users")
+            .queryParam("name", resource.getName())
+            .build()
+            .encode()
+            .toString();
+        response.setHeader("Location", location);
     }
-
 
     // update
 
@@ -158,6 +161,6 @@ public class UserController extends AbstractController<UserDto, UserDto> impleme
     @Override
     protected final IUserService getService() {
         return service;
-    }  
+    }
 
 }

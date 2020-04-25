@@ -70,7 +70,11 @@ public class AsyncController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void createUserWithAsync(@RequestBody final UserDto resource, HttpServletResponse response, UriComponentsBuilder uriBuilder) throws InterruptedException {
         asyncService.createUserAsync(resource);
-        final String location = uriBuilder.path("/long").path("/users/").build().encode().toString();        
+        final String location = uriBuilder.path("/long")
+            .path("/users/")
+            .build()
+            .encode()
+            .toString();
         response.setHeader("Location", location + resource.getName());
     }
 
@@ -83,7 +87,8 @@ public class AsyncController {
         System.out.println(user);
         if (user == null) {
             response.setStatus(404);
-        } else if (user.getStatus().equals("In Progress")) {
+        } else if (user.getStatus()
+            .equals("In Progress")) {
             response.setStatus(202);
             return null;
         }

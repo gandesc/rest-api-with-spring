@@ -15,7 +15,7 @@ import io.restassured.response.Response;
 public class PrivilegeReadOnlyLogicRestLiveTest extends UmReadOnlyLogicRestLiveTest<Privilege> {
 
     private static final String APPLICATION_KRYO = "application/x-kryo";
-    
+
     @Autowired
     private PrivilegeRestClient api;
 
@@ -28,7 +28,9 @@ public class PrivilegeReadOnlyLogicRestLiveTest extends UmReadOnlyLogicRestLiveT
     @Test
     public final void giveConsumingAsKryo_whenAllResourcesAreRetrieved_then200IsReceived() {
         // When
-        final Response response = getApi().givenReadAuthenticated().accept(APPLICATION_KRYO).get(getApi().getUri());
+        final Response response = getApi().givenReadAuthenticated()
+            .accept(APPLICATION_KRYO)
+            .get(getApi().getUri());
 
         // Then
         assertThat(response.getStatusCode(), is(200));

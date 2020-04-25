@@ -1,11 +1,9 @@
 package com.baeldung.common.web;
 
-import org.springframework.http.HttpStatus;
-
 import com.baeldung.common.web.exception.MyBadRequestException;
-import com.baeldung.common.web.exception.MyConflictException;
 import com.baeldung.common.web.exception.MyForbiddenException;
 import com.baeldung.common.web.exception.MyResourceNotFoundException;
+import org.springframework.http.HttpStatus;
 
 /**
  * Simple static methods to be called at the start of your own methods to verify
@@ -96,7 +94,7 @@ public final class RestPreconditions {
      * @param expression
      *            a boolean expression
      *
-     * @throws MyConflictException
+     * @throws MyBadRequestException
      *             if {@code expression} is false
      */
     public static void checkRequestState(final boolean expression) {
@@ -111,12 +109,12 @@ public final class RestPreconditions {
      * @param message
      *            the message of the exception if the check fails
      *
-     * @throws MyConflictException
+     * @throws MyBadRequestException
      *             if {@code expression} is false
      */
     public static void checkRequestState(final boolean expression, final String message) {
         if (!expression) {
-            throw new MyConflictException(message);
+            throw new MyBadRequestException(message);
         }
     }
 

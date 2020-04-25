@@ -16,9 +16,11 @@ public class JoinPointToStringHelper {
         if (signature instanceof MethodSignature) {
             MethodSignature ms = (MethodSignature) signature;
             sb.append("#");
-            sb.append(ms.getMethod().getName());
+            sb.append(ms.getMethod()
+                .getName());
             sb.append("(");
-            appendTypes(sb, ms.getMethod().getParameterTypes());
+            appendTypes(sb, ms.getMethod()
+                .getParameterTypes());
             sb.append(")");
         }
         return sb.toString();
@@ -27,7 +29,10 @@ public class JoinPointToStringHelper {
     //
 
     private static Class<?> getType(JoinPoint jp) {
-        return Optional.ofNullable(jp.getSourceLocation()).map(SourceLocation::getWithinType).orElse(jp.getSignature().getDeclaringType());
+        return Optional.ofNullable(jp.getSourceLocation())
+            .map(SourceLocation::getWithinType)
+            .orElse(jp.getSignature()
+                .getDeclaringType());
     }
 
     private static void appendTypes(StringBuilder sb, Class<?>[] types) {

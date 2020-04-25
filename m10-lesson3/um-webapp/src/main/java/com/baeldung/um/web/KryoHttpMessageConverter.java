@@ -41,13 +41,15 @@ public class KryoHttpMessageConverter extends AbstractHttpMessageConverter<Objec
     @Override
     protected Object readInternal(final Class<? extends Object> clazz, final HttpInputMessage inputMessage) throws IOException {
         final Input input = new Input(inputMessage.getBody());
-        return kryoThreadLocal.get().readClassAndObject(input);
+        return kryoThreadLocal.get()
+            .readClassAndObject(input);
     }
 
     @Override
     protected void writeInternal(final Object object, final HttpOutputMessage outputMessage) throws IOException {
         final Output output = new Output(outputMessage.getBody());
-        kryoThreadLocal.get().writeClassAndObject(output, object);
+        kryoThreadLocal.get()
+            .writeClassAndObject(output, object);
         output.flush();
     }
 
@@ -55,10 +57,10 @@ public class KryoHttpMessageConverter extends AbstractHttpMessageConverter<Objec
     protected MediaType getDefaultContentType(final Object object) {
         return KRYO;
     }
-    
+
     //
-    
-    private static final Kryo createKryo(){
+
+    private static final Kryo createKryo() {
         final Kryo kryo = new Kryo();
         kryo.register(UserDto.class, 1);
         kryo.register(Role.class, 2);
@@ -67,5 +69,5 @@ public class KryoHttpMessageConverter extends AbstractHttpMessageConverter<Objec
 
         return kryo;
     }
-    
+
 }

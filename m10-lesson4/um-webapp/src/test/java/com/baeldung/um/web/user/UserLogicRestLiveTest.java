@@ -67,7 +67,8 @@ public class UserLogicRestLiveTest extends UmLogicRestLiveTest<UserDto> {
     @Test
     public final void whenResourceIsCreatedWithNewAssociation_then409IsReceived() {
         final UserDto newResource = getEntityOps().createNewResource();
-        newResource.getRoles().add(getAssociationEntityOps().createNewResource());
+        newResource.getRoles()
+            .add(getAssociationEntityOps().createNewResource());
 
         // When
         final Response response = getApi().createAsResponse(newResource);
@@ -82,7 +83,8 @@ public class UserLogicRestLiveTest extends UmLogicRestLiveTest<UserDto> {
         final Role invalidAssociation = getAssociationEntityOps().createNewResource();
         invalidAssociation.setId(1001l);
         final UserDto newResource = getEntityOps().createNewResource();
-        newResource.getRoles().add(invalidAssociation);
+        newResource.getRoles()
+            .add(invalidAssociation);
 
         // When
         final Response response = getApi().createAsResponse(newResource);
@@ -95,7 +97,8 @@ public class UserLogicRestLiveTest extends UmLogicRestLiveTest<UserDto> {
     public final void whenUserIsCreatedWithExistingRole_then201IsReceived() {
         final Role existingAssociation = getAssociationAPI().create(getAssociationEntityOps().createNewResource());
         final UserDto newResource = getEntityOps().createNewResource();
-        newResource.getRoles().add(existingAssociation);
+        newResource.getRoles()
+            .add(existingAssociation);
 
         // When
         final Response response = getApi().createAsResponse(newResource);
@@ -109,7 +112,8 @@ public class UserLogicRestLiveTest extends UmLogicRestLiveTest<UserDto> {
         Response response = createRandomUser().post(getApi().getUri() + "/callable");
 
         assertEquals(201, response.getStatusCode());
-        assertNotNull(response.jsonPath().get("name"));
+        assertNotNull(response.jsonPath()
+            .get("name"));
         assertTrue(response.time() > AsyncService.DELAY);
     }
 
@@ -118,7 +122,8 @@ public class UserLogicRestLiveTest extends UmLogicRestLiveTest<UserDto> {
         Response response = createRandomUser().post(getApi().getUri() + "/deferred");
 
         assertEquals(201, response.getStatusCode());
-        assertNotNull(response.jsonPath().get("name"));
+        assertNotNull(response.jsonPath()
+            .get("name"));
         assertTrue(response.time() > AsyncService.DELAY);
     }
 
@@ -131,14 +136,18 @@ public class UserLogicRestLiveTest extends UmLogicRestLiveTest<UserDto> {
         String loc = response.getHeader("Location");
         assertNotNull(loc);
 
-        Response checkLocResponse = getApi().givenReadAuthenticated().get(loc);
+        Response checkLocResponse = getApi().givenReadAuthenticated()
+            .get(loc);
         assertTrue(checkLocResponse.getStatusCode() == 200);
-        assertTrue(checkLocResponse.asString().contains("In Progress"));
+        assertTrue(checkLocResponse.asString()
+            .contains("In Progress"));
 
         Thread.sleep(AsyncService.DELAY);
-        Response finalLocResponse = getApi().givenReadAuthenticated().get(loc);
+        Response finalLocResponse = getApi().givenReadAuthenticated()
+            .get(loc);
         assertEquals(200, finalLocResponse.getStatusCode());
-        assertTrue(finalLocResponse.asString().contains("Ready"));
+        assertTrue(finalLocResponse.asString()
+            .contains("Ready"));
     }
 
     // TODO: sort
@@ -147,7 +156,8 @@ public class UserLogicRestLiveTest extends UmLogicRestLiveTest<UserDto> {
     public final void whenScenario_getResource_getAssociationsById() {
         final Role existingAssociation = getAssociationAPI().create(getAssociationEntityOps().createNewResource());
         final UserDto resourceToCreate = getEntityOps().createNewResource();
-        resourceToCreate.getRoles().add(existingAssociation);
+        resourceToCreate.getRoles()
+            .add(existingAssociation);
 
         // When
         final UserDto existingResource = getApi().create(resourceToCreate);
@@ -175,10 +185,14 @@ public class UserLogicRestLiveTest extends UmLogicRestLiveTest<UserDto> {
         assertThat(resource1ViewOfServerAfter.getRoles(), hasItem(child));
     }
 
-    // 
+    //
 
     private RequestSpecification createRandomUser() {
-        return RestAssured.given().auth().basic(Um.ADMIN_EMAIL, Um.ADMIN_PASS).contentType(MediaType.APPLICATION_JSON_VALUE).body(getEntityOps().createNewResource());
+        return RestAssured.given()
+            .auth()
+            .basic(Um.ADMIN_EMAIL, Um.ADMIN_PASS)
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .body(getEntityOps().createNewResource());
     }
 
     // template method
