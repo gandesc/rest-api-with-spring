@@ -145,7 +145,8 @@ public abstract class AbstractDiscoverabilityLiveTest<T extends IDto> {
         final String uriOfExistingResource = getApi().createAsUri(createNewResource());
 
         // When
-        final Response res = getApi().givenReadAuthenticated().post(uriOfExistingResource);
+        final Response res = getApi().givenReadAuthenticated()
+            .post(uriOfExistingResource);
 
         // Then
         final String allowHeader = res.getHeader(HttpHeaders.ALLOW);
@@ -160,7 +161,8 @@ public abstract class AbstractDiscoverabilityLiveTest<T extends IDto> {
 
         // Then
         final Response response = getApi().read(uriOfNewlyCreatedResource);
-        final T resourceFromServer = marshaller.decode(response.body().asString(), clazz);
+        final T resourceFromServer = marshaller.decode(response.body()
+            .asString(), clazz);
         assertThat(unpersistedResource, equalTo(resourceFromServer));
     }
 

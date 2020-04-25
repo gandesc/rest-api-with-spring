@@ -31,7 +31,7 @@ public class UmApp {
             UmJavaSecurityConfig.class
     }; // @formatter:on
 
-    //    
+    //
 
     public static void main(final String... args) {
         final SpringApplication springApplication = new SpringApplication(CONFIGS);

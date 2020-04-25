@@ -59,7 +59,8 @@ public class UserLogicRestLiveTest extends UmLogicRestLiveTest<UserDto> {
     @Test
     public final void whenResourceIsCreatedWithNewAssociation_then409IsReceived() {
         final UserDto newResource = getEntityOps().createNewResource();
-        newResource.getRoles().add(getAssociationEntityOps().createNewResource());
+        newResource.getRoles()
+            .add(getAssociationEntityOps().createNewResource());
 
         // When
         final Response response = getApi().createAsResponse(newResource);
@@ -74,7 +75,8 @@ public class UserLogicRestLiveTest extends UmLogicRestLiveTest<UserDto> {
         final Role invalidAssociation = getAssociationEntityOps().createNewResource();
         invalidAssociation.setId(1001l);
         final UserDto newResource = getEntityOps().createNewResource();
-        newResource.getRoles().add(invalidAssociation);
+        newResource.getRoles()
+            .add(invalidAssociation);
 
         // When
         final Response response = getApi().createAsResponse(newResource);
@@ -87,7 +89,8 @@ public class UserLogicRestLiveTest extends UmLogicRestLiveTest<UserDto> {
     public final void whenUserIsCreatedWithExistingRole_then201IsReceived() {
         final Role existingAssociation = getAssociationAPI().create(getAssociationEntityOps().createNewResource());
         final UserDto newResource = getEntityOps().createNewResource();
-        newResource.getRoles().add(existingAssociation);
+        newResource.getRoles()
+            .add(existingAssociation);
 
         // When
         final Response response = getApi().createAsResponse(newResource);
@@ -102,7 +105,8 @@ public class UserLogicRestLiveTest extends UmLogicRestLiveTest<UserDto> {
     public final void whenScenario_getResource_getAssociationsById() {
         final Role existingAssociation = getAssociationAPI().create(getAssociationEntityOps().createNewResource());
         final UserDto resourceToCreate = getEntityOps().createNewResource();
-        resourceToCreate.getRoles().add(existingAssociation);
+        resourceToCreate.getRoles()
+            .add(existingAssociation);
 
         // When
         final UserDto existingResource = getApi().create(resourceToCreate);

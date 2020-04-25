@@ -36,7 +36,8 @@ public class RateLimiterAspect {
     }
 
     private String getOrCreateKey(JoinPoint jp, RateLimit limit) {
-        return Optional.ofNullable(Strings.emptyToNull(limit.key())).orElseGet(() -> JoinPointToStringHelper.toString(jp));
+        return Optional.ofNullable(Strings.emptyToNull(limit.key()))
+            .orElseGet(() -> JoinPointToStringHelper.toString(jp));
     }
 
     private Function<String, RateLimiter> createLimiter(RateLimit limit) {

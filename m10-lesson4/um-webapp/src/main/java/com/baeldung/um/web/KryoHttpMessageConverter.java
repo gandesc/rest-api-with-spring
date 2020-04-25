@@ -47,13 +47,15 @@ public class KryoHttpMessageConverter extends AbstractHttpMessageConverter<Objec
     @Override
     protected Object readInternal(final Class<? extends Object> clazz, final HttpInputMessage inputMessage) throws IOException {
         final Input input = new Input(inputMessage.getBody());
-        return kryoThreadLocal.get().readClassAndObject(input);
+        return kryoThreadLocal.get()
+            .readClassAndObject(input);
     }
 
     @Override
     protected void writeInternal(final Object object, final HttpOutputMessage outputMessage) throws IOException {
         final Output output = new Output(outputMessage.getBody());
-        kryoThreadLocal.get().writeClassAndObject(output, object);
+        kryoThreadLocal.get()
+            .writeClassAndObject(output, object);
         output.flush();
     }
 
