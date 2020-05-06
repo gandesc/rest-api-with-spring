@@ -88,8 +88,8 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-						<configuration>
-							<reuseForks>false</reuseForks>                        	
+                        <configuration>
+                            <reuseForks>false</reuseForks>
                         </configuration>
                         <executions>
                             <execution>
@@ -122,24 +122,13 @@
                 <plugins>
 
                     <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                    </plugin>
+
+                    <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <phase>integration-test</phase>
-                                <goals>
-                                    <goal>test</goal>
-                                </goals>
-                                <configuration>
-                                    <excludes>
-                                        <exclude>none</exclude>
-                                    </excludes>
-                                    <includes>
-                                        <include>**/*LiveTest.java</include>
-                                    </includes>
-                                </configuration>
-                            </execution>
-                        </executions>
+                        <artifactId>maven-failsafe-plugin</artifactId>
                     </plugin>
 
                 </plugins>

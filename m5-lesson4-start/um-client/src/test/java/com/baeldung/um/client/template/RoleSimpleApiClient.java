@@ -76,7 +76,8 @@ public final class RoleSimpleApiClient {
 
     public final List<Role> findAll(final String uri) {
         final Response allAsResponse = read(uri);
-        final List<Role> listOfResources = marshaller.<Role> decodeList(allAsResponse.getBody().asString(), clazz);
+        final List<Role> listOfResources = marshaller.<Role> decodeList(allAsResponse.getBody()
+            .asString(), clazz);
         if (listOfResources == null) {
             return Lists.newArrayList();
         }
@@ -91,17 +92,20 @@ public final class RoleSimpleApiClient {
 
     public final List<Role> findAllSorted(final String sortBy, final String sortOrder) {
         final Response findAllResponse = findByUriAsResponse(getUri() + QueryConstants.Q_SORT_BY + sortBy + QueryConstants.S_ORDER + sortOrder);
-        return marshaller.<Role> decodeList(findAllResponse.getBody().asString(), clazz);
+        return marshaller.<Role> decodeList(findAllResponse.getBody()
+            .asString(), clazz);
     }
 
     public final List<Role> findAllPaginated(final int page, final int size) {
         final Response allPaginatedAsResponse = findAllPaginatedAsResponse(page, size);
-        return marshaller.<Role> decodeList(allPaginatedAsResponse.getBody().asString(), clazz);
+        return marshaller.<Role> decodeList(allPaginatedAsResponse.getBody()
+            .asString(), clazz);
     }
 
     public final List<Role> findAllPaginatedAndSorted(final int page, final int size, final String sortBy, final String sortOrder) {
         final Response allPaginatedAndSortedAsResponse = findAllPaginatedAndSortedAsResponse(page, size, sortBy, sortOrder);
-        return marshaller.<Role> decodeList(allPaginatedAndSortedAsResponse.getBody().asString(), clazz);
+        return marshaller.<Role> decodeList(allPaginatedAndSortedAsResponse.getBody()
+            .asString(), clazz);
     }
 
     public final Response findAllPaginatedAndSortedAsResponse(final int page, final int size, final String sortBy, final String sortOrder) {
@@ -183,7 +187,9 @@ public final class RoleSimpleApiClient {
         Preconditions.checkNotNull(resource);
         final RequestSpecification givenAuthenticated = givenAuthenticated();
 
-        return givenAuthenticated.contentType(JSON).body(resource).post(getUri());
+        return givenAuthenticated.contentType(JSON)
+            .body(resource)
+            .post(getUri());
     }
 
     /* public final Response createAsResponse(final String resourceAsString) {
@@ -203,7 +209,9 @@ public final class RoleSimpleApiClient {
     public final Response updateAsResponse(final Role resource) {
         Preconditions.checkNotNull(resource);
 
-        return givenAuthenticated().contentType(JSON).body(resource).put(getUri() + "/" + resource.getId());
+        return givenAuthenticated().contentType(JSON)
+            .body(resource)
+            .put(getUri() + "/" + resource.getId());
     }
 
     // delete
@@ -225,7 +233,10 @@ public final class RoleSimpleApiClient {
 
     public final RequestSpecification givenAuthenticated() {
         final Pair<String, String> credentials = getDefaultCredentials();
-        return RestAssured.given().auth().preemptive().basic(credentials.getLeft(), credentials.getRight());
+        return RestAssured.given()
+            .auth()
+            .preemptive()
+            .basic(credentials.getLeft(), credentials.getRight());
     }
 
     public final Response read(final String uriOfResource) {

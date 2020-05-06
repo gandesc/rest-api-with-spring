@@ -34,7 +34,10 @@ public final class RoleSimpleApiClient {
 
     public final RequestSpecification givenAuthenticated() {
         final Pair<String, String> credentials = getDefaultCredentials();
-        return RestAssured.given().auth().preemptive().basic(credentials.getLeft(), credentials.getRight());
+        return RestAssured.given()
+            .auth()
+            .preemptive()
+            .basic(credentials.getLeft(), credentials.getRight());
     }
 
     private final Pair<String, String> getDefaultCredentials() {

@@ -62,7 +62,8 @@ public final class RoleSimpleApiClientNoBase {
 
     public final List<Role> findAll() {
         final Response allAsResponse = read(getUri());
-        final List<Role> listOfResources = marshaller.<Role> decodeList(allAsResponse.getBody().asString(), clazz);
+        final List<Role> listOfResources = marshaller.<Role> decodeList(allAsResponse.getBody()
+            .asString(), clazz);
         if (listOfResources == null) {
             return Lists.newArrayList();
         }
@@ -137,7 +138,9 @@ public final class RoleSimpleApiClientNoBase {
         Preconditions.checkNotNull(resource);
         final RequestSpecification givenAuthenticated = givenAuthenticated();
 
-        return givenAuthenticated.contentType(JSON).body(resource).post(getUri());
+        return givenAuthenticated.contentType(JSON)
+            .body(resource)
+            .post(getUri());
     }
 
     // update
@@ -150,7 +153,9 @@ public final class RoleSimpleApiClientNoBase {
     public final Response updateAsResponse(final Role resource) {
         Preconditions.checkNotNull(resource);
 
-        return givenAuthenticated().contentType(JSON).body(resource).put(getUri() + "/" + resource.getId());
+        return givenAuthenticated().contentType(JSON)
+            .body(resource)
+            .put(getUri() + "/" + resource.getId());
     }
 
     // delete
@@ -172,7 +177,10 @@ public final class RoleSimpleApiClientNoBase {
 
     public final RequestSpecification givenAuthenticated() {
         final Pair<String, String> credentials = getDefaultCredentials();
-        return RestAssured.given().auth().preemptive().basic(credentials.getLeft(), credentials.getRight());
+        return RestAssured.given()
+            .auth()
+            .preemptive()
+            .basic(credentials.getLeft(), credentials.getRight());
     }
 
     public final Response read(final String uriOfResource) {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
 
+import com.baeldung.common.web.exception.*;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -22,10 +23,6 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.baeldung.common.persistence.exception.MyEntityNotFoundException;
-import com.baeldung.common.web.exception.ApiError;
-import com.baeldung.common.web.exception.MyConflictException;
-import com.baeldung.common.web.exception.MyResourceNotFoundException;
-import com.baeldung.common.web.exception.ValidationErrorDTO;
 
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
@@ -53,12 +50,13 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         return handleExceptionInternal(ex, dto, headers, HttpStatus.BAD_REQUEST, request);
     }
 
-    @ExceptionHandler(value = { DataIntegrityViolationException.class })
+    @ExceptionHandler(value = { DataIntegrityViolationException.class, MyBadRequestException.class })
     protected final ResponseEntity<Object> handleBadRequest(final RuntimeException ex, final WebRequest request) {
         logger.info("Bad Request: " + ex.getLocalizedMessage());
         logger.debug("Bad Request: ", ex);
 
-        if (ExceptionUtils.getRootCauseMessage(ex).contains("uplicate")) {
+        if (ExceptionUtils.getRootCauseMessage(ex)
+            .contains("uplicate")) {
             final ApiError apiError = message(HttpStatus.CONFLICT, ex);
             return handleExceptionInternal(ex, apiError, new HttpHeaders(), HttpStatus.CONFLICT, request);
         }
@@ -123,8 +121,10 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     }
 
     private ApiError message(final HttpStatus httpStatus, final Exception ex) {
-        final String message = ex.getMessage() == null ? ex.getClass().getSimpleName() : ex.getMessage();
-        final String devMessage = ex.getClass().getSimpleName();
+        final String message = ex.getMessage() == null ? ex.getClass()
+            .getSimpleName() : ex.getMessage();
+        final String devMessage = ex.getClass()
+            .getSimpleName();
         // devMessage = ExceptionUtils.getStackTrace(ex);
 
         return new ApiError(httpStatus.value(), message, devMessage);

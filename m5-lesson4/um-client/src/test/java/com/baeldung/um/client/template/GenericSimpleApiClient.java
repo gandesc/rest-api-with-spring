@@ -80,7 +80,8 @@ public abstract class GenericSimpleApiClient<T extends IDto> {
 
     public final List<T> findAll(final String uri) {
         final Response allAsResponse = read(uri);
-        final List<T> listOfResources = marshaller.<T> decodeList(allAsResponse.getBody().asString(), clazz);
+        final List<T> listOfResources = marshaller.<T> decodeList(allAsResponse.getBody()
+            .asString(), clazz);
         if (listOfResources == null) {
             return Lists.newArrayList();
         }
@@ -95,17 +96,20 @@ public abstract class GenericSimpleApiClient<T extends IDto> {
 
     public final List<T> findAllSorted(final String sortBy, final String sortOrder) {
         final Response findAllResponse = findByUriAsResponse(getUri() + QueryConstants.Q_SORT_BY + sortBy + QueryConstants.S_ORDER + sortOrder);
-        return marshaller.<T> decodeList(findAllResponse.getBody().asString(), clazz);
+        return marshaller.<T> decodeList(findAllResponse.getBody()
+            .asString(), clazz);
     }
 
     public final List<T> findAllPaginated(final int page, final int size) {
         final Response allPaginatedAsResponse = findAllPaginatedAsResponse(page, size);
-        return marshaller.<T> decodeList(allPaginatedAsResponse.getBody().asString(), clazz);
+        return marshaller.<T> decodeList(allPaginatedAsResponse.getBody()
+            .asString(), clazz);
     }
 
     public final List<T> findAllPaginatedAndSorted(final int page, final int size, final String sortBy, final String sortOrder) {
         final Response allPaginatedAndSortedAsResponse = findAllPaginatedAndSortedAsResponse(page, size, sortBy, sortOrder);
-        return marshaller.<T> decodeList(allPaginatedAndSortedAsResponse.getBody().asString(), clazz);
+        return marshaller.<T> decodeList(allPaginatedAndSortedAsResponse.getBody()
+            .asString(), clazz);
     }
 
     public final Response findAllPaginatedAndSortedAsResponse(final int page, final int size, final String sortBy, final String sortOrder) {
@@ -187,7 +191,9 @@ public abstract class GenericSimpleApiClient<T extends IDto> {
         Preconditions.checkNotNull(resource);
         final RequestSpecification givenAuthenticated = givenAuthenticated();
 
-        return givenAuthenticated.contentType(JSON).body(resource).post(getUri());
+        return givenAuthenticated.contentType(JSON)
+            .body(resource)
+            .post(getUri());
     }
 
     /* public final Response createAsResponse(final String resourceAsString) {
@@ -207,7 +213,9 @@ public abstract class GenericSimpleApiClient<T extends IDto> {
     public final Response updateAsResponse(final T resource) {
         Preconditions.checkNotNull(resource);
 
-        return givenAuthenticated().contentType(JSON).body(resource).put(getUri() + "/" + resource.getId());
+        return givenAuthenticated().contentType(JSON)
+            .body(resource)
+            .put(getUri() + "/" + resource.getId());
     }
 
     // delete
@@ -227,7 +235,10 @@ public abstract class GenericSimpleApiClient<T extends IDto> {
 
     public final RequestSpecification givenAuthenticated() {
         final Pair<String, String> credentials = getDefaultCredentials();
-        return RestAssured.given().auth().preemptive().basic(credentials.getLeft(), credentials.getRight());
+        return RestAssured.given()
+            .auth()
+            .preemptive()
+            .basic(credentials.getLeft(), credentials.getRight());
     }
 
     public final Response read(final String uriOfResource) {

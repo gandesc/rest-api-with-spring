@@ -59,7 +59,8 @@ public class RoleSimpleLiveTest {
     @Test
     public final void givenResourceForIdExists_whenResourceOfThatIdIsRetrieved_then200IsRetrieved() {
         // Given
-        final String uriForResourseCreation = getApi().createAsResponse(createNewResource()).getHeader(HttpHeaders.LOCATION);
+        final String uriForResourseCreation = getApi().createAsResponse(createNewResource())
+            .getHeader(HttpHeaders.LOCATION);
 
         // when
         final Response response = getApi().read(uriForResourseCreation);

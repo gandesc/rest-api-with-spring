@@ -38,8 +38,9 @@ public abstract class AbstractRawService<T extends IWithName> implements IRawSer
     @Override
     @Transactional(readOnly = true)
     public T findOne(final long id) {
-    	Optional<T> entity = getDao().findById(id);
-    	return entity.orElse(null);    }
+        Optional<T> entity = getDao().findById(id);
+        return entity.orElse(null);
+    }
 
     // find - all
 
@@ -60,23 +61,25 @@ public abstract class AbstractRawService<T extends IWithName> implements IRawSer
     @Transactional(readOnly = true)
     public List<T> findAllPaginatedAndSorted(final int page, final int size, final String sortBy, final String sortOrder) {
         final Sort sortInfo = constructSort(sortBy, sortOrder);
-        final List<T> content = getDao().findAll(PageRequest.of(page, size, sortInfo)).getContent();
+        final List<T> content = getDao().findAll(PageRequest.of(page, size, sortInfo))
+            .getContent();
         if (content == null) {
             return Lists.newArrayList();
         }
         return content;
     }
-    
+
     @Override
     @Transactional(readOnly = true)
-    public Page<T> findAllPaginatedRaw(final int page, final int size) {       
+    public Page<T> findAllPaginatedRaw(final int page, final int size) {
         return getDao().findAll(PageRequest.of(page, size));
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<T> findAllPaginated(final int page, final int size) {
-        final List<T> content = getDao().findAll(PageRequest.of(page, size)).getContent();
+        final List<T> content = getDao().findAll(PageRequest.of(page, size))
+            .getContent();
         if (content == null) {
             return Lists.newArrayList();
         }
@@ -120,8 +123,8 @@ public abstract class AbstractRawService<T extends IWithName> implements IRawSer
     @Override
     public void delete(final long id) {
         final Optional<T> entity = getDao().findById(id);
-        if(entity.isPresent()) {
-            getDao().delete(entity.get());  
+        if (entity.isPresent()) {
+            getDao().delete(entity.get());
         } else {
             throw new MyEntityNotFoundException();
         }
@@ -143,9 +146,9 @@ public abstract class AbstractRawService<T extends IWithName> implements IRawSer
     // template
 
     protected final Sort constructSort(final String sortBy, final String sortOrder) {
-        Sort sortInfo = null;
+        Sort sortInfo = Sort.unsorted();
         if (sortBy != null) {
-            sortInfo = new Sort(Direction.fromString(sortOrder), sortBy);
+            sortInfo = Sort.by(Direction.fromString(sortOrder), sortBy);
         }
         return sortInfo;
     }

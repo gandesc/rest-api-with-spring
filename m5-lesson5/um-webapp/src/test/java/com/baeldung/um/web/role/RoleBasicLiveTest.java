@@ -50,7 +50,8 @@ public class RoleBasicLiveTest {
     @Test
     public void whenAllRolesAreRetrieved_thenNotEmpty() {
         // When
-        final Response response = givenAuthenticated().header(HttpHeaders.ACCEPT, JSON).get(getUri());
+        final Response response = givenAuthenticated().header(HttpHeaders.ACCEPT, JSON)
+            .get(getUri());
         final List<Role> allRoles = response.as(List.class);
 
         // Then
@@ -63,11 +64,14 @@ public class RoleBasicLiveTest {
     public final void givenResourceExists_whenResourceIsRetrieved_thenResourceIsCorrectlyRetrieved() {
         // Given
         final Role newResource = new Role(randomAlphabetic(8), Sets.<Privilege> newHashSet());
-        final Response responseOfCreate = givenAuthenticated().contentType(JSON).body(newResource).post(getUri());
+        final Response responseOfCreate = givenAuthenticated().contentType(JSON)
+            .body(newResource)
+            .post(getUri());
         final String uriOfResource = responseOfCreate.getHeader(HttpHeaders.LOCATION);
 
         // When
-        final Response responseOfGet = givenAuthenticated().header(HttpHeaders.ACCEPT, JSON).get(uriOfResource);
+        final Response responseOfGet = givenAuthenticated().header(HttpHeaders.ACCEPT, JSON)
+            .get(uriOfResource);
         final Role createdResource = responseOfGet.as(Role.class);
 
         // Then
@@ -81,7 +85,9 @@ public class RoleBasicLiveTest {
         existingResource.setName(null);
 
         // When
-        final Response responseOfUpdate = givenAuthenticated().contentType(JSON).body(existingResource).put(getUri() + "/" + existingResource.getId());
+        final Response responseOfUpdate = givenAuthenticated().contentType(JSON)
+            .body(existingResource)
+            .put(getUri() + "/" + existingResource.getId());
 
         // Then
         assertThat(responseOfUpdate.getStatusCode(), is(400));
@@ -90,15 +96,21 @@ public class RoleBasicLiveTest {
     // UTIL
 
     public final Role create(final Role resource) {
-        final Response responseOfCreate = givenAuthenticated().contentType(JSON).body(resource).post(getUri());
+        final Response responseOfCreate = givenAuthenticated().contentType(JSON)
+            .body(resource)
+            .post(getUri());
         final String uriOfResource = responseOfCreate.getHeader(HttpHeaders.LOCATION);
 
-        final Response responseOfGet = givenAuthenticated().header(HttpHeaders.ACCEPT, JSON).get(uriOfResource);
+        final Response responseOfGet = givenAuthenticated().header(HttpHeaders.ACCEPT, JSON)
+            .get(uriOfResource);
         return responseOfGet.as(Role.class);
     }
 
     private final RequestSpecification givenAuthenticated() {
-        return RestAssured.given().auth().preemptive().basic(Um.ADMIN_EMAIL, Um.ADMIN_PASS);
+        return RestAssured.given()
+            .auth()
+            .preemptive()
+            .basic(Um.ADMIN_EMAIL, Um.ADMIN_PASS);
     }
 
     private final String getUri() {

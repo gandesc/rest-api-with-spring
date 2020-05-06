@@ -185,14 +185,16 @@ public abstract class GenericSimpleLiveTest<T extends INameableDto> {
     @Test
     public final void whenResourceWithUnsupportedMediaTypeIsCreated_then415IsReceived() {
         // When
-        final Response response = getApi().givenAuthenticated().contentType("unknown").post(getUri());
+        final Response response = getApi().givenAuthenticated()
+            .contentType("unknown")
+            .post(getUri());
 
         // Then
         assertThat(response.getStatusCode(), is(415));
     }
 
     @Test
-    public final void whenResourceIsCreatedWithNonNullId_then409IsReceived() {
+    public final void whenResourceIsCreatedWithNonNullId_then400IsReceived() {
         final T resourceWithId = createNewResource();
         resourceWithId.setId(5l);
 
@@ -200,7 +202,7 @@ public abstract class GenericSimpleLiveTest<T extends INameableDto> {
         final Response response = getApi().createAsResponse(resourceWithId);
 
         // Then
-        assertThat(response.getStatusCode(), is(409));
+        assertThat(response.getStatusCode(), is(400));
     }
 
     @Test
@@ -264,7 +266,9 @@ public abstract class GenericSimpleLiveTest<T extends INameableDto> {
     @Test
     public final void whenNullResourceIsUpdated_then400IsReceived() {
         // When
-        final Response response = getApi().givenAuthenticated().contentType(JSON).put(getUri() + "/" + randomAlphanumeric(4));
+        final Response response = getApi().givenAuthenticated()
+            .contentType(JSON)
+            .put(getUri() + "/" + randomAlphanumeric(4));
 
         // Then
         assertThat(response.getStatusCode(), is(400));
@@ -288,7 +292,8 @@ public abstract class GenericSimpleLiveTest<T extends INameableDto> {
     @Test
     public final void givenResourceExists_whenResourceIsDeleted_then204IsReceived() {
         // Given
-        final long idOfResource = getApi().create(createNewResource()).getId();
+        final long idOfResource = getApi().create(createNewResource())
+            .getId();
 
         // When
         final Response response = getApi().deleteAsResponse(idOfResource);
@@ -300,7 +305,8 @@ public abstract class GenericSimpleLiveTest<T extends INameableDto> {
     @Test
     public final void whenResourceIsDeletedByIncorrectNonNumericId_then400IsReceived() {
         // When
-        final Response response = getApi().givenAuthenticated().delete(getUri() + randomAlphabetic(6));
+        final Response response = getApi().givenAuthenticated()
+            .delete(getUri() + randomAlphabetic(6));
 
         // Then
         assertThat(response.getStatusCode(), is(400));
@@ -318,7 +324,8 @@ public abstract class GenericSimpleLiveTest<T extends INameableDto> {
     @Test
     public final void givenResourceExistedAndWasDeleted_whenRetrievingResource_then404IsReceived() {
         // Given
-        final long idOfResource = getApi().create(createNewResource()).getId();
+        final long idOfResource = getApi().create(createNewResource())
+            .getId();
         getApi().deleteAsResponse(idOfResource);
 
         // When
@@ -333,7 +340,8 @@ public abstract class GenericSimpleLiveTest<T extends INameableDto> {
     @Test
     public final void givenRequestAcceptsMime_whenResourceIsRetrievedById_thenResponseContentTypeIsMime() {
         // Given
-        final long idOfCreatedResource = getApi().create(createNewResource()).getId();
+        final long idOfCreatedResource = getApi().create(createNewResource())
+            .getId();
 
         // When
         final Response res = getApi().findOneAsResponse(idOfCreatedResource);

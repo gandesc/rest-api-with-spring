@@ -4,9 +4,9 @@ import static com.baeldung.common.web.WebConstants.PATH_SEP;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.http.HttpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -40,7 +40,11 @@ public class ResourceCreatedDiscoverabilityListener implements ApplicationListen
      */
     protected void addLinkHeaderOnEntityCreation(final UriComponentsBuilder uriBuilder, final HttpServletResponse response, final String idOfNewEntity, final Class clazz) {
         final String path = calculatePathToResource(clazz);
-        final String locationValue = uriBuilder.path(path).build().expand(idOfNewEntity).encode().toUriString();
+        final String locationValue = uriBuilder.path(path)
+            .build()
+            .expand(idOfNewEntity)
+            .encode()
+            .toUriString();
 
         response.setHeader(HttpHeaders.LOCATION, locationValue);
     }

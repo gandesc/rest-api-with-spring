@@ -39,7 +39,8 @@ public class AuthenticationRestLiveTest {
     @Test
     public final void whenAuthenticationIsPerformed_then200IsReceived() {
         // When
-        final Response response = givenAuthenticated().contentType(APPLICATION_JSON.toString()).get(paths.getAuthenticationUri());
+        final Response response = givenAuthenticated().contentType(APPLICATION_JSON.toString())
+            .get(paths.getAuthenticationUri());
 
         // Then
         assertThat(response.getStatusCode(), is(200));
@@ -48,7 +49,8 @@ public class AuthenticationRestLiveTest {
     @Test
     public final void whenAuthenticationIsPerformed_thenResponseHasContent() {
         // When
-        final Response response = givenAuthenticated().contentType(APPLICATION_JSON.toString()).post(paths.getAuthenticationUri());
+        final Response response = givenAuthenticated().contentType(APPLICATION_JSON.toString())
+            .post(paths.getAuthenticationUri());
 
         // Then
         assertThat(response.asString(), is(notNullValue()));
@@ -57,7 +59,8 @@ public class AuthenticationRestLiveTest {
     @Test
     public final void whenAuthenticationIsPerformed_thenResponseIsUser() {
         // When
-        final Response response = givenAuthenticated().contentType(APPLICATION_JSON.toString()).get(paths.getAuthenticationUri());
+        final Response response = givenAuthenticated().contentType(APPLICATION_JSON.toString())
+            .get(paths.getAuthenticationUri());
 
         // Then
         response.as(User.class);
@@ -66,7 +69,8 @@ public class AuthenticationRestLiveTest {
     @Test
     public final void whenAuthenticationIsPerformed_thenUserResponseIsCorrect() {
         // When
-        final Response response = givenAuthenticated().contentType(APPLICATION_JSON.toString()).get(paths.getAuthenticationUri());
+        final Response response = givenAuthenticated().contentType(APPLICATION_JSON.toString())
+            .get(paths.getAuthenticationUri());
 
         // Then
         assertEquals(new User(Um.EMAIL, Um.PASS, null), response.as(User.class));
@@ -75,7 +79,10 @@ public class AuthenticationRestLiveTest {
     // util
 
     protected RequestSpecification givenAuthenticated() {
-        return RestAssured.given().auth().preemptive().basic(Um.ADMIN_EMAIL, Um.ADMIN_PASS);
+        return RestAssured.given()
+            .auth()
+            .preemptive()
+            .basic(Um.ADMIN_EMAIL, Um.ADMIN_PASS);
     }
 
 }

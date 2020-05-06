@@ -78,6 +78,7 @@ public class RoleContractLiveTest {
         final InputStream stream = getClass().getResourceAsStream("/data/role_json_01.json");
         final JsonNode rootNode = new ObjectMapper().readTree(stream);
         ((ObjectNode) rootNode).set("name", JsonNodeFactory.instance.textNode(randomAlphabetic(8)));
+        ((ObjectNode) rootNode).set("description", JsonNodeFactory.instance.textNode(randomAlphabetic(8)));
         return rootNode.toString();
     }
 
@@ -94,7 +95,8 @@ public class RoleContractLiveTest {
 
     private final String createNewResource1() {
         final Role newRole = new Role(randomAlphabetic(8), Sets.<Privilege> newHashSet());
-        return getApi().getMarshaller().encode(newRole);
+        return getApi().getMarshaller()
+            .encode(newRole);
     }
 
 }

@@ -57,7 +57,10 @@ public class SecurityRestLiveTest {
     public final void givenAuthenticatedByBasicAuth_whenResourceIsCreated_then201IsReceived() {
         // Given
         // When
-        final Response response = givenAuthenticated().contentType(userClient.getMarshaller().getMime()).body(userOps.createNewResource()).post(userClient.getUri());
+        final Response response = givenAuthenticated().contentType(userClient.getMarshaller()
+            .getMime())
+            .body(userOps.createNewResource())
+            .post(userClient.getUri());
 
         // Then
         assertThat(response.getStatusCode(), is(201));
@@ -68,7 +71,10 @@ public class SecurityRestLiveTest {
     public final void givenAuthenticatedByDigestAuth_whenResourceIsCreated_then201IsReceived() {
         // Given
         // When
-        final Response response = givenAuthenticated().contentType(userClient.getMarshaller().getMime()).body(userOps.createNewResource()).post(userClient.getUri());
+        final Response response = givenAuthenticated().contentType(userClient.getMarshaller()
+            .getMime())
+            .body(userOps.createNewResource())
+            .post(userClient.getUri());
 
         // Then
         assertThat(response.getStatusCode(), is(201));
@@ -77,7 +83,10 @@ public class SecurityRestLiveTest {
     // util
 
     protected final RequestSpecification givenAuthenticated() {
-        return RestAssured.given().auth().preemptive().basic(Um.ADMIN_EMAIL, Um.ADMIN_PASS);
+        return RestAssured.given()
+            .auth()
+            .preemptive()
+            .basic(Um.ADMIN_EMAIL, Um.ADMIN_PASS);
     }
 
 }

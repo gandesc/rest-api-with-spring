@@ -60,7 +60,8 @@ public class RoleSimpleLiveTest {
     @Test
     public final void givenResourceForIdExists_whenResourceOfThatIdIsRetrieved_then200IsRetrieved() {
         // Given
-        final String uriForResourseCreation = getApi().createAsResponse(createNewResource()).getHeader(HttpHeaders.LOCATION);
+        final String uriForResourseCreation = getApi().createAsResponse(createNewResource())
+            .getHeader(HttpHeaders.LOCATION);
 
         // when
         final Response response = getApi().read(uriForResourseCreation);
@@ -116,14 +117,16 @@ public class RoleSimpleLiveTest {
     @Test
     public final void whenResourceWithUnsupportedMediaTypeIsCreated_then415IsReceived() {
         // When
-        final Response response = getApi().givenAuthenticated().contentType("unknown").post(getUri());
+        final Response response = getApi().givenAuthenticated()
+            .contentType("unknown")
+            .post(getUri());
 
         // Then
         assertThat(response.getStatusCode(), is(415));
     }
 
     @Test
-    public final void whenResourceIsCreatedWithNonNullId_then409IsReceived() {
+    public final void whenResourceIsCreatedWithNonNullId_then400IsReceived() {
         final Role resourceWithId = createNewResource();
         resourceWithId.setId(5l);
 
@@ -131,7 +134,7 @@ public class RoleSimpleLiveTest {
         final Response response = getApi().createAsResponse(resourceWithId);
 
         // Then
-        assertThat(response.getStatusCode(), is(409));
+        assertThat(response.getStatusCode(), is(400));
     }
 
     @Test

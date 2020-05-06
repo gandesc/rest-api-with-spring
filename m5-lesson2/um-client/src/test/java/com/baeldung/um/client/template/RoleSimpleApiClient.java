@@ -52,7 +52,9 @@ public final class RoleSimpleApiClient {
     }
 
     public final Response createAsResponse(final Role role) {
-        return givenAuthenticated().contentType(JSON).body(role).post(getUri());
+        return givenAuthenticated().contentType(JSON)
+            .body(role)
+            .post(getUri());
     }
 
     public final Role create(final Role role) {
@@ -62,7 +64,9 @@ public final class RoleSimpleApiClient {
     }
 
     public final Response updateAsResponse(final Role role) {
-        return givenAuthenticated().contentType(JSON).body(role).put(getUri() + "/" + role.getId());
+        return givenAuthenticated().contentType(JSON)
+            .body(role)
+            .put(getUri() + "/" + role.getId());
     }
 
     public final Role update(final Role role) {
@@ -77,7 +81,8 @@ public final class RoleSimpleApiClient {
     // UTIL
 
     public final Response read(final String uri) {
-        return givenAuthenticated().accept(JSON).get(uri);
+        return givenAuthenticated().accept(JSON)
+            .get(uri);
     }
 
     public final String getUri() {
@@ -86,7 +91,10 @@ public final class RoleSimpleApiClient {
 
     public final RequestSpecification givenAuthenticated() {
         final Pair<String, String> credentials = getDefaultCredentials();
-        return RestAssured.given().auth().preemptive().basic(credentials.getLeft(), credentials.getRight());
+        return RestAssured.given()
+            .auth()
+            .preemptive()
+            .basic(credentials.getLeft(), credentials.getRight());
     }
 
     private final Pair<String, String> getDefaultCredentials() {
