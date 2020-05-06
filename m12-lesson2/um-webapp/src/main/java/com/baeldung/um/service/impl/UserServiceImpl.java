@@ -13,7 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class UserServiceImpl extends AbstractService<User> implements IUserService {
 
-    @Autowired private IUserJpaDao dao;
+    @Autowired
+    private IUserJpaDao dao;
 
     public UserServiceImpl() {
         super();

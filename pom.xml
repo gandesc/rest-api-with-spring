@@ -7,7 +7,7 @@
     <packaging>pom</packaging>
 
     <name>user-management-parent</name>
-    <url>https://github.com/eugenp/restwithspring</url>
+    <url>https://github.com/eugenp/REST-With-Spring</url>
     <description>REST with Spring Classes</description>
 
     <modules>
@@ -19,6 +19,8 @@
         <module>m12-lesson3</module>
         <module>m12-lesson4-start</module>
         <module>m12-lesson4</module>
+		<module>m12-lesson5-start</module>
+		<module>m12-lesson5</module>
     </modules>
 
 </project>

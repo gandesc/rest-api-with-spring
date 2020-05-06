@@ -23,7 +23,10 @@ import lombok.ToString;
 
 @Entity
 @XmlRootElement
-@Getter @Setter @EqualsAndHashCode(of = "name") @ToString(of = {"id", "name"})
+@Getter
+@Setter
+@EqualsAndHashCode(of = "name")
+@ToString(of = { "id", "name" })
 public class User implements INameableEntity, INameableDto {
 
     @Id

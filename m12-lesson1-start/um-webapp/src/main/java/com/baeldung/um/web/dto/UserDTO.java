@@ -15,7 +15,8 @@ import lombok.ToString;
 
 @XmlRootElement
 @Data
-@EqualsAndHashCode(of = "name") @ToString(of = {"id", "name"})
+@EqualsAndHashCode(of = "name")
+@ToString(of = { "id", "name" })
 public class UserDTO {
 
     private Long id;
@@ -28,7 +29,7 @@ public class UserDTO {
 
     private Boolean locked;
 
-    private Set<@Email String> alternativeEmailAddresses;    
+    private Set<@Email String> alternativeEmailAddresses;
 
     private Optional<@Positive Long> age = Optional.empty();
 

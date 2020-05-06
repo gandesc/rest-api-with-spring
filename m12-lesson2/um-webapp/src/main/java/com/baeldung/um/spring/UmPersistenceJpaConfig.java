@@ -24,7 +24,8 @@ import java.util.Properties;
 @EnableJpaRepositories(basePackages = "com.baeldung.um.persistence.dao")
 public class UmPersistenceJpaConfig {
 
-    @Autowired private Environment env;
+    @Autowired
+    private Environment env;
 
     public UmPersistenceJpaConfig() {
         super();

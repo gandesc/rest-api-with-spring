@@ -9,10 +9,9 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 public class UmApp extends SpringBootServletInitializer {
 
     public static void main(final String... args) {
-        new SpringApplicationBuilder(UmApp.class)
-          .initializers(new MyApplicationContextInitializer())
-          .listeners()
-          .run(args);
+        new SpringApplicationBuilder(UmApp.class).initializers(new MyApplicationContextInitializer())
+            .listeners()
+            .run(args);
     }
 
     @Override

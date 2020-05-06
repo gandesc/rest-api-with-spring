@@ -32,7 +32,8 @@ import com.baeldung.um.util.UmMappings;
 @RequestMapping(UmMappings.ROLES)
 public class RoleController extends AbstractController<Role> implements ISortingController<Role> {
 
-    @Autowired private IRoleService service;
+    @Autowired
+    private IRoleService service;
 
     // API
 

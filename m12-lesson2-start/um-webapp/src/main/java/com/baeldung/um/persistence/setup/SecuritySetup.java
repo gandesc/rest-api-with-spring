@@ -33,11 +33,14 @@ public class SecuritySetup implements ApplicationListener<ContextRefreshedEvent>
 
     private boolean setupDone;
 
-    @Autowired private IUserService userService;
+    @Autowired
+    private IUserService userService;
 
-    @Autowired private IRoleService roleService;
+    @Autowired
+    private IRoleService roleService;
 
-    @Autowired private IPrivilegeService privilegeService;
+    @Autowired
+    private IPrivilegeService privilegeService;
 
     public SecuritySetup() {
         super();

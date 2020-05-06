@@ -11,9 +11,13 @@ public class RandomStringUtils {
     private static RandomStringGenerator randomNumericGenerator;
 
     static {
-        randomAlphaNumericGenerator = new RandomStringGenerator.Builder().withinRange('0', 'z').filteredBy(LETTERS, DIGITS).build();
-        randomAlphabeticGenerator = new RandomStringGenerator.Builder().withinRange('a', 'z').build();
-        randomNumericGenerator = new RandomStringGenerator.Builder().withinRange('0', '9').build();
+        randomAlphaNumericGenerator = new RandomStringGenerator.Builder().withinRange('0', 'z')
+            .filteredBy(LETTERS, DIGITS)
+            .build();
+        randomAlphabeticGenerator = new RandomStringGenerator.Builder().withinRange('a', 'z')
+            .build();
+        randomNumericGenerator = new RandomStringGenerator.Builder().withinRange('0', '9')
+            .build();
     }
 
     public static String randomAlphanumeric(final int count) {

@@ -15,9 +15,11 @@ public class Privilege implements INameableEntity, INameableDto {
     @Column(name = "PRIV_ID")
     private Long id;
 
-    @Column(unique = true, nullable = false) private String name;
+    @Column(unique = true, nullable = false)
+    private String name;
 
-    @Column() private String description;
+    @Column()
+    private String description;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "privileges", fetch = FetchType.EAGER)
@@ -81,13 +83,17 @@ public class Privilege implements INameableEntity, INameableDto {
 
     @Override
     public boolean equals(final Object obj) {
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (getClass() != obj.getClass()) return false;
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
         final Privilege other = (Privilege) obj;
         if (name == null) {
             return other.name == null;
-        } else return name.equals(other.name);
+        } else
+            return name.equals(other.name);
     }
 
     @Override
