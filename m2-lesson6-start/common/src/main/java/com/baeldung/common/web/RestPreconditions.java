@@ -95,7 +95,7 @@ public final class RestPreconditions {
      * @param expression
      *            a boolean expression
      *
-     * @throws MyConflictException
+     * @throws MyBadRequestException
      *             if {@code expression} is false
      */
     public static void checkRequestState(final boolean expression) {
@@ -110,12 +110,12 @@ public final class RestPreconditions {
      * @param message
      *            the message of the exception if the check fails
      *
-     * @throws MyConflictException
+     * @throws MyBadRequestException
      *             if {@code expression} is false
      */
     public static void checkRequestState(final boolean expression, final String message) {
         if (!expression) {
-            throw new MyConflictException(message);
+            throw new MyBadRequestException(message);
         }
     }
 

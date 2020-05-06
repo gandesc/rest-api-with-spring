@@ -15,16 +15,20 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 @Configuration
 @ComponentScan({ "com.baeldung.um.web", "com.baeldung.common.web" })
 public class UmWebConfig implements WebMvcConfigurer {
-	
+
     // configuration
 
     @Override
     public void extendMessageConverters(final List<HttpMessageConverter<?>> converters) {
-        final Optional<HttpMessageConverter<?>> converterFound = converters.stream().filter(c -> c instanceof AbstractJackson2HttpMessageConverter).findFirst();
+        final Optional<HttpMessageConverter<?>> converterFound = converters.stream()
+            .filter(c -> c instanceof AbstractJackson2HttpMessageConverter)
+            .findFirst();
         if (converterFound.isPresent()) {
             final AbstractJackson2HttpMessageConverter converter = (AbstractJackson2HttpMessageConverter) converterFound.get();
-            converter.getObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
-            converter.getObjectMapper().enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+            converter.getObjectMapper()
+                .enable(SerializationFeature.INDENT_OUTPUT);
+            converter.getObjectMapper()
+                .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         }
     }
 }

@@ -14,7 +14,8 @@ import org.springframework.context.annotation.Import;
 public class UmApp {
 
     public static void main(final String... args) {
-        new SpringApplicationBuilder(UmApp.class).listeners().run(args);
+        new SpringApplicationBuilder(UmApp.class).listeners()
+            .run(args);
     }
 
 }

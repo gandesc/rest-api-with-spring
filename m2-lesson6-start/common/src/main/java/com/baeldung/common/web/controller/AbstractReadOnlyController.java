@@ -21,7 +21,6 @@ import com.google.common.collect.Lists;
 
 public abstract class AbstractReadOnlyController<T extends IWithName> {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
-    
 
     // find - one
 
@@ -32,7 +31,8 @@ public abstract class AbstractReadOnlyController<T extends IWithName> {
     // find - all
 
     protected final List<T> findAllInternal(final HttpServletRequest request) {
-        if (request.getParameterNames().hasMoreElements()) {
+        if (request.getParameterNames()
+            .hasMoreElements()) {
             throw new MyResourceNotFoundException();
         }
 

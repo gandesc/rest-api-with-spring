@@ -24,17 +24,25 @@ public class UmWebConfig implements WebMvcConfigurer {
 
     @Override
     public void extendMessageConverters(final List<HttpMessageConverter<?>> converters) {
-        final Optional<HttpMessageConverter<?>> jsonConverterFound = converters.stream().filter(c -> c instanceof MappingJackson2HttpMessageConverter).findFirst();
+        final Optional<HttpMessageConverter<?>> jsonConverterFound = converters.stream()
+            .filter(c -> c instanceof MappingJackson2HttpMessageConverter)
+            .findFirst();
         if (jsonConverterFound.isPresent()) {
             final AbstractJackson2HttpMessageConverter converter = (AbstractJackson2HttpMessageConverter) jsonConverterFound.get();
-            converter.getObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
-            converter.getObjectMapper().enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+            converter.getObjectMapper()
+                .enable(SerializationFeature.INDENT_OUTPUT);
+            converter.getObjectMapper()
+                .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         }
-        final Optional<HttpMessageConverter<?>> xmlConverterFound = converters.stream().filter(c -> c instanceof MappingJackson2XmlHttpMessageConverter).findFirst();
+        final Optional<HttpMessageConverter<?>> xmlConverterFound = converters.stream()
+            .filter(c -> c instanceof MappingJackson2XmlHttpMessageConverter)
+            .findFirst();
         if (xmlConverterFound.isPresent()) {
             final MappingJackson2XmlHttpMessageConverter converter = (MappingJackson2XmlHttpMessageConverter) xmlConverterFound.get();
-            converter.getObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
-            converter.getObjectMapper().enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+            converter.getObjectMapper()
+                .enable(SerializationFeature.INDENT_OUTPUT);
+            converter.getObjectMapper()
+                .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         }
     }
 }
