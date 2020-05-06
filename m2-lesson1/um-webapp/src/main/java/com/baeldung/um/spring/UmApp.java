@@ -13,12 +13,14 @@ import com.baeldung.um.persistence.setup.MyApplicationContextInitializer;
     UmServiceConfig.class,
     UmWebConfig.class
 }) // @formatter:on
-public class UmApp {        
+public class UmApp {
 
-    //    
+    //
 
     public static void main(final String... args) {
-        new SpringApplicationBuilder(UmApp.class).initializers(new MyApplicationContextInitializer()).listeners().run(args);
+        new SpringApplicationBuilder(UmApp.class).initializers(new MyApplicationContextInitializer())
+            .listeners()
+            .run(args);
     }
 
 }

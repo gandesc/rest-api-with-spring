@@ -4,7 +4,7 @@ import com.baeldung.common.persistence.model.INameableEntity;
 import com.baeldung.common.web.RestPreconditions;
 
 public abstract class AbstractController<T extends INameableEntity> extends AbstractReadOnlyController<T> {
-    
+
     // save/create/persist
 
     protected final void createInternal(final T resource) {
@@ -21,7 +21,8 @@ public abstract class AbstractController<T extends INameableEntity> extends Abst
     protected final void updateInternal(final long id, final T resource) {
         RestPreconditions.checkRequestElementNotNull(resource);
         RestPreconditions.checkRequestElementNotNull(resource.getId());
-        RestPreconditions.checkIfBadRequest(resource.getId() == id, resource.getClass().getSimpleName() + " id and URI id don't match");
+        RestPreconditions.checkIfBadRequest(resource.getId() == id, resource.getClass()
+            .getSimpleName() + " id and URI id don't match");
         RestPreconditions.checkNotNull(getService().findOne(resource.getId()));
 
         getService().update(resource);

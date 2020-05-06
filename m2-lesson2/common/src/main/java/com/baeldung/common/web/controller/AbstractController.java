@@ -21,7 +21,8 @@ public abstract class AbstractController<E extends INameableEntity> extends Abst
     protected final void updateInternal(final long id, final E resource) {
         RestPreconditions.checkRequestElementNotNull(resource);
         RestPreconditions.checkRequestElementNotNull(resource.getId());
-        RestPreconditions.checkIfBadRequest(resource.getId() == id, resource.getClass().getSimpleName() + " id and URI id don't match");
+        RestPreconditions.checkIfBadRequest(resource.getId() == id, resource.getClass()
+            .getSimpleName() + " id and URI id don't match");
         RestPreconditions.checkNotNull(getService().findOne(resource.getId()));
 
         getService().update(resource);
