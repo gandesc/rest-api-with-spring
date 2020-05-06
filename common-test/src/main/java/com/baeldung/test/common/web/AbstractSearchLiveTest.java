@@ -191,7 +191,8 @@ public abstract class AbstractSearchLiveTest<T extends INameableDto> extends Abs
         final T existingResource = getApi().create(createNewResource());
 
         // When
-        final List<T> found = getApi().searchAll(ClientConstraintsUtil.createNameConstraint(EQ, existingResource.getName().toLowerCase()));
+        final List<T> found = getApi().searchAll(ClientConstraintsUtil.createNameConstraint(EQ, existingResource.getName()
+            .toLowerCase()));
 
         // Then
         assertThat(found, hasItem(existingResource));
@@ -353,7 +354,8 @@ public abstract class AbstractSearchLiveTest<T extends INameableDto> extends Abs
     public final void givenResourceExists_whenResourceIsSearchedByNegatedId_thenOperationIsSuccessful() {
         final T existingResource = getApi().create(createNewResource());
 
-        final Triple<String, ClientOperation, String> negatedIdConstraint = new ImmutableTriple<>(SearchField.id.toString(), NEG_EQ, existingResource.getId().toString());
+        final Triple<String, ClientOperation, String> negatedIdConstraint = new ImmutableTriple<>(SearchField.id.toString(), NEG_EQ, existingResource.getId()
+            .toString());
 
         // When
         final Response searchResponse = getApi().searchAsResponse(negatedIdConstraint, null);
@@ -409,7 +411,8 @@ public abstract class AbstractSearchLiveTest<T extends INameableDto> extends Abs
         final T existingResource2 = getApi().create(createNewResource());
 
         // When
-        final ImmutableTriple<String, ClientOperation, String> idConstraint = new ImmutableTriple<>(SearchField.id.toString(), NEG_EQ, existingResource1.getId().toString());
+        final ImmutableTriple<String, ClientOperation, String> idConstraint = new ImmutableTriple<>(SearchField.id.toString(), NEG_EQ, existingResource1.getId()
+            .toString());
         final List<T> searchResults = getApi().searchAll(idConstraint);
 
         // Then

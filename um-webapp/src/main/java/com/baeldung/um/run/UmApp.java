@@ -31,7 +31,8 @@ public class UmApp {
     }; // @formatter:on
 
     public static void main(final String... args) {
-        new SpringApplicationBuilder(CONFIGS).listeners().run(args);
+        new SpringApplicationBuilder(CONFIGS).listeners()
+            .run(args);
     }
 
 }

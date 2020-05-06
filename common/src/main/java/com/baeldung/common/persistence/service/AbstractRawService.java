@@ -1,8 +1,14 @@
 package com.baeldung.common.persistence.service;
 
-import java.util.List;
-import java.util.Optional;
-
+import com.baeldung.common.interfaces.IWithName;
+import com.baeldung.common.persistence.event.*;
+import com.baeldung.common.persistence.exception.MyEntityNotFoundException;
+import com.baeldung.common.search.ClientOperation;
+import com.baeldung.common.util.SearchCommonUtil;
+import com.baeldung.common.web.exception.MyBadRequestException;
+import com.baeldung.common.web.exception.MyConflictException;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.apache.commons.lang3.tuple.Triple;
 import org.slf4j.Logger;
@@ -18,21 +24,8 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.baeldung.common.interfaces.IWithName;
-import com.baeldung.common.persistence.ServicePreconditions;
-import com.baeldung.common.persistence.event.AfterEntitiesDeletedEvent;
-import com.baeldung.common.persistence.event.AfterEntityCreateEvent;
-import com.baeldung.common.persistence.event.AfterEntityDeleteEvent;
-import com.baeldung.common.persistence.event.AfterEntityUpdateEvent;
-import com.baeldung.common.persistence.event.BeforeEntityCreateEvent;
-import com.baeldung.common.persistence.event.BeforeEntityDeleteEvent;
-import com.baeldung.common.persistence.event.BeforeEntityUpdateEvent;
-import com.baeldung.common.search.ClientOperation;
-import com.baeldung.common.util.SearchCommonUtil;
-import com.baeldung.common.web.exception.MyBadRequestException;
-import com.baeldung.common.web.exception.MyConflictException;
-import com.google.common.base.Preconditions;
-import com.google.common.collect.Lists;
+import java.util.List;
+import java.util.Optional;
 
 @Transactional
 public abstract class AbstractRawService<T extends IWithName> implements IRawService<T> {
@@ -114,9 +107,9 @@ public abstract class AbstractRawService<T extends IWithName> implements IRawSer
         if (firstSpec == null) {
             return null;
         }
-        
+
         Optional<T> entity = getSpecificationExecutor().findOne(specifications);
-    	return entity.orElse(null);
+        return entity.orElse(null);
     }
 
     @Override
@@ -128,7 +121,7 @@ public abstract class AbstractRawService<T extends IWithName> implements IRawSer
             specifications = specifications.and(resolveConstraint(constraints[i]));
         }
 
-        return getSpecificationExecutor().findAll(specifications, PageRequest.of(page, size, null));
+        return getSpecificationExecutor().findAll(specifications, PageRequest.of(page, size));
     }
 
     // find - one
@@ -136,8 +129,8 @@ public abstract class AbstractRawService<T extends IWithName> implements IRawSer
     @Override
     @Transactional(readOnly = true)
     public T findOne(final long id) {
-    	Optional<T> entity = getDao().findById(id);
-    	return entity.orElse(null);
+        Optional<T> entity = getDao().findById(id);
+        return entity.orElse(null);
     }
 
     // find - all
@@ -152,20 +145,21 @@ public abstract class AbstractRawService<T extends IWithName> implements IRawSer
     @Transactional(readOnly = true)
     public Page<T> findAllPaginatedAndSortedRaw(final int page, final int size, final String sortBy, final String sortOrder) {
         final Sort sortInfo = constructSort(sortBy, sortOrder);
-        return getDao().findAll(PageRequest.of(page, size));
+        return getDao().findAll(PageRequest.of(page, size, sortInfo));
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<T> findAllPaginatedAndSorted(final int page, final int size, final String sortBy, final String sortOrder) {
         final Sort sortInfo = constructSort(sortBy, sortOrder);
-        final List<T> content = getDao().findAll(PageRequest.of(page, size, sortInfo)).getContent();
+        final List<T> content = getDao().findAll(PageRequest.of(page, size, sortInfo))
+            .getContent();
         if (content == null) {
             return Lists.newArrayList();
         }
         return content;
     }
-    
+
     @Override
     @Transactional(readOnly = true)
     public Page<T> findAllPaginatedRaw(final int page, final int size) {
@@ -175,7 +169,8 @@ public abstract class AbstractRawService<T extends IWithName> implements IRawSer
     @Override
     @Transactional(readOnly = true)
     public List<T> findAllPaginated(final int page, final int size) {
-        final List<T> content = getDao().findAll(PageRequest.of(page, size)).getContent();
+        final List<T> content = getDao().findAll(PageRequest.of(page, size))
+            .getContent();
         if (content == null) {
             return Lists.newArrayList();
         }
@@ -223,12 +218,11 @@ public abstract class AbstractRawService<T extends IWithName> implements IRawSer
 
     @Override
     public void delete(final long id) {
-    	final Optional<T> entity = getDao().findById(id);
-        ServicePreconditions.checkEntityExists(entity);
+        final T entity = getDao().findById(id).orElseThrow(MyEntityNotFoundException::new);
 
-        eventPublisher.publishEvent(new BeforeEntityDeleteEvent<T>(this, clazz, entity.get()));
-        getDao().delete(entity.get());
-        eventPublisher.publishEvent(new AfterEntityDeleteEvent<T>(this, clazz, entity.get()));
+        eventPublisher.publishEvent(new BeforeEntityDeleteEvent<T>(this, clazz, entity));
+        getDao().delete(entity);
+        eventPublisher.publishEvent(new AfterEntityDeleteEvent<T>(this, clazz, entity));
     }
 
     // count
@@ -252,9 +246,9 @@ public abstract class AbstractRawService<T extends IWithName> implements IRawSer
     // template
 
     protected final Sort constructSort(final String sortBy, final String sortOrder) {
-        Sort sortInfo = null;
+        Sort sortInfo = Sort.unsorted();
         if (sortBy != null) {
-            sortInfo = new Sort(Direction.fromString(sortOrder), sortBy);
+            sortInfo = Sort.by(Direction.fromString(sortOrder), sortBy);
         }
         return sortInfo;
     }

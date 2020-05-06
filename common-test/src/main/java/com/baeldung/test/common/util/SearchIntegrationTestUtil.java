@@ -69,7 +69,7 @@ public final class SearchIntegrationTestUtil {
     }
 
     public static <T extends Serializable> void givenResourceExists_whenSearchByEndsWithIncorrectPartOfKeyIsPerformed_thenResourceIsNotFound(final IOperations<T> api, final T existingEntity, final SearchField key, final ClientOperation op,
-            final String value) {
+        final String value) {
         final String partOfValue = value.substring(2, 5);
 
         // When
