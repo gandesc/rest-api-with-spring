@@ -90,7 +90,7 @@ public class UserController extends AbstractController<User, User> implements IS
         deleteByIdInternal(id);
     }
 
-    // 
+    //
 
     @Override
     protected IUserService getService() {

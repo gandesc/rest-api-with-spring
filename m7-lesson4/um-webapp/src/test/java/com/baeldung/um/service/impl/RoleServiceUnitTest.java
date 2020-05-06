@@ -45,7 +45,7 @@ public class RoleServiceUnitTest extends AbstractServiceUnitTest<Role> {
     protected final Role configureGet(final long id) {
         final Role entity = createNewEntity();
         entity.setId(id);
-		when(daoMock.findById(id)).thenReturn(Optional.of(entity));
+        when(daoMock.findById(id)).thenReturn(Optional.of(entity));
         return entity;
     }
 

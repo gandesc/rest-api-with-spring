@@ -46,7 +46,7 @@ public class PrivilegeServiceUnitTest extends AbstractServiceUnitTest<Privilege>
     protected final Privilege configureGet(final long id) {
         final Privilege entity = new Privilege();
         entity.setId(id);
-		when(daoMock.findById(id)).thenReturn(Optional.of(entity));
+        when(daoMock.findById(id)).thenReturn(Optional.of(entity));
         return entity;
     }
 

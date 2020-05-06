@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpStatus;
@@ -47,40 +45,48 @@ public abstract class AbstractReadOnlyController<D extends IDto, E extends IEnti
     // find - all
 
     protected final List<D> findAllInternal(final HttpServletRequest request) {
-        if (request.getParameterNames().hasMoreElements()) {
+        if (request.getParameterNames()
+            .hasMoreElements()) {
             throw new MyResourceNotFoundException();
         }
 
-        return getService().findAll().stream().map(this::convertToDto).collect(Collectors.toList());
+        return getService().findAll()
+            .stream()
+            .map(this::convertToDto)
+            .collect(Collectors.toList());
     }
 
     protected final List<D> findPaginatedAndSortedInternal(final int page, final int size, final String sortBy, final String sortOrder) {
         final Page<E> entities = getService().findAllPaginatedAndSortedRaw(page, size, sortBy, sortOrder);
-        List<D> dtos = entities.stream().map(this::convertToDto).collect(Collectors.toList());
-        final Page<D> resultPage = new PageImpl<D>(dtos, PageRequest.of(page, size, constructSort(sortBy, sortOrder)), entities.getTotalElements());
+        List<D> dtos = entities.stream()
+            .map(this::convertToDto)
+            .collect(Collectors.toList());
 
-        if (page > resultPage.getTotalPages()) {
+        if (page > entities.getTotalPages()) {
             throw new MyResourceNotFoundException();
         }
 
-        return resultPage.getContent();
+        return dtos;
     }
 
     protected final List<D> findPaginatedInternal(final int page, final int size) {
         final Page<E> entities = getService().findAllPaginatedRaw(page, size);
-        List<D> dtos = (List<D>) entities.stream().map(this::convertToDto).collect(Collectors.toList());
-        final Page<D> resultPage = new PageImpl<D>(dtos, PageRequest.of(page, size), entities.getTotalElements());
+        List<D> dtos = (List<D>) entities.stream()
+            .map(this::convertToDto)
+            .collect(Collectors.toList());
 
-        if (page > resultPage.getTotalPages()) {
+        if (page > entities.getTotalPages()) {
             throw new MyResourceNotFoundException();
         }
 
-        return resultPage.getContent();
+        return dtos;
     }
 
     protected final List<D> findAllSortedInternal(final String sortBy, final String sortOrder) {
         final List<E> entities = getService().findAllSorted(sortBy, sortOrder);
-        return (List<D>) entities.stream().map(this::convertToDto).collect(Collectors.toList());
+        return (List<D>) entities.stream()
+            .map(this::convertToDto)
+            .collect(Collectors.toList());
     }
 
     // count
@@ -108,15 +114,9 @@ public abstract class AbstractReadOnlyController<D extends IDto, E extends IEnti
 
     // util
 
-    private final Sort constructSort(final String sortBy, final String sortOrder) {
-        Sort sortInfo = null;
-        if (sortBy != null) {
-            sortInfo = new Sort(Direction.fromString(sortOrder), sortBy);
-        }
-        return sortInfo;
-    }
-
     protected abstract D convertToDto(E entity);
+
+    protected abstract E convertToEntity(D dto);
 
     // template method
 

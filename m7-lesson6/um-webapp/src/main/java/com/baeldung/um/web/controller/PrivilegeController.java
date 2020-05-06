@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -32,6 +33,9 @@ public class PrivilegeController extends AbstractController<PrivilegeDto, Privil
     @Autowired
     private IPrivilegeService service;
 
+    @Autowired
+    protected ModelMapper modelmapper;
+
     public PrivilegeController() {
         super(PrivilegeDto.class);
     }
@@ -43,7 +47,7 @@ public class PrivilegeController extends AbstractController<PrivilegeDto, Privil
     @Override
     @GetMapping(params = { QueryConstants.PAGE, QueryConstants.SIZE, QueryConstants.SORT_BY })
     public List<PrivilegeDto> findAllPaginatedAndSorted(@RequestParam(value = QueryConstants.PAGE) final int page, @RequestParam(value = QueryConstants.SIZE) final int size, @RequestParam(value = QueryConstants.SORT_BY) final String sortBy,
-            @RequestParam(value = QueryConstants.SORT_ORDER) final String sortOrder) {
+        @RequestParam(value = QueryConstants.SORT_ORDER) final String sortOrder) {
         return findPaginatedAndSortedInternal(page, size, sortBy, sortOrder);
     }
 
@@ -96,7 +100,7 @@ public class PrivilegeController extends AbstractController<PrivilegeDto, Privil
     protected PrivilegeDto convertToDto(Privilege entity) {
         return this.modelmapper.map(entity, PrivilegeDto.class);
     }
-    
+
     @Override
     protected Privilege convertToEntity(PrivilegeDto dto) {
         return this.modelmapper.map(dto, Privilege.class);

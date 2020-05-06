@@ -1,6 +1,5 @@
 package com.baeldung.common.web.controller;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.baeldung.common.interfaces.IDto;
@@ -8,9 +7,6 @@ import com.baeldung.common.persistence.model.IEntity;
 import com.baeldung.common.web.RestPreconditions;
 
 public abstract class AbstractController<D extends IDto, E extends IEntity> extends AbstractReadOnlyController<D, E> {
-
-    @Autowired
-    protected ModelMapper modelmapper;
 
     @Autowired
     public AbstractController(final Class<D> clazzToSet) {
@@ -38,8 +34,6 @@ public abstract class AbstractController<D extends IDto, E extends IEntity> exte
 
         getService().update(convertToEntity(resource));
     }
-
-    protected abstract E convertToEntity(D dto);
 
     // delete/remove
 

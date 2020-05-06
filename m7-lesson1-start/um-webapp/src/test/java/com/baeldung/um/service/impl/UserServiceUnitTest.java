@@ -45,7 +45,7 @@ public class UserServiceUnitTest extends AbstractServiceUnitTest<User> {
     protected final User configureGet(final long id) {
         final User entity = new User();
         entity.setId(id);
-		when(daoMock.findById(id)).thenReturn(Optional.of(entity));
+        when(daoMock.findById(id)).thenReturn(Optional.of(entity));
         return entity;
     }
 

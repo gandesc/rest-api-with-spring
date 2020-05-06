@@ -10,7 +10,7 @@ import com.baeldung.common.persistence.model.INameableEntity;
 import com.baeldung.common.web.RestPreconditions;
 import com.baeldung.common.web.events.AfterResourceCreatedEvent;
 
-public abstract class AbstractController<D extends IDto, E extends INameableEntity  > extends AbstractReadOnlyController<D, E> {
+public abstract class AbstractController<D extends IDto, E extends INameableEntity> extends AbstractReadOnlyController<D, E> {
 
     @Autowired
     public AbstractController(final Class<D> clazzToSet) {
@@ -25,7 +25,8 @@ public abstract class AbstractController<D extends IDto, E extends INameableEnti
         final E existingResource = getService().create(resource);
 
         // - note: mind the autoboxing and potential NPE when the resource has null id at this point (likely when working with DTOs)
-        eventPublisher.publishEvent(new AfterResourceCreatedEvent<D>(clazz, uriBuilder, response, existingResource.getId().toString()));
+        eventPublisher.publishEvent(new AfterResourceCreatedEvent<D>(clazz, uriBuilder, response, existingResource.getId()
+            .toString()));
     }
 
     // update

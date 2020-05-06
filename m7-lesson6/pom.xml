@@ -11,7 +11,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.1.RELEASE</version>
+        <version>2.2.3.RELEASE</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
@@ -99,7 +99,7 @@
 
         <rest-assured.version>3.2.0</rest-assured.version>
         
-        <modelmapper.version>2.3.1</modelmapper.version>
+        <modelmapper.version>2.3.2</modelmapper.version>
 
         <!-- maven plugins -->
         <maven-surefire-plugin.version>2.20</maven-surefire-plugin.version>

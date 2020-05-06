@@ -43,8 +43,16 @@ public class CustomRequestMappingHandlerMapping extends RequestMappingHandlerMap
             }
             resultPath = newPath.toArray(resultPath);
         }
-        return RequestMappingInfo.paths(resolveEmbeddedValuesInPatterns(resultPath)).methods(requestMapping.method()).params(requestMapping.params()).headers(requestMapping.headers()).consumes(requestMapping.consumes()).produces(requestMapping.produces())
-                .mappingName(requestMapping.name()).customCondition(customCondition).options(this.config).build();
+        return RequestMappingInfo.paths(resolveEmbeddedValuesInPatterns(resultPath))
+            .methods(requestMapping.method())
+            .params(requestMapping.params())
+            .headers(requestMapping.headers())
+            .consumes(requestMapping.consumes())
+            .produces(requestMapping.produces())
+            .mappingName(requestMapping.name())
+            .customCondition(customCondition)
+            .options(this.config)
+            .build();
     }
 
     private RequestCondition<?> createCondition(Version apiVersion) {
@@ -55,7 +63,9 @@ public class CustomRequestMappingHandlerMapping extends RequestMappingHandlerMap
     }
 
     private RequestCondition<?> createVersionRequestCondition(double[] value) {
-        return new VersionRequestCondition(Arrays.stream(value).boxed().collect(Collectors.toSet()));
+        return new VersionRequestCondition(Arrays.stream(value)
+            .boxed()
+            .collect(Collectors.toSet()));
 
     }
 }

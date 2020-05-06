@@ -28,7 +28,7 @@ public class UmApp {
     }; // @formatter:on
 
     //
-    
+
     public static void main(final String... args) {
         final SpringApplication springApplication = new SpringApplication(CONFIGS);
         springApplication.addInitializers(new MyApplicationContextInitializer());

@@ -16,7 +16,9 @@ public final class SearchUriBuilder {
 
     public final SearchUriBuilder consume(final Triple<String, ClientOperation, String> constraint) {
         final ClientOperation operation = (constraint == null) ? null : constraint.getMiddle();
-        final boolean negated = (constraint == null) ? false : constraint.getMiddle().isNegated();
+        final boolean negated = (constraint == null) ? false
+            : constraint.getMiddle()
+                .isNegated();
         final String key = (constraint == null) ? null : constraint.getLeft();
         final String value = (constraint == null) ? null : constraint.getRight();
 

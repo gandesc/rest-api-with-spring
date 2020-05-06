@@ -27,7 +27,7 @@ public class UmApp {
             ,UmApp.class
     }; // @formatter:on
 
-    //    
+    //
 
     public static void main(final String... args) {
         final SpringApplication springApplication = new SpringApplication(CONFIGS);

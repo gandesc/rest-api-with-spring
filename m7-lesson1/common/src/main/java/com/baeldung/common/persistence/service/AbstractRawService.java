@@ -1,8 +1,11 @@
 package com.baeldung.common.persistence.service;
 
-import java.util.List;
-import java.util.Optional;
-
+import com.baeldung.common.persistence.event.*;
+import com.baeldung.common.persistence.exception.MyEntityNotFoundException;
+import com.baeldung.common.persistence.model.INameableEntity;
+import com.baeldung.common.search.ClientOperation;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 import org.apache.commons.lang3.tuple.Triple;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,18 +20,8 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.baeldung.common.persistence.event.AfterEntitiesDeletedEvent;
-import com.baeldung.common.persistence.event.AfterEntityCreateEvent;
-import com.baeldung.common.persistence.event.AfterEntityDeleteEvent;
-import com.baeldung.common.persistence.event.AfterEntityUpdateEvent;
-import com.baeldung.common.persistence.event.BeforeEntityCreateEvent;
-import com.baeldung.common.persistence.event.BeforeEntityDeleteEvent;
-import com.baeldung.common.persistence.event.BeforeEntityUpdateEvent;
-import com.baeldung.common.persistence.exception.MyEntityNotFoundException;
-import com.baeldung.common.persistence.model.INameableEntity;
-import com.baeldung.common.search.ClientOperation;
-import com.google.common.base.Preconditions;
-import com.google.common.collect.Lists;
+import java.util.List;
+import java.util.Optional;
 
 @Transactional
 public abstract class AbstractRawService<T extends INameableEntity> implements IRawService<T> {
@@ -52,8 +45,8 @@ public abstract class AbstractRawService<T extends INameableEntity> implements I
     @Override
     @Transactional(readOnly = true)
     public T findOne(final long id) {
-    	Optional<T> entity = getDao().findById(id);
-    	return entity.orElse(null);
+        Optional<T> entity = getDao().findById(id);
+        return entity.orElse(null);
     }
 
     // find - all
@@ -68,30 +61,32 @@ public abstract class AbstractRawService<T extends INameableEntity> implements I
     @Transactional(readOnly = true)
     public Page<T> findAllPaginatedAndSortedRaw(final int page, final int size, final String sortBy, final String sortOrder) {
         final Sort sortInfo = constructSort(sortBy, sortOrder);
-        return getDao().findAll(PageRequest.of(page, size));
+        return getDao().findAll(PageRequest.of(page, size, sortInfo));
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<T> findAllPaginatedAndSorted(final int page, final int size, final String sortBy, final String sortOrder) {
         final Sort sortInfo = constructSort(sortBy, sortOrder);
-        final List<T> content = getDao().findAll(PageRequest.of(page, size, sortInfo)).getContent();
+        final List<T> content = getDao().findAll(PageRequest.of(page, size, sortInfo))
+            .getContent();
         if (content == null) {
             return Lists.newArrayList();
         }
         return content;
     }
-    
+
     @Override
     @Transactional(readOnly = true)
-    public Page<T> findAllPaginatedRaw(final int page, final int size) {       
+    public Page<T> findAllPaginatedRaw(final int page, final int size) {
         return getDao().findAll(PageRequest.of(page, size));
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<T> findAllPaginated(final int page, final int size) {
-        final List<T> content = getDao().findAll(PageRequest.of(page, size)).getContent();
+        final List<T> content = getDao().findAll(PageRequest.of(page, size))
+            .getContent();
         if (content == null) {
             return Lists.newArrayList();
         }
@@ -139,15 +134,11 @@ public abstract class AbstractRawService<T extends INameableEntity> implements I
 
     @Override
     public void delete(final long id) {
-    	final Optional<T> entity = getDao().findById(id);
-        
-        if(entity.isPresent()) {
-	        eventPublisher.publishEvent(new BeforeEntityDeleteEvent<T>(this, clazz, entity.get()));
-	        getDao().delete(entity.get());
-	        eventPublisher.publishEvent(new AfterEntityDeleteEvent<T>(this, clazz, entity.get()));
-        } else {
-            throw new MyEntityNotFoundException();
-        }
+        final T entity = getDao().findById(id).orElseThrow(MyEntityNotFoundException::new);
+
+        eventPublisher.publishEvent(new BeforeEntityDeleteEvent<T>(this, clazz, entity));
+        getDao().delete(entity);
+        eventPublisher.publishEvent(new AfterEntityDeleteEvent<T>(this, clazz, entity));
     }
 
     // count
@@ -171,9 +162,9 @@ public abstract class AbstractRawService<T extends INameableEntity> implements I
     // template
 
     protected final Sort constructSort(final String sortBy, final String sortOrder) {
-        Sort sortInfo = null;
+        Sort sortInfo = Sort.unsorted();
         if (sortBy != null) {
-            sortInfo = new Sort(Direction.fromString(sortOrder), sortBy);
+            sortInfo = Sort.by(Direction.fromString(sortOrder), sortBy);
         }
         return sortInfo;
     }

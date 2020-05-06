@@ -26,11 +26,6 @@
 		</developer>
 	</developers>
 
-	<ciManagement>
-		<system>Jenkins</system>
-		<url>https://rest-security.ci.cloudbees.com/</url>
-	</ciManagement>
-
 	<modules>
         <module>m7-lesson1-start</module>
         <module>m7-lesson1</module>
@@ -43,13 +38,11 @@
         <module>m7-lesson4-start</module>
         <module>m7-lesson4</module>
         
-        <!-- 
         <module>m7-lesson5-start</module>
         <module>m7-lesson5</module>
         
         <module>m7-lesson6</module>
 		<module>m7-lesson6-start</module>
-         -->
 	</modules>
 
 </project>

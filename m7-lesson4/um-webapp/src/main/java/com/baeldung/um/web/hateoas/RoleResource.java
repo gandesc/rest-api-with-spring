@@ -1,12 +1,12 @@
 package com.baeldung.um.web.hateoas;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
-import org.springframework.hateoas.ResourceSupport;
+import org.springframework.hateoas.RepresentationModel;
 
 import com.baeldung.um.persistence.model.Role;
 
-public class RoleResource extends ResourceSupport {
+public class RoleResource extends RepresentationModel {
 
     private final Role role;
 
