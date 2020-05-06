@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @ComponentScan({ "com.baeldung.common.web", "com.baeldung.um.web" })
 @EnableAspectJAutoProxy
 public class UmWebConfig implements WebMvcConfigurer {
-    
+
     //
 
 }

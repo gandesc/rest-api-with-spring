@@ -20,7 +20,10 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Getter @Setter @EqualsAndHashCode(of = "name") @ToString(of = "name")
+@Getter
+@Setter
+@EqualsAndHashCode(of = "name")
+@ToString(of = "name")
 public class Privilege implements INameableEntity, INameableDto {
 
     @Id

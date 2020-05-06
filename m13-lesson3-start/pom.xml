@@ -11,10 +11,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <!-- this is the highest version with which there are no failing tests.
-        It has to do with serialisation, and it might work well if one replaces yasson 
-        with johnzon, but the lesson uses yasson explicitly -->
-        <version>2.0.0.RELEASE</version>   
+        <version>2.2.3.RELEASE</version>   
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
@@ -34,11 +31,6 @@
             <id>eugenp</id>
         </developer>
     </developers>
-
-    <ciManagement>
-        <system>Jenkins</system>
-        <url>https://rest-security.ci.cloudbees.com/</url>
-    </ciManagement>
 
     <build>
 
@@ -63,7 +55,6 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <configuration>
-                        <testFailureIgnore>true</testFailureIgnore>
                         <excludes>
                             <exclude>**/*IntegrationTest.java</exclude>
                             <exclude>**/*LiveTest.java</exclude>
@@ -141,8 +132,6 @@
         <!-- commons and utils -->
         <guava.version>27.0-jre</guava.version>
         <commons-text.version>1.6</commons-text.version>
-
-        <rest-assured.version>3.2.0</rest-assured.version>        
 
     </properties>
 

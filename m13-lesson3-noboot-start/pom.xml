@@ -26,11 +26,6 @@
         </developer>
     </developers>
 
-    <ciManagement>
-        <system>Jenkins</system>
-        <url>https://rest-security.ci.cloudbees.com/</url>
-    </ciManagement>
-
     <build>
 
         <plugins>
@@ -55,7 +50,6 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${maven-surefire-plugin.version}</version>
                     <configuration>
-                        <testFailureIgnore>true</testFailureIgnore>
                         <excludes>
                             <exclude>**/*IntegrationTest.java</exclude>
                             <exclude>**/*LiveTest.java</exclude>

@@ -7,7 +7,7 @@
     <packaging>pom</packaging>
 
     <name>user-management-parent</name>
-    <url>https://github.com/eugenp/restwithspring</url>
+    <url>https://github.com/eugenp/REST-With-Spring</url>
     <description>REST with Spring Classes</description>
 
     <modules>
@@ -17,9 +17,10 @@
         <module>m13-lesson2</module>
         <module>m13-lesson3-start</module>
         <module>m13-lesson3</module>
-	<module>m13-lesson3-noboot-start</module>
+	    <module>m13-lesson3-noboot-start</module>
         <module>m13-lesson3-noboot</module>
-        
+        <module>m13-lesson4-start</module>
+        <module>m13-lesson4</module>
         <module>m13-lesson5-start</module>
         <module>m13-lesson5</module>
     </modules>
