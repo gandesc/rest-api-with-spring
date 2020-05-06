@@ -18,7 +18,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     @Autowired
     private AuthenticationManager authenticationManager;
-    
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -30,12 +30,13 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     public TokenStore tokenStore() {
         return new InMemoryTokenStore();
     }
-    
+
     // config
 
     @Override
     public void configure(final AuthorizationServerEndpointsConfigurer endpoints) {
-        endpoints.tokenStore(tokenStore()).authenticationManager(authenticationManager);
+        endpoints.tokenStore(tokenStore())
+            .authenticationManager(authenticationManager);
     }
 
     @Override

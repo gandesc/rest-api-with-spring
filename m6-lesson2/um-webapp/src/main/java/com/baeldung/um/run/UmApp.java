@@ -35,23 +35,23 @@ public class UmApp {
             AuthorizationServerConfiguration.class
     }; // // @formatter:on
 
-    //    
+    //
 
     public static void main(final String... args) {
         final SpringApplication springApplication = new SpringApplication(CONFIGS);
         springApplication.addInitializers(new MyApplicationContextInitializer());
         springApplication.run(args);
     }
-    
+
     @Configuration
     public static class AuthenticationMananagerProvider extends WebSecurityConfigurerAdapter {
-    	
-    	@Bean
-    	@Override
-    	public AuthenticationManager authenticationManagerBean() throws Exception {
-    		return super.authenticationManagerBean();
-    	}
-    	
+
+        @Bean
+        @Override
+        public AuthenticationManager authenticationManagerBean() throws Exception {
+            return super.authenticationManagerBean();
+        }
+
         @Bean
         public PasswordEncoder passwordEncoder() {
             return new BCryptPasswordEncoder();

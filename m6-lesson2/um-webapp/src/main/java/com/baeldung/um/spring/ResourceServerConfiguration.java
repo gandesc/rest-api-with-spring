@@ -25,7 +25,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
     @Autowired
     private UserDetailsService userDetailsService;
-    
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
