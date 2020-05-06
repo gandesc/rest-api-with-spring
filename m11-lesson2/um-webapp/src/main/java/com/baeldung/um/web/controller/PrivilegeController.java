@@ -40,7 +40,7 @@ public class PrivilegeController extends AbstractController<Privilege> implement
     @Override
     @GetMapping(params = { QueryConstants.PAGE, QueryConstants.SIZE, QueryConstants.SORT_BY })
     public Flux<Privilege> findAllPaginatedAndSorted(@RequestParam(value = QueryConstants.PAGE) final int page, @RequestParam(value = QueryConstants.SIZE) final int size, @RequestParam(value = QueryConstants.SORT_BY) final String sortBy,
-            @RequestParam(value = QueryConstants.SORT_ORDER) final String sortOrder) {
+        @RequestParam(value = QueryConstants.SORT_ORDER) final String sortOrder) {
         return findPaginatedAndSortedInternal(page, size, sortBy, sortOrder);
     }
 
@@ -61,7 +61,8 @@ public class PrivilegeController extends AbstractController<Privilege> implement
     public Flux<Privilege> findAll(final ServerHttpRequest request) {
         Flux<Privilege> privileges = findAllInternal(request);
         Flux<Long> every5Sec = Flux.interval(Duration.ofMillis(5000));
-        return Flux.zip(every5Sec, privileges).map(Tuple2::getT2);
+        return Flux.zip(every5Sec, privileges)
+            .map(Tuple2::getT2);
     }
 
     // find - one

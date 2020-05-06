@@ -17,7 +17,9 @@ import com.baeldung.um.persistence.setup.MyApplicationContextInitializer;
 public class UmApp extends SpringBootServletInitializer {
 
     public static void main(final String... args) {
-        new SpringApplicationBuilder(UmApp.class).initializers(new MyApplicationContextInitializer()).listeners().run(args);
+        new SpringApplicationBuilder(UmApp.class).initializers(new MyApplicationContextInitializer())
+            .listeners()
+            .run(args);
     }
 
 }

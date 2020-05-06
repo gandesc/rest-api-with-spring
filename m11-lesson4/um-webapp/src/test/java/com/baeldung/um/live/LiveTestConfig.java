@@ -27,6 +27,8 @@ public class LiveTestConfig {
 
     @Bean
     WebTestClient createWebTestclient() {
-        return WebTestClient.bindToServer().baseUrl(BASE_URI).build();
+        return WebTestClient.bindToServer()
+            .baseUrl(BASE_URI)
+            .build();
     }
 }

@@ -50,7 +50,7 @@ public class WebClientLiveTest {
         // @formatter:off                
         Mono<HttpStatus> result = webClient.post()
                 .uri("/privileges")                
-                .syncBody(getAPrivilegeForPost())
+                .bodyValue(getAPrivilegeForPost())
                 .exchange()
                 .map(response ->response.statusCode());
         // @formatter:on 

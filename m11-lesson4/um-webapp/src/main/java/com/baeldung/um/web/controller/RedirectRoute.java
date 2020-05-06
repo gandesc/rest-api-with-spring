@@ -16,9 +16,7 @@ public class RedirectRoute {
 
     @Bean
     RouterFunction<ServerResponse> routerFunction(RedirectHandler redirectHandler) {
-        return 
-            route(GET(PRIVILEGE), redirectHandler::singularToPlural)
-            .andRoute(GET(USER), redirectHandler::singularToPlural)
+        return route(GET(PRIVILEGE), redirectHandler::singularToPlural).andRoute(GET(USER), redirectHandler::singularToPlural)
             .andRoute(GET(ROLE), redirectHandler::singularToPlural);
     }
 }

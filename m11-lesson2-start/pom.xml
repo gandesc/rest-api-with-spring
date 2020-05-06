@@ -11,7 +11,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.1.RELEASE</version>
+        <version>2.2.3.RELEASE</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
@@ -31,11 +31,6 @@
             <id>eugenp</id>
         </developer>
     </developers>
-
-    <ciManagement>
-        <system>Jenkins</system>
-        <url>https://rest-security.ci.cloudbees.com/</url>
-    </ciManagement>
 
     <build>
 
@@ -89,6 +84,45 @@
 
     </build>
 
+    <profiles>
+
+        <profile>
+            <id>integration</id>
+            <build>
+                <plugins>
+
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>integration-test</phase>
+                                <goals>
+                                    <goal>test</goal>
+                                </goals>
+                                <configuration>
+                                    <excludes>
+                                        <exclude>none</exclude>
+                                    </excludes>
+                                    <includes>
+                                        <include>**/*IntegrationTest.java</include>
+                                    </includes>
+                                    <systemPropertyVariables>
+                                        <persistenceTarget>test</persistenceTarget>
+                                    </systemPropertyVariables>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                </plugins>
+            </build>
+        </profile>
+
+    </profiles>
+    
+
     <properties>
 
         <!-- non-dependencies -->
@@ -102,12 +136,6 @@
 
         <!-- commons and utils -->
         <guava.version>27.0-jre</guava.version>
-        
-
-        <rest-assured.version>3.2.0</rest-assured.version>
-
-        <!-- Kotlin -->
-        <!-- <kotlin.version>1.1.4-3</kotlin.version> -->
 
     </properties>
 

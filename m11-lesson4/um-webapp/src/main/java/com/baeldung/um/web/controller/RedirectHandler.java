@@ -15,10 +15,13 @@ public class RedirectHandler {
     public RedirectHandler() {
         super();
     }
-    
+
     public Mono<ServerResponse> singularToPlural(ServerRequest request) {
-        String correctUri = request.uri().toString() + "s";
-        return ServerResponse.status(MOVED_PERMANENTLY).header(LOCATION, correctUri).build();
+        String correctUri = request.uri()
+            .toString() + "s";
+        return ServerResponse.status(MOVED_PERMANENTLY)
+            .header(LOCATION, correctUri)
+            .build();
     }
 
 }
