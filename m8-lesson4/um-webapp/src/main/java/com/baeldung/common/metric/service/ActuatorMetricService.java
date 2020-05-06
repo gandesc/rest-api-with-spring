@@ -80,15 +80,18 @@ class ActuatorMetricService implements IActuatorMetricService {
         int old;
 
         for (final Metric<?> counterMetric : publicMetrics.metrics()) {
-            if (counterMetric.getName().contains("counter.status.")) {
-                status = counterMetric.getName().substring(15, 18);
+            if (counterMetric.getName()
+                .contains("counter.status.")) {
+                status = counterMetric.getName()
+                    .substring(15, 18);
                 if (!statusList.contains(status)) {
                     statusList.add(status);
                     statusCount.add(0);
                 }
                 indexOfStatus = statusList.indexOf(status);
                 old = statusCount.get(indexOfStatus) == null ? 0 : statusCount.get(indexOfStatus);
-                statusCount.set(indexOfStatus, counterMetric.getValue().intValue() + old);
+                statusCount.set(indexOfStatus, counterMetric.getValue()
+                    .intValue() + old);
             }
         }
     }

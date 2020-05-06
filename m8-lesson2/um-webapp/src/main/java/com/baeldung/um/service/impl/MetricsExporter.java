@@ -18,7 +18,8 @@ final class MetricsExporter {
 
     @Scheduled(fixedRate = 1000 * 30) // every 30 seconds
     public void exportMetrics() {
-        metricRepo.findAll().forEach(this::log);
+        metricRepo.findAll()
+            .forEach(this::log);
     }
 
     private void log(final Metric<?> m) {
