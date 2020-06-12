@@ -1,14 +1,16 @@
 package com.baeldung.live;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+
 import java.util.Arrays;
 import java.util.TreeSet;
 
 import org.hamcrest.Matchers;
-import org.junit.Assert;
 import org.junit.Test;
 
 import com.baeldung.common.util.RandomStringUtils;
 import com.baeldung.um.persistence.model.User;
+
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -25,7 +27,7 @@ public class LiveTest {
             .body(user)
             .post(URI);
 
-        Assert.assertThat(response.getStatusCode(), Matchers.equalTo(400));
+        assertThat(response.getStatusCode(), Matchers.equalTo(400));
     }
 
     @Test
@@ -36,7 +38,7 @@ public class LiveTest {
             .body(user)
             .post(URI);
 
-        Assert.assertThat(response.getStatusCode(), Matchers.equalTo(201));
+        assertThat(response.getStatusCode(), Matchers.equalTo(201));
     }
 
     @Test
@@ -47,7 +49,7 @@ public class LiveTest {
             .body(user)
             .post(URI);
 
-        Assert.assertThat(response.getStatusCode(), Matchers.equalTo(400));
+        assertThat(response.getStatusCode(), Matchers.equalTo(400));
     }
 
     @Test
@@ -58,7 +60,7 @@ public class LiveTest {
             .body(user)
             .post(URI);
 
-        Assert.assertThat(response.getStatusCode(), Matchers.equalTo(201));
+        assertThat(response.getStatusCode(), Matchers.equalTo(201));
     }
 
     private User userWithInvalidEmailAddresses() {
