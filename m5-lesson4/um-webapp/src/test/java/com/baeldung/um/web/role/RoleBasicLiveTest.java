@@ -2,15 +2,14 @@ package com.baeldung.um.web.role;
 
 import static com.baeldung.common.spring.util.Profiles.CLIENT;
 import static com.baeldung.common.spring.util.Profiles.TEST;
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
 import java.util.List;
 
 import org.hamcrest.Matchers;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.http.MediaType;
@@ -25,6 +24,7 @@ import com.baeldung.um.spring.UmClientConfig;
 import com.baeldung.um.spring.UmLiveTestConfig;
 import com.baeldung.um.util.Um;
 import com.google.common.collect.Sets;
+
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -49,7 +49,7 @@ public class RoleBasicLiveTest {
         final Response response = basicAuth.accept(ContentType.JSON)
             .get(URI);
 
-        Assert.assertThat(response.getStatusCode(), Matchers.equalTo(200));
+        assertThat(response.getStatusCode(), Matchers.equalTo(200));
     }
 
     @Test

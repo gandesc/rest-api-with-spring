@@ -10,7 +10,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import java.util.List;
 
 import org.hamcrest.Matchers;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ActiveProfiles;
@@ -24,6 +23,7 @@ import com.baeldung.um.spring.UmClientConfig;
 import com.baeldung.um.spring.UmLiveTestConfig;
 import com.baeldung.um.util.Um;
 import com.google.common.collect.Sets;
+
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -47,7 +47,7 @@ public class RoleBasicLiveTest {
         final Response response = basicAuth.accept(ContentType.JSON)
             .get(URI);
 
-        Assert.assertThat(response.getStatusCode(), Matchers.equalTo(200));
+        assertThat(response.getStatusCode(), Matchers.equalTo(200));
     }
 
     @Test
@@ -60,7 +60,7 @@ public class RoleBasicLiveTest {
             .get(URI);
         final List<Role> roles = response.as(List.class);
 
-        Assert.assertThat(roles, not(Matchers.<Role> empty()));
+        assertThat(roles, not(Matchers.<Role> empty()));
     }
 
     @Test
