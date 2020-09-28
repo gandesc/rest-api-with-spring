@@ -3,6 +3,7 @@ package com.baeldung.um.web.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -74,7 +75,7 @@ public class UserController extends AbstractController<UserDto> implements ISort
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestBody final UserDto resource) {
+    public void create(@RequestBody @Valid final UserDto resource) {
         createInternal(resource);
     }
 
@@ -82,7 +83,7 @@ public class UserController extends AbstractController<UserDto> implements ISort
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable("id") final Long id, @RequestBody final UserDto resource) {
+    public void update(@PathVariable("id") final Long id, @RequestBody @Valid final UserDto resource) {
         updateInternal(id, resource);
     }
 
