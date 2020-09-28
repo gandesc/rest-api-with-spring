@@ -2,7 +2,6 @@ package com.baeldung.um.spring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 
 import com.baeldung.um.persistence.setup.MyApplicationContextInitializer;
 import com.baeldung.um.profile.UmDevAndQAConfig;
