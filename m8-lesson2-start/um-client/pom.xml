@@ -39,7 +39,7 @@
 		</resources>
 
 		<plugins>
-			
+
 			<!-- this create jar file of code from src/test/java so modules with tests can share code -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -52,7 +52,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			
+
 		</plugins>
 
 	</build>

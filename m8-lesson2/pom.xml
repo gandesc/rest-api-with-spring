@@ -99,6 +99,10 @@
 	</build>
 
 	<properties>
+		<!-- non-dependencies -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
+
 		<!-- Spring related -->
 		
 		<javassist.version>3.20.0-GA</javassist.version>
