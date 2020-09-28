@@ -3,7 +3,6 @@ package com.baeldung.common.web;
 import org.springframework.http.HttpStatus;
 
 import com.baeldung.common.web.exception.MyBadRequestException;
-import com.baeldung.common.web.exception.MyConflictException;
 import com.baeldung.common.web.exception.MyResourceNotFoundException;
 
 /**

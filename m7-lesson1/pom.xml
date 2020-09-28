@@ -108,7 +108,7 @@
 		<guava.version>27.0-jre</guava.version>
 
 		<swagger.version>2.9.2</swagger.version>
-		<rest-assured.version>3.2.0</rest-assured.version>
+		<rest-assured.version>4.3.1</rest-assured.version>
 
 	</properties>
 

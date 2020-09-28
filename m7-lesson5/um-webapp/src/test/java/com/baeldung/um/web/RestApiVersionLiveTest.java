@@ -27,7 +27,7 @@ import com.baeldung.um.spring.UmWebConfig;
 public class RestApiVersionLiveTest {
 
     private static final String RESOURCE_URI = "/countv";
-    private static final String APP_ROOT = "/um-webapp/api/users";
+    private static final String APP_ROOT = "/users";
 
     @Autowired
     private TestRestTemplate restTemplate;

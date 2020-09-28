@@ -8,8 +8,6 @@ import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.apache.commons.lang3.tuple.Triple;
 
 import com.baeldung.common.search.ClientOperation;
-import com.baeldung.common.util.QueryConstants;
-import com.baeldung.common.util.SearchField;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 

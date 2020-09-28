@@ -97,7 +97,7 @@
         <!-- commons and utils -->
         <guava.version>27.0-jre</guava.version>
 
-        <rest-assured.version>3.2.0</rest-assured.version>
+        <rest-assured.version>4.3.1</rest-assured.version>
         
         <modelmapper.version>2.3.2</modelmapper.version>
 
