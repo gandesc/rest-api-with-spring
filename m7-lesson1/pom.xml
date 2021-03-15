@@ -109,6 +109,9 @@
 
 		<swagger.version>2.9.2</swagger.version>
 
+        <rest-assured.version>4.3.3</rest-assured.version>
+        <groovy.version>3.0.6</groovy.version>
+
 	</properties>
 
 	<modules>
