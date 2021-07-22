@@ -51,8 +51,7 @@ public class WebClientLiveTest {
         Mono<HttpStatus> result = webClient.post()
                 .uri("/privileges")                
                 .bodyValue(getAPrivilegeForPost())
-                .exchange()
-                .map(response ->response.statusCode());
+                .exchangeToMono(response -> Mono.just(response.statusCode()));
         // @formatter:on 
 
         result.subscribe(httpStatus -> System.out.println("Http Status code:" + httpStatus.value()));
