@@ -6,7 +6,7 @@ import org.springframework.hateoas.RepresentationModel;
 
 import com.baeldung.um.persistence.model.Role;
 
-public class RoleResource extends RepresentationModel {
+public class RoleResource extends RepresentationModel<RoleResource> {
 
     private final Role role;
 

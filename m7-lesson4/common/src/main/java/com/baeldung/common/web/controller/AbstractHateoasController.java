@@ -22,7 +22,7 @@ import com.baeldung.common.persistence.service.IRawService;
 import com.baeldung.common.web.RestPreconditions;
 import com.baeldung.common.web.exception.MyResourceNotFoundException;
 
-public abstract class AbstractHateoasController<D extends RepresentationModel, E extends INameableEntity> {
+public abstract class AbstractHateoasController<D extends RepresentationModel<D>, E extends INameableEntity> {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
