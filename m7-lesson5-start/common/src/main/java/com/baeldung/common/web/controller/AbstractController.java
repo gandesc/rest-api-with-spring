@@ -1,31 +1,24 @@
 package com.baeldung.common.web.controller;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.util.UriComponentsBuilder;
 
-import com.baeldung.common.persistence.model.INameableEntity;
+import com.baeldung.common.interfaces.IDto;
+import com.baeldung.common.persistence.model.IEntity;
 import com.baeldung.common.web.RestPreconditions;
-import com.baeldung.common.web.events.AfterResourceCreatedEvent;
 
-public abstract class AbstractController<T extends INameableEntity> extends AbstractReadOnlyController<T> {
+public abstract class AbstractController<D extends IDto, E extends IEntity> extends AbstractReadOnlyController<D, E> {
 
     @Autowired
-    public AbstractController(final Class<T> clazzToSet) {
+    public AbstractController(final Class<D> clazzToSet) {
         super(clazzToSet);
     }
 
     // save/create/persist
 
-    protected final void createInternal(final T resource, final UriComponentsBuilder uriBuilder, final HttpServletResponse response) {
+    protected final void createInternal(final E resource) {
         RestPreconditions.checkRequestElementNotNull(resource);
         RestPreconditions.checkRequestState(resource.getId() == null);
-        final T existingResource = getService().create(resource);
-
-        // - note: mind the autoboxing and potential NPE when the resource has null id at this point (likely when working with DTOs)
-        eventPublisher.publishEvent(new AfterResourceCreatedEvent<T>(clazz, uriBuilder, response, existingResource.getId()
-            .toString()));
+        getService().create(resource);
     }
 
     // update
@@ -33,7 +26,7 @@ public abstract class AbstractController<T extends INameableEntity> extends Abst
     /**
      * - note: the operation is IDEMPOTENT <br/>
      */
-    protected final void updateInternal(final long id, final T resource) {
+    protected final void updateInternal(final long id, final E resource) {
         RestPreconditions.checkRequestElementNotNull(resource);
         RestPreconditions.checkRequestElementNotNull(resource.getId());
         RestPreconditions.checkRequestState(resource.getId() == id);
@@ -45,9 +38,6 @@ public abstract class AbstractController<T extends INameableEntity> extends Abst
     // delete/remove
 
     protected final void deleteByIdInternal(final long id) {
-        // InvalidDataAccessApiUsageException - ResourceNotFoundException
-        // IllegalStateException - ResourceNotFoundException
-        // DataAccessException - ignored
         getService().delete(id);
     }
 

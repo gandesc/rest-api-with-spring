@@ -1,8 +1,7 @@
 package com.baeldung.common.persistence.service;
 
-import com.baeldung.common.interfaces.IWithName;
 import com.baeldung.common.persistence.exception.MyEntityNotFoundException;
-import com.google.common.base.Preconditions;
+import com.baeldung.common.persistence.model.IEntity;
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,10 +16,10 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
 
 @Transactional
-public abstract class AbstractRawService<T extends IWithName> implements IRawService<T> {
+public abstract class AbstractRawService<T extends IEntity> implements IRawService<T> {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
@@ -32,15 +31,13 @@ public abstract class AbstractRawService<T extends IWithName> implements IRawSer
 
     // API
 
-    // search
-
     // find - one
 
     @Override
     @Transactional(readOnly = true)
     public T findOne(final long id) {
-        Optional<T> entity = getDao().findById(id);
-        return entity.orElse(null);
+        return getDao().findById(id)
+            .orElse(null);
     }
 
     // find - all
@@ -79,7 +76,7 @@ public abstract class AbstractRawService<T extends IWithName> implements IRawSer
     @Override
     @Transactional(readOnly = true)
     public List<T> findAllPaginated(final int page, final int size) {
-        final List<T> content = getDao().findAll(PageRequest.of(page, size))
+        final List<T> content = getDao().findAll(PageRequest.of(page, size, null))
             .getContent();
         if (content == null) {
             return Lists.newArrayList();
@@ -98,7 +95,7 @@ public abstract class AbstractRawService<T extends IWithName> implements IRawSer
 
     @Override
     public T create(final T entity) {
-        Preconditions.checkNotNull(entity);
+        Objects.requireNonNull(entity);
 
         final T persistedEntity = getDao().save(entity);
 
@@ -109,7 +106,7 @@ public abstract class AbstractRawService<T extends IWithName> implements IRawSer
 
     @Override
     public void update(final T entity) {
-        Preconditions.checkNotNull(entity);
+        Objects.requireNonNull(entity);
 
         getDao().save(entity);
     }

@@ -9,7 +9,7 @@
     <parent>
         <groupId>com.baeldung</groupId>
         <artifactId>user-management-parent-m7-l5</artifactId>
-        <version>0.4.0-SNAPSHOT</version>
+        <version>0.1.0-SNAPSHOT</version>
     </parent>
 
     <dependencies>
@@ -19,43 +19,22 @@
         <dependency>
             <groupId>com.baeldung</groupId>
             <artifactId>common-m7-l5</artifactId>
-            <version>0.4.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.baeldung</groupId>
-            <artifactId>common-client-m7-l5</artifactId>
-            <version>0.4.0-SNAPSHOT</version>
-            <scope>test</scope>
-            <classifier>tests</classifier>
-        </dependency>
-
-        <dependency>
-            <groupId>com.baeldung</groupId>
-            <artifactId>common-test-m7-l5</artifactId>
-            <version>0.4.0-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.baeldung</groupId>
-            <artifactId>um-client-m7-l5</artifactId>
-            <version>0.4.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.baeldung</groupId>
-            <artifactId>um-client-m7-l5</artifactId>
-            <version>0.4.0-SNAPSHOT</version>
-            <scope>test</scope>
-            <classifier>tests</classifier>
-        </dependency>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>       
 
         <!-- web -->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- util -->
+    
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>${modelmapper.version}</version>
         </dependency>
 
         <!-- test scoped -->
@@ -65,23 +44,27 @@
             <artifactId>spring-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <scope>test</scope>
+        </dependency>
         
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.vintage</groupId>
-            <artifactId>junit-vintage-engine</artifactId>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.hamcrest</groupId>
-                    <artifactId>hamcrest-core</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+        
+
     </dependencies>
 
     <build>
@@ -106,10 +89,6 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <configuration>
-							<argLine>-Xmx128m</argLine>
-						    <reuseForks>false</reuseForks>                        	
-                        </configuration>
                         <executions>
                             <execution>
                                 <phase>integration-test</phase>
@@ -134,7 +113,6 @@
                 </plugins>
             </build>
         </profile>
-
 
     </profiles>
 

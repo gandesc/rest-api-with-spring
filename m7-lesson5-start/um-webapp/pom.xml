@@ -9,7 +9,7 @@
     <parent>
         <groupId>com.baeldung</groupId>
         <artifactId>user-management-parent-m7-l5-start</artifactId>
-        <version>0.4.0-SNAPSHOT</version>
+        <version>0.1.0-SNAPSHOT</version>
     </parent>
 
     <dependencies>
@@ -19,36 +19,7 @@
         <dependency>
             <groupId>com.baeldung</groupId>
             <artifactId>common-m7-l5-start</artifactId>
-            <version>0.4.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.baeldung</groupId>
-            <artifactId>common-client-m7-l5-start</artifactId>
-            <version>0.4.0-SNAPSHOT</version>
-            <scope>test</scope>
-            <classifier>tests</classifier>
-        </dependency>
-
-        <dependency>
-            <groupId>com.baeldung</groupId>
-            <artifactId>common-test-m7-l5-start</artifactId>
-            <version>0.4.0-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.baeldung</groupId>
-            <artifactId>um-client-m7-l5-start</artifactId>
-            <version>0.4.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.baeldung</groupId>
-            <artifactId>um-client-m7-l5-start</artifactId>
-            <version>0.4.0-SNAPSHOT</version>
-            <scope>test</scope>
-            <classifier>tests</classifier>
+            <version>0.1.0-SNAPSHOT</version>
         </dependency>
 
         <!-- web -->
@@ -65,7 +36,25 @@
             <artifactId>spring-test</artifactId>
             <scope>test</scope>
         </dependency>
-        
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -76,7 +65,6 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
-
     </build>
 
     <profiles>
@@ -90,10 +78,6 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <configuration>
-							<argLine>-Xmx128m</argLine>
-						    <reuseForks>false</reuseForks>                        	
-                        </configuration>
                         <executions>
                             <execution>
                                 <phase>integration-test</phase>
@@ -118,7 +102,6 @@
                 </plugins>
             </build>
         </profile>
-
 
     </profiles>
 

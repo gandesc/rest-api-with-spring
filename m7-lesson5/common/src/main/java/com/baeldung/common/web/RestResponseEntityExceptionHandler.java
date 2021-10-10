@@ -1,5 +1,6 @@
 package com.baeldung.common.web;
 
+import java.nio.file.AccessDeniedException;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
@@ -58,6 +59,17 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
         final ApiError apiError = message(HttpStatus.BAD_REQUEST, ex);
         return handleExceptionInternal(ex, apiError, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
+    // 403
+
+    @ExceptionHandler({ AccessDeniedException.class })
+    protected ResponseEntity<Object> handleEverything(final AccessDeniedException ex, final WebRequest request) {
+        logger.error("403 Status Code", ex);
+
+        final ApiError apiError = message(HttpStatus.FORBIDDEN, ex);
+
+        return handleExceptionInternal(ex, apiError, new HttpHeaders(), HttpStatus.FORBIDDEN, request);
     }
 
     // 404

@@ -15,7 +15,7 @@ import com.baeldung.um.service.IUserService;
 public class UserServiceImpl extends AbstractService<User> implements IUserService {
 
     @Autowired
-    IUserJpaDao dao;
+    private IUserJpaDao dao;
 
     public UserServiceImpl() {
         super();
@@ -31,6 +31,8 @@ public class UserServiceImpl extends AbstractService<User> implements IUserServi
         return dao.findByName(name);
     }
 
+    // other
+
     // Spring
 
     @Override
@@ -42,5 +44,4 @@ public class UserServiceImpl extends AbstractService<User> implements IUserServi
     protected JpaSpecificationExecutor<User> getSpecificationExecutor() {
         return dao;
     }
-
 }

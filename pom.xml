@@ -40,9 +40,6 @@
         
         <module>m7-lesson5-start</module>
         <module>m7-lesson5</module>
-        
-        <module>m7-lesson6</module>
-		<module>m7-lesson6-start</module>
 	</modules>
 
 </project>
