@@ -60,7 +60,7 @@ public abstract class AbstractDiscoverabilityLiveTest<T extends IDto> {
     // GET (single)
 
     @Test
-    public final void whenResourceIsRetrieved_thenUriToGetAllResourcesIsDiscoverable() {
+    public void whenResourceIsRetrieved_thenUriToGetAllResourcesIsDiscoverable() {
         // Given
         final String uriOfExistingResource = getApi().createAsUri(createNewResource());
 
