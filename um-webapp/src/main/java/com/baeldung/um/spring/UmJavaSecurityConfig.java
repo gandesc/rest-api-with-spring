@@ -36,7 +36,7 @@ public class UmJavaSecurityConfig extends WebSecurityConfigurerAdapter {
         // @formatter:off
         http.
         authorizeRequests().
-        antMatchers("/api/health").anonymous().
+        antMatchers("/health").anonymous().
         anyRequest().authenticated().and().
         httpBasic().and().
         sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().
