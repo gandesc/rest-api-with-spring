@@ -67,6 +67,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven-surefire-plugin.version}</version>
 					<configuration>
 						<excludes>
 							<exclude>**/*IntegrationTest.java</exclude>
@@ -81,6 +82,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven-compiler-plugin.version}</version>
 					<configuration>
 						<source>1.8</source>
 						<target>1.8</target>
@@ -91,6 +93,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-resources-plugin</artifactId>
+					<version>${maven-resources-plugin.version}</version>
 				</plugin>
 
 			</plugins>
@@ -99,11 +102,12 @@
 	</build>
 
 	<properties>
-		<!-- non-dependencies -->
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.8</java.version>
-
-		<!-- Spring related -->
+  
+        <!-- non-dependencies -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+		
+        <!-- Spring related -->
 		
 		<javassist.version>3.20.0-GA</javassist.version>
 		<aspectjweaver.version>1.8.6</aspectjweaver.version>
@@ -113,6 +117,7 @@
 
 		<!-- marshalling -->
 		<jackson.version>2.6.0</jackson.version>
+		<jaxb-api.version>2.2.12</jaxb-api.version>
 		<xstream.version>1.4.8</xstream.version>
 
 		<!-- commons and utils -->
@@ -151,9 +156,13 @@
 		<httpcore.version>4.4.5</httpcore.version>
 		<httpclient.version>4.5.2</httpclient.version>
 
-		<rest-assured.version>3.2.0</rest-assured.version>
+		<rest-assured.version>2.5.0</rest-assured.version>
 
 		<!-- maven plugins -->
+		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
+		<maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
+		<maven-resources-plugin.version>3.0.1</maven-resources-plugin.version>
+		<cargo-maven2-plugin.version>1.5.0</cargo-maven2-plugin.version>
 		<maven-war-plugin.version>2.6</maven-war-plugin.version>
 
 	</properties>

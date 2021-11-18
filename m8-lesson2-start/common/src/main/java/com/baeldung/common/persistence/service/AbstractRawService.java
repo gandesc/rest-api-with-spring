@@ -14,7 +14,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.baeldung.common.interfaces.IWithName;
 import com.baeldung.common.persistence.ServicePreconditions;
 import com.baeldung.common.persistence.event.AfterEntitiesDeletedEvent;
 import com.baeldung.common.persistence.event.AfterEntityCreateEvent;
@@ -23,11 +22,12 @@ import com.baeldung.common.persistence.event.AfterEntityUpdateEvent;
 import com.baeldung.common.persistence.event.BeforeEntityCreateEvent;
 import com.baeldung.common.persistence.event.BeforeEntityDeleteEvent;
 import com.baeldung.common.persistence.event.BeforeEntityUpdateEvent;
+import com.baeldung.common.persistence.model.IEntity;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 
 @Transactional
-public abstract class AbstractRawService<T extends IWithName> implements IRawService<T> {
+public abstract class AbstractRawService<T extends IEntity> implements IRawService<T> {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
 
     private Class<T> clazz;
@@ -70,8 +70,7 @@ public abstract class AbstractRawService<T extends IWithName> implements IRawSer
     @Transactional(readOnly = true)
     public List<T> findAllPaginatedAndSorted(final int page, final int size, final String sortBy, final String sortOrder) {
         final Sort sortInfo = constructSort(sortBy, sortOrder);
-        final List<T> content = getDao().findAll(new PageRequest(page, size, sortInfo))
-            .getContent();
+        final List<T> content = getDao().findAll(new PageRequest(page, size, sortInfo)).getContent();
         if (content == null) {
             return Lists.newArrayList();
         }
@@ -80,15 +79,8 @@ public abstract class AbstractRawService<T extends IWithName> implements IRawSer
 
     @Override
     @Transactional(readOnly = true)
-    public Page<T> findAllPaginatedRaw(final int page, final int size) {
-        return getDao().findAll(new PageRequest(page, size));
-    }
-
-    @Override
-    @Transactional(readOnly = true)
     public List<T> findAllPaginated(final int page, final int size) {
-        final List<T> content = getDao().findAll(new PageRequest(page, size, null))
-            .getContent();
+        final List<T> content = getDao().findAll(new PageRequest(page, size, null)).getContent();
         if (content == null) {
             return Lists.newArrayList();
         }

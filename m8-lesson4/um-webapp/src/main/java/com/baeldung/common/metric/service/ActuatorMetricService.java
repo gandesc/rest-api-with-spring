@@ -25,8 +25,8 @@ class ActuatorMetricService implements IActuatorMetricService {
     public ActuatorMetricService() {
         super();
 
-        statusMetricsByMinute = new ArrayList<>();
-        statusList = new ArrayList<>();
+        statusMetricsByMinute = new ArrayList<List<Integer>>();
+        statusList = new ArrayList<String>();
     }
 
     // API
@@ -46,7 +46,7 @@ class ActuatorMetricService implements IActuatorMetricService {
         }
 
         List<Integer> minuteOfStatuses;
-        List<Integer> last = new ArrayList<>();
+        List<Integer> last = new ArrayList<Integer>();
         for (int i = 1; i < rowCount; i++) {
             minuteOfStatuses = statusMetricsByMinute.get(i - 1);
             result[i][0] = dateFormat.format(new Date(current.getTime() - (60000 * (rowCount - i))));
@@ -66,7 +66,7 @@ class ActuatorMetricService implements IActuatorMetricService {
 
     @Scheduled(fixedDelay = 60000)
     private void exportMetrics() {
-        final List<Integer> lastMinuteStatuses = new ArrayList<>();
+        final List<Integer> lastMinuteStatuses = new ArrayList<Integer>();
 
         initializeStatuses(lastMinuteStatuses);
         updateMetrics(lastMinuteStatuses);
@@ -80,18 +80,15 @@ class ActuatorMetricService implements IActuatorMetricService {
         int old;
 
         for (final Metric<?> counterMetric : publicMetrics.metrics()) {
-            if (counterMetric.getName()
-                .contains("counter.status.")) {
-                status = counterMetric.getName()
-                    .substring(15, 18);
+            if (counterMetric.getName().contains("counter.status.")) {
+                status = counterMetric.getName().substring(15, 18);
                 if (!statusList.contains(status)) {
                     statusList.add(status);
                     statusCount.add(0);
                 }
                 indexOfStatus = statusList.indexOf(status);
                 old = statusCount.get(indexOfStatus) == null ? 0 : statusCount.get(indexOfStatus);
-                statusCount.set(indexOfStatus, counterMetric.getValue()
-                    .intValue() + old);
+                statusCount.set(indexOfStatus, counterMetric.getValue().intValue() + old);
             }
         }
     }

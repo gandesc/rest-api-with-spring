@@ -26,15 +26,13 @@
 		</developer>
 	</developers>
 
-
-
 	<modules>
 		<module>m8-lesson1</module>
 		<module>m8-lesson2</module>
         <module>m8-lesson4</module>
         <module>m8-lesson1-start</module>
         <module>m8-lesson2-start</module>
-		<module>m8-lesson2-upgraded</module>
+        <module>m8-lesson2-upgraded</module>
 	</modules>
 
 </project>

@@ -11,23 +11,22 @@ import org.springframework.stereotype.Component;
 
 @Component
 final class MetricsExporter {
-
-    private Logger logger = LoggerFactory.getLogger(getClass());
-
+    
+    private Logger logger = LoggerFactory.getLogger(getClass());        
+    
     @Autowired
-    private BufferMetricReader metricReader;
-
+    private BufferMetricReader metricReader;    
+    
     @Autowired
     private CounterService counterService;
 
     @Scheduled(fixedRate = 1000 * 30) // every 30 seconds
     public void exportMetrics() {
-        metricReader.findAll()
-            .forEach(this::log);
+        metricReader.findAll().forEach(this::log);
     }
 
     private void log(final Metric<?> m) {
-        logger.info("Reporting metric {}={}", m.getName(), m.getValue());
-        // counterService.reset(m.getName());
+        logger.info("Reporting metric {}={}", m.getName(), m.getValue());              
+        //counterService.reset(m.getName());
     }
 }

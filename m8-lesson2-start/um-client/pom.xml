@@ -27,6 +27,12 @@
 			<scope>test</scope>
 		</dependency>
 
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>${jaxb-api.version}</version>
+        </dependency>
+
 	</dependencies>
 
 	<build>
@@ -39,7 +45,7 @@
 		</resources>
 
 		<plugins>
-
+			
 			<!-- this create jar file of code from src/test/java so modules with tests can share code -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -52,7 +58,7 @@
 					</execution>
 				</executions>
 			</plugin>
-
+			
 		</plugins>
 
 	</build>

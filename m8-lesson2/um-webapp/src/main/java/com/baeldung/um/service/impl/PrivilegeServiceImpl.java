@@ -17,7 +17,7 @@ public class PrivilegeServiceImpl extends AbstractService<Privilege> implements 
 
     @Autowired
     IPrivilegeJpaDao dao;
-
+    
     @Autowired
     private CounterService counterService;
 
@@ -30,9 +30,9 @@ public class PrivilegeServiceImpl extends AbstractService<Privilege> implements 
     // find
 
     @Override
-    public Privilege findByName(final String name) {
+    public Privilege findByName(final String name) { 
         counterService.increment("service.privilege.finByName");
-
+        
         return getDao().findByName(name);
     }
 

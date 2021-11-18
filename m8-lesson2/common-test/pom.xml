@@ -38,9 +38,15 @@
 		</dependency>
 
 		<dependency>
-			<groupId>io.rest-assured</groupId>
+			<groupId>com.jayway.restassured</groupId>
 			<artifactId>rest-assured</artifactId>
 			<version>${rest-assured.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 	</dependencies>
@@ -82,9 +88,6 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-surefire-plugin</artifactId>
-						<configuration>
-						    <reuseForks>false</reuseForks>                        	
-                        </configuration>
 						<executions>
 							<execution>
 								<phase>integration-test</phase>
