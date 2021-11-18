@@ -41,7 +41,7 @@ public class PrivilegeController extends AbstractController<Privilege> implement
     @Override
     @GetMapping(params = { QueryConstants.PAGE, QueryConstants.SIZE, QueryConstants.SORT_BY })
     public List<Privilege> findAllPaginatedAndSorted(@RequestParam(value = QueryConstants.PAGE) final int page, @RequestParam(value = QueryConstants.SIZE) final int size, @RequestParam(value = QueryConstants.SORT_BY) final String sortBy,
-        @RequestParam(value = QueryConstants.SORT_ORDER) final String sortOrder) {
+            @RequestParam(value = QueryConstants.SORT_ORDER) final String sortOrder) {
         return findPaginatedAndSortedInternal(page, size, sortBy, sortOrder);
     }
 
@@ -74,7 +74,7 @@ public class PrivilegeController extends AbstractController<Privilege> implement
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody final Privilege resource) {
         if (StringUtils.isBlank(resource.getName())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "name is mandatory");
+            throw new ServerWebInputException("name is mandatory for creation");
         }
         createInternal(resource);
     }
@@ -82,9 +82,6 @@ public class PrivilegeController extends AbstractController<Privilege> implement
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void update(@PathVariable("id") final Long id, @RequestBody final Privilege resource) {
-        if (StringUtils.isBlank(resource.getName())) {
-            throw new ServerWebInputException("name is mandatory");
-        }
         updateInternal(id, resource);
     }
 

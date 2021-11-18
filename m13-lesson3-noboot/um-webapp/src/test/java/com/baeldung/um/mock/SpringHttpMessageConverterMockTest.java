@@ -32,8 +32,7 @@ public class SpringHttpMessageConverterMockTest {
 
     @Before
     public void setup() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(context)
-            .build();
+        mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
     }
 
     @Test

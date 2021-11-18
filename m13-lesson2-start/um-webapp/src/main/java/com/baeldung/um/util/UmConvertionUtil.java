@@ -16,16 +16,11 @@ public final class UmConvertionUtil {
     // API
 
     public static Set<Privilege> convertRolesToPrivileges(final Collection<Role> roles) {
-        return roles.stream()
-            .flatMap(role -> role.getPrivileges()
-                .stream())
-            .collect(Collectors.toSet());
+        return roles.stream().flatMap(role -> role.getPrivileges().stream()).collect(Collectors.toSet());
     }
 
     public static Collection<String> convertPrivilegesToPrivilegeNames(final Collection<Privilege> privileges) {
-        return privileges.stream()
-            .map(Privilege::toString)
-            .collect(Collectors.toList());
+        return privileges.stream().map(Privilege::toString).collect(Collectors.toList());
     }
 
     public static Collection<String> convertRolesToPrivilegeNames(final Collection<Role> roles) {

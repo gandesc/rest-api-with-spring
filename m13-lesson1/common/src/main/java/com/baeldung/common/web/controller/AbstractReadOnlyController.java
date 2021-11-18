@@ -41,8 +41,7 @@ public abstract class AbstractReadOnlyController<D extends IDto, E extends IEnti
     // find - all
 
     protected final List<D> findAllInternal(final HttpServletRequest request) {
-        if (request.getParameterNames()
-            .hasMoreElements()) {
+        if (request.getParameterNames().hasMoreElements()) {
             throw new MyResourceNotFoundException();
         }
 

@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>um-webapp-m13-l3</artifactId>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <name>um-webapp-l3</name>
 
@@ -27,7 +27,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-          
         </dependency>
 
         <!-- JSON-B -->
@@ -52,17 +51,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.junit.vintage</groupId>
-            <artifactId>junit-vintage-engine</artifactId>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.hamcrest</groupId>
-                    <artifactId>hamcrest-core</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
 
         <dependency>
             <groupId>junit</groupId>
@@ -77,9 +65,16 @@
         </dependency>
 
         <dependency>
-			<groupId>io.rest-assured</groupId>
+            <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
+            <version>${rest-assured.version}</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-logging</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         
         <dependency>
@@ -103,8 +98,8 @@
     <properties>
     
         <!-- marshalling -->
-        <javax.json.version>1.1.4</javax.json.version>
-        <yasson.version>1.0.7</yasson.version>
+        <javax.json.version>1.1.2</javax.json.version>
+        <yasson.version>1.0.1</yasson.version>
         
     </properties>
 

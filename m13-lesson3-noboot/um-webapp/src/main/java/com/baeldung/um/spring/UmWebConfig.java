@@ -24,6 +24,8 @@ public class UmWebConfig implements WebMvcConfigurer {
     public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
         JsonbHttpMessageConverter jsonbHttpMessageConverter = new JsonbHttpMessageConverter();
         converters.add(0, jsonbHttpMessageConverter);
+        
+        WebMvcConfigurer.super.extendMessageConverters(converters);
     }
 
     // beans

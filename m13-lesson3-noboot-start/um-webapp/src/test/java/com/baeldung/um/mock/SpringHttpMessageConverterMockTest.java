@@ -32,12 +32,11 @@ public class SpringHttpMessageConverterMockTest {
 
     @Before
     public void setup() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(context)
-            .build();
+        mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
     }
 
     @Test
-    public void whenAllPrivilegesAreRetrived_then200K() throws Exception {
+    public void shouldReturnDefaultMessage() throws Exception {
         // @formatter:off
         mockMvc.perform(get("/api/privileges")
                 .contentType(MediaType.APPLICATION_JSON))

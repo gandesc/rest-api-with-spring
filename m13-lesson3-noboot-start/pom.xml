@@ -127,10 +127,7 @@
         <java.version>1.8</java.version>
 
         <!-- Sping -->
-        <!-- this is the highest version with which there are no failing tests.
-        It has to do with serialisation, and it might work well if one replaces yasson 
-        with johnzon, but the lesson uses yasson explicitly -->
-        <org.springframework.version>5.0.4.RELEASE</org.springframework.version>                                
+        <org.springframework.version>5.0.3.RELEASE</org.springframework.version>                                
 
         <!-- logging -->
         <slf4j.version>1.7.25</slf4j.version>
@@ -139,21 +136,21 @@
         <jcl-over-slf4j.version>1.7.25</jcl-over-slf4j.version>
 
         <!-- commons and utils -->
-        <commons-lang3.version>3.8.1</commons-lang3.version>
-        <guava.version>27.0-jre</guava.version>
-        <commons-text.version>1.6</commons-text.version>
+        <commons-lang3.version>3.5</commons-lang3.version>
+        <guava.version>23.6.1-jre</guava.version>
+        <commons-text.version>1.1</commons-text.version>
 
         <!-- test -->
         <rest-assured.version>3.2.0</rest-assured.version>
-        <mockito-core.version>2.23.4</mockito-core.version>
-        
+        <mockito-core.version>1.10.19</mockito-core.version>
+        <hamcrest-library.version>1.3</hamcrest-library.version>
         <junit.version>4.12</junit.version>
 
         <!-- maven plugins -->
-        <maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
-        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
-        <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
-        <maven-war-plugin.vesion>3.2.2</maven-war-plugin.vesion>
+        <maven-surefire-plugin.version>2.20</maven-surefire-plugin.version>
+        <maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
+        <maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
+        <maven-war-plugin.vesion>3.1.0</maven-war-plugin.vesion>
 
     </properties>
 

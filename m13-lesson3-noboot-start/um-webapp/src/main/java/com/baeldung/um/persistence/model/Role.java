@@ -21,10 +21,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Getter
-@Setter
-@EqualsAndHashCode(of = "name")
-@ToString(exclude = "privileges")
+@Getter @Setter @EqualsAndHashCode(of = "name") @ToString(exclude = "privileges")
 public class Role implements INameableEntity, INameableDto {
 
     @Id
@@ -55,5 +52,4 @@ public class Role implements INameableEntity, INameableDto {
         name = nameToSet;
         privileges = privilegesToSet;
     }
-
 }

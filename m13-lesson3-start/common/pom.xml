@@ -25,6 +25,17 @@
             <artifactId>commons-lang3</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-logging</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
         <!-- spring -->
 
         <dependency>
@@ -48,7 +59,7 @@
             <artifactId>validation-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.hibernate.validator</groupId>
+            <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>${hibernate-validator.version}</version>
         </dependency>
@@ -128,7 +139,7 @@
     <properties>
 
         <!-- validator -->
-        <hibernate-validator.version>6.0.13.Final</hibernate-validator.version>
+        <hibernate-validator.version>6.0.2.Final</hibernate-validator.version>
 
     </properties>
 

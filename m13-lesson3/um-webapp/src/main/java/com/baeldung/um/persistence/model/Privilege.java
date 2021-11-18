@@ -20,10 +20,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Getter
-@Setter
-@EqualsAndHashCode(of = "name")
-@ToString(of = "name")
+@Getter @Setter @EqualsAndHashCode(of = "name") @ToString(of = "name")	
 public class Privilege implements INameableEntity, INameableDto {
 
     @Id
@@ -36,7 +33,7 @@ public class Privilege implements INameableEntity, INameableDto {
 
     @Column()
     private String description;
-
+    
     @JsonbTransient
     @ManyToMany(mappedBy = "privileges", fetch = FetchType.EAGER)
     private Set<Role> roles;

@@ -12,7 +12,7 @@ import com.baeldung.um.service.IPrivilegeService;
 import com.baeldung.um.util.UmMappings;
 
 @RestController
-@RequestMapping(UmMappings.PRIVILEGES)
+@RequestMapping(UmMappings.PRIVILEGESX)
 public class PrivilegeVxController extends AbstractController<Privilege, Privilege> {
 
     @Autowired
