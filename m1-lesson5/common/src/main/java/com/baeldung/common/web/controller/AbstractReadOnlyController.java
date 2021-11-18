@@ -1,9 +1,11 @@
 package com.baeldung.common.web.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.baeldung.common.persistence.model.IEntity;
+import com.baeldung.common.persistence.service.IRawService;
+import com.baeldung.common.web.RestPreconditions;
+import com.baeldung.common.web.exception.MyResourceNotFoundException;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -13,14 +15,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.baeldung.common.interfaces.IWithName;
-import com.baeldung.common.persistence.service.IRawService;
-import com.baeldung.common.web.RestPreconditions;
-import com.baeldung.common.web.exception.MyResourceNotFoundException;
-import com.google.common.collect.Lists;
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
-public abstract class AbstractReadOnlyController<T extends IWithName> {
+public abstract class AbstractReadOnlyController<T extends IEntity> {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
+
+    protected Class<T> clazz;
+
+    public AbstractReadOnlyController(final Class<T> clazzToSet) {
+        super();
+
+        Preconditions.checkNotNull(clazzToSet);
+        clazz = clazzToSet;
+    }
 
     // find - one
 
@@ -31,8 +39,7 @@ public abstract class AbstractReadOnlyController<T extends IWithName> {
     // find - all
 
     protected final List<T> findAllInternal(final HttpServletRequest request) {
-        if (request.getParameterNames()
-            .hasMoreElements()) {
+        if (request.getParameterNames().hasMoreElements()) {
             throw new MyResourceNotFoundException();
         }
 

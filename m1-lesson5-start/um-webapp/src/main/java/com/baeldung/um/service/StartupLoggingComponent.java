@@ -1,7 +1,6 @@
 package com.baeldung.um.service;
 
-import java.util.List;
-
+import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -9,15 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
-import com.google.common.collect.Lists;
+import java.util.List;
 
 @Component
 public class StartupLoggingComponent implements InitializingBean {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    private static final String ENV_TARGET_KEY = "envTarget";
     private static final String PERSISTENCE_TARGET_KEY = "persistenceTarget";
-    private static final String ACTIVE_SPRING_PROFILE_KEY = "spring.profiles.active";
     private static final String PERSISTENCE_HOST_KEY = "jdbc.url";
 
     @Autowired
@@ -33,9 +30,7 @@ public class StartupLoggingComponent implements InitializingBean {
     public void afterPropertiesSet() {
         logger.info("============================================================================");
         try {
-            logEnvTarget(env);
             logPersistenceTarget(env);
-
             logPersistenceData(env);
         } catch (final Exception ex) {
             logger.warn("There was a problem logging data on startup", ex);
@@ -46,13 +41,8 @@ public class StartupLoggingComponent implements InitializingBean {
 
     // UTIL
 
-    private void logEnvTarget(final Environment environment) {
-        final String envTarget = getValueOfProperty(environment, ENV_TARGET_KEY, "dev", Lists.newArrayList("dev"));
-        logger.info("{} = {}", ENV_TARGET_KEY, envTarget);
-    }
-
     private void logPersistenceTarget(final Environment environment) {
-        final String envTarget = getValueOfProperty(environment, PERSISTENCE_TARGET_KEY, "h2", Lists.newArrayList("h2", "mysql"));
+        final String envTarget = getValueOfProperty(environment, PERSISTENCE_TARGET_KEY, "local", Lists.newArrayList("local", "dev", "prod"));
         logger.info("{} = {}", PERSISTENCE_TARGET_KEY, envTarget);
     }
 

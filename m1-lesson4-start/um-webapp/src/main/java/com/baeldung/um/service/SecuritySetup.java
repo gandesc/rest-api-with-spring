@@ -1,14 +1,5 @@
 package com.baeldung.um.service;
 
-import java.util.Set;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.stereotype.Component;
-
 import com.baeldung.um.persistence.model.Privilege;
 import com.baeldung.um.persistence.model.Role;
 import com.baeldung.um.persistence.model.User;
@@ -17,6 +8,14 @@ import com.baeldung.um.util.Um.Privileges;
 import com.baeldung.um.util.Um.Roles;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.stereotype.Component;
+
+import java.util.Set;
 
 /**
  * This simple setup class will run during the bootstrap process of Spring and will create some setup data <br>
@@ -55,7 +54,7 @@ public class SecuritySetup implements ApplicationListener<ContextRefreshedEvent>
 
             createPrivileges();
             createRoles();
-            createUsers();
+            createUserss();
 
             setupDone = true;
             logger.info("Setup Done");
@@ -114,7 +113,7 @@ public class SecuritySetup implements ApplicationListener<ContextRefreshedEvent>
 
     // User/User
 
-    final void createUsers() {
+    final void createUserss() {
         final Role roleAdmin = roleService.findByName(Roles.ROLE_ADMIN);
 
         // createUserIfNotExisting(SecurityConstants.ADMIN_USERNAME, SecurityConstants.ADMIN_PASS, Sets.<Role> newHashSet(roleAdmin));

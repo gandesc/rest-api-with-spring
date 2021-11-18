@@ -1,26 +1,18 @@
 package com.baeldung.um.web.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
 import com.baeldung.common.util.QueryConstants;
 import com.baeldung.common.web.controller.AbstractController;
 import com.baeldung.common.web.controller.ISortingController;
 import com.baeldung.um.persistence.model.User;
 import com.baeldung.um.service.IUserService;
 import com.baeldung.um.util.UmMappings;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = UmMappings.USERS)
@@ -28,6 +20,10 @@ public class UserController extends AbstractController<User> implements ISorting
 
     @Autowired
     private IUserService service;
+
+    public UserController() {
+        super(User.class);
+    }
 
     // API
 
@@ -37,7 +33,7 @@ public class UserController extends AbstractController<User> implements ISorting
     @RequestMapping(params = { QueryConstants.PAGE, QueryConstants.SIZE, QueryConstants.SORT_BY }, method = RequestMethod.GET)
     @ResponseBody
     public List<User> findAllPaginatedAndSorted(@RequestParam(value = QueryConstants.PAGE) final int page, @RequestParam(value = QueryConstants.SIZE) final int size, @RequestParam(value = QueryConstants.SORT_BY) final String sortBy,
-        @RequestParam(value = QueryConstants.SORT_ORDER) final String sortOrder) {
+            @RequestParam(value = QueryConstants.SORT_ORDER) final String sortOrder) {
         return findPaginatedAndSortedInternal(page, size, sortBy, sortOrder);
     }
 

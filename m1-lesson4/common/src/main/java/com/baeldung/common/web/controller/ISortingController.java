@@ -1,10 +1,9 @@
 package com.baeldung.common.web.controller;
 
-import java.util.List;
+import com.baeldung.common.persistence.model.IEntity;
 
 import javax.servlet.http.HttpServletRequest;
-
-import com.baeldung.common.persistence.model.IEntity;
+import java.util.List;
 
 public interface ISortingController<T extends IEntity> {
 

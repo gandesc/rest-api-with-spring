@@ -1,8 +1,10 @@
 package com.baeldung.common.web;
 
-import javax.persistence.EntityNotFoundException;
-import javax.validation.ConstraintViolationException;
-
+import com.baeldung.common.persistence.exception.MyEntityNotFoundException;
+import com.baeldung.common.web.exception.MyBadRequestException;
+import com.baeldung.common.web.exception.MyConflictException;
+import com.baeldung.common.web.exception.MyForbiddenException;
+import com.baeldung.common.web.exception.MyPreconditionFailedException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
@@ -16,11 +18,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.baeldung.common.persistence.exception.MyEntityNotFoundException;
-import com.baeldung.common.web.exception.MyBadRequestException;
-import com.baeldung.common.web.exception.MyConflictException;
-import com.baeldung.common.web.exception.MyForbiddenException;
-import com.baeldung.common.web.exception.MyPreconditionFailedException;
+import javax.persistence.EntityNotFoundException;
+import javax.validation.ConstraintViolationException;
 
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {

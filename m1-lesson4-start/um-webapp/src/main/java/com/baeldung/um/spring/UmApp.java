@@ -1,10 +1,8 @@
 package com.baeldung.um.spring;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Import;
-
-import com.baeldung.um.persistence.setup.MyApplicationContextInitializer;
 
 @SpringBootApplication
 @Import({ // @formatter:off
@@ -16,9 +14,7 @@ import com.baeldung.um.persistence.setup.MyApplicationContextInitializer;
 public class UmApp {
 
     public static void main(final String... args) {
-        new SpringApplicationBuilder(UmApp.class).initializers(new MyApplicationContextInitializer())
-            .listeners()
-            .run(args);
+        SpringApplication.run(UmApp.class,args);
     }
 
 }
