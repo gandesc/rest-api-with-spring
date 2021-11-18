@@ -1,12 +1,5 @@
 package com.baeldung.um.client.marshall;
 
-import java.io.IOException;
-import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.MediaType;
-
 import com.baeldung.client.marshall.IMarshaller;
 import com.baeldung.um.persistence.model.Privilege;
 import com.baeldung.um.persistence.model.Role;
@@ -16,6 +9,12 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Preconditions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
+
+import java.io.IOException;
+import java.util.List;
 
 public final class ProdJacksonMarshaller implements IMarshaller {
     private final Logger logger = LoggerFactory.getLogger(ProdJacksonMarshaller.class);

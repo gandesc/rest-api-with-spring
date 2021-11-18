@@ -1,18 +1,17 @@
 package com.baeldung.um.service.impl;
 
+import com.baeldung.common.persistence.service.AbstractService;
+import com.baeldung.um.persistence.dao.IRoleJpaDao;
+import com.baeldung.um.persistence.model.Role;
+import com.baeldung.um.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.baeldung.common.persistence.service.AbstractService;
-import com.baeldung.um.persistence.dao.IRoleJpaDao;
-import com.baeldung.um.persistence.model.Role;
-import com.baeldung.um.service.IRoleService;
-
 @Service
 @Transactional
-public class RoleServiceImpl extends AbstractService<Role> implements IRoleService {
+public class RoleServiceImpl extends AbstractService<Role>implements IRoleService {
 
     @Autowired
     IRoleJpaDao dao;

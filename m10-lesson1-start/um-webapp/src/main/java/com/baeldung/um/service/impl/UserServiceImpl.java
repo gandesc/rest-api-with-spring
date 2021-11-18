@@ -1,19 +1,18 @@
 package com.baeldung.um.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.baeldung.common.persistence.service.AbstractService;
 import com.baeldung.common.security.SpringSecurityUtil;
 import com.baeldung.um.persistence.dao.IUserJpaDao;
 import com.baeldung.um.persistence.model.User;
 import com.baeldung.um.service.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class UserServiceImpl extends AbstractService<User> implements IUserService {
+public class UserServiceImpl extends AbstractService<User>implements IUserService {
 
     @Autowired
     IUserJpaDao dao;

@@ -1,19 +1,5 @@
 package com.baeldung.um.common.web.root;
 
-import static com.baeldung.common.spring.util.Profiles.CLIENT;
-import static com.baeldung.common.spring.util.Profiles.TEST;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.greaterThanOrEqualTo;
-
-import java.util.List;
-
-import org.hamcrest.Matchers;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
-
 import com.baeldung.test.common.client.security.ITestAuthenticator;
 import com.baeldung.test.common.web.util.HTTPLinkHeaderUtil;
 import com.baeldung.um.client.UmPaths;
@@ -22,8 +8,21 @@ import com.baeldung.um.util.Um;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.net.HttpHeaders;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
+import com.jayway.restassured.response.Response;
+import com.jayway.restassured.specification.RequestSpecification;
+import org.hamcrest.Matchers;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
+
+import java.util.List;
+
+import static com.baeldung.common.spring.util.Profiles.CLIENT;
+import static com.baeldung.common.spring.util.Profiles.TEST;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 
 @ActiveProfiles({ CLIENT, TEST })
 @Ignore("the corresponding controller is ignored for now")

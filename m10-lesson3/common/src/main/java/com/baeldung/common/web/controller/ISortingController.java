@@ -1,13 +1,11 @@
 package com.baeldung.common.web.controller;
 
-import java.util.List;
+import com.baeldung.common.persistence.model.IEntity;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.web.util.UriComponentsBuilder;
-
-import com.baeldung.common.persistence.model.IEntity;
+import java.util.List;
 
 public interface ISortingController<T extends IEntity> {
 

@@ -1,10 +1,9 @@
 package com.baeldung.common.persistence.event;
 
-import java.io.Serializable;
-
+import com.google.common.base.Preconditions;
 import org.springframework.context.ApplicationEvent;
 
-import com.google.common.base.Preconditions;
+import java.io.Serializable;
 
 public final class AfterEntityCreateEvent<T extends Serializable> extends ApplicationEvent {
     private final Class<T> clazz;

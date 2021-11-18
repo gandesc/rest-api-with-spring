@@ -1,11 +1,7 @@
 package com.baeldung.common.security;
 
-import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
-
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
-import java.util.Set;
-
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Lists;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -17,8 +13,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Lists;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
+import java.util.Set;
+
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
 public final class SpringSecurityUtil {
 
@@ -33,8 +32,7 @@ public final class SpringSecurityUtil {
 
     public static User authenticate(final String key, final String uuid) {
         final SpringSecurityPrincipal principal = new SpringSecurityPrincipal(randomAlphabetic(6), randomAlphabetic(6), true, Lists.<GrantedAuthority> newArrayList(), uuid);
-        SecurityContextHolder.getContext()
-            .setAuthentication(new RunAsUserToken(key, principal, null, Lists.<GrantedAuthority> newArrayList(), null));
+        SecurityContextHolder.getContext().setAuthentication(new RunAsUserToken(key, principal, null, Lists.<GrantedAuthority> newArrayList(), null));
 
         return principal;
     }
@@ -135,8 +133,7 @@ public final class SpringSecurityUtil {
         final UserDetails userDetails = SpringSecurityUtil.getCurrentUserDetails();
         if (userDetails != null) {
             for (final GrantedAuthority each : userDetails.getAuthorities()) {
-                if (each.getAuthority()
-                    .equals(privilege)) {
+                if (each.getAuthority().equals(privilege)) {
                     return true;
                 }
             }
@@ -198,7 +195,7 @@ public final class SpringSecurityUtil {
         final int indexOfDelimiter = decoded.indexOf(':');
         final String username = decoded.substring(0, indexOfDelimiter);
         final String password = decoded.substring(indexOfDelimiter + 1);
-        return new ImmutablePair<>(username, password);
+        return new ImmutablePair<String, String>(username, password);
     }
 
 }

@@ -1,7 +1,6 @@
 package com.baeldung.um.service;
 
-import java.util.List;
-
+import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -9,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
-import com.google.common.collect.Lists;
+import java.util.List;
 
 @Component
 public class StartupLoggingComponent implements InitializingBean {
@@ -36,6 +35,7 @@ public class StartupLoggingComponent implements InitializingBean {
             logEnvTarget(env);
             logPersistenceTarget(env);
 
+            logActiveSpringProfile(env);
             logPersistenceData(env);
         } catch (final Exception ex) {
             logger.warn("There was a problem logging data on startup", ex);
@@ -52,8 +52,13 @@ public class StartupLoggingComponent implements InitializingBean {
     }
 
     private void logPersistenceTarget(final Environment environment) {
-        final String envTarget = getValueOfProperty(environment, PERSISTENCE_TARGET_KEY, "h2", Lists.newArrayList("h2", "mysql"));
+        final String envTarget = getValueOfProperty(environment, PERSISTENCE_TARGET_KEY, "h2", Lists.newArrayList("h2", "mysql", "cargo"));
         logger.info("{} = {}", PERSISTENCE_TARGET_KEY, envTarget);
+    }
+
+    private void logActiveSpringProfile(final Environment environment) {
+        final String activeSpringProfile = getValueOfProperty(environment, ACTIVE_SPRING_PROFILE_KEY, "none", null);
+        logger.info("{} = {}", ACTIVE_SPRING_PROFILE_KEY, activeSpringProfile);
     }
 
     private void logPersistenceData(final Environment environment) {

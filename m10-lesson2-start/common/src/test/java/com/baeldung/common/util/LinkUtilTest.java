@@ -1,13 +1,11 @@
 package com.baeldung.common.util;
 
+import org.junit.Test;
+
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
-
-import org.junit.Test;
-
-import com.baeldung.common.util.LinkUtil;
 
 public final class LinkUtilTest {
 

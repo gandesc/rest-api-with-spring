@@ -1,7 +1,6 @@
 package com.baeldung.um.client.marshall;
 
-import static com.baeldung.common.spring.util.Profiles.TEST;
-
+import com.baeldung.client.marshall.IMarshaller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.FactoryBean;
@@ -10,7 +9,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
-import com.baeldung.client.marshall.IMarshaller;
+import static com.baeldung.common.spring.util.Profiles.TEST;
 
 @Component
 @Profile(TEST)

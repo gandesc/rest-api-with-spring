@@ -1,14 +1,13 @@
 package com.baeldung.um.web.user;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.baeldung.client.IDtoOperations;
 import com.baeldung.um.client.template.UserRestClient;
 import com.baeldung.um.model.UserDtoOpsImpl;
-import com.baeldung.um.persistence.model.User;
 import com.baeldung.um.test.live.UmDiscoverabilityRestLiveTest;
+import com.baeldung.um.web.dto.UserDto;
+import org.springframework.beans.factory.annotation.Autowired;
 
-public class UserDiscoverabilityRestLiveTest extends UmDiscoverabilityRestLiveTest<User> {
+public class UserDiscoverabilityRestLiveTest extends UmDiscoverabilityRestLiveTest<UserDto> {
 
     @Autowired
     private UserRestClient restTemplate;
@@ -16,7 +15,7 @@ public class UserDiscoverabilityRestLiveTest extends UmDiscoverabilityRestLiveTe
     private UserDtoOpsImpl entityOps;
 
     public UserDiscoverabilityRestLiveTest() {
-        super(User.class);
+        super(UserDto.class);
     }
 
     // tests
@@ -29,7 +28,7 @@ public class UserDiscoverabilityRestLiveTest extends UmDiscoverabilityRestLiveTe
     }
 
     @Override
-    protected final User createNewResource() {
+    protected final UserDto createNewResource() {
         return getEntityOps().createNewResource();
     }
 
@@ -39,7 +38,7 @@ public class UserDiscoverabilityRestLiveTest extends UmDiscoverabilityRestLiveTe
     }
 
     @Override
-    protected final IDtoOperations<User> getEntityOps() {
+    protected final IDtoOperations<UserDto> getEntityOps() {
         return entityOps;
     }
 

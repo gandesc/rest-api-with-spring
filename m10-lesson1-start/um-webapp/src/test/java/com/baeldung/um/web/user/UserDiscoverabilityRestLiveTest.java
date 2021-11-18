@@ -1,12 +1,11 @@
 package com.baeldung.um.web.user;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.baeldung.client.IDtoOperations;
 import com.baeldung.um.client.template.UserRestClient;
 import com.baeldung.um.model.UserDtoOpsImpl;
 import com.baeldung.um.persistence.model.User;
 import com.baeldung.um.test.live.UmDiscoverabilityRestLiveTest;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class UserDiscoverabilityRestLiveTest extends UmDiscoverabilityRestLiveTest<User> {
 

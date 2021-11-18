@@ -1,8 +1,12 @@
 package com.baeldung.um.service.impl;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
+import com.baeldung.common.web.RestPreconditions;
+import com.baeldung.um.persistence.model.Principal;
+import com.baeldung.um.service.AsyncService;
+import com.baeldung.um.service.IPrincipalService;
+import com.baeldung.um.service.IUserService;
+import com.baeldung.um.web.dto.UserDto;
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -12,13 +16,8 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.baeldung.common.persistence.ServicePreconditions;
-import com.baeldung.um.persistence.model.Principal;
-import com.baeldung.um.service.AsyncService;
-import com.baeldung.um.service.IPrincipalService;
-import com.baeldung.um.service.IUserService;
-import com.baeldung.um.web.dto.UserDto;
-import com.google.common.collect.Lists;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -61,9 +60,7 @@ public class UserServiceImpl implements IUserService {
     @Transactional(readOnly = true)
     public List<UserDto> findAll() {
         final List<Principal> principals = principalService.findAll();
-        final List<UserDto> userDtos = principals.stream()
-            .map(this::convert)
-            .collect(Collectors.toList());
+        final List<UserDto> userDtos = principals.stream().map(this::convert).collect(Collectors.toList());
         return Lists.newArrayList(userDtos);
     }
 
@@ -71,30 +68,15 @@ public class UserServiceImpl implements IUserService {
     @Transactional(readOnly = true)
     public List<UserDto> findAllSorted(final String sortBy, final String sortOrder) {
         final List<Principal> principals = principalService.findAllSorted(sortBy, sortOrder);
-        final List<UserDto> userDtos = principals.stream()
-            .map(this::convert)
-            .collect(Collectors.toList());
+        final List<UserDto> userDtos = principals.stream().map(this::convert).collect(Collectors.toList());
         return Lists.newArrayList(userDtos);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Page<UserDto> findAllPaginatedRaw(final int page, final int size) {
-        final Page<Principal> principals = principalService.findAllPaginatedRaw(page, size);
-        final List<UserDto> userDtos = principals.getContent()
-            .stream()
-            .map(this::convert)
-            .collect(Collectors.toList());
-        return new PageImpl<>(userDtos, new PageRequest(page, size), principals.getTotalElements());
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<UserDto> findAllPaginated(final int page, final int size) {
         final List<Principal> principals = principalService.findAllPaginated(page, size);
-        final List<UserDto> userDtos = principals.stream()
-            .map(this::convert)
-            .collect(Collectors.toList());
+        final List<UserDto> userDtos = principals.stream().map(this::convert).collect(Collectors.toList());
         return Lists.newArrayList(userDtos);
     }
 
@@ -102,11 +84,8 @@ public class UserServiceImpl implements IUserService {
     @Transactional(readOnly = true)
     public Page<UserDto> findAllPaginatedAndSortedRaw(final int page, final int size, final String sortBy, final String sortOrder) {
         final Page<Principal> principals = principalService.findAllPaginatedAndSortedRaw(page, size, sortBy, sortOrder);
-        final List<UserDto> userDtos = principals.getContent()
-            .stream()
-            .map(this::convert)
-            .collect(Collectors.toList());
-        return new PageImpl<>(userDtos, new PageRequest(page, size, constructSort(sortBy, sortOrder)), principals.getTotalElements());
+        final List<UserDto> userDtos = principals.getContent().stream().map(this::convert).collect(Collectors.toList());
+        return new PageImpl<UserDto>(userDtos, new PageRequest(page, size, constructSort(sortBy, sortOrder)), principals.getTotalElements());
     }
 
     @Override
@@ -143,7 +122,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public void update(final UserDto dto) {
-        final Principal principalToUpdate = ServicePreconditions.checkEntityExists(principalService.findOne(dto.getId()));
+        final Principal principalToUpdate = RestPreconditions.checkNotNull(principalService.findOne(dto.getId()));
 
         principalToUpdate.setName(dto.getName());
         principalToUpdate.setEmail(dto.getEmail());

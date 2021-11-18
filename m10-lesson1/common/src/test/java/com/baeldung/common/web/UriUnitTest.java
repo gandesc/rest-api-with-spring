@@ -1,10 +1,10 @@
 package com.baeldung.common.web;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import static org.junit.Assert.assertTrue;
 
 public class UriUnitTest {
 
@@ -13,12 +13,10 @@ public class UriUnitTest {
         final String uri = "http://localhost:8080/rest-sec/api/privilege?q=name%3DjDiedXRD";
 
         // When
-        final UriComponents uriComponents = UriComponentsBuilder.fromUriString(uri)
-            .build();
+        final UriComponents uriComponents = UriComponentsBuilder.fromUriString(uri).build();
 
         // Then
-        assertTrue(uriComponents.getQueryParams()
-            .size() == 1);
+        assertTrue(uriComponents.getQueryParams().size() == 1);
     }
 
 }

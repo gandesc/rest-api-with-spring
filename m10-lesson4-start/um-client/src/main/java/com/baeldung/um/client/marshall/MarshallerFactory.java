@@ -1,12 +1,11 @@
 package com.baeldung.um.client.marshall;
 
-import static com.baeldung.common.spring.util.Profiles.DEPLOYED;
-
+import com.baeldung.client.marshall.IMarshaller;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import com.baeldung.client.marshall.IMarshaller;
+import static com.baeldung.common.spring.util.Profiles.DEPLOYED;
 
 @Component
 @Profile(DEPLOYED)

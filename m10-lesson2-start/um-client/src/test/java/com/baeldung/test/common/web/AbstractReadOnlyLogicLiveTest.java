@@ -1,24 +1,23 @@
 package com.baeldung.test.common.web;
 
-import static com.baeldung.common.spring.util.Profiles.CLIENT;
-import static com.baeldung.common.spring.util.Profiles.TEST;
-import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
-import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-
-import org.junit.Test;
-import org.springframework.data.domain.Sort;
-import org.springframework.test.context.ActiveProfiles;
-
 import com.baeldung.common.interfaces.INameableDto;
 import com.baeldung.common.util.SearchField;
 import com.baeldung.common.web.WebConstants;
 import com.baeldung.test.common.client.template.IRestClient;
 import com.baeldung.test.common.util.IDUtil;
 import com.google.common.base.Preconditions;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
+import com.jayway.restassured.response.Response;
+import com.jayway.restassured.specification.RequestSpecification;
+import org.junit.Test;
+import org.springframework.data.domain.Sort;
+import org.springframework.test.context.ActiveProfiles;
+
+import static com.baeldung.common.spring.util.Profiles.CLIENT;
+import static com.baeldung.common.spring.util.Profiles.TEST;
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
+import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 @ActiveProfiles({ CLIENT, TEST })
 public abstract class AbstractReadOnlyLogicLiveTest<T extends INameableDto> {

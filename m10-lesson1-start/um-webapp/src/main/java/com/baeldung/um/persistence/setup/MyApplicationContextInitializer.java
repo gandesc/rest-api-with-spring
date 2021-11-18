@@ -1,7 +1,6 @@
 package com.baeldung.um.persistence.setup;
 
-import java.io.IOException;
-
+import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContextInitializer;
@@ -9,7 +8,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.io.support.ResourcePropertySource;
 
-import com.google.common.base.Preconditions;
+import java.io.IOException;
 
 public class MyApplicationContextInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
     private final Logger logger = LoggerFactory.getLogger(MyApplicationContextInitializer.class);
@@ -31,8 +30,7 @@ public class MyApplicationContextInitializer implements ApplicationContextInitia
         String envTarget = null;
         try {
             envTarget = getEnvTarget(environment);
-            environment.getPropertySources()
-                .addFirst(new ResourcePropertySource("classpath:env-" + envTarget + ".properties"));
+            environment.getPropertySources().addFirst(new ResourcePropertySource("classpath:env-" + envTarget + ".properties"));
 
             final String activeProfiles = environment.getProperty("spring.profiles.active");
             if (activeProfiles != null) {

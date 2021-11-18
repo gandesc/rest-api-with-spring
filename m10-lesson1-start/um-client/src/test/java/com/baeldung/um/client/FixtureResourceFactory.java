@@ -1,11 +1,11 @@
 package com.baeldung.um.client;
 
-import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
-
 import com.baeldung.um.persistence.model.Privilege;
 import com.baeldung.um.persistence.model.Role;
 import com.baeldung.um.persistence.model.User;
 import com.google.common.collect.Sets;
+
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
 public class FixtureResourceFactory {
 
@@ -13,8 +13,9 @@ public class FixtureResourceFactory {
         throw new AssertionError();
     }
 
-    // user
 
+    // user
+    
     public static User createNewUser(final String name) {
         return createNewUser(name, randomAlphabetic(8));
     }

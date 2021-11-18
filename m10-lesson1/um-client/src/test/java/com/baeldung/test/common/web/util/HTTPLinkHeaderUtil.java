@@ -1,9 +1,9 @@
 package com.baeldung.test.common.web.util;
 
-import java.util.List;
-
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
+
+import java.util.List;
 
 public final class HTTPLinkHeaderUtil {
 
@@ -38,8 +38,7 @@ public final class HTTPLinkHeaderUtil {
         String linkRelation = null;
         for (final String link : links) {
             final int positionOfSeparator = link.indexOf(';');
-            linkRelation = link.substring(positionOfSeparator + 1, link.length())
-                .trim();
+            linkRelation = link.substring(positionOfSeparator + 1, link.length()).trim();
             if (extractTypeOfRelation(linkRelation).equals(rel)) {
                 uriWithSpecifiedRel = link.substring(1, positionOfSeparator - 1);
                 break;
@@ -51,8 +50,7 @@ public final class HTTPLinkHeaderUtil {
 
     static Object extractTypeOfRelation(final String linkRelation) {
         final int positionOfEquals = linkRelation.indexOf('=');
-        return linkRelation.substring(positionOfEquals + 2, linkRelation.length() - 1)
-            .trim();
+        return linkRelation.substring(positionOfEquals + 2, linkRelation.length() - 1).trim();
     }
 
     /**

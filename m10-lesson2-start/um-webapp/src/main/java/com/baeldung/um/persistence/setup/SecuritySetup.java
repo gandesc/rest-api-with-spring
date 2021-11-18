@@ -1,7 +1,18 @@
 package com.baeldung.um.persistence.setup;
 
-import java.util.Set;
-
+import com.baeldung.common.persistence.event.BeforeSetupEvent;
+import com.baeldung.common.spring.util.Profiles;
+import com.baeldung.um.persistence.model.Principal;
+import com.baeldung.um.persistence.model.Privilege;
+import com.baeldung.um.persistence.model.Role;
+import com.baeldung.um.service.IPrincipalService;
+import com.baeldung.um.service.IPrivilegeService;
+import com.baeldung.um.service.IRoleService;
+import com.baeldung.um.util.Um;
+import com.baeldung.um.util.Um.Privileges;
+import com.baeldung.um.util.Um.Roles;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Sets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,23 +22,11 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import com.baeldung.common.persistence.event.BeforeSetupEvent;
-import com.baeldung.common.spring.util.Profiles;
-import com.baeldung.um.persistence.model.User;
-import com.baeldung.um.persistence.model.Privilege;
-import com.baeldung.um.persistence.model.Role;
-import com.baeldung.um.service.IUserService;
-import com.baeldung.um.service.IPrivilegeService;
-import com.baeldung.um.service.IRoleService;
-import com.baeldung.um.util.Um;
-import com.baeldung.um.util.Um.Privileges;
-import com.baeldung.um.util.Um.Roles;
-import com.google.common.base.Preconditions;
-import com.google.common.collect.Sets;
+import java.util.Set;
 
 /**
  * This simple setup class will run during the bootstrap process of Spring and will create some setup data <br>
- * The main focus here is creating some standard privileges, then roles and finally some default users
+ * The main focus here is creating some standard privileges, then roles and finally some default principals/users
  */
 @Component
 @Profile(Profiles.DEPLOYED)
@@ -37,7 +36,7 @@ public class SecuritySetup implements ApplicationListener<ContextRefreshedEvent>
     private boolean setupDone;
 
     @Autowired
-    private IUserService userService;
+    private IPrincipalService principalService;
 
     @Autowired
     private IRoleService roleService;
@@ -67,7 +66,7 @@ public class SecuritySetup implements ApplicationListener<ContextRefreshedEvent>
 
             createPrivileges();
             createRoles();
-            createUsers();
+            createPrincipals();
 
             setupDone = true;
             logger.info("Setup Done");
@@ -125,21 +124,21 @@ public class SecuritySetup implements ApplicationListener<ContextRefreshedEvent>
         }
     }
 
-    // User/User
+    // Principal/User
 
-    final void createUsers() {
+    final void createPrincipals() {
         final Role roleAdmin = roleService.findByName(Roles.ROLE_ADMIN);
         final Role roleUser = roleService.findByName(Roles.ROLE_USER);
 
-        createUserIfNotExisting(Um.ADMIN_EMAIL, Um.ADMIN_PASS, Sets.<Role> newHashSet(roleAdmin));
-        createUserIfNotExisting(Um.USER_EMAIL, Um.USER_PASS, Sets.<Role> newHashSet(roleUser));
+        createPrincipalIfNotExisting(Um.ADMIN_EMAIL, Um.ADMIN_PASS, Sets.<Role> newHashSet(roleAdmin));
+        createPrincipalIfNotExisting(Um.USER_EMAIL, Um.USER_PASS, Sets.<Role> newHashSet(roleUser));
     }
 
-    final void createUserIfNotExisting(final String loginName, final String pass, final Set<Role> roles) {
-        final User entityByName = userService.findByName(loginName);
+    final void createPrincipalIfNotExisting(final String loginName, final String pass, final Set<Role> roles) {
+        final Principal entityByName = principalService.findByName(loginName);
         if (entityByName == null) {
-            final User entity = new User(loginName, pass, roles);
-            userService.create(entity);
+            final Principal entity = new Principal(loginName, pass, roles);
+            principalService.create(entity);
         }
     }
 

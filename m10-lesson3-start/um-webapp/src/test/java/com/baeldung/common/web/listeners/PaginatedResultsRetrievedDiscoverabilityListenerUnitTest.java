@@ -1,12 +1,9 @@
 package com.baeldung.common.web.listeners;
 
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-
-import javax.servlet.http.HttpServletResponse;
-
+import com.baeldung.common.util.LinkUtil;
+import com.baeldung.common.web.events.PaginatedResultsRetrievedEvent;
+import com.baeldung.um.web.dto.UserDto;
+import com.google.common.net.HttpHeaders;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -15,11 +12,12 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.baeldung.common.util.LinkUtil;
-import com.baeldung.common.web.events.PaginatedResultsRetrievedEvent;
-import com.baeldung.common.web.listeners.PaginatedResultsRetrievedDiscoverabilityListener;
-import com.baeldung.um.web.dto.UserDto;
-import com.google.common.net.HttpHeaders;
+import javax.servlet.http.HttpServletResponse;
+
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 @Ignore("in progress")
@@ -69,11 +67,8 @@ public class PaginatedResultsRetrievedDiscoverabilityListenerUnitTest {
         listener.onApplicationEvent(new PaginatedResultsRetrievedEvent<UserDto>(RESOURCE_CLASS, uriComponentsBuilder, httpServletResponse, pageToSet, totalPagesToSet, PAGE_SIZE_TO_SET));
 
         // then
-        verify(httpServletResponse).addHeader(eq(HttpHeaders.LINK), eq(LinkUtil.createLinkHeader(RESOURCE_HTTP_LOCATION + "/" + RESOURCE_CLASS.getSimpleName()
-            .toLowerCase() + "?page=" + (pageToSet + 1) + "&size=" + PAGE_SIZE_TO_SET, "next") + ", " + LinkUtil.createLinkHeader(RESOURCE_HTTP_LOCATION + "/"
-                + RESOURCE_CLASS.getSimpleName()
-                    .toLowerCase()
-                + "?page=" + (totalPagesToSet - 1) + "&size=" + PAGE_SIZE_TO_SET, "last")));
+        verify(httpServletResponse).addHeader(eq(HttpHeaders.LINK), eq(LinkUtil.createLinkHeader(RESOURCE_HTTP_LOCATION + "/" + RESOURCE_CLASS.getSimpleName().toLowerCase() + "?page=" + (pageToSet + 1) + "&size=" + PAGE_SIZE_TO_SET, "next") + ", "
+                + LinkUtil.createLinkHeader(RESOURCE_HTTP_LOCATION + "/" + RESOURCE_CLASS.getSimpleName().toLowerCase() + "?page=" + (totalPagesToSet - 1) + "&size=" + PAGE_SIZE_TO_SET, "last")));
     }
 
     @Test
@@ -86,11 +81,8 @@ public class PaginatedResultsRetrievedDiscoverabilityListenerUnitTest {
         listener.onApplicationEvent(new PaginatedResultsRetrievedEvent<UserDto>(RESOURCE_CLASS, uriComponentsBuilder, httpServletResponse, pageToSet, totalPagesToSet, PAGE_SIZE_TO_SET));
 
         // then
-        verify(httpServletResponse).addHeader(eq(HttpHeaders.LINK), eq(LinkUtil.createLinkHeader(RESOURCE_HTTP_LOCATION + "/" + RESOURCE_CLASS.getSimpleName()
-            .toLowerCase() + "?page=" + (pageToSet - 1) + "&size=" + PAGE_SIZE_TO_SET, "prev") + ", " + LinkUtil.createLinkHeader(RESOURCE_HTTP_LOCATION + "/"
-                + RESOURCE_CLASS.getSimpleName()
-                    .toLowerCase()
-                + "?page=0&size=" + PAGE_SIZE_TO_SET, "first")));
+        verify(httpServletResponse).addHeader(eq(HttpHeaders.LINK), eq(LinkUtil.createLinkHeader(RESOURCE_HTTP_LOCATION + "/" + RESOURCE_CLASS.getSimpleName().toLowerCase() + "?page=" + (pageToSet - 1) + "&size=" + PAGE_SIZE_TO_SET, "prev") + ", "
+                + LinkUtil.createLinkHeader(RESOURCE_HTTP_LOCATION + "/" + RESOURCE_CLASS.getSimpleName().toLowerCase() + "?page=0&size=" + PAGE_SIZE_TO_SET, "first")));
     }
 
     @Test
@@ -103,15 +95,11 @@ public class PaginatedResultsRetrievedDiscoverabilityListenerUnitTest {
         listener.onApplicationEvent(new PaginatedResultsRetrievedEvent<UserDto>(RESOURCE_CLASS, uriComponentsBuilder, httpServletResponse, pageToSet, totalPagesToSet, PAGE_SIZE_TO_SET));
 
         // then
-        verify(httpServletResponse).addHeader(eq(HttpHeaders.LINK), eq(LinkUtil.createLinkHeader(RESOURCE_HTTP_LOCATION + "/" + RESOURCE_CLASS.getSimpleName()
-            .toLowerCase() + "?page=" + (pageToSet + 1) + "&size=" + PAGE_SIZE_TO_SET, "next") + ", " + LinkUtil.createLinkHeader(RESOURCE_HTTP_LOCATION + "/"
-                + RESOURCE_CLASS.getSimpleName()
-                    .toLowerCase()
-                + "?page=" + (pageToSet - 1) + "&size=" + PAGE_SIZE_TO_SET, "prev")
-            + ", " + LinkUtil.createLinkHeader(RESOURCE_HTTP_LOCATION + "/" + RESOURCE_CLASS.getSimpleName()
-                .toLowerCase() + "?page=0&size=" + PAGE_SIZE_TO_SET, "first")
-            + ", " + LinkUtil.createLinkHeader(RESOURCE_HTTP_LOCATION + "/" + RESOURCE_CLASS.getSimpleName()
-                .toLowerCase() + "?page=" + (totalPagesToSet - 1) + "&size=" + PAGE_SIZE_TO_SET, "last")));
+        verify(httpServletResponse).addHeader(eq(HttpHeaders.LINK),
+                eq(LinkUtil.createLinkHeader(RESOURCE_HTTP_LOCATION + "/" + RESOURCE_CLASS.getSimpleName().toLowerCase() + "?page=" + (pageToSet + 1) + "&size=" + PAGE_SIZE_TO_SET, "next") + ", "
+                        + LinkUtil.createLinkHeader(RESOURCE_HTTP_LOCATION + "/" + RESOURCE_CLASS.getSimpleName().toLowerCase() + "?page=" + (pageToSet - 1) + "&size=" + PAGE_SIZE_TO_SET, "prev") + ", "
+                        + LinkUtil.createLinkHeader(RESOURCE_HTTP_LOCATION + "/" + RESOURCE_CLASS.getSimpleName().toLowerCase() + "?page=0&size=" + PAGE_SIZE_TO_SET, "first") + ", "
+                        + LinkUtil.createLinkHeader(RESOURCE_HTTP_LOCATION + "/" + RESOURCE_CLASS.getSimpleName().toLowerCase() + "?page=" + (totalPagesToSet - 1) + "&size=" + PAGE_SIZE_TO_SET, "last")));
 
     }
 

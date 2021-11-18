@@ -1,13 +1,11 @@
 package com.baeldung.common.security;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
-
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Test;
 
-import com.baeldung.common.security.SpringSecurityUtil;
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 
 public class Base64UnitTest {
 

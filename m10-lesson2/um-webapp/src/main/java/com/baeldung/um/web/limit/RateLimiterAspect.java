@@ -1,7 +1,7 @@
 package com.baeldung.um.web.limit;
 
-import java.util.concurrent.ConcurrentHashMap;
-
+import com.baeldung.um.util.limit.JoinPointToStringHelper;
+import com.google.common.util.concurrent.RateLimiter;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -9,8 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.baeldung.um.util.limit.JoinPointToStringHelper;
-import com.google.common.util.concurrent.RateLimiter;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Aspect
 @Component
@@ -23,7 +22,7 @@ public class RateLimiterAspect {
         this.limiters = new ConcurrentHashMap<>();
     }
 
-    //
+    // 
 
     @Before("@annotation(limit)")
     public void rateLimit(JoinPoint jp, RateLimit limit) {
@@ -36,7 +35,7 @@ public class RateLimiterAspect {
     //
 
     private String getOrCreateKey(JoinPoint jp, RateLimit limit) {
-        if (limit.key() == null) {
+        if( limit.key() == null ){
             return limit.key();
         }
         return JoinPointToStringHelper.toString(jp);

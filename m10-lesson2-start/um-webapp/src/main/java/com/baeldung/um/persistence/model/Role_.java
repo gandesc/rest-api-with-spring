@@ -5,9 +5,6 @@ import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-import com.baeldung.um.persistence.model.Privilege;
-import com.baeldung.um.persistence.model.Role;
-
 @Generated(value = "org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor")
 @StaticMetamodel(Role.class)
 public abstract class Role_ {

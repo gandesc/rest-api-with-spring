@@ -1,7 +1,5 @@
 package com.baeldung.um.spring;
 
-import javax.servlet.Filter;
-
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -9,6 +7,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.ShallowEtagHeaderFilter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import javax.servlet.Filter;
 
 @Configuration
 @ComponentScan({ "com.baeldung.common.web", "com.baeldung.um.web" })
@@ -25,7 +25,7 @@ public class UmWebConfig extends WebMvcConfigurerAdapter {
     public FilterRegistrationBean someFilterRegistration() {
         final FilterRegistrationBean registration = new FilterRegistrationBean();
         registration.setFilter(etagFilter());
-        registration.addUrlPatterns("/*");
+        registration.addUrlPatterns("/api/*");
         registration.setName("etagFilter");
         registration.setOrder(1);
         return registration;

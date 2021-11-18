@@ -1,11 +1,10 @@
 package com.baeldung.common.web.events;
 
-import javax.servlet.http.HttpServletResponse;
-
+import com.baeldung.common.interfaces.IDto;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.baeldung.common.interfaces.IDto;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Event that is fired when a paginated search is performed.

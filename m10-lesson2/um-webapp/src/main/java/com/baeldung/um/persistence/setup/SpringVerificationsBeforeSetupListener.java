@@ -1,17 +1,16 @@
 package com.baeldung.um.persistence.setup;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Component;
-
 import com.baeldung.common.persistence.event.BeforeSetupEvent;
 import com.baeldung.um.web.controller.AuthenticationController;
 import com.baeldung.um.web.controller.PrivilegeController;
 import com.baeldung.um.web.controller.RoleController;
 import com.baeldung.um.web.controller.UserController;
 import com.google.common.base.Preconditions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 
 @Component
 @Profile("dev")

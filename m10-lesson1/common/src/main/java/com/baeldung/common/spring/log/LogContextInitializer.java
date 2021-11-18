@@ -1,11 +1,11 @@
 package com.baeldung.common.spring.log;
 
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
+
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
 
 /**
  * 
@@ -22,26 +22,18 @@ public class LogContextInitializer implements ServletContextListener {
     @Override
     public void contextInitialized(final ServletContextEvent sce) {
         // Logging context information
-        MDC.put("appName", sce.getServletContext()
-            .getServletContextName());
-        MDC.put("contextPath", sce.getServletContext()
-            .getContextPath());
+        MDC.put("appName", sce.getServletContext().getServletContextName());
+        MDC.put("contextPath", sce.getServletContext().getContextPath());
 
         if (logger.isInfoEnabled()) {
-            logger.info("INITIALIZING APPLICATION \"{}\" ON WEB CONTEXT \"{}\".", sce.getServletContext()
-                .getServletContextName(),
-                sce.getServletContext()
-                    .getContextPath());
+            logger.info("INITIALIZING APPLICATION \"{}\" ON WEB CONTEXT \"{}\".", sce.getServletContext().getServletContextName(), sce.getServletContext().getContextPath());
         }
     }
 
     @Override
     public void contextDestroyed(final ServletContextEvent sce) {
         if (logger.isInfoEnabled()) {
-            logger.info("DESTROYING APPLICATION \"{}\" ON WEB CONTEXT \"{}\".", sce.getServletContext()
-                .getServletContextName(),
-                sce.getServletContext()
-                    .getContextPath());
+            logger.info("DESTROYING APPLICATION \"{}\" ON WEB CONTEXT \"{}\".", sce.getServletContext().getServletContextName(), sce.getServletContext().getContextPath());
         }
     }
 

@@ -1,19 +1,17 @@
 package com.baeldung.um.service.impl;
 
-import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import org.junit.Before;
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import com.baeldung.test.common.service.AbstractServiceUnitTest;
 import com.baeldung.um.common.FixtureEntityFactory;
 import com.baeldung.um.persistence.dao.IRoleJpaDao;
 import com.baeldung.um.persistence.model.Role;
-import com.baeldung.um.service.impl.RoleServiceImpl;
 import com.google.common.collect.Lists;
+import org.junit.Before;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class RoleServiceUnitTest extends AbstractServiceUnitTest<Role> {
 

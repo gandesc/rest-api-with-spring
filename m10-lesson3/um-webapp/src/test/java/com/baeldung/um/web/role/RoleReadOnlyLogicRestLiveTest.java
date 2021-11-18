@@ -1,11 +1,10 @@
 package com.baeldung.um.web.role;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.baeldung.um.client.template.PrivilegeRestClient;
 import com.baeldung.um.client.template.RoleRestClient;
 import com.baeldung.um.persistence.model.Role;
 import com.baeldung.um.test.live.UmReadOnlyLogicRestLiveTest;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class RoleReadOnlyLogicRestLiveTest extends UmReadOnlyLogicRestLiveTest<Role> {
 

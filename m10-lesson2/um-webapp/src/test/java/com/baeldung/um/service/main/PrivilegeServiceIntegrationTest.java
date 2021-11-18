@@ -1,14 +1,13 @@
 package com.baeldung.um.service.main;
 
-import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
-
+import com.baeldung.common.persistence.service.IService;
+import com.baeldung.um.persistence.model.Privilege;
+import com.baeldung.um.service.IPrivilegeService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 
-import com.baeldung.common.persistence.service.IService;
-import com.baeldung.um.persistence.model.Privilege;
-import com.baeldung.um.service.IPrivilegeService;
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
 public class PrivilegeServiceIntegrationTest extends SecServiceIntegrationTest<Privilege> {
 

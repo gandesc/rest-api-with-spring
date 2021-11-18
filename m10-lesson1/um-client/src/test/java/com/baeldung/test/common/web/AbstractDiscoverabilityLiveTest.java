@@ -1,20 +1,5 @@
 package com.baeldung.test.common.web;
 
-import static com.baeldung.common.spring.util.Profiles.CLIENT;
-import static com.baeldung.common.spring.util.Profiles.TEST;
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
-import org.hamcrest.core.AnyOf;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
-
 import com.baeldung.client.IDtoOperations;
 import com.baeldung.client.marshall.IMarshaller;
 import com.baeldung.common.interfaces.IDto;
@@ -23,10 +8,20 @@ import com.baeldung.test.common.client.template.IRestClient;
 import com.baeldung.test.common.web.util.HTTPLinkHeaderUtil;
 import com.google.common.base.Preconditions;
 import com.google.common.net.HttpHeaders;
-import io.restassured.config.RedirectConfig;
-import io.restassured.config.RestAssuredConfig;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
+import com.jayway.restassured.config.RedirectConfig;
+import com.jayway.restassured.config.RestAssuredConfig;
+import com.jayway.restassured.response.Response;
+import com.jayway.restassured.specification.RequestSpecification;
+import org.hamcrest.core.AnyOf;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
+
+import static com.baeldung.common.spring.util.Profiles.CLIENT;
+import static com.baeldung.common.spring.util.Profiles.TEST;
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.*;
 
 @ActiveProfiles({ CLIENT, TEST })
 public abstract class AbstractDiscoverabilityLiveTest<T extends IDto> {
@@ -145,8 +140,7 @@ public abstract class AbstractDiscoverabilityLiveTest<T extends IDto> {
         final String uriOfExistingResource = getApi().createAsUri(createNewResource());
 
         // When
-        final Response res = getApi().givenReadAuthenticated()
-            .post(uriOfExistingResource);
+        final Response res = getApi().givenReadAuthenticated().post(uriOfExistingResource);
 
         // Then
         final String allowHeader = res.getHeader(HttpHeaders.ALLOW);
@@ -161,8 +155,7 @@ public abstract class AbstractDiscoverabilityLiveTest<T extends IDto> {
 
         // Then
         final Response response = getApi().read(uriOfNewlyCreatedResource);
-        final T resourceFromServer = marshaller.decode(response.body()
-            .asString(), clazz);
+        final T resourceFromServer = marshaller.decode(response.body().asString(), clazz);
         assertThat(unpersistedResource, equalTo(resourceFromServer));
     }
 

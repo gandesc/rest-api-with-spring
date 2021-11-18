@@ -1,20 +1,20 @@
 package com.baeldung.um.security;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
+import com.baeldung.um.persistence.model.Principal;
+import com.baeldung.um.service.IPrincipalService;
+import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import com.baeldung.um.persistence.model.User;
-import com.baeldung.um.service.IUserService;
-import com.google.common.base.Preconditions;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Database user authentication service.
@@ -23,7 +23,7 @@ import com.google.common.base.Preconditions;
 public final class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private IUserService userService;
+    private IPrincipalService principalService;
 
     public MyUserDetailsService() {
         super();
@@ -38,24 +38,19 @@ public final class MyUserDetailsService implements UserDetailsService {
     public final UserDetails loadUserByUsername(final String username) {
         Preconditions.checkNotNull(username);
 
-        final User user = userService.findByName(username);
-        if (user == null) {
+        final Principal principal = principalService.findByName(username);
+        if (principal == null) {
             throw new UsernameNotFoundException("Username was not found: " + username);
         }
 
         final List<GrantedAuthority> authorities = new ArrayList<>();
-        user.getRoles()
-            .forEach(role -> {
-                if (role != null) {
-                    authorities.addAll(role.getPrivileges()
-                        .stream()
-                        .map(priv -> new SimpleGrantedAuthority(priv.getName()))
-                        .distinct()
-                        .collect(Collectors.toList()));
-                }
-            });
+        principal.getRoles().forEach(role -> {
+            if (role != null) {
+                authorities.addAll(role.getPrivileges().stream().map(priv -> new SimpleGrantedAuthority(priv.getName())).distinct().collect(Collectors.toList()));
+            }
+        });
 
-        return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(), authorities);
+        return new User(principal.getName(), principal.getPassword(), authorities);
     }
 
 }

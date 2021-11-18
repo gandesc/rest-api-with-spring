@@ -1,15 +1,13 @@
 package com.baeldung.um.web.dto;
 
-import java.util.Set;
-
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.Email;
-
 import com.baeldung.common.interfaces.INameableDto;
 import com.baeldung.common.persistence.model.INameableEntity;
 import com.baeldung.um.persistence.model.Principal;
 import com.baeldung.um.persistence.model.Role;
+import org.hibernate.validator.constraints.Email;
+
+import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 public class UserDto implements INameableEntity, INameableDto {
 

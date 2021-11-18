@@ -1,11 +1,14 @@
 package com.baeldung.um.security;
 
-import static com.baeldung.common.spring.util.Profiles.CLIENT;
-import static com.baeldung.common.spring.util.Profiles.TEST;
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-
+import com.baeldung.test.common.client.security.ITestAuthenticator;
+import com.baeldung.um.client.template.PrivilegeRestClient;
+import com.baeldung.um.model.PrivilegeDtoOpsImpl;
+import com.baeldung.um.spring.CommonTestConfig;
+import com.baeldung.um.spring.UmClientConfig;
+import com.baeldung.um.spring.UmLiveTestConfig;
+import com.baeldung.um.util.Um;
+import com.jayway.restassured.response.Response;
+import com.jayway.restassured.specification.RequestSpecification;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +17,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import com.baeldung.test.common.client.security.ITestAuthenticator;
-import com.baeldung.um.client.template.PrivilegeRestClient;
-import com.baeldung.um.model.PrivilegeDtoOpsImpl;
-import com.baeldung.um.spring.CommonTestConfig;
-import com.baeldung.um.spring.UmClientConfig;
-import com.baeldung.um.spring.UmLiveTestConfig;
-import com.baeldung.um.util.Um;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
+import static com.baeldung.common.spring.util.Profiles.CLIENT;
+import static com.baeldung.common.spring.util.Profiles.TEST;
+import static com.jayway.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 @ActiveProfiles({ CLIENT, TEST })
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -60,10 +59,7 @@ public class SecurityRestLiveTest {
     public final void givenAuthenticatedByBasicAuth_whenResourceIsCreated_then201IsReceived() {
         // Given
         // When
-        final Response response = givenAuthenticated().contentType(resourceClient.getMarshaller()
-            .getMime())
-            .body(resourceOps.createNewResource())
-            .post(resourceClient.getUri());
+        final Response response = givenAuthenticated().contentType(resourceClient.getMarshaller().getMime()).body(resourceOps.createNewResource()).post(resourceClient.getUri());
 
         // Then
         assertThat(response.getStatusCode(), is(201));

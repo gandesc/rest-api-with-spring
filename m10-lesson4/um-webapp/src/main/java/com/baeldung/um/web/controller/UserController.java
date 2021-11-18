@@ -1,26 +1,5 @@
 package com.baeldung.um.web.controller;
 
-import java.util.List;
-import java.util.concurrent.Callable;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.context.request.async.DeferredResult;
-import org.springframework.web.util.UriComponentsBuilder;
-
 import com.baeldung.common.util.QueryConstants;
 import com.baeldung.common.web.controller.AbstractController;
 import com.baeldung.common.web.controller.ISortingController;
@@ -29,6 +8,19 @@ import com.baeldung.um.service.IUserService;
 import com.baeldung.um.util.Um.Privileges;
 import com.baeldung.um.util.UmMappings;
 import com.baeldung.um.web.dto.UserDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.async.DeferredResult;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+import java.util.List;
+import java.util.concurrent.Callable;
 
 @Controller
 @RequestMapping(value = UmMappings.USERS)
@@ -53,7 +45,7 @@ public class UserController extends AbstractController<UserDto, UserDto> impleme
     @ResponseBody
     @Secured(Privileges.CAN_USER_READ)
     public List<UserDto> findAllPaginatedAndSorted(@RequestParam(value = QueryConstants.PAGE) final int page, @RequestParam(value = QueryConstants.SIZE) final int size, @RequestParam(value = QueryConstants.SORT_BY) final String sortBy,
-        @RequestParam(value = QueryConstants.SORT_ORDER) final String sortOrder, final UriComponentsBuilder uriBuilder, final HttpServletResponse response) {
+                                                   @RequestParam(value = QueryConstants.SORT_ORDER) final String sortOrder, final UriComponentsBuilder uriBuilder, final HttpServletResponse response) {
         return findPaginatedAndSortedInternal(page, size, sortBy, sortOrder, uriBuilder, response);
     }
 
@@ -62,7 +54,7 @@ public class UserController extends AbstractController<UserDto, UserDto> impleme
     @ResponseBody
     @Secured(Privileges.CAN_USER_READ)
     public List<UserDto> findAllPaginated(@RequestParam(value = QueryConstants.PAGE) final int page, @RequestParam(value = QueryConstants.SIZE) final int size, final UriComponentsBuilder uriBuilder, final HttpServletResponse response) {
-        return findPaginatedInternal(page, size, uriBuilder, response);
+        return findPaginatedAndSortedInternal(page, size, null, null, uriBuilder, response);
     }
 
     @Override
@@ -121,7 +113,7 @@ public class UserController extends AbstractController<UserDto, UserDto> impleme
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
     public DeferredResult<UserDto> createUserWithDeferredResult(@RequestBody final UserDto resource) {
-        final DeferredResult<UserDto> result = new DeferredResult<>();
+        final DeferredResult<UserDto> result = new DeferredResult<UserDto>();
         asyncService.scheduleCreateUser(resource, result);
         return result;
     }
@@ -130,13 +122,10 @@ public class UserController extends AbstractController<UserDto, UserDto> impleme
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void createUserWithAsync(@RequestBody final UserDto resource, HttpServletResponse response, UriComponentsBuilder uriBuilder) throws InterruptedException {
         asyncService.createUserAsync(resource);
-        final String location = uriBuilder.path("/users")
-            .queryParam("name", resource.getName())
-            .build()
-            .encode()
-            .toString();
+        final String location = uriBuilder.path("/users").queryParam("name", resource.getName()).build().encode().toString();
         response.setHeader("Location", location);
     }
+
 
     // update
 

@@ -1,7 +1,13 @@
 package com.baeldung.um.web.controller;
 
-import java.util.Collection;
-
+import com.baeldung.common.security.SpringSecurityUtil;
+import com.baeldung.um.persistence.model.Privilege;
+import com.baeldung.um.persistence.model.Role;
+import com.baeldung.um.util.UmMappings;
+import com.baeldung.um.web.dto.UserDto;
+import com.google.common.base.Function;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Sets;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,14 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.baeldung.common.security.SpringSecurityUtil;
-import com.baeldung.um.persistence.model.Privilege;
-import com.baeldung.um.persistence.model.Role;
-import com.baeldung.um.util.UmMappings;
-import com.baeldung.um.web.dto.UserDto;
-import com.google.common.base.Function;
-import com.google.common.collect.Collections2;
-import com.google.common.collect.Sets;
+import java.util.Collection;
 
 /**
  * - note: this controller will start working with the User model and, if necessary, will move to a Authentication resource (which is the way it should work)

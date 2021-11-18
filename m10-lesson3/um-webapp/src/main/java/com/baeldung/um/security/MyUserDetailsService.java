@@ -1,9 +1,8 @@
 package com.baeldung.um.security;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
+import com.baeldung.um.persistence.model.Principal;
+import com.baeldung.um.service.IPrincipalService;
+import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,9 +12,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import com.baeldung.um.persistence.model.Principal;
-import com.baeldung.um.service.IPrincipalService;
-import com.google.common.base.Preconditions;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Database user authentication service.
@@ -45,16 +44,11 @@ public final class MyUserDetailsService implements UserDetailsService {
         }
 
         final List<GrantedAuthority> authorities = new ArrayList<>();
-        principal.getRoles()
-            .forEach(role -> {
-                if (role != null) {
-                    authorities.addAll(role.getPrivileges()
-                        .stream()
-                        .map(priv -> new SimpleGrantedAuthority(priv.getName()))
-                        .distinct()
-                        .collect(Collectors.toList()));
-                }
-            });
+        principal.getRoles().forEach(role -> {
+            if (role != null) {
+                authorities.addAll(role.getPrivileges().stream().map(priv -> new SimpleGrantedAuthority(priv.getName())).distinct().collect(Collectors.toList()));
+            }
+        });
 
         return new User(principal.getName(), principal.getPassword(), authorities);
     }

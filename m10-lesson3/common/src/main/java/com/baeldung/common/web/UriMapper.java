@@ -1,8 +1,7 @@
 package com.baeldung.common.web;
 
-import org.springframework.stereotype.Component;
-
 import com.baeldung.common.interfaces.IDto;
+import org.springframework.stereotype.Component;
 
 @Component
 public class UriMapper implements IUriMapper {
@@ -18,9 +17,7 @@ public class UriMapper implements IUriMapper {
      */
     @Override
     public <T extends IDto> String getUriBase(final Class<T> clazz) {
-        String simpleName = clazz.getSimpleName()
-            .toString()
-            .toLowerCase();
+        String simpleName = clazz.getSimpleName().toString().toLowerCase();
         if (simpleName.endsWith("dto")) {
             simpleName = simpleName.substring(0, simpleName.length() - 3);
         }

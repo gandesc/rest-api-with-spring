@@ -1,22 +1,12 @@
 package com.baeldung.um.persistence.model;
 
-import java.util.Set;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.xml.bind.annotation.XmlRootElement;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
 import com.baeldung.common.interfaces.INameableDto;
 import com.baeldung.common.persistence.model.INameableEntity;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Set;
 
 @Entity
 @XmlRootElement
@@ -50,7 +40,7 @@ public class User implements INameableEntity, INameableDto {
 
         locked = false;
     }
-
+    
     public User(final String name, final String email, final String password, final Set<Role> roles) {
         super();
 
@@ -159,9 +149,7 @@ public class User implements INameableEntity, INameableDto {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("id", id)
-            .append("name", name)
-            .toString();
+        return new ToStringBuilder(this).append("id", id).append("name", name).toString();
     }
 
 }

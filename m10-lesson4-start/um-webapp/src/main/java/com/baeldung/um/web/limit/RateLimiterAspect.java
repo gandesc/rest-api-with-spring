@@ -1,9 +1,7 @@
 package com.baeldung.um.web.limit;
 
-import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Function;
-
+import com.google.common.base.Strings;
+import com.google.common.util.concurrent.RateLimiter;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -11,8 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.google.common.base.Strings;
-import com.google.common.util.concurrent.RateLimiter;
+import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
 
 @Aspect
 @Component
@@ -36,8 +35,7 @@ public class RateLimiterAspect {
     }
 
     private String getOrCreateKey(JoinPoint jp, RateLimit limit) {
-        return Optional.ofNullable(Strings.emptyToNull(limit.key()))
-            .orElseGet(() -> JoinPointToStringHelper.toString(jp));
+        return Optional.ofNullable(Strings.emptyToNull(limit.key())).orElseGet(() -> JoinPointToStringHelper.toString(jp));
     }
 
     private Function<String, RateLimiter> createLimiter(RateLimit limit) {

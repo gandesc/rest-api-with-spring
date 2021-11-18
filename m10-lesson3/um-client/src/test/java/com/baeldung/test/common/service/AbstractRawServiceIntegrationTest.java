@@ -1,29 +1,23 @@
 package com.baeldung.test.common.service;
 
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-
-import java.util.List;
-
+import com.baeldung.common.persistence.model.IEntity;
+import com.baeldung.common.persistence.service.IRawService;
+import com.baeldung.common.util.SearchField;
+import com.baeldung.common.util.order.OrderById;
+import com.baeldung.test.common.util.IDUtil;
 import org.hamcrest.Matchers;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Sort;
 
-import com.baeldung.common.persistence.model.INameableEntity;
-import com.baeldung.common.persistence.service.IRawService;
-import com.baeldung.common.util.SearchField;
-import com.baeldung.common.util.order.OrderById;
-import com.baeldung.test.common.util.IDUtil;
+import java.util.List;
 
-public abstract class AbstractRawServiceIntegrationTest<T extends INameableEntity> {
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.not;
+import static org.junit.Assert.*;
+
+public abstract class AbstractRawServiceIntegrationTest<T extends IEntity> {
 
     // tests
 
@@ -148,8 +142,7 @@ public abstract class AbstractRawServiceIntegrationTest<T extends INameableEntit
     public final void whenResourcesAreRetrievedSortedDescById_thenResultsAreOrderedCorrectly() {
         final List<T> resourcesOrderedById = getApi().findAllSorted(SearchField.id.toString(), Sort.Direction.DESC.name());
 
-        assertTrue(new OrderById<T>().reverse()
-            .isOrdered(resourcesOrderedById));
+        assertTrue(new OrderById<T>().reverse().isOrdered(resourcesOrderedById));
     }
 
     // create

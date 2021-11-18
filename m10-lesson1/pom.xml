@@ -7,18 +7,18 @@
 	<packaging>pom</packaging>
 
 	<name>user-management-parent-l1</name>
-	<url>https://github.com/eugenp/REST-With-Spring</url>
+	<url>https://github.com/eugenp/restwithspring</url>
 	<description>REST with Spring Classes</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.22.RELEASE</version>
+		<version>1.4.1.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
 	<issueManagement>
-		<url>https://github.com/eugenp/REST-With-Spring/issues</url>
+		<url>https://github.com/eugenp/restwithspring/issues</url>
 		<system>GitHub Issues</system>
 	</issueManagement>
 
@@ -39,10 +39,12 @@
 		</developer>
 	</developers>
 
+
+
 	<scm>
-		<connection>scm:git:git://github.com/eugenp/REST-With-Spring.git</connection>
-		<url>scm:git:git://github.com/eugenp/REST-With-Spring.git</url>
-		<developerConnection>scm:git:git://github.com/eugenp/REST-With-Spring.git</developerConnection>
+		<connection>https://github.com/eugenp/REST-With-Spring</connection>
+		<url>https://github.com/eugenp/REST-With-Spring</url>
+		<developerConnection>https://github.com/eugenp/REST-With-Spring</developerConnection>
 	</scm>
 
 	<build>
@@ -67,7 +69,9 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven-surefire-plugin.version}</version>
 					<configuration>
+						<testFailureIgnore>true</testFailureIgnore>
 						<excludes>
 							<exclude>**/*IntegrationTest.java</exclude>
 							<exclude>**/*LiveTest.java</exclude>
@@ -78,6 +82,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven-compiler-plugin.version}</version>
 					<configuration>
 						<source>1.8</source>
 						<target>1.8</target>
@@ -88,6 +93,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-resources-plugin</artifactId>
+					<version>${maven-resources-plugin.version}</version>
 				</plugin>
 
 			</plugins>
@@ -96,21 +102,69 @@
 	</build>
 
 	<properties>
-	
+		
 		<!-- non-dependencies -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 		
-		<!-- persistence -->
-		<validation-api.version>2.0.1.Final</validation-api.version>  
+		<!-- overriding Spring Boot -->
+		<spring-hateoas.version>0.21.0.RELEASE</spring-hateoas.version>
+		<spring-boot.version>1.4.0.RELEASE</spring-boot.version>
 
-		 
+		<commons-collections.version>3.2.2</commons-collections.version>
+		<hibernate.version>5.2.1.Final</hibernate.version>
+		<hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
+		<httpclient.version>4.5.2</httpclient.version>
+		<jackson.version>2.8.1</jackson.version>
+		<javassist.version>3.20.0-GA</javassist.version>
+		<mysql.version>5.1.39</mysql.version>
+		
+		<slf4j.version>1.7.21</slf4j.version>
+
+		<!-- Spring related -->
+		<aspectjweaver.version>1.8.9</aspectjweaver.version>
+
+		<!-- web -->
+		<javax.servlet-api.version>3.1.0</javax.servlet-api.version>
+
+		<!-- marshalling -->
+		<jaxb-api.version>2.2.12</jaxb-api.version>
+
 		<!-- commons and utils -->
-		<guava.version>27.0-jre</guava.version>
-		<commons-lang3.version>3.8.1</commons-lang3.version>		
-		 
-		<rest-assured.version>4.3.3</rest-assured.version>
-		<groovy.version>3.0.6</groovy.version>
+		<commons-lang3.version>3.4</commons-lang3.version>
+		<guava.version>19.0</guava.version>
+
+		<!-- UNSORTED -->
+		<commons-codec.version>1.10</commons-codec.version>
+
+		<!-- persistence -->
+		<querydsl.version>4.1.3</querydsl.version>
+		<spring-data-jpa.version>1.10.2.RELEASE</spring-data-jpa.version>
+		<h2.version>1.4.192</h2.version>
+		<hsqldb.version>2.3.4</hsqldb.version>
+
+		<validation-api.version>1.1.0.Final</validation-api.version>
+
+		<!-- ops related -->
+		<tomcat.version>8.5.4</tomcat.version>
+
+		<!-- logging -->
+		<logback.version>1.1.5</logback.version>
+
+		<!-- testing -->
+		<org.hamcrest.version>1.3</org.hamcrest.version>
+		<junit.version>4.12</junit.version>
+		<mockito.version>1.10.19</mockito.version>
+
+		<httpcore.version>4.4.5</httpcore.version>
+		<rest-assured.version>2.9.0</rest-assured.version>
+
+		<!-- maven plugins -->
+		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
+		<maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
+		<maven-resources-plugin.version>3.0.1</maven-resources-plugin.version>
+		<cargo-maven2-plugin.version>1.5.0</cargo-maven2-plugin.version>
+		<maven-war-plugin.version>2.6</maven-war-plugin.version>
 
 	</properties>
 

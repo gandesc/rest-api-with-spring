@@ -1,10 +1,9 @@
 package com.baeldung.test.common.client.template;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.baeldung.common.interfaces.IDto;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
+import com.jayway.restassured.response.Response;
+import com.jayway.restassured.specification.RequestSpecification;
+import org.apache.commons.lang3.tuple.Pair;
 
 public interface IRestClientAsResponse<T extends IDto> {
 

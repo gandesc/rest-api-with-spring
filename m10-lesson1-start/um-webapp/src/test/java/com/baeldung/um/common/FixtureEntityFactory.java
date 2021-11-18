@@ -1,17 +1,18 @@
 package com.baeldung.um.common;
 
-import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
-
 import com.baeldung.um.persistence.model.Privilege;
 import com.baeldung.um.persistence.model.Role;
 import com.baeldung.um.persistence.model.User;
 import com.google.common.collect.Sets;
+
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
 public class FixtureEntityFactory {
 
     private FixtureEntityFactory() {
         throw new AssertionError();
     }
+
 
     // user
 

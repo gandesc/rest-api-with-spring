@@ -1,11 +1,12 @@
 package com.baeldung.um.common;
 
-import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
-
+import com.baeldung.um.persistence.model.Principal;
 import com.baeldung.um.persistence.model.Privilege;
 import com.baeldung.um.persistence.model.Role;
-import com.baeldung.um.persistence.model.User;
+import com.baeldung.um.web.dto.UserDto;
 import com.google.common.collect.Sets;
+
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
 public class FixtureEntityFactory {
 
@@ -13,14 +14,24 @@ public class FixtureEntityFactory {
         throw new AssertionError();
     }
 
-    // user
+    // user DTO
 
-    public static User createNewUser() {
+    public static UserDto createNewUser() {
         return createNewUser(randomAlphabetic(8), randomAlphabetic(8));
     }
 
-    public static User createNewUser(final String name, final String pass) {
-        return new User(name, pass, Sets.<Role> newHashSet());
+    public static UserDto createNewUser(final String name, final String pass) {
+        return new UserDto(name, randomAlphabetic(6) + "@gmail.com", pass, Sets.<Role> newHashSet());
+    }
+
+    // principal
+
+    public static Principal createNewPrincipal() {
+        return createNewPrincipal(randomAlphabetic(8), randomAlphabetic(8));
+    }
+
+    public static Principal createNewPrincipal(final String name, final String pass) {
+        return new Principal(name, pass, Sets.<Role> newHashSet());
     }
 
     // role

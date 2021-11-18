@@ -1,13 +1,5 @@
 package com.baeldung.test.common.client.template;
 
-import java.util.List;
-
-import org.apache.commons.lang3.tuple.Pair;
-import org.apache.http.HttpHeaders;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.baeldung.client.marshall.IMarshaller;
 import com.baeldung.common.interfaces.IDto;
 import com.baeldung.common.util.QueryConstants;
@@ -15,8 +7,15 @@ import com.baeldung.common.web.WebConstants;
 import com.baeldung.test.common.client.security.ITestAuthenticator;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
+import com.jayway.restassured.response.Response;
+import com.jayway.restassured.specification.RequestSpecification;
+import org.apache.commons.lang3.tuple.Pair;
+import org.apache.http.HttpHeaders;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 public abstract class AbstractRestClient<T extends IDto> implements IRestClient<T> {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
@@ -105,8 +104,7 @@ public abstract class AbstractRestClient<T extends IDto> implements IRestClient<
     @Override
     public final List<T> findAllByUri(final String uri) {
         final Response allAsResponse = readExtendedRequest().get(uri);
-        final List<T> listOfResources = marshaller.<T> decodeList(allAsResponse.getBody()
-            .asString(), clazz);
+        final List<T> listOfResources = marshaller.<T> decodeList(allAsResponse.getBody().asString(), clazz);
         if (listOfResources == null) {
             return Lists.newArrayList();
         }
@@ -127,8 +125,7 @@ public abstract class AbstractRestClient<T extends IDto> implements IRestClient<
     @Override
     public final List<T> findAllSorted(final String sortBy, final String sortOrder) {
         final Response findAllResponse = findAllByUriAsResponse(getUri() + QueryConstants.Q_SORT_BY + sortBy + QueryConstants.S_ORDER + sortOrder);
-        return marshaller.<T> decodeList(findAllResponse.getBody()
-            .asString(), clazz);
+        return marshaller.<T> decodeList(findAllResponse.getBody().asString(), clazz);
     }
 
     @Override
@@ -250,9 +247,7 @@ public abstract class AbstractRestClient<T extends IDto> implements IRestClient<
 
         final String resourceAsString = marshaller.encode(resource);
         logger.debug("Creating Resource against URI: " + getUri());
-        return givenAuthenticated.contentType(marshaller.getMime())
-            .body(resourceAsString)
-            .post(getUri());
+        return givenAuthenticated.contentType(marshaller.getMime()).body(resourceAsString).post(getUri());
     }
 
     // update
@@ -268,9 +263,7 @@ public abstract class AbstractRestClient<T extends IDto> implements IRestClient<
         Preconditions.checkNotNull(resource);
 
         final String resourceAsString = marshaller.encode(resource);
-        return givenWriteAuthenticated().contentType(marshaller.getMime())
-            .body(resourceAsString)
-            .put(getUri() + "/" + resource.getId());
+        return givenWriteAuthenticated().contentType(marshaller.getMime()).body(resourceAsString).put(getUri() + "/" + resource.getId());
     }
 
     // delete

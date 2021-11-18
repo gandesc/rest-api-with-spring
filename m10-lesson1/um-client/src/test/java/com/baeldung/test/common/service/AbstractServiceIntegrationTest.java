@@ -1,20 +1,17 @@
 package com.baeldung.test.common.service;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-
-import java.util.List;
-
-import org.junit.Ignore;
-import org.junit.Test;
-import org.springframework.data.domain.Sort;
-
 import com.baeldung.common.persistence.model.INameableEntity;
 import com.baeldung.common.persistence.service.IService;
 import com.baeldung.common.util.SearchField;
 import com.baeldung.common.util.order.OrderByName;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.springframework.data.domain.Sort;
+
+import java.util.List;
+
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.*;
 
 public abstract class AbstractServiceIntegrationTest<T extends INameableEntity> extends AbstractRawServiceIntegrationTest<T> {
 

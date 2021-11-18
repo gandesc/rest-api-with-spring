@@ -1,16 +1,14 @@
 package com.baeldung.um.web.dto;
 
-import java.util.Set;
-
-import javax.validation.constraints.NotNull;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.hibernate.validator.constraints.Email;
-
 import com.baeldung.common.interfaces.INameableDto;
 import com.baeldung.common.persistence.model.INameableEntity;
 import com.baeldung.um.persistence.model.Principal;
 import com.baeldung.um.persistence.model.Role;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.validator.constraints.Email;
+
+import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 public class UserDto implements INameableEntity, INameableDto {
 
@@ -123,9 +121,7 @@ public class UserDto implements INameableEntity, INameableDto {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("id", id)
-            .append("name", name)
-            .toString();
+        return new ToStringBuilder(this).append("id", id).append("name", name).toString();
     }
 
 }

@@ -1,11 +1,11 @@
 package com.baeldung.client.util;
 
+import org.springframework.web.util.UriTemplate;
+
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-
-import org.springframework.web.util.UriTemplate;
 
 public final class UriUtil {
 
@@ -18,8 +18,7 @@ public final class UriUtil {
     public static URI createSearchUri(final String uriBase, final String paramToExpand) {
         URL url = null;
         try {
-            url = new UriTemplate(uriBase).expand(paramToExpand)
-                .toURL();
+            url = new UriTemplate(uriBase).expand(paramToExpand).toURL();
         } catch (final MalformedURLException ex) {
             throw new IllegalArgumentException(ex);
         }

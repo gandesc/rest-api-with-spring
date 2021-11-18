@@ -1,14 +1,5 @@
 package com.baeldung.um.service.main;
 
-import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
-import static org.hamcrest.Matchers.hasItem;
-import static org.junit.Assert.assertThat;
-
-import org.junit.Ignore;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-
 import com.baeldung.common.persistence.service.IService;
 import com.baeldung.um.persistence.model.Privilege;
 import com.baeldung.um.persistence.model.Role;
@@ -16,6 +7,14 @@ import com.baeldung.um.service.IPrincipalService;
 import com.baeldung.um.service.IPrivilegeService;
 import com.baeldung.um.service.IRoleService;
 import com.google.common.collect.Sets;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
+import static org.hamcrest.Matchers.hasItem;
+import static org.junit.Assert.assertThat;
 
 public class RoleServiceIntegrationTest extends SecServiceIntegrationTest<Role> {
 
@@ -51,8 +50,7 @@ public class RoleServiceIntegrationTest extends SecServiceIntegrationTest<Role> 
     public final void givenEntityExistsWithAssociationScenarios_whenDeletingEverything_thenNoException() {
         final Privilege existingAssociation = getAssociationService().create(new Privilege(randomAlphabetic(6)));
         final Role newResource = createNewEntity();
-        newResource.getPrivileges()
-            .add(existingAssociation);
+        newResource.getPrivileges().add(existingAssociation);
         getApi().create(newResource);
 
         principalService.deleteAll();
@@ -64,13 +62,11 @@ public class RoleServiceIntegrationTest extends SecServiceIntegrationTest<Role> 
     public final void whenCreatingNewResourceWithExistingAssociations_thenNewResourceIsCorrectlyCreated() {
         final Privilege existingAssociation = getAssociationService().create(new Privilege(randomAlphabetic(6)));
         final Role newResource = createNewEntity();
-        newResource.getPrivileges()
-            .add(existingAssociation);
+        newResource.getPrivileges().add(existingAssociation);
         getApi().create(newResource);
 
         final Role newResource2 = createNewEntity();
-        newResource2.getPrivileges()
-            .add(existingAssociation);
+        newResource2.getPrivileges().add(existingAssociation);
         getApi().create(newResource2);
     }
 

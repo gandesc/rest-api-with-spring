@@ -1,19 +1,15 @@
 package com.baeldung.um.test.live;
 
-import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
+import com.baeldung.um.service.AsyncService;
+import com.baeldung.um.util.Um;
+import com.jayway.restassured.RestAssured;
+import com.jayway.restassured.response.Response;
+import com.jayway.restassured.specification.RequestSpecification;
 import org.junit.Test;
 import org.springframework.http.MediaType;
 
-import com.baeldung.um.service.AsyncService;
-import com.baeldung.um.util.Um;
-import io.restassured.RestAssured;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
+import static org.junit.Assert.*;
 
 public class UmAsyncRestLiveTest {
 
@@ -25,8 +21,7 @@ public class UmAsyncRestLiveTest {
         System.out.println(response.asString());
 
         assertEquals(201, response.getStatusCode());
-        assertNotNull(response.jsonPath()
-            .get("name"));
+        assertNotNull(response.jsonPath().get("name"));
         assertTrue(response.time() > AsyncService.DELAY);
     }
 
@@ -36,8 +31,7 @@ public class UmAsyncRestLiveTest {
         System.out.println(response.asString());
 
         assertEquals(201, response.getStatusCode());
-        assertNotNull(response.jsonPath()
-            .get("name"));
+        assertNotNull(response.jsonPath().get("name"));
         assertTrue(response.time() > AsyncService.DELAY);
     }
 
@@ -52,28 +46,23 @@ public class UmAsyncRestLiveTest {
         // check loc first time
         final Response checkLocResponse = givenAuth().get(loc);
         assertEquals(202, checkLocResponse.getStatusCode());
-        assertFalse(checkLocResponse.asString()
-            .contains("name"));
+        assertFalse(checkLocResponse.asString().contains("name"));
 
         // check loc after delay
         Thread.sleep(2 * AsyncService.DELAY);
         final Response finalLocResponse = givenAuth().get(loc);
         assertEquals(200, finalLocResponse.getStatusCode());
-        assertNotNull(finalLocResponse.jsonPath()
-            .get("name"));
+        assertNotNull(finalLocResponse.jsonPath().get("name"));
     }
 
     //
 
     private RequestSpecification createRandomUser() {
-        return givenAuth().contentType(MediaType.APPLICATION_JSON_VALUE)
-            .body("{\"name\":\"" + randomAlphabetic(6) + "\",\"password\":\"" + randomAlphabetic(8) + "\"}");
+        return givenAuth().contentType(MediaType.APPLICATION_JSON_VALUE).body("{\"name\":\"" + randomAlphabetic(6) + "\",\"password\":\"" + randomAlphabetic(8) + "\"}");
     }
 
     private RequestSpecification givenAuth() {
-        return RestAssured.given()
-            .auth()
-            .basic(Um.ADMIN_EMAIL, Um.ADMIN_PASS);
+        return RestAssured.given().auth().basic(Um.ADMIN_EMAIL, Um.ADMIN_PASS);
     }
 
 }

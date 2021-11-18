@@ -1,23 +1,18 @@
 package com.baeldung.common.web.listeners;
 
-import static com.baeldung.common.util.LinkUtil.REL_FIRST;
-import static com.baeldung.common.util.LinkUtil.REL_LAST;
-import static com.baeldung.common.util.LinkUtil.REL_NEXT;
-import static com.baeldung.common.util.LinkUtil.REL_PREV;
-import static com.baeldung.common.util.LinkUtil.createLinkHeader;
-import static com.baeldung.common.web.WebConstants.PATH_SEP;
-
-import javax.servlet.http.HttpServletResponse;
-
+import com.baeldung.common.web.IUriMapper;
+import com.baeldung.common.web.events.PaginatedResultsRetrievedEvent;
+import com.google.common.base.Preconditions;
+import com.google.common.net.HttpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.baeldung.common.web.IUriMapper;
-import com.baeldung.common.web.events.PaginatedResultsRetrievedEvent;
-import com.google.common.base.Preconditions;
-import com.google.common.net.HttpHeaders;
+import javax.servlet.http.HttpServletResponse;
+
+import static com.baeldung.common.util.LinkUtil.*;
+import static com.baeldung.common.web.WebConstants.PATH_SEP;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
 @Component
@@ -74,35 +69,19 @@ class PaginatedResultsRetrievedDiscoverabilityListener implements ApplicationLis
     }
 
     final String constructNextPageUri(final UriComponentsBuilder uriBuilder, final int page, final int size) {
-        return uriBuilder.replaceQueryParam(PAGE, page + 1)
-            .replaceQueryParam("size", size)
-            .build()
-            .encode()
-            .toUriString();
+        return uriBuilder.replaceQueryParam(PAGE, page + 1).replaceQueryParam("size", size).build().encode().toUriString();
     }
 
     final String constructPrevPageUri(final UriComponentsBuilder uriBuilder, final int page, final int size) {
-        return uriBuilder.replaceQueryParam(PAGE, page - 1)
-            .replaceQueryParam("size", size)
-            .build()
-            .encode()
-            .toUriString();
+        return uriBuilder.replaceQueryParam(PAGE, page - 1).replaceQueryParam("size", size).build().encode().toUriString();
     }
 
     final String constructFirstPageUri(final UriComponentsBuilder uriBuilder, final int size) {
-        return uriBuilder.replaceQueryParam(PAGE, 0)
-            .replaceQueryParam("size", size)
-            .build()
-            .encode()
-            .toUriString();
+        return uriBuilder.replaceQueryParam(PAGE, 0).replaceQueryParam("size", size).build().encode().toUriString();
     }
 
     final String constructLastPageUri(final UriComponentsBuilder uriBuilder, final int totalPages, final int size) {
-        return uriBuilder.replaceQueryParam(PAGE, totalPages)
-            .replaceQueryParam("size", size)
-            .build()
-            .encode()
-            .toUriString();
+        return uriBuilder.replaceQueryParam(PAGE, totalPages).replaceQueryParam("size", size).build().encode().toUriString();
     }
 
     final boolean hasNextPage(final int page, final int totalPages) {

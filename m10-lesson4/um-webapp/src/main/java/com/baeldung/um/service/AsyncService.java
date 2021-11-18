@@ -1,10 +1,6 @@
 package com.baeldung.um.service;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.Future;
-
+import com.baeldung.um.web.dto.UserDto;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +10,10 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.async.DeferredResult;
 
-import com.baeldung.um.web.dto.UserDto;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.Future;
 
 @Service
 public class AsyncService {
@@ -24,7 +23,7 @@ public class AsyncService {
 
     public static final long DELAY = 10000L;
 
-    private final ConcurrentMap<String, Pair<UserDto, DeferredResult<UserDto>>> deferredResultMap = new ConcurrentHashMap<>();
+    private final ConcurrentMap<String, Pair<UserDto, DeferredResult<UserDto>>> deferredResultMap = new ConcurrentHashMap<String, Pair<UserDto, DeferredResult<UserDto>>>();
 
     @Async
     public Future<UserDto> createUserAsync(UserDto resource) throws InterruptedException {
@@ -51,16 +50,14 @@ public class AsyncService {
     }
 
     public void scheduleCreateUser(UserDto resource, DeferredResult<UserDto> deferredResult) {
-        CompletableFuture.supplyAsync(() -> userService.createSlow(resource))
-            .whenCompleteAsync((result, throwable) -> deferredResult.setResult(result));
+        CompletableFuture.supplyAsync(() -> userService.createSlow(resource)).whenCompleteAsync((result, throwable) -> deferredResult.setResult(result));
     }
 
     @Scheduled(fixedRate = DELAY)
     public void processUserDtoQueue() {
         deferredResultMap.forEach((k, pair) -> {
             final UserDto created = userService.create(pair.getLeft());
-            pair.getRight()
-                .setResult(created);
+            pair.getRight().setResult(created);
         });
     }
 }

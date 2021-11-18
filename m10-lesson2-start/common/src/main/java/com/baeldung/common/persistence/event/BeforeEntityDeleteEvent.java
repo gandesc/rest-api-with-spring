@@ -1,14 +1,13 @@
 package com.baeldung.common.persistence.event;
 
-import org.springframework.context.ApplicationEvent;
-
-import com.baeldung.common.interfaces.IWithName;
+import com.baeldung.common.persistence.model.IEntity;
 import com.google.common.base.Preconditions;
+import org.springframework.context.ApplicationEvent;
 
 /**
  * This event should be fired when entity is updated.
  */
-public final class BeforeEntityDeleteEvent<T extends IWithName> extends ApplicationEvent {
+public final class BeforeEntityDeleteEvent<T extends IEntity> extends ApplicationEvent {
 
     private final Class<T> clazz;
     private final T entity;
