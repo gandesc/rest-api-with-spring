@@ -2,10 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>common-test-m9</artifactId>
-	<name>common-test</name>
+	<name>common-test-m9</name>
 
 	<parent>
-		<groupId>com.baeldung</groupId>
+		<groupId>org.baeldung</groupId>
 		<artifactId>user-management-parent-m9</artifactId>
 		<version>1.0.1-SNAPSHOT</version>
 	</parent>
@@ -15,7 +15,7 @@
 		<!-- internal -->
 
 		<dependency>
-			<groupId>com.baeldung</groupId>
+			<groupId>org.baeldung</groupId>
 			<artifactId>common-client-m9</artifactId>
 			<version>1.0.1-SNAPSHOT</version>
 		</dependency>
@@ -49,8 +49,15 @@
 		</dependency>
 
 		<dependency>
-			<groupId>io.rest-assured</groupId>
+			<groupId>com.jayway.restassured</groupId>
 			<artifactId>rest-assured</artifactId>
+			<version>${rest-assured.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 	</dependencies>

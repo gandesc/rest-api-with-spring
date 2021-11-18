@@ -4,10 +4,10 @@
     <artifactId>um-webapp-m9</artifactId>
     <packaging>war</packaging>
 
-    <name>um-webapp</name>
+    <name>um-webapp-m9</name>
 
     <parent>
-        <groupId>com.baeldung</groupId>
+        <groupId>org.baeldung</groupId>
         <artifactId>user-management-parent-m9</artifactId>
         <version>1.0.1-SNAPSHOT</version>
     </parent>
@@ -17,13 +17,13 @@
         <!-- internal -->
 
         <dependency>
-            <groupId>com.baeldung</groupId>
+            <groupId>org.baeldung</groupId>
             <artifactId>common-m9</artifactId>
             <version>1.0.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>com.baeldung</groupId>
+            <groupId>org.baeldung</groupId>
             <artifactId>common-client-m9</artifactId>
             <version>1.0.1-SNAPSHOT</version>
             <scope>test</scope>
@@ -31,20 +31,20 @@
         </dependency>
 
         <dependency>
-            <groupId>com.baeldung</groupId>
+            <groupId>org.baeldung</groupId>
             <artifactId>common-test-m9</artifactId>
             <version>1.0.1-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>com.baeldung</groupId>
+            <groupId>org.baeldung</groupId>
             <artifactId>um-client-m9</artifactId>
             <version>1.0.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>com.baeldung</groupId>
+            <groupId>org.baeldung</groupId>
             <artifactId>um-client-m9</artifactId>
             <version>1.0.1-SNAPSHOT</version>
             <scope>test</scope>
@@ -95,7 +95,7 @@
     </dependencies>
 
     <build>
-        <finalName>um-webapp/api</finalName>
+        <finalName>um-webapp</finalName>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -110,8 +110,9 @@
                 <artifactId>cargo-maven2-plugin</artifactId>
                 <version>${cargo-maven2-plugin.version}</version>
                 <configuration>
+                    <wait>false</wait>
                     <container>
-                        <containerId>tomcat9x</containerId>
+                        <containerId>tomcat8x</containerId>
                         <type>embedded</type>
                         <systemProperties>
                             <envTarget>dev</envTarget>
@@ -129,6 +130,7 @@
             </plugin>
 
         </plugins>
+
     </build>
 
     <profiles>
