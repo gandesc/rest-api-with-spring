@@ -35,10 +35,6 @@ public class RoleController extends AbstractController<Role, Role> implements IS
     @Autowired
     private IRoleService service;
 
-    public RoleController() {
-        super(Role.class);
-    }
-
     // API
 
     // find - all/paginated

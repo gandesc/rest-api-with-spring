@@ -15,22 +15,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.baeldung.common.interfaces.IDto;
-import com.baeldung.common.persistence.model.IEntity;
+import com.baeldung.common.interfaces.IWithName;
 import com.baeldung.common.persistence.service.IRawService;
 import com.baeldung.common.web.RestPreconditions;
 import com.baeldung.common.web.exception.MyResourceNotFoundException;
 
-public abstract class AbstractReadOnlyController<D extends IDto, E extends IEntity> {
+public abstract class AbstractReadOnlyController<D extends IDto, E extends IWithName> {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
-
-    protected Class<D> clazz;
-
-    public AbstractReadOnlyController(final Class<D> clazzToSet) {
-        super();
-
-        Objects.requireNonNull(clazzToSet);
-        clazz = clazzToSet;
-    }
 
     // find - one
 
@@ -41,8 +32,7 @@ public abstract class AbstractReadOnlyController<D extends IDto, E extends IEnti
     // find - all
 
     protected final List<D> findAllInternal(final HttpServletRequest request) {
-        if (request.getParameterNames()
-            .hasMoreElements()) {
+        if (request.getParameterNames().hasMoreElements()) {
             throw new MyResourceNotFoundException();
         }
 

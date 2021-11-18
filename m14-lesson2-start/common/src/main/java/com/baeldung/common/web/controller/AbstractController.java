@@ -1,17 +1,10 @@
 package com.baeldung.common.web.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.baeldung.common.interfaces.IDto;
-import com.baeldung.common.persistence.model.IEntity;
+import com.baeldung.common.persistence.model.INameableEntity;
 import com.baeldung.common.web.RestPreconditions;
 
-public abstract class AbstractController<D extends IDto, E extends IEntity> extends AbstractReadOnlyController<D, E> {
-
-    @Autowired
-    public AbstractController(final Class<D> clazzToSet) {
-        super(clazzToSet);
-    }
+public abstract class AbstractController<D extends IDto, E extends INameableEntity> extends AbstractReadOnlyController<D, E> {
 
     // save/create/persist
 
