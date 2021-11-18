@@ -35,6 +35,7 @@
 		<dependency>
 			<groupId>io.rest-assured</groupId>
 			<artifactId>rest-assured</artifactId>
+                                                                              <version>${rest-assured.version}</version>
 		</dependency>
 
 	</dependencies>

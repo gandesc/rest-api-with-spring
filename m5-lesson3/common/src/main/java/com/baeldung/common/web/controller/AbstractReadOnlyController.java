@@ -1,10 +1,16 @@
 package com.baeldung.common.web.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.baeldung.common.interfaces.IWithName;
+import com.baeldung.common.persistence.service.IRawService;
+import com.baeldung.common.util.QueryConstants;
+import com.baeldung.common.web.RestPreconditions;
+import com.baeldung.common.web.WebConstants;
+import com.baeldung.common.web.events.MultipleResourcesRetrievedEvent;
+import com.baeldung.common.web.events.PaginatedResultsRetrievedEvent;
+import com.baeldung.common.web.events.SingleResourceRetrievedEvent;
+import com.baeldung.common.web.exception.MyResourceNotFoundException;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,17 +24,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.baeldung.common.interfaces.IWithName;
-import com.baeldung.common.persistence.service.IRawService;
-import com.baeldung.common.util.QueryConstants;
-import com.baeldung.common.web.RestPreconditions;
-import com.baeldung.common.web.WebConstants;
-import com.baeldung.common.web.events.MultipleResourcesRetrievedEvent;
-import com.baeldung.common.web.events.PaginatedResultsRetrievedEvent;
-import com.baeldung.common.web.events.SingleResourceRetrievedEvent;
-import com.baeldung.common.web.exception.MyResourceNotFoundException;
-import com.google.common.base.Preconditions;
-import com.google.common.collect.Lists;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 public abstract class AbstractReadOnlyController<T extends IWithName> {
     protected final Logger logger = LoggerFactory.getLogger(getClass());

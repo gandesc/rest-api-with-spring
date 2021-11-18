@@ -1,13 +1,11 @@
 package com.baeldung.common.web.events;
 
-import java.io.Serializable;
-
-import javax.servlet.http.HttpServletResponse;
-
+import com.google.common.base.Preconditions;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.google.common.base.Preconditions;
+import javax.servlet.http.HttpServletResponse;
+import java.io.Serializable;
 
 /**
  * Event that is fired when a resource was created.

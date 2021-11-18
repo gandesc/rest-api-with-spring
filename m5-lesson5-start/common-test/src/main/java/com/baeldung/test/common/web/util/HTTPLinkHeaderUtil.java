@@ -1,9 +1,9 @@
 package com.baeldung.test.common.web.util;
 
-import java.util.List;
-
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
+
+import java.util.List;
 
 public final class HTTPLinkHeaderUtil {
 

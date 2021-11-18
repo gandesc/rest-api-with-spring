@@ -1,8 +1,8 @@
 package com.baeldung.common.persistence.model;
 
-import java.io.Serializable;
-
 import com.baeldung.common.interfaces.IWithId;
+
+import java.io.Serializable;
 
 public interface IEntity extends IWithId, Serializable {
 

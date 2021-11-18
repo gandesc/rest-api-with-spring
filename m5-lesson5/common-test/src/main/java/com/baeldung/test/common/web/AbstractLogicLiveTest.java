@@ -1,23 +1,5 @@
 package com.baeldung.test.common.web;
 
-import static com.baeldung.common.spring.util.Profiles.CLIENT;
-import static com.baeldung.common.spring.util.Profiles.TEST;
-import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
-import static org.apache.commons.lang3.RandomStringUtils.randomAlphanumeric;
-import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
-import org.apache.http.HttpHeaders;
-import org.hamcrest.core.StringContains;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
-
 import com.baeldung.client.IDtoOperations;
 import com.baeldung.client.marshall.IMarshaller;
 import com.baeldung.common.interfaces.INameableDto;
@@ -27,6 +9,21 @@ import com.baeldung.test.common.util.IDUtil;
 import com.google.common.base.Preconditions;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.apache.http.HttpHeaders;
+import org.hamcrest.core.StringContains;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
+
+import static com.baeldung.common.spring.util.Profiles.CLIENT;
+import static com.baeldung.common.spring.util.Profiles.TEST;
+import static org.apache.commons.lang3.RandomStringUtils.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @ActiveProfiles({ CLIENT, TEST })
 public abstract class AbstractLogicLiveTest<T extends INameableDto> {

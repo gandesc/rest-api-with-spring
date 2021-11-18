@@ -1,13 +1,12 @@
 package com.baeldung.common.web.controller;
 
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.util.UriComponentsBuilder;
-
 import com.baeldung.common.persistence.model.INameableEntity;
 import com.baeldung.common.web.RestPreconditions;
 import com.baeldung.common.web.events.AfterResourceCreatedEvent;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import javax.servlet.http.HttpServletResponse;
 
 public abstract class AbstractController<T extends INameableEntity> extends AbstractReadOnlyController<T> {
 

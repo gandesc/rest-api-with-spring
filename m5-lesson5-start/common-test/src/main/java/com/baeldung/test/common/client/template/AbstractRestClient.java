@@ -1,13 +1,5 @@
 package com.baeldung.test.common.client.template;
 
-import java.util.List;
-
-import org.apache.commons.lang3.tuple.Pair;
-import org.apache.http.HttpHeaders;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.baeldung.client.marshall.IMarshaller;
 import com.baeldung.common.interfaces.IDto;
 import com.baeldung.common.util.QueryConstants;
@@ -17,6 +9,13 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.apache.commons.lang3.tuple.Pair;
+import org.apache.http.HttpHeaders;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 public abstract class AbstractRestClient<T extends IDto> implements IRestClient<T> {
     protected final Logger logger = LoggerFactory.getLogger(getClass());

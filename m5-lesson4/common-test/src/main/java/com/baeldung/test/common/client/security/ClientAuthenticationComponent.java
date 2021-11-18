@@ -1,10 +1,9 @@
 package com.baeldung.test.common.client.security;
 
-import org.springframework.stereotype.Component;
-
 import com.google.common.base.Preconditions;
 import io.restassured.RestAssured;
 import io.restassured.specification.RequestSpecification;
+import org.springframework.stereotype.Component;
 
 @Component
 public class ClientAuthenticationComponent implements ITestAuthenticator {

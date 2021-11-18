@@ -1,14 +1,15 @@
 package com.baeldung.um.web.role;
 
-import static com.baeldung.common.spring.util.Profiles.CLIENT;
-import static com.baeldung.common.spring.util.Profiles.TEST;
-import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.MatcherAssert.assertThat;
-
-import java.util.List;
-
+import com.baeldung.um.persistence.model.Role;
+import com.baeldung.um.spring.CommonTestConfig;
+import com.baeldung.um.spring.UmClientConfig;
+import com.baeldung.um.spring.UmLiveTestConfig;
+import com.baeldung.um.util.Um;
+import com.google.common.collect.Sets;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,17 +18,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import com.baeldung.um.persistence.model.Role;
-import com.baeldung.um.spring.CommonTestConfig;
-import com.baeldung.um.spring.UmClientConfig;
-import com.baeldung.um.spring.UmLiveTestConfig;
-import com.baeldung.um.util.Um;
-import com.google.common.collect.Sets;
+import java.util.List;
 
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
+import static com.baeldung.common.spring.util.Profiles.CLIENT;
+import static com.baeldung.common.spring.util.Profiles.TEST;
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 @ActiveProfiles({ CLIENT, TEST })
 @RunWith(SpringJUnit4ClassRunner.class)

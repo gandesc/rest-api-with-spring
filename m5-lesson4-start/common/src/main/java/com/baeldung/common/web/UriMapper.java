@@ -1,8 +1,7 @@
 package com.baeldung.common.web;
 
-import org.springframework.stereotype.Component;
-
 import com.baeldung.common.interfaces.IDto;
+import org.springframework.stereotype.Component;
 
 @Component
 public class UriMapper implements IUriMapper {

@@ -1,21 +1,20 @@
 package com.baeldung.um.service.main;
 
-import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.MatcherAssert.assertThat;
-
+import com.baeldung.common.persistence.service.IService;
+import com.baeldung.um.persistence.model.Privilege;
+import com.baeldung.um.persistence.model.Role;
+import com.baeldung.um.service.IPrivilegeService;
+import com.baeldung.um.service.IRoleService;
+import com.baeldung.um.service.IUserService;
+import com.google.common.collect.Sets;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 
-import com.baeldung.common.persistence.service.IService;
-import com.baeldung.um.persistence.model.Privilege;
-import com.baeldung.um.persistence.model.Role;
-import com.baeldung.um.service.IUserService;
-import com.baeldung.um.service.IPrivilegeService;
-import com.baeldung.um.service.IRoleService;
-import com.google.common.collect.Sets;
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasItem;
 
 public class RoleServiceIntegrationTest extends SecServiceIntegrationTest<Role> {
 

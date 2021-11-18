@@ -1,11 +1,11 @@
 package com.baeldung.client.util;
 
+import org.springframework.web.util.UriTemplate;
+
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-
-import org.springframework.web.util.UriTemplate;
 
 public final class UriUtil {
 

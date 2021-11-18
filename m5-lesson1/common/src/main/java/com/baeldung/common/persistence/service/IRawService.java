@@ -1,9 +1,8 @@
 package com.baeldung.common.persistence.service;
 
-import org.springframework.data.domain.Page;
-
 import com.baeldung.common.interfaces.IOperations;
 import com.baeldung.common.interfaces.IWithName;
+import org.springframework.data.domain.Page;
 
 public interface IRawService<T extends IWithName> extends IOperations<T> {
 

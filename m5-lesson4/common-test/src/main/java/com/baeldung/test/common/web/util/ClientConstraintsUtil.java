@@ -1,10 +1,9 @@
 package com.baeldung.test.common.web.util;
 
-import org.apache.commons.lang3.tuple.ImmutableTriple;
-import org.apache.commons.lang3.tuple.Triple;
-
 import com.baeldung.common.search.ClientOperation;
 import com.baeldung.common.util.SearchField;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
+import org.apache.commons.lang3.tuple.Triple;
 
 public class ClientConstraintsUtil {
 

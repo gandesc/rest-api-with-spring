@@ -1,12 +1,11 @@
 package com.baeldung.client.template;
 
-import org.apache.commons.lang3.tuple.Pair;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-
 import com.baeldung.client.marshall.IMarshaller;
 import com.baeldung.client.util.HeaderUtil;
 import com.google.common.base.Preconditions;
+import org.apache.commons.lang3.tuple.Pair;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 
 public abstract class AbstractBaseClientRestTemplate {
 

@@ -1,10 +1,10 @@
 package com.baeldung.common.web;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import static org.junit.Assert.assertTrue;
 
 public class URIParsingUnitTest {
 

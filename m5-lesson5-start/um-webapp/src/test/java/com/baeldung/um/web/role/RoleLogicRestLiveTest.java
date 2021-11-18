@@ -1,19 +1,5 @@
 package com.baeldung.um.web.role;
 
-import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.hamcrest.MatcherAssert.assertThat;
-
-import org.hamcrest.Matchers;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.baeldung.client.IDtoOperations;
 import com.baeldung.test.common.test.contract.IResourceWithAssociationsIntegrationTest;
 import com.baeldung.um.client.template.PrivilegeRestClient;
@@ -25,6 +11,17 @@ import com.baeldung.um.persistence.model.Role;
 import com.baeldung.um.test.live.UmLogicRestLiveTest;
 import com.google.common.collect.Sets;
 import io.restassured.response.Response;
+import org.hamcrest.Matchers;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class RoleLogicRestLiveTest extends UmLogicRestLiveTest<Role> implements IResourceWithAssociationsIntegrationTest {
 

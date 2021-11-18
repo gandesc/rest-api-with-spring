@@ -1,8 +1,8 @@
 package com.baeldung.client.template;
 
-import java.util.List;
-
 import com.baeldung.common.interfaces.IDto;
+
+import java.util.List;
 
 public interface IReadOnlyTemplateWithUri<T extends IDto> {
 

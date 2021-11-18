@@ -1,15 +1,5 @@
 package com.baeldung.um.client.template;
 
-import java.util.List;
-
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-import org.apache.http.HttpHeaders;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Component;
-
 import com.baeldung.client.marshall.IMarshaller;
 import com.baeldung.common.spring.util.Profiles;
 import com.baeldung.common.util.QueryConstants;
@@ -22,6 +12,15 @@ import com.google.common.collect.Lists;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+import org.apache.http.HttpHeaders;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 @Profile(Profiles.CLIENT)

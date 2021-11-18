@@ -1,16 +1,15 @@
 package com.baeldung.um.service.main;
 
-import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
-
+import com.baeldung.common.persistence.service.IService;
+import com.baeldung.um.persistence.model.Role;
+import com.baeldung.um.persistence.model.User;
+import com.baeldung.um.service.IUserService;
+import com.google.common.collect.Sets;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 
-import com.baeldung.common.persistence.service.IService;
-import com.baeldung.um.persistence.model.User;
-import com.baeldung.um.persistence.model.Role;
-import com.baeldung.um.service.IUserService;
-import com.google.common.collect.Sets;
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
 public class UserServiceIntegrationTest extends SecServiceIntegrationTest<User> {
 

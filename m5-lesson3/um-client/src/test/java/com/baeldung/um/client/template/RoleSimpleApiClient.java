@@ -1,7 +1,13 @@
 package com.baeldung.um.client.template;
 
-import java.util.List;
-
+import com.baeldung.common.spring.util.Profiles;
+import com.baeldung.um.client.UmPaths;
+import com.baeldung.um.persistence.model.Role;
+import com.baeldung.um.util.Um;
+import com.google.common.base.Preconditions;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.http.HttpHeaders;
@@ -10,15 +16,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
-import com.baeldung.common.spring.util.Profiles;
-import com.baeldung.um.client.UmPaths;
-import com.baeldung.um.persistence.model.Role;
-import com.baeldung.um.util.Um;
-import io.restassured.RestAssured;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
-
-import com.google.common.base.Preconditions;
+import java.util.List;
 
 @Component
 @Profile(Profiles.CLIENT)

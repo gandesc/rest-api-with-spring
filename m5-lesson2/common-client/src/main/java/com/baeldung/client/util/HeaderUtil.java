@@ -1,9 +1,8 @@
 package com.baeldung.client.util;
 
-import org.springframework.http.HttpHeaders;
-
 import com.baeldung.client.marshall.IMarshaller;
 import com.baeldung.common.security.SpringSecurityUtil;
+import org.springframework.http.HttpHeaders;
 
 public final class HeaderUtil {
 

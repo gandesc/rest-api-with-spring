@@ -1,18 +1,17 @@
 package com.baeldung.common.web.listeners;
 
-import static com.baeldung.common.web.WebConstants.PATH_SEP;
-
-import javax.servlet.http.HttpServletResponse;
-
+import com.baeldung.common.web.IUriMapper;
+import com.baeldung.common.web.events.AfterResourceCreatedEvent;
+import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.baeldung.common.web.IUriMapper;
-import com.baeldung.common.web.events.AfterResourceCreatedEvent;
-import com.google.common.base.Preconditions;
+import javax.servlet.http.HttpServletResponse;
+
+import static com.baeldung.common.web.WebConstants.PATH_SEP;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 @Component
