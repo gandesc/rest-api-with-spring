@@ -39,9 +39,7 @@ public class RootController {
 
     @SuppressWarnings("unused")
     private void rootInternal(final UriComponentsBuilder uriBuilder, final HttpServletResponse response) {
-        final String userUriNew = uriBuilder.path("/" + UmMappings.USERS)
-            .build()
-            .toUriString();
+        final String userUriNew = uriBuilder.path("/" + UmMappings.USERS).build().toUriString();
 
         final String userUri = LinkUtil.createLinkHeader(WebConstants.PATH_SEP + UmMappings.USERS, LinkUtil.REL_COLLECTION);
         final String roleUri = LinkUtil.createLinkHeader(WebConstants.PATH_SEP + UmMappings.ROLES, LinkUtil.REL_COLLECTION);

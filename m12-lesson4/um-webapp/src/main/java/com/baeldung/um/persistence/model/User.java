@@ -13,6 +13,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import com.baeldung.common.interfaces.INameableDto;
 import com.baeldung.common.persistence.model.INameableEntity;
 
@@ -23,10 +25,7 @@ import lombok.ToString;
 
 @Entity
 @XmlRootElement
-@Getter
-@Setter
-@EqualsAndHashCode(of = "name")
-@ToString(of = { "id", "name" })
+@Getter @Setter @EqualsAndHashCode(of = "name") @ToString(of = {"id", "name"})
 public class User implements INameableEntity, INameableDto {
 
     @Id

@@ -1,11 +1,10 @@
 package com.baeldung.live;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-
 import java.util.Arrays;
 import java.util.TreeSet;
 
 import org.hamcrest.Matchers;
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.baeldung.common.util.RandomStringUtils;
@@ -22,45 +21,33 @@ public class LiveTest {
     @Test
     public void whenUserIsCreatedWithInvalidAlternativeEmailAddresses_then400BadRequest() {
         User user = userWithInvalidEmailAddresses();
-        final Response response = RestAssured.given()
-            .contentType(ContentType.JSON)
-            .body(user)
-            .post(URI);
+        final Response response = RestAssured.given().contentType(ContentType.JSON).body(user).post(URI);
 
-        assertThat(response.getStatusCode(), Matchers.equalTo(400));
+        Assert.assertThat(response.getStatusCode(), Matchers.equalTo(400));
     }
 
     @Test
     public void whenUserIsCreatedWithValidAlternativeEmailAddresses_then201Created() {
         User user = userWithValidEmailAddresses();
-        final Response response = RestAssured.given()
-            .contentType(ContentType.JSON)
-            .body(user)
-            .post(URI);
+        final Response response = RestAssured.given().contentType(ContentType.JSON).body(user).post(URI);
 
-        assertThat(response.getStatusCode(), Matchers.equalTo(201));
+        Assert.assertThat(response.getStatusCode(), Matchers.equalTo(201));
     }
 
     @Test
     public void whenUserIsCreatedWithInvalidAge_then400BadRequest() {
         User user = userWithInvalidAge();
-        final Response response = RestAssured.given()
-            .contentType(ContentType.JSON)
-            .body(user)
-            .post(URI);
+        final Response response = RestAssured.given().contentType(ContentType.JSON).body(user).post(URI);
 
-        assertThat(response.getStatusCode(), Matchers.equalTo(400));
+        Assert.assertThat(response.getStatusCode(), Matchers.equalTo(400));
     }
 
     @Test
     public void whenUserIsCreatedWithValidAge_then201Created() {
         User user = userWithValidAge();
-        final Response response = RestAssured.given()
-            .contentType(ContentType.JSON)
-            .body(user)
-            .post(URI);
+        final Response response = RestAssured.given().contentType(ContentType.JSON).body(user).post(URI);
 
-        assertThat(response.getStatusCode(), Matchers.equalTo(201));
+        Assert.assertThat(response.getStatusCode(), Matchers.equalTo(201));
     }
 
     private User userWithInvalidEmailAddresses() {

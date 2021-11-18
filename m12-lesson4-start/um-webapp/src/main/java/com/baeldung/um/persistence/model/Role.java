@@ -23,10 +23,7 @@ import lombok.ToString;
 
 @Entity
 @XmlRootElement
-@Getter
-@Setter
-@EqualsAndHashCode(of = "name")
-@ToString(exclude = { "privileges" })
+@Getter @Setter @EqualsAndHashCode(of = "name") @ToString(exclude = {"privileges"})
 public class Role implements INameableEntity, INameableDto {
 
     @Id

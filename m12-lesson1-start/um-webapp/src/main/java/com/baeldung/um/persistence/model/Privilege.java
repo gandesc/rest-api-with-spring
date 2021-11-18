@@ -19,8 +19,7 @@ import lombok.ToString;
 @XmlRootElement
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(of = "name")
-@ToString(exclude = "id")
+@EqualsAndHashCode(of = "name") @ToString(exclude = "id")
 public class Privilege implements INameableEntity, INameableDto {
 
     @Id
@@ -32,7 +31,7 @@ public class Privilege implements INameableEntity, INameableDto {
     private String name;
 
     @Column(unique = false, nullable = true)
-    private String description;
+    private String description;    
 
     public Privilege(final String nameToSet) {
         super();

@@ -39,10 +39,9 @@ public class RedirectController {
     // util
 
     private final ResponseEntity<Void> singularToPlural(final HttpServletRequest request) {
-        final String correctUri = request.getRequestURL()
-            .toString() + "s";
+        final String correctUri = request.getRequestURL().toString() + "s";
         final HttpHeaders responseHeaders = new org.springframework.http.HttpHeaders();
-        responseHeaders.add(HttpHeaders.LOCATION, correctUri);
+        responseHeaders.add(org.apache.http.HttpHeaders.LOCATION, correctUri);
 
         final ResponseEntity<Void> redirectResponse = new ResponseEntity<>(responseHeaders, HttpStatus.MOVED_PERMANENTLY);
         return redirectResponse;

@@ -15,14 +15,11 @@ public class User implements INameableEntity, INameableDto {
     @Column(name = "USER_ID")
     private Long id;
 
-    @Column(unique = true, nullable = false)
-    private String name;
+    @Column(unique = true, nullable = false) private String name;
 
-    @Column(nullable = false)
-    private String password;
+    @Column(nullable = false) private String password;
 
-    @Column( /* nullable = false */)
-    private Boolean locked;
+    @Column( /* nullable = false */) private Boolean locked;
 
     // @formatter:off
     @ManyToMany( /* cascade = { CascadeType.REMOVE }, */fetch = FetchType.EAGER)
@@ -102,26 +99,22 @@ public class User implements INameableEntity, INameableDto {
 
     @Override
     public boolean equals(final Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
         final User other = (User) obj;
         if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.name))
-            return false;
+            if (other.name != null) return false;
+        } else if (!name.equals(other.name)) return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("id", id)
-            .append("name", name)
-            .toString();
+        return new ToStringBuilder(this)
+          .append("id", id)
+          .append("name", name)
+          .toString();
     }
 
 }

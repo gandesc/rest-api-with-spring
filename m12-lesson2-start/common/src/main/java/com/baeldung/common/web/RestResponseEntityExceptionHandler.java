@@ -1,7 +1,10 @@
 package com.baeldung.common.web;
 
 import com.baeldung.common.persistence.exception.MyEntityNotFoundException;
-import com.baeldung.common.web.exception.*;
+import com.baeldung.common.web.exception.ApiError;
+import com.baeldung.common.web.exception.MyConflictException;
+import com.baeldung.common.web.exception.MyResourceNotFoundException;
+import com.baeldung.common.web.exception.ValidationErrorDTO;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
@@ -50,7 +53,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         return handleExceptionInternal(ex, dto, headers, HttpStatus.BAD_REQUEST, request);
     }
 
-    @ExceptionHandler(value = { ConstraintViolationException.class, DataIntegrityViolationException.class, MyBadRequestException.class })
+    @ExceptionHandler(value = { ConstraintViolationException.class, DataIntegrityViolationException.class })
     protected final ResponseEntity<Object> handleBadRequest(final RuntimeException ex, final WebRequest request) {
         logger.info("Bad Request: " + ex.getLocalizedMessage());
         logger.debug("Bad Request: ", ex);
@@ -125,10 +128,12 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     }
 
     private ApiError message(final HttpStatus httpStatus, final Exception ex) {
-        final String message = ex.getMessage() == null ? ex.getClass()
-            .getSimpleName() : ex.getMessage();
-        final String devMessage = ex.getClass()
-            .getSimpleName();
+        final String message = ex.getMessage() == null ? ex
+          .getClass()
+          .getSimpleName() : ex.getMessage();
+        final String devMessage = ex
+          .getClass()
+          .getSimpleName();
         // devMessage = ExceptionUtils.getStackTrace(ex);
 
         return new ApiError(httpStatus.value(), message, devMessage);

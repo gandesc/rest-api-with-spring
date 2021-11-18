@@ -13,8 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class PrivilegeServiceImpl extends AbstractService<Privilege> implements IPrivilegeService {
 
-    @Autowired
-    private IPrivilegeJpaDao dao;
+    @Autowired private IPrivilegeJpaDao dao;
 
     public PrivilegeServiceImpl() {
         super();

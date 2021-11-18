@@ -49,7 +49,7 @@ public class UserController extends AbstractController<User, User> implements IS
     @ResponseBody
     @Secured(Privileges.CAN_USER_READ)
     public List<User> findAllPaginatedAndSorted(@RequestParam(value = QueryConstants.PAGE) final int page, @RequestParam(value = QueryConstants.SIZE) final int size, @RequestParam(value = QueryConstants.SORT_BY) final String sortBy,
-        @RequestParam(value = QueryConstants.SORT_ORDER) final String sortOrder, final UriComponentsBuilder uriBuilder, final HttpServletResponse response) {
+            @RequestParam(value = QueryConstants.SORT_ORDER) final String sortOrder, final UriComponentsBuilder uriBuilder, final HttpServletResponse response) {
         return findPaginatedAndSortedInternal(page, size, sortBy, sortOrder, uriBuilder, response);
     }
 
@@ -135,8 +135,7 @@ public class UserController extends AbstractController<User, User> implements IS
         userEntity.setPassword(resource.getPassword());
         userEntity.setLocked(resource.getLocked());
         userEntity.setAlternativeEmailAddresses(new TreeSet<String>(resource.getAlternativeEmailAddresses()));
-        userEntity.setAge(resource.getAge()
-            .orElse(null));
+        userEntity.setAge(resource.getAge().orElse(null));
 
         return userEntity;
     }

@@ -5,7 +5,6 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -21,17 +20,19 @@ public class RedirectRoute {
     @Bean
     public RouterFunction<ServerResponse> routerFunction() {
 
-        return route(GET(UmMappings.Singular.PRIVILEGE), this::singularToPluralHandler).andRoute(GET(UmMappings.Singular.ROLE), this::singularToPluralHandler)
+        return
+            route(GET(UmMappings.Singular.PRIVILEGE), this::singularToPluralHandler)
+            .andRoute(GET(UmMappings.Singular.ROLE), this::singularToPluralHandler)
             .andRoute(GET(UmMappings.Singular.USER), this::singularToPluralHandler);
     }
 
     public Mono<ServerResponse> singularToPluralHandler(ServerRequest request) {
 
-        String correctUri = request.uri()
-            .toString() + "s";
+        String correctUri = request.uri().toString() + "s";
 
-        return ServerResponse.status(HttpStatus.MOVED_PERMANENTLY)
-            .header(HttpHeaders.LOCATION, correctUri)
+        return ServerResponse
+            .status(HttpStatus.MOVED_PERMANENTLY)
+            .header(org.apache.http.HttpHeaders.LOCATION, correctUri)
             .build();
     }
 }

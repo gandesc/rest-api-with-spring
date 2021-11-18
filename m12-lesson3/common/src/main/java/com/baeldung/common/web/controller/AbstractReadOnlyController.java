@@ -30,8 +30,9 @@ public abstract class AbstractReadOnlyController<T extends IEntity> {
     // find - all
 
     protected final List<T> findAllInternal(final HttpServletRequest request) {
-        if (request.getParameterNames()
-            .hasMoreElements()) {
+        if (request
+          .getParameterNames()
+          .hasMoreElements()) {
             throw new MyResourceNotFoundException();
         }
 

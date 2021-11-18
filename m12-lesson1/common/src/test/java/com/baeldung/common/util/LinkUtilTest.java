@@ -3,7 +3,7 @@ package com.baeldung.common.util;
 import static com.baeldung.common.util.RandomStringUtils.randomAlphabetic;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertNotNull;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 

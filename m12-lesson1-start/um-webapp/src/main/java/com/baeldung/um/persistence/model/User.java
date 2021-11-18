@@ -23,14 +23,13 @@ import lombok.ToString;
 @Entity
 @XmlRootElement
 @Data
-@EqualsAndHashCode(of = "name")
-@ToString(of = { "id", "name" })
+@EqualsAndHashCode(of = "name") @ToString(of = {"id", "name"})
 public class User implements INameableEntity, INameableDto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "USER_ID")
-    private Long id;
+    private Long id;        
 
     @Column(unique = true, nullable = false)
     private String name;
@@ -42,7 +41,7 @@ public class User implements INameableEntity, INameableDto {
     private String password;
 
     @Column( /* nullable = false */)
-    private Boolean locked;
+    private Boolean locked;        
 
     // @formatter:off
     @ManyToMany( /* cascade = { CascadeType.REMOVE }, */fetch = FetchType.EAGER)

@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.PositiveOrZero;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.baeldung.common.interfaces.INameableDto;
@@ -25,8 +26,7 @@ import lombok.ToString;
 @Entity
 @XmlRootElement
 @Data
-@EqualsAndHashCode(of = "name")
-@ToString(of = { "id", "name" })
+@EqualsAndHashCode(of = "name") @ToString(of = {"id", "name"})
 public class User implements INameableEntity, INameableDto {
 
     @Id
@@ -55,6 +55,7 @@ public class User implements INameableEntity, INameableDto {
     @PastOrPresent    
     private Date dateOfBirth;*/
 
+    @PositiveOrZero
     @Column
     private Long age;
 

@@ -11,8 +11,8 @@ import com.baeldung.um.persistence.model.Role;
 
 public interface IRoleJpaDao extends JpaRepository<Role, Long>, JpaSpecificationExecutor<Role>, IByNameApi<Role> {
 
-    Optional<Role> findRoleById(Long id);
+	Optional<Role> findRoleById(Long id);
 
-    Stream<Role> findAllByName(String name);
+	Stream<Role> findAllByName(String name);
 
 }

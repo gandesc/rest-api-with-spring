@@ -17,8 +17,7 @@ public class StartupLoggingComponent implements InitializingBean {
     private static final String ACTIVE_SPRING_PROFILE_KEY = "spring.profiles.active";
     private static final String PERSISTENCE_HOST_KEY = "jdbc.url";
     private final Logger logger = LoggerFactory.getLogger(getClass());
-    @Autowired
-    private Environment env;
+    @Autowired private Environment env;
 
     public StartupLoggingComponent() {
         super();

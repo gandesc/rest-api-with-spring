@@ -15,8 +15,7 @@ public class Role implements INameableEntity, INameableDto {
     @Column(name = "ROLE_ID")
     private Long id;
 
-    @Column(unique = true, nullable = false)
-    private String name;
+    @Column(unique = true, nullable = false) private String name;
 
     // @formatter:off
     @ManyToMany(fetch = FetchType.EAGER)
@@ -80,23 +79,20 @@ public class Role implements INameableEntity, INameableDto {
 
     @Override
     public boolean equals(final Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
         final Role other = (Role) obj;
         if (name == null) {
             return other.name == null;
-        } else
-            return name.equals(other.name);
+        } else return name.equals(other.name);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("id", id)
-            .append("name", name)
-            .toString();
+        return new ToStringBuilder(this)
+          .append("id", id)
+          .append("name", name)
+          .toString();
     }
 }

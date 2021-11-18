@@ -15,8 +15,7 @@ import lombok.ToString;
 
 @XmlRootElement
 @Data
-@EqualsAndHashCode(of = "name")
-@ToString(of = { "id", "name" })
+@EqualsAndHashCode(of = "name") @ToString(of = {"id", "name"})
 public class UserDTO {
 
     private Long id;

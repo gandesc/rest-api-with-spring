@@ -29,7 +29,7 @@ public class MyApplicationContextInitializer implements ApplicationContextInitia
         if (activeProfiles != null) {
             environment.setActiveProfiles(activeProfiles.split(","));
         }
-
+        
         applicationContext.registerBean(IPrivilegeService.class, () -> new PrivilegeServiceImpl());
     }
 
