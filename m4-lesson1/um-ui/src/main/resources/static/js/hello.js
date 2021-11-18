@@ -12,7 +12,7 @@ angular.module('hello', [ 'ngRoute' ]).config(function($routeProvider) {
     
     $http.get("http://localhost:8082/um-webapp/api/roles/1", {
         headers : headers
-    }).then(function(result) {
-        $scope.role = result.data;
+    }).success(function(data) {
+        $scope.role = data;
     })
 });

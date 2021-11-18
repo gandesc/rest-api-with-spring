@@ -28,8 +28,8 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			com.baeldung.um.spring, 
-			com.baeldung.client.spring
+			org.baeldung.um.spring, 
+			org.baeldung.client.spring
 		</param-value>
 	</context-param>
 	<context-param>
@@ -46,7 +46,7 @@
 
 	<context-param>
 		<param-name>contextInitializerClasses</param-name>
-		<param-value>com.baeldung.um.persistence.setup.MyApplicationContextInitializer</param-value>
+		<param-value>org.baeldung.um.persistence.setup.MyApplicationContextInitializer</param-value>
 	</context-param>
 
 	<servlet>

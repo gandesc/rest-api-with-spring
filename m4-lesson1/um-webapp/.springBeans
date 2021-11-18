@@ -7,7 +7,7 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>java:com.baeldung.um.run.UmApp</config>
+		<config>java:org.baeldung.um.run.UmApp</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

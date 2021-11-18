@@ -1,10 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<name>user-management-parent-l2-start</name>
+	<name>user-management-parent</name>
 	<description>REST with Spring Classes Module4-Lesson2-start</description>
 	
-	<groupId>com.baeldung</groupId>
+	<groupId>org.baeldung</groupId>
 	<artifactId>user-management-parent-m4-l2-start</artifactId>
 	<version>0.4.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.5.2</version>
+		<version>1.2.7.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
@@ -49,7 +49,9 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven-surefire-plugin.version}</version>
 					<configuration>
+						<testFailureIgnore>true</testFailureIgnore>
 						<excludes>
 							<exclude>**/*IntegrationTest.java</exclude>
 							<exclude>**/*LiveTest.java</exclude>
@@ -63,6 +65,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven-compiler-plugin.version}</version>
 					<configuration>
 						<source>1.8</source>
 						<target>1.8</target>
@@ -73,6 +76,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-resources-plugin</artifactId>
+					<version>${maven-resources-plugin.version}</version>
 				</plugin>
 
 			</plugins>
@@ -81,16 +85,71 @@
 	</build>
 
 	<properties>
-	
+
 		<!-- non-dependencies -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
-		 
+
+		<!-- Spring related -->
+		<spring.version>4.2.5.RELEASE</spring.version>
+		<spring-security.version>4.0.4.RELEASE</spring-security.version>
+		<javassist.version>3.20.0-GA</javassist.version>
+		<aspectjweaver.version>1.8.6</aspectjweaver.version>
+
+		<!-- web -->
+		<javax.servlet-api.version>3.1.0</javax.servlet-api.version>
+
+		<!-- marshalling -->
+		<jackson.version>2.7.2</jackson.version>
+		<jaxb-api.version>2.2.12</jaxb-api.version>
+
 		<!-- commons and utils -->
-		<guava.version>27.0-jre</guava.version>
-		<commons-lang3.version>3.8.1</commons-lang3.version>
+		<commons-lang3.version>3.4</commons-lang3.version>
+		<guava.version>18.0</guava.version>
+
+		<!-- UNSORTED -->
+		<commons-codec.version>1.10</commons-codec.version>
+
+		<!-- persistence -->
+		<mysql-connector-java.version>5.1.38</mysql-connector-java.version>
+		<hibernate.version>4.3.11.Final</hibernate.version>
+		<hibernate-jpamodelgen.version>4.3.11.Final</hibernate-jpamodelgen.version>
+		<commons-dbcp.version>1.4</commons-dbcp.version>
+		<querydsl.version>4.0.3</querydsl.version>
+		<spring-data-jpa.version>1.8.2.RELEASE</spring-data-jpa.version>
+
+		<h2.version>1.4.187</h2.version>
+		<hsqldb.version>2.3.3</hsqldb.version>
+
+		<validation-api.version>1.1.0.Final</validation-api.version>
+		<hibernate-validator.version>5.2.1.Final</hibernate-validator.version>
+
+		<!-- ops related -->
+		<tomcat.version>8.0.32</tomcat.version>
+
+		<!-- logging -->
+		<org.slf4j.version>1.7.12</org.slf4j.version>
+		<logback.version>1.1.3</logback.version>
+
+		<!-- testing -->
+		<org.hamcrest.version>1.3</org.hamcrest.version>
+		<junit.version>4.12</junit.version>
+		<mockito.version>1.10.19</mockito.version>
+
+		<httpcore.version>4.4.3</httpcore.version>
+		<httpclient.version>4.5.1</httpclient.version>
+
+		<rest-assured.version>2.6.0</rest-assured.version>
+
+		<!-- maven plugins -->
+		<maven-surefire-plugin.version>2.19</maven-surefire-plugin.version>
+		<maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
+		<maven-resources-plugin.version>2.7</maven-resources-plugin.version>
+		<cargo-maven2-plugin.version>1.4.16</cargo-maven2-plugin.version>
+		<maven-war-plugin.version>2.3</maven-war-plugin.version>
+
 	</properties>
-	
+
 	<modules>
 		<module>common-client</module>
 		<module>common</module>
