@@ -1,11 +1,7 @@
 package com.baeldung.common.security;
 
-import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
-
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
-import java.util.Set;
-
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Lists;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -17,8 +13,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Lists;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
+import java.util.Set;
+
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
 public final class SpringSecurityUtil {
 

@@ -1,16 +1,6 @@
 package com.baeldung.um.persistence.setup;
 
-import java.util.Set;
-
 import com.baeldung.common.spring.util.Profiles;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.annotation.Profile;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.stereotype.Component;
-
 import com.baeldung.um.persistence.model.Principal;
 import com.baeldung.um.persistence.model.Privilege;
 import com.baeldung.um.persistence.model.Role;
@@ -22,6 +12,15 @@ import com.baeldung.um.util.Um.Privileges;
 import com.baeldung.um.util.Um.Roles;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Profile;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.stereotype.Component;
+
+import java.util.Set;
 
 /**
  * This simple setup class will run during the bootstrap process of Spring and will create some setup data <br>

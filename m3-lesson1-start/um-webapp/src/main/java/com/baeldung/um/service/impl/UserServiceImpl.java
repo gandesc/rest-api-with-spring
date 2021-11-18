@@ -1,8 +1,11 @@
 package com.baeldung.um.service.impl;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
+import com.baeldung.common.web.RestPreconditions;
+import com.baeldung.um.persistence.model.Principal;
+import com.baeldung.um.service.IPrincipalService;
+import com.baeldung.um.service.IUserService;
+import com.baeldung.um.web.dto.UserDto;
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -12,12 +15,8 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.baeldung.common.persistence.ServicePreconditions;
-import com.baeldung.um.persistence.model.Principal;
-import com.baeldung.um.service.IPrincipalService;
-import com.baeldung.um.service.IUserService;
-import com.baeldung.um.web.dto.UserDto;
-import com.google.common.collect.Lists;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -91,7 +90,7 @@ public class UserServiceImpl implements IUserService {
             .stream()
             .map(this::convert)
             .collect(Collectors.toList());
-        return new PageImpl<UserDto>(userDtos, PageRequest.of(page, size, constructSort(sortBy, sortOrder)), principals.getTotalElements());
+        return new PageImpl<UserDto>(userDtos, new PageRequest(page, size, constructSort(sortBy, sortOrder)), principals.getTotalElements());
     }
 
     @Override
@@ -102,7 +101,7 @@ public class UserServiceImpl implements IUserService {
             .stream()
             .map(this::convert)
             .collect(Collectors.toList());
-        return new PageImpl<UserDto>(userDtos, PageRequest.of(page, size), principals.getTotalElements());
+        return new PageImpl<UserDto>(userDtos, new PageRequest(page, size), principals.getTotalElements());
     }
 
     @Override
@@ -125,7 +124,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public void update(final UserDto dto) {
-        final Principal principalToUpdate = ServicePreconditions.checkEntityExists(principalService.findOne(dto.getId()));
+        final Principal principalToUpdate = RestPreconditions.checkNotNull(principalService.findOne(dto.getId()));
 
         principalToUpdate.setName(dto.getName());
         principalToUpdate.setEmail(dto.getEmail());
@@ -168,9 +167,9 @@ public class UserServiceImpl implements IUserService {
     }
 
     private final Sort constructSort(final String sortBy, final String sortOrder) {
-        Sort sortInfo = Sort.unsorted();
+        Sort sortInfo = null;
         if (sortBy != null) {
-            sortInfo = Sort.by(Direction.fromString(sortOrder), sortBy);
+            sortInfo = new Sort(Direction.fromString(sortOrder), sortBy);
         }
         return sortInfo;
     }

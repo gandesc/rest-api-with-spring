@@ -1,13 +1,13 @@
 package com.baeldung.um.spring;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.filter.DelegatingFilterProxy;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Configuration
 public class UmServletConfig {

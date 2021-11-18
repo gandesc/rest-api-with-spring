@@ -1,15 +1,8 @@
 package com.baeldung.um.spring;
 
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.Configuration;
 
-// @Configuration
-@ComponentScan("com.baeldung.um.security")
-@ImportResource({ "classpath*:umSecurityConfig.xml" })
+@Configuration
 public class UmSecurityConfig {
-
-    public UmSecurityConfig() {
-        super();
-    }
 
 }

@@ -1,7 +1,8 @@
 package com.baeldung.um.common.dto;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-
+import com.baeldung.um.run.UmApp;
+import com.baeldung.um.web.dto.UserDto;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,9 +17,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.baeldung.um.run.UmApp;
-import com.baeldung.um.web.dto.UserDto;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = { UmApp.class })

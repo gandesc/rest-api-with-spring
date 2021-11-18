@@ -1,9 +1,14 @@
 package com.baeldung.um.security;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-
+import com.baeldung.um.persistence.model.Privilege;
+import com.baeldung.um.persistence.model.Role;
+import com.baeldung.um.persistence.model.User;
+import com.baeldung.um.service.IUserService;
+import com.google.common.base.Function;
+import com.google.common.base.Functions;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Sets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -12,15 +17,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import com.baeldung.um.persistence.model.User;
-import com.baeldung.um.persistence.model.Privilege;
-import com.baeldung.um.persistence.model.Role;
-import com.baeldung.um.service.IUserService;
-import com.google.common.base.Function;
-import com.google.common.base.Functions;
-import com.google.common.base.Preconditions;
-import com.google.common.collect.Collections2;
-import com.google.common.collect.Sets;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Database user authentication service.
