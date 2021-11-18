@@ -1,11 +1,9 @@
 package com.baeldung.um.service.impl;
 
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
-import java.util.Optional;
 
 import org.junit.Before;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -45,7 +43,7 @@ public class UserServiceUnitTest extends AbstractServiceUnitTest<User> {
     protected final User configureGet(final long id) {
         final User entity = new User();
         entity.setId(id);
-        when(daoMock.findById(id)).thenReturn(Optional.of(entity));
+        when(daoMock.findOne(id)).thenReturn(entity);
         return entity;
     }
 

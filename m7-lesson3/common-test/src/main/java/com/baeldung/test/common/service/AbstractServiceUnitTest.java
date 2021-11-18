@@ -3,14 +3,12 @@ package com.baeldung.test.common.service;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertSame;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.ArgumentMatchers.isA;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
-import java.util.Optional;
 
 import org.junit.Test;
 import org.springframework.context.ApplicationEventPublisher;
@@ -23,7 +21,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import com.baeldung.common.persistence.event.AfterEntityCreateEvent;
 import com.baeldung.common.persistence.event.AfterEntityUpdateEvent;
 import com.baeldung.common.persistence.event.BeforeEntityCreateEvent;
-import com.baeldung.common.persistence.model.INameableEntity;
+import com.baeldung.common.persistence.model.IEntity;
 import com.baeldung.common.persistence.service.IRawService;
 import com.baeldung.test.common.util.IDUtil;
 import com.google.common.collect.Lists;
@@ -31,7 +29,7 @@ import com.google.common.collect.Lists;
 /**
  * A base class for service layer unit tests.
  */
-public abstract class AbstractServiceUnitTest<T extends INameableEntity> {
+public abstract class AbstractServiceUnitTest<T extends IEntity> {
 
     protected ApplicationEventPublisher eventPublisher;
 
@@ -148,7 +146,7 @@ public abstract class AbstractServiceUnitTest<T extends INameableEntity> {
     @Test
     public void whenPageOfEntitiesIsRetrieved_thenResultIsCorrect() {
         // Given
-        final PageRequest pageRequest = PageRequest.of(1, 10);
+        final PageRequest pageRequest = new PageRequest(1, 10);
         final Page<T> page = new PageImpl<T>(Lists.<T> newArrayList(), pageRequest, 10L);
         when(getDAO().findAll(eq(pageRequest))).thenReturn(page);
 
@@ -198,7 +196,7 @@ public abstract class AbstractServiceUnitTest<T extends INameableEntity> {
         getApi().findOne(1l);
 
         // Then
-        verify(getDAO()).findById(1l);
+        verify(getDAO()).findOne(1l);
     }
 
     @Test
@@ -272,12 +270,12 @@ public abstract class AbstractServiceUnitTest<T extends INameableEntity> {
     protected final T givenEntityExists(final long id) {
         final T entity = createNewEntity();
         entity.setId(id);
-        when(getDAO().findById(entity.getId())).thenReturn(Optional.of(entity));
+        when(getDAO().findOne(id)).thenReturn(entity);
         return entity;
     }
 
     protected final T givenEntityExists(final T entity) {
-        when(getDAO().findById(entity.getId())).thenReturn(Optional.of(entity));
+        when(getDAO().findOne(entity.getId())).thenReturn(entity);
         return entity;
     }
 
@@ -295,7 +293,7 @@ public abstract class AbstractServiceUnitTest<T extends INameableEntity> {
         final T entity = createNewEntity();
         entity.setId(IDUtil.randomPositiveLong());
 
-        when(getDAO().findById(entity.getId())).thenReturn(Optional.of(entity));
+        when(getDAO().findOne(entity.getId())).thenReturn(entity);
         return entity;
     }
 

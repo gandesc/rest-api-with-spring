@@ -8,6 +8,8 @@ import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.apache.commons.lang3.tuple.Triple;
 
 import com.baeldung.common.search.ClientOperation;
+import com.baeldung.common.util.QueryConstants;
+import com.baeldung.common.util.SearchField;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 
@@ -73,7 +75,7 @@ public final class SearchCommonUtil {
         final ClientOperation op = determineOperation(negated, value);
         final String theKey = determineKey(negated, key);
         final String theValue = determineValue(value);
-        return new ImmutableTriple<>(theKey, op, theValue);
+        return new ImmutableTriple<String, ClientOperation, String>(theKey, op, theValue);
     }
 
     static String determineValue(final String value) {

@@ -2,7 +2,7 @@ package com.baeldung.um.service.main;
 
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertThat;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -51,8 +51,7 @@ public class RoleServiceIntegrationTest extends SecServiceIntegrationTest<Role> 
     public final void givenEntityExistsWithAssociationScenarios_whenDeletingEverything_thenNoException() {
         final Privilege existingAssociation = getAssociationService().create(new Privilege(randomAlphabetic(6)));
         final Role newResource = createNewEntity();
-        newResource.getPrivileges()
-            .add(existingAssociation);
+        newResource.getPrivileges().add(existingAssociation);
         getApi().create(newResource);
 
         userService.deleteAll();
@@ -64,13 +63,11 @@ public class RoleServiceIntegrationTest extends SecServiceIntegrationTest<Role> 
     public final void whenCreatingNewResourceWithExistingAssociations_thenNewResourceIsCorrectlyCreated() {
         final Privilege existingAssociation = getAssociationService().create(new Privilege(randomAlphabetic(6)));
         final Role newResource = createNewEntity();
-        newResource.getPrivileges()
-            .add(existingAssociation);
+        newResource.getPrivileges().add(existingAssociation);
         getApi().create(newResource);
 
         final Role newResource2 = createNewEntity();
-        newResource2.getPrivileges()
-            .add(existingAssociation);
+        newResource2.getPrivileges().add(existingAssociation);
         getApi().create(newResource2);
     }
 

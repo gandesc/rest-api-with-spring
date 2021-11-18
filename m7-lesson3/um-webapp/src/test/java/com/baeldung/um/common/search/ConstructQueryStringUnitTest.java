@@ -6,7 +6,7 @@ import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertEquals;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertThat;
 
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.apache.commons.lang3.tuple.Triple;
@@ -63,14 +63,14 @@ public final class ConstructQueryStringUnitTest {
 
     @Test
     public final void whenQueryURIConstructedFromContainsName_thenNoExceptions() {
-        final Triple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<>(SearchField.name.toString(), CONTAINS, randomAlphabetic(8));
+        final Triple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.name.toString(), CONTAINS, randomAlphabetic(8));
         SearchTestUtil.constructQueryString(null, nameConstraint);
     }
 
     @Test
     public final void whenQueryURIConstructedFromContainsName_thenQueryStringIsCorrect() {
         final String name = randomAlphabetic(8);
-        final Triple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<>(SearchField.name.toString(), CONTAINS, name);
+        final Triple<String, ClientOperation, String> nameConstraint = new ImmutableTriple<String, ClientOperation, String>(SearchField.name.toString(), CONTAINS, name);
         final String queryString = SearchTestUtil.constructQueryString(null, nameConstraint);
 
         assertEquals(SearchField.name.toString() + QueryConstants.OP + QueryConstants.ANY_CLIENT + name + QueryConstants.ANY_CLIENT, queryString);

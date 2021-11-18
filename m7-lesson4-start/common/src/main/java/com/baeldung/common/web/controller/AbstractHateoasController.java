@@ -10,19 +10,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
-import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.ResourceSupport;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.baeldung.common.persistence.model.INameableEntity;
+import com.baeldung.common.persistence.model.IEntity;
 import com.baeldung.common.persistence.service.IRawService;
 import com.baeldung.common.web.RestPreconditions;
 import com.baeldung.common.web.exception.MyResourceNotFoundException;
 
-public abstract class AbstractHateoasController<D extends RepresentationModel<D>, E extends INameableEntity> {
+public abstract class AbstractHateoasController<D extends ResourceSupport, E extends IEntity> {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
@@ -38,8 +38,7 @@ public abstract class AbstractHateoasController<D extends RepresentationModel<D>
     // find - all
 
     protected final List<D> findAllInternal(final HttpServletRequest request) {
-        if (request.getParameterNames()
-            .hasMoreElements()) {
+        if (request.getParameterNames().hasMoreElements()) {
             throw new MyResourceNotFoundException();
         }
 
@@ -124,9 +123,7 @@ public abstract class AbstractHateoasController<D extends RepresentationModel<D>
     protected abstract IRawService<E> getService();
 
     private final List<D> convertList(final List<E> entities) {
-        return entities.stream()
-            .map(this::convert)
-            .collect(Collectors.toList());
+        return entities.stream().map(this::convert).collect(Collectors.toList());
     }
 
     protected abstract D convert(final E entity);

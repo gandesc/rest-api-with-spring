@@ -29,8 +29,7 @@ public final class SearchUtilSec {
     }
 
     static boolean isConstraintNegated(final Triple<String, ClientOperation, String> constraint) {
-        return constraint.getMiddle()
-            .isNegated();
+        return constraint.getMiddle().isNegated();
     }
 
 }
