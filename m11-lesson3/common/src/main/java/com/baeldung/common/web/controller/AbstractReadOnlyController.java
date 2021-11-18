@@ -32,13 +32,11 @@ public abstract class AbstractReadOnlyController<T extends IWithName> {
     // find - all
 
     protected final Flux<T> findAllInternal(final ServerHttpRequest request) {
-        if (!request.getQueryParams()
-            .isEmpty()) {
+        if (!request.getQueryParams().isEmpty()) {
             throw new MyResourceNotFoundException();
         }
 
-        return Flux.fromStream(getService().findAll()
-            .stream());
+        return Flux.fromStream(getService().findAll().stream());
     }
 
     protected final Flux<T> findPaginatedAndSortedInternal(final int page, final int size, final String sortBy, final String sortOrder) {
@@ -47,8 +45,7 @@ public abstract class AbstractReadOnlyController<T extends IWithName> {
             throw new MyResourceNotFoundException();
         }
 
-        return Flux.fromStream(resultPage.getContent()
-            .stream());
+        return Flux.fromStream(resultPage.getContent().stream());
     }
 
     protected final Flux<T> findPaginatedInternal(final int page, final int size) {
@@ -57,8 +54,7 @@ public abstract class AbstractReadOnlyController<T extends IWithName> {
             throw new MyResourceNotFoundException();
         }
 
-        return Flux.fromStream(resultPage.getContent()
-            .stream());
+        return Flux.fromStream(resultPage.getContent().stream());
     }
 
     protected final Flux<T> findAllSortedInternal(final String sortBy, final String sortOrder) {

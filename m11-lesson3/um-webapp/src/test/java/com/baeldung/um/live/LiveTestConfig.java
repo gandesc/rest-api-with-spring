@@ -13,22 +13,17 @@ public class LiveTestConfig {
     private final static String BASE_URI = "http://localhost:8082/api";
 
     @Bean
-    WebClient webClientBuilder() {
-
-        // @formatter:off
+    public WebClient webClient() {
         return WebClient
-                .builder()
-                     .baseUrl(BASE_URI)                  
-                     .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .build();
-        // @formatter:on
-
-    }
-
-    @Bean
-    WebTestClient createWebTestclient() {
-        return WebTestClient.bindToServer()
-            .baseUrl(BASE_URI)
+            .builder()
+                 .baseUrl(BASE_URI)                  
+                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
             .build();
     }
+    
+    @Bean
+    public WebTestClient webTestClient() {
+        return WebTestClient.bindToServer().baseUrl(BASE_URI).build();
+    }
+    
 }

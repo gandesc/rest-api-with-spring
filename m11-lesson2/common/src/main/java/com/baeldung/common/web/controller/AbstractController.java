@@ -12,8 +12,7 @@ public abstract class AbstractController<T extends INameableEntity> extends Abst
     protected final Mono<Void> createInternal(final T resource) {
         RestPreconditions.checkRequestElementNotNull(resource);
         RestPreconditions.checkRequestState(resource.getId() == null);
-        return Mono.just(getService().create(resource))
-            .then();
+        return Mono.just(getService().create(resource)).then();
     }
 
     // update

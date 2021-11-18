@@ -30,15 +30,9 @@ public class RedirectController {
     // util
 
     private ResponseEntity<Void> singularToPlural(ServerHttpRequest request) {
-        String correctUri = request.getPath()
-            .contextPath()
-            .value()
-            + request.getPath()
-                .pathWithinApplication()
-                .value()
-            + "s";
+        String correctUri = request.getPath().contextPath().value() + request.getPath().pathWithinApplication().value() + "s";
         HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.add(HttpHeaders.LOCATION, correctUri);
+        responseHeaders.add(org.apache.http.HttpHeaders.LOCATION, correctUri);
 
         return new ResponseEntity<>(responseHeaders, HttpStatus.MOVED_PERMANENTLY);
     }
