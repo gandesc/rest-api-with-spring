@@ -130,7 +130,7 @@
         <!-- this is the highest version with which there are no failing tests.
         It has to do with serialisation, and it might work well if one replaces yasson 
         with johnzon, but the lesson uses yasson explicitly -->
-        <org.springframework.version>5.0.4.RELEASE</org.springframework.version>                                
+        <org.springframework.version>5.3.13</org.springframework.version>                                
 
         <!-- logging -->
         <slf4j.version>1.7.25</slf4j.version>

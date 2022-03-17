@@ -71,7 +71,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
-            <version>1.18.4</version>
+            <version>1.18.22</version>
         </dependency>
 
     </dependencies>
@@ -103,7 +103,7 @@
 
         <!-- marshalling -->
         <javax.json.version>1.1.4</javax.json.version>
-        <yasson.version>1.0.2</yasson.version>
+        <yasson.version>1.0.9</yasson.version>
     </properties>
 
 </project>
