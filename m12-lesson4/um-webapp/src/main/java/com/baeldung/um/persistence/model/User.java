@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.baeldung.common.interfaces.INameableDto;
@@ -27,6 +28,7 @@ import lombok.ToString;
 @Setter
 @EqualsAndHashCode(of = "name")
 @ToString(of = { "id", "name" })
+@Table(name="\"user\"")
 public class User implements INameableEntity, INameableDto {
 
     @Id

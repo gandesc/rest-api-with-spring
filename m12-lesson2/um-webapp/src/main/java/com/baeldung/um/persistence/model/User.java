@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Table(name="\"user\"")
 public class User implements INameableEntity, INameableDto {
 
     @Id
