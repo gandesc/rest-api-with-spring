@@ -29,11 +29,6 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
     // 400
 
-    @ExceptionHandler(value = {DataIntegrityViolationException.class, MyBadRequestException.class})
-    public final ResponseEntity<Object> handleBadRequest(final RuntimeException ex, final WebRequest request) {
-        return handleExceptionInternal(ex, message(HttpStatus.BAD_REQUEST, ex), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
-    }
-
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         return handleExceptionInternal(ex, message(HttpStatus.BAD_REQUEST, ex), headers, HttpStatus.BAD_REQUEST, request);
@@ -42,6 +37,11 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         return handleExceptionInternal(ex, message(HttpStatus.BAD_REQUEST, ex), headers, HttpStatus.BAD_REQUEST, request);
+    }
+
+    @ExceptionHandler(value = {DataIntegrityViolationException.class, MyBadRequestException.class})
+    protected final ResponseEntity<Object> handleBadRequest(final RuntimeException ex, final WebRequest request) {
+        return handleExceptionInternal(ex, message(HttpStatus.BAD_REQUEST, ex), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
     private ApiError message(final HttpStatus status, final Exception ex) {
