@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.baeldung.common.interfaces.INameableDto;
 import com.baeldung.common.persistence.model.INameableEntity;
@@ -23,6 +25,8 @@ public class Privilege implements INameableEntity, INameableDto {
     private Long id;
 
     @Column(unique = true, nullable = false)
+    @NotNull
+    @Size(min = 2, max = 30)
     private String name;
 
     @Column(unique = false, nullable = false)
