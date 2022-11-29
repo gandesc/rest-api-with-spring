@@ -40,12 +40,18 @@ public final class RoleSimpleApiClient {
         return read(getUri() + "/" + id);
     }
 
-    public List<Role> findAll() {
-        return read(getUri()).as(List.class);
+    public final List<Role> findAll() {
+        return findAllAsResponse().as(List.class);
+    }
+
+    public Response findAllAsResponse() {
+        return read(getUri());
     }
 
     public Response createAsResponse(final Role role) {
-        return givenAuthenticated().contentType(JSON).body(role).post(getUri() + "/" + role.getId());
+        return givenAuthenticated().contentType(JSON)
+                .body(role)
+                .post(getUri());
     }
 
     public Role create(final Role role) {
@@ -56,7 +62,9 @@ public final class RoleSimpleApiClient {
     }
 
     public Response updateAsResponse(final Role role) {
-        return givenAuthenticated().contentType(JSON).body(role).put(getUri() + "/" + role.getId());
+        return givenAuthenticated().contentType(JSON)
+                .body(role)
+                .put(getUri() + "/" + role.getId());
     }
 
     public Role update(final Role role) {
@@ -65,14 +73,15 @@ public final class RoleSimpleApiClient {
         return read(getUri() + "/" + role.getId()).as(Role.class);
     }
 
-    public Response deleteAsResponse(final Role role) {
-        return givenAuthenticated().delete(getUri() + "/" + role.getId());
+    public Response deleteAsResponse(final long id) {
+        return givenAuthenticated().delete(getUri() + "/" + id);
     }
 
     // UTIL
 
-    private Response read(final String uri) {
-        return givenAuthenticated().accept(JSON).get(uri);
+    public Response read(final String uri) {
+        return givenAuthenticated().accept(JSON)
+                .get(uri);
     }
 
     public final String getUri() {
