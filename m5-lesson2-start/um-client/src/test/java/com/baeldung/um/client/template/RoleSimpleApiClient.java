@@ -29,18 +29,18 @@ public final class RoleSimpleApiClient {
 
     // API
 
-    public final Role findOne(final long id) {
+    public Role findOne(final long id) {
         final Response response = findOneAsResponse(id);
         Preconditions.checkState(response.getStatusCode() == 200, "Find one operation didn't result in a 200 ok");
 
         return response.as(Role.class);
     }
 
-    public final Response findOneAsResponse(final long id) {
+    public Response findOneAsResponse(final long id) {
         return read(getUri() + "/" + id);
     }
 
-    public final List<Role> findAll() {
+    public List<Role> findAll() {
         return read(getUri()).as(List.class);
     }
 
