@@ -6,13 +6,13 @@ import com.baeldung.um.persistence.model.Role;
 import com.baeldung.um.util.Um;
 import com.google.common.base.Preconditions;
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
@@ -42,6 +42,31 @@ public final class RoleSimpleApiClient {
 
     public final List<Role> findAll() {
         return read(getUri()).as(List.class);
+    }
+
+    public Response createAsResponse(final Role role) {
+        return givenAuthenticated().contentType(JSON).body(role).post(getUri() + "/" + role.getId());
+    }
+
+    public Role create(final Role role) {
+        Response response = createAsResponse(role);
+        final String location = response.getHeader(HttpHeaders.LOCATION);
+
+        return read(location).as(Role.class);
+    }
+
+    public Response updateAsResponse(final Role role) {
+        return givenAuthenticated().contentType(JSON).body(role).put(getUri() + "/" + role.getId());
+    }
+
+    public Role update(final Role role) {
+        updateAsResponse(role);
+
+        return read(getUri() + "/" + role.getId()).as(Role.class);
+    }
+
+    public Response deleteAsResponse(final Role role) {
+        return givenAuthenticated().delete(getUri() + "/" + role.getId());
     }
 
     // UTIL
