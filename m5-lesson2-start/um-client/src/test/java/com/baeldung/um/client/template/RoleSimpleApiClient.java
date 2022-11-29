@@ -31,7 +31,7 @@ public final class RoleSimpleApiClient {
 
     public final Role findOne(final long id) {
         final Response response = findOneAsResponse(id);
-        Preconditions.checkState(response.getStatusCode() == 200, "Find one operation didn't result in a 200 ok")
+        Preconditions.checkState(response.getStatusCode() == 200, "Find one operation didn't result in a 200 ok");
 
         return response.as(Role.class);
     }
