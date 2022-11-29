@@ -8,7 +8,15 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.common.io.CharStreams;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,8 +61,14 @@ public class RoleContractLiveTest {
         return api;
     }
 
-    private final Role createNewResource() {
-        return new Role(randomAlphabetic(8), Sets.<Privilege> newHashSet());
+    private String createNewResource() throws IOException {
+        final InputStream stream = getClass().getResourceAsStream("/data/role_json_01.json");
+        final JsonNode rootNode = new ObjectMapper().readTree(stream);
+
+        ((ObjectNode) rootNode).set("name", JsonNodeFactory.instance.textNode(randomAlphabetic(8)));
+        ((ObjectNode) rootNode).set("description", JsonNodeFactory.instance.textNode(randomAlphabetic(10)));
+
+        return rootNode.toString();
     }
 
 }
