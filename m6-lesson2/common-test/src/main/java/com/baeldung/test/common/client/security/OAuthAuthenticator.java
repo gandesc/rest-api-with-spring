@@ -49,6 +49,7 @@ public class OAuthAuthenticator implements ITestAuthenticator {
 
     final String getAccessToken(final String username, final String password) {
         try {
+
             final URI uri = new URI(webProps.getProtocol(), null, webProps.getHost(), webProps.getPort(), webProps.getPath() + webProps.getOauthPath(), null, null);
             final String url = uri.toString();
             final String encodedCredentials = new String(Base64.encodeBase64((CLIENT_ID + ":" + CLIENT_SECRET).getBytes()));
@@ -64,11 +65,7 @@ public class OAuthAuthenticator implements ITestAuthenticator {
 
             final HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(params, headers);
 
-            final RestTemplate restTemplate = new RestTemplate();
-            restTemplate.getMessageConverters()
-                .add(new StringHttpMessageConverter());
-
-            final TokenResponse tokenResponse = restTemplate.postForObject(url, request, TokenResponse.class);
+            final TokenResponse tokenResponse = new RestTemplate().postForObject(url, request, TokenResponse.class);
             final String accessToken = tokenResponse.getAccessToken();
             return accessToken;
         } catch (final HttpClientErrorException e) {
