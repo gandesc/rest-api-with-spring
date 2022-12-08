@@ -96,4 +96,14 @@ public class RoleController extends AbstractController<Role, Role> implements IS
     protected IRoleService getService() {
         return service;
     }
+
+    @Override
+    protected Role convertToDto(Role entity) {
+        return entity;
+    }
+
+    @Override
+    protected Role convertToEntity(Role entity) {
+        return entity;
+    }
 }

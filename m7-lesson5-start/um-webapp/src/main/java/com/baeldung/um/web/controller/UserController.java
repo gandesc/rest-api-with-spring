@@ -97,4 +97,14 @@ public class UserController extends AbstractController<User, User> implements IS
         return service;
     }
 
+    @Override
+    protected User convertToDto(User entity) {
+        return entity;
+    }
+
+    @Override
+    protected User convertToEntity(User entity) {
+        return entity;
+    }
+
 }

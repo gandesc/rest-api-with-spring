@@ -40,5 +40,4 @@ public abstract class AbstractController<D extends IDto, E extends IEntity> exte
     protected final void deleteByIdInternal(final long id) {
         getService().delete(id);
     }
-
 }

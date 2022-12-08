@@ -2,6 +2,7 @@ package com.baeldung.common.web.controller;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -35,7 +36,7 @@ public abstract class AbstractReadOnlyController<D extends IDto, E extends IEnti
     // find - one
 
     protected final D findOneInternal(final Long id) {
-        return (D) RestPreconditions.checkNotNull(getService().findOne(id));
+        return this.convertToDto(RestPreconditions.checkNotNull(getService().findOne(id)));
     }
 
     // find - all
@@ -46,30 +47,31 @@ public abstract class AbstractReadOnlyController<D extends IDto, E extends IEnti
             throw new MyResourceNotFoundException();
         }
 
-        return (List<D>) getService().findAll();
+        return getService().findAll().stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
     protected final List<D> findPaginatedAndSortedInternal(final int page, final int size, final String sortBy, final String sortOrder) {
-        final Page<D> resultPage = (Page<D>) getService().findAllPaginatedAndSortedRaw(page, size, sortBy, sortOrder);
+        final Page<E> resultPage = getService().findAllPaginatedAndSortedRaw(page, size, sortBy, sortOrder);
         if (page > resultPage.getTotalPages()) {
             throw new MyResourceNotFoundException();
         }
 
-        return resultPage.getContent();
+        return resultPage.getContent().stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
     protected final List<D> findPaginatedInternal(final int page, final int size) {
-        final Page<D> resultPage = (Page<D>) getService().findAllPaginatedRaw(page, size);
+        final Page<E> resultPage = getService().findAllPaginatedRaw(page, size);
         if (page > resultPage.getTotalPages()) {
             throw new MyResourceNotFoundException();
         }
 
-        return resultPage.getContent();
+        return resultPage.getContent().stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
     protected final List<D> findAllSortedInternal(final String sortBy, final String sortOrder) {
-        final List<D> resultPage = (List<D>) getService().findAllSorted(sortBy, sortOrder);
-        return resultPage;
+        final List<E> resultPage = getService().findAllSorted(sortBy, sortOrder);
+
+        return resultPage.stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
     // count
@@ -98,5 +100,8 @@ public abstract class AbstractReadOnlyController<D extends IDto, E extends IEnti
     // template method
 
     protected abstract IRawService<E> getService();
+
+    abstract protected D convertToDto(E entity);
+    abstract protected E convertToEntity(D entity);
 
 }

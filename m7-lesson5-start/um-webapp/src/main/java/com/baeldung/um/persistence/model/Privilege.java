@@ -15,7 +15,7 @@ import com.baeldung.common.persistence.model.INameableEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Privilege implements INameableEntity, INameableDto {
+public class Privilege implements INameableEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
