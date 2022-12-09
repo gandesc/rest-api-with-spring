@@ -1,5 +1,7 @@
 package com.baeldung.um.service.impl;
 
+import io.micrometer.core.instrument.Counter;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,9 @@ public class PrivilegeServiceImpl extends AbstractService<Privilege> implements 
     @Autowired
     IPrivilegeJpaDao dao;
 
+    @Autowired
+    private Counter privilegeCounter;
+
     public PrivilegeServiceImpl() {
         super(Privilege.class);
     }
@@ -27,6 +32,8 @@ public class PrivilegeServiceImpl extends AbstractService<Privilege> implements 
 
     @Override
     public Privilege findByName(final String name) {
+        privilegeCounter.increment();
+
         return getDao().findByName(name);
     }
 
