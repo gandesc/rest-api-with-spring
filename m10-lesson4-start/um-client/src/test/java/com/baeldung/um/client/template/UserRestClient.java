@@ -35,5 +35,4 @@ public final class UserRestClient extends AbstractRestClient<UserDto> {
     public final Pair<String, String> getDefaultCredentials() {
         return new ImmutablePair<>(Um.ADMIN_EMAIL, Um.ADMIN_PASS);
     }
-
 }
