@@ -5,7 +5,12 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.*;
 
+import com.baeldung.um.service.AsyncService;
+import com.baeldung.um.util.Um;
+import io.restassured.RestAssured;
+import io.restassured.specification.RequestSpecification;
 import org.hamcrest.Matchers;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -22,6 +27,8 @@ import com.baeldung.um.test.live.UmLogicRestLiveTest;
 import com.baeldung.um.web.dto.UserDto;
 import com.google.common.collect.Sets;
 import io.restassured.response.Response;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 
 public class UserLogicRestLiveTest extends UmLogicRestLiveTest<UserDto> {
 
@@ -51,6 +58,33 @@ public class UserLogicRestLiveTest extends UmLogicRestLiveTest<UserDto> {
     }
 
     // create
+
+    @Test
+    public final void whenResourceIsCallableCreate_then201IsReceived() {
+        Response response = createRandomUser().post(getApi().getUri() + "/callable");
+
+        assertEquals(201, response.getStatusCode());
+        assertNotNull(response.jsonPath().get("name"));
+        assertTrue(response.time() > AsyncService.DELAY);
+    }
+
+    @Test
+    public final void whenResourceIsDeferredCreate_then201IsReceived() {
+        Response response = createRandomUser().post(getApi().getUri() + "/deferred");
+
+        assertEquals(201, response.getStatusCode());
+        assertNotNull(response.jsonPath().get("name"));
+        assertTrue(response.time() > AsyncService.DELAY);
+    }
+
+    @Test
+    public final void whenResourceIsAsyncCreated_then202IsReceived() {
+        Response response = createRandomUser().post(getApi().getUri() + "/async");
+
+        assertEquals(202, response.getStatusCode());
+        assertTrue(response.time() < AsyncService.DELAY);
+        assertNotNull(response.getHeader("Location"));
+    }
 
     /**
      * - note: this test ensures that a new User cannot automatically create new Privileges <br>
@@ -154,4 +188,11 @@ public class UserLogicRestLiveTest extends UmLogicRestLiveTest<UserDto> {
         return associationOps;
     }
 
+    private RequestSpecification createRandomUser() {
+        return RestAssured.given()
+                .auth()
+                .basic(Um.ADMIN_EMAIL, Um.ADMIN_PASS)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .body(getEntityOps().createNewResource());
+    }
 }

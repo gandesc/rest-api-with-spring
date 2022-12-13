@@ -7,4 +7,6 @@ public interface IUserService extends IService<UserDto> {
 
     UserDto getCurrentUser();
 
+    UserDto createSlow(final UserDto resource);
+
 }
