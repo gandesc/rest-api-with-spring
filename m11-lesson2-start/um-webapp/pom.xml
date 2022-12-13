@@ -2,7 +2,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>um-webapp-m11-l2-start</artifactId>
-    <packaging>war</packaging>
 
     <name>um-webapp-l2-start</name>
 
@@ -26,7 +25,7 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
 
         <!-- test scoped -->
