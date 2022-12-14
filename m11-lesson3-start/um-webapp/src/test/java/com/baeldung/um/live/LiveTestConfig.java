@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
@@ -19,4 +20,10 @@ public class LiveTestConfig {
                 .build();
     }
 
+    @Bean
+    public WebTestClient webTestClient() {
+        return WebTestClient.bindToServer()
+                .baseUrl(BASE_URI)
+                .build();
+    }
 }
