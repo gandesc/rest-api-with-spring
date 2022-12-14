@@ -1,11 +1,9 @@
 package com.baeldung.um.web.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +21,11 @@ import com.baeldung.common.web.controller.ISortingController;
 import com.baeldung.um.persistence.model.Privilege;
 import com.baeldung.um.service.IPrivilegeService;
 import com.baeldung.um.util.UmMappings;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+import reactor.util.function.Tuple2;
+
+import java.time.Duration;
 
 @RestController
 @RequestMapping(UmMappings.PRIVILEGES)
@@ -37,33 +40,36 @@ public class PrivilegeController extends AbstractController<Privilege> implement
 
     @Override
     @GetMapping(params = { QueryConstants.PAGE, QueryConstants.SIZE, QueryConstants.SORT_BY })
-    public List<Privilege> findAllPaginatedAndSorted(@RequestParam(value = QueryConstants.PAGE) final int page, @RequestParam(value = QueryConstants.SIZE) final int size, @RequestParam(value = QueryConstants.SORT_BY) final String sortBy,
-        @RequestParam(value = QueryConstants.SORT_ORDER) final String sortOrder) {
+    public Flux<Privilege> findAllPaginatedAndSorted(@RequestParam(value = QueryConstants.PAGE) final int page, @RequestParam(value = QueryConstants.SIZE) final int size, @RequestParam(value = QueryConstants.SORT_BY) final String sortBy,
+                                                     @RequestParam(value = QueryConstants.SORT_ORDER) final String sortOrder) {
         return findPaginatedAndSortedInternal(page, size, sortBy, sortOrder);
     }
 
     @Override
     @GetMapping(params = { QueryConstants.PAGE, QueryConstants.SIZE })
-    public List<Privilege> findAllPaginated(@RequestParam(value = QueryConstants.PAGE) final int page, @RequestParam(value = QueryConstants.SIZE) final int size) {
+    public Flux<Privilege> findAllPaginated(@RequestParam(value = QueryConstants.PAGE) final int page, @RequestParam(value = QueryConstants.SIZE) final int size) {
         return findPaginatedInternal(page, size);
     }
 
     @Override
     @GetMapping(params = { QueryConstants.SORT_BY })
-    public List<Privilege> findAllSorted(@RequestParam(value = QueryConstants.SORT_BY) final String sortBy, @RequestParam(value = QueryConstants.SORT_ORDER) final String sortOrder) {
+    public Flux<Privilege> findAllSorted(@RequestParam(value = QueryConstants.SORT_BY) final String sortBy, @RequestParam(value = QueryConstants.SORT_ORDER) final String sortOrder) {
         return findAllSortedInternal(sortBy, sortOrder);
     }
 
     @Override
-    @GetMapping
-    public List<Privilege> findAll(final HttpServletRequest request) {
-        return findAllInternal(request);
+    @GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<Privilege> findAll(final ServerHttpRequest request) {
+        Flux<Long> interval = Flux.interval(Duration.ofSeconds(5));
+        Flux<Privilege> privilege = findAllInternal(request);
+
+        return Flux.zip(interval, privilege).map(Tuple2::getT2);
     }
 
     // find - one
 
     @GetMapping("/{id}")
-    public Privilege findOne(@PathVariable("id") final Long id) {
+    public Mono<Privilege> findOne(@PathVariable("id") final Long id) {
         return findOneInternal(id);
     }
 
