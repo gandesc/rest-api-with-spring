@@ -1,17 +1,12 @@
 package com.baeldung.um.persistence.model;
 
+import java.util.Date;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.baeldung.common.interfaces.INameableDto;
@@ -45,6 +40,19 @@ public class User implements INameableEntity, INameableDto {
 
     @Column( /* nullable = false */)
     private Boolean locked;
+
+    @Column
+    @ElementCollection
+    private Set<@Email String> alternativeEmailAddresses;
+
+    @Column
+    @Temporal(TemporalType.DATE)
+    @PastOrPresent
+    private Date dateOfBirth;
+
+    @Column
+    @Positive
+    private Integer age;
 
     // @formatter:off
     @ManyToMany( /* cascade = { CascadeType.REMOVE }, */fetch = FetchType.EAGER)
