@@ -26,7 +26,7 @@ import com.baeldung.um.util.UmMappings;
 
 @RestController
 @RequestMapping(UmMappings.PRIVILEGES)
-public class PrivilegeController extends AbstractController<Privilege> implements ISortingController<Privilege> {
+public class PrivilegeControllerJava extends AbstractController<Privilege> implements ISortingController<Privilege> {
 
     @Autowired
     private IPrivilegeService service;
@@ -58,13 +58,6 @@ public class PrivilegeController extends AbstractController<Privilege> implement
     @GetMapping
     public List<Privilege> findAll(final HttpServletRequest request) {
         return findAllInternal(request);
-    }
-
-    // find - one
-
-    @GetMapping("/{id}")
-    public Privilege findOne(@PathVariable("id") final Long id) {
-        return findOneInternal(id);
     }
 
     @PostMapping
