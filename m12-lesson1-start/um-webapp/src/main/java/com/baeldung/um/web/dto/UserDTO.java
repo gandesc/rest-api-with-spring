@@ -31,7 +31,7 @@ public class UserDTO {
 
     private Set<@Email String> alternativeEmailAddresses;
 
-    private Optional<@Positive Long> age = Optional.empty();
+    private Optional<@Positive Integer> age = Optional.empty();
 
     private Set<Role> roles;
 }

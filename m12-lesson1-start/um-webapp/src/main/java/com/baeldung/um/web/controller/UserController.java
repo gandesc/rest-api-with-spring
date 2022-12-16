@@ -1,11 +1,13 @@
 package com.baeldung.um.web.controller;
 
 import java.util.List;
+import java.util.TreeSet;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import com.baeldung.um.web.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.annotation.Secured;
@@ -86,18 +88,18 @@ public class UserController extends AbstractController<User, User> implements IS
 
     // create
 
-    @RequestMapping(method = RequestMethod.POST)
+/*    @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody @Valid final User resource, final UriComponentsBuilder uriBuilder, final HttpServletResponse response) {
         createInternal(resource, uriBuilder, response);
-    }
+    }*/
 
     // create for validating Optional
-    /*@RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody @Valid final UserDTO resource, final UriComponentsBuilder uriBuilder, final HttpServletResponse response) {
         createInternal(userDtoToUser(resource), uriBuilder, response);
-    }*/
+    }
 
     // update
 
@@ -124,7 +126,7 @@ public class UserController extends AbstractController<User, User> implements IS
         return service;
     }
 
-    /*private User userDtoToUser(UserDTO resource) {
+    private User userDtoToUser(UserDTO resource) {
         User userEntity = new User();
     
         // dto to entity conversion
@@ -132,10 +134,10 @@ public class UserController extends AbstractController<User, User> implements IS
         userEntity.setEmail(resource.getEmail());
         userEntity.setPassword(resource.getPassword());
         userEntity.setLocked(resource.getLocked());
-        userEntity.setAlternativeEmailAddresses(new TreeSet<String>(resource.getAlternativeEmailAddresses()));
+        userEntity.setAlternativeEmailAddresses(new TreeSet<>(resource.getAlternativeEmailAddresses()));
         userEntity.setAge(resource.getAge().orElse(null));
     
         return userEntity;
-    }*/
+    }
 
 }
