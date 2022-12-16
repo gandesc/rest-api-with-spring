@@ -10,7 +10,6 @@ import com.baeldung.um.persistence.dao.IPrivilegeJpaDao;
 import com.baeldung.um.persistence.model.Privilege;
 import com.baeldung.um.service.IPrivilegeService;
 
-@Service
 @Transactional
 public class PrivilegeServiceImpl extends AbstractService<Privilege> implements IPrivilegeService {
 

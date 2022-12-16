@@ -1,5 +1,7 @@
 package com.baeldung.um.persistence.setup;
 
+import com.baeldung.um.service.IPrivilegeService;
+import com.baeldung.um.service.impl.PrivilegeServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContextInitializer;
@@ -26,6 +28,8 @@ public class MyApplicationContextInitializer implements ApplicationContextInitia
         if (activeProfiles != null) {
             environment.setActiveProfiles(activeProfiles.split(","));
         }
+
+        applicationContext.registerBean(IPrivilegeService.class, PrivilegeServiceImpl::new);
     }
 
 }
