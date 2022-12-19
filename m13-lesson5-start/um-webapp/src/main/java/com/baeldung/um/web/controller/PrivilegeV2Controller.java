@@ -59,13 +59,6 @@ public class PrivilegeV2Controller extends AbstractController<Privilege, Privile
         return findAllInternal(request);
     }
 
-    // find - one
-
-    @GetMapping("/{id}")
-    public Privilege findOne(@PathVariable("id") final Long id) {
-        return findOneInternal(id);
-    }
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody final Privilege resource) {
