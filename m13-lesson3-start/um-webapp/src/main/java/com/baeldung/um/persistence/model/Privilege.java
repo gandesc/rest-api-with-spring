@@ -1,23 +1,15 @@
 package com.baeldung.um.persistence.model;
 
-import java.util.Set;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-
 import com.baeldung.common.interfaces.INameableDto;
 import com.baeldung.common.persistence.model.INameableEntity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import javax.json.bind.annotation.JsonbTransient;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -37,7 +29,7 @@ public class Privilege implements INameableEntity, INameableDto {
     @Column()
     private String description;
 
-    @JsonIgnore
+    @JsonbTransient
     @ManyToMany(mappedBy = "privileges", fetch = FetchType.EAGER)
     private Set<Role> roles;
 
